@@ -1,0 +1,27 @@
+{
+  "name": "xpressbuy",
+  "version": "1.0.0",
+  "description": "E-commerce website using AWS services",
+  "main": "server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "server": "nodemon backend/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UtkarshVijayvergia/XpressBuy.git"
+  },
+  "keywords": [
+    "XpressBuy",
+    "E-commerce",
+    "AWS",
+    "NodeJS",
+    "React"
+  ],
+  "author": "Utkarsh Vijayvergia",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/UtkarshVijayvergia/XpressBuy/issues"
+  },
+  "homepage": "https://github.com/UtkarshVijayvergia/XpressBuy#readme"
+}
