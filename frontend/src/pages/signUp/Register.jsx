@@ -1,15 +1,18 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-// import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
-// import { register, reset } from '../../features/auth/authSlice'
 import { FaUser, FaEnvelope, FaUserLock, FaLock } from 'react-icons/fa'
 import { toast } from 'react-toastify'
-// import Spinner from '../../components/Spinner'
 import './register.css'
 
+// AWS Amplify authenication
+import { Auth } from 'aws-amplify';
+
+
 const Register = () => {
+    const navigate = useNavigate()
+
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -17,25 +20,44 @@ const Register = () => {
         password: "",
         confirmPassword: "",
     })
-
     const { name, email, username, password, confirmPassword } = formData;
 
-    const navigate = useNavigate()
-    // const dispatch = useDispatch()
 
-    // const { user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth)
+    // sign up with aws-amplify and aws cognito
+    const [errors, setErrors] = React.useState('');
+    const [user, setUser] = React.useState(null);
 
+    const onSubmit = async (e) => {
+        e.preventDefault();
+        setErrors('');
+        try {
+            const signUpResponse = await Auth.signUp({
+                username: email,
+                password: password,
+                attributes: {
+                    name: name,
+                    email: email,
+                    preferred_username: username,
+                },
+            });
+            console.log(signUpResponse);
+            setUser(signUpResponse.user);
+            navigate(`/confirm?email=${email}`);
+        } catch (err) {
+            console.log(err);
+            setErrors(err.message);
+        }
+    }
+
+    
     // useEffect(() => {
     //   if(isError){
     //     toast.error(message)
     //   }
-
     //   if(isSuccess || user){
     //     navigate('/home')
     //   }
-
     //   dispatch(reset())
-    
     // }, [user, isError, isSuccess, message, navigate, dispatch])
     
 
@@ -46,9 +68,9 @@ const Register = () => {
         }))
     }
 
-    const onSubmit = (e) => {
-        e.preventDefault();
 
+    // const onSubmit = (e) => {
+        // e.preventDefault();
         // Password Validation
         // if(password.length < 8){
         //     toast.error('Password length must be atleast 8 characters')
@@ -71,23 +93,17 @@ const Register = () => {
         // else if(password !== confirmPassword){
         //     toast.error('Password Do Not Match')
         // }
-        
         // else{
         //     const userData = {
         //         name,
         //         email,
         //         password,
         //     }
-
         //     dispatch(register(userData))
         // }
-
-        console.log(name, email, username, password, confirmPassword);
-    }
-
-    // if(isLoading){
-    //     return <Spinner />
+        // console.log(name, email, username, password, confirmPassword);
     // }
+
 
     return (
         <div>
