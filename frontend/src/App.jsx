@@ -8,7 +8,7 @@ import LandingPage from './pages/landingPage/LandingPage';
 import Login from './pages/login/Login';
 import Register from './pages/signUp/Register';
 import Home from './pages/homePage/Home';
-
+import ConfirmEmail from './pages/userConfirmation/ConfirmEmail'
 
 function App() {
     Amplify.configure({
@@ -37,6 +37,7 @@ function App() {
                     <Route path='/login' element={<Login />} />
                     <Route path='/signup' element={<Register />} />
                     <Route path='/home' element={<Home />} />
+                    <Route path='/confirm' element={<ConfirmEmail />} />
                     {/* <Route path='/contact' element={<About/>} /> */}
 
                     {/* {user?(<Route path={`user/${user.name}`} element={<Profile/>} />):<></>} */}
