@@ -1,16 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify';
+import { Amplify } from 'aws-amplify';
+
 import 'react-toastify/dist/ReactToastify.css'
-// import Dashboard from './pages/feed/Dashboard';
-// import Login from './pages/auth/Login';
-// import Register from './pages/auth/Register';
-// import Navbar from './components/Navbar';
-// import About from './pages/About';
-// import Profile from './pages/profile/Profile';
-// import LandingPage from './pages/landingPage/LandingPage';
-// import Error404 from './pages/Error404';
-// import AccountDetails from './pages/profileDetails/AccountDetails';
 import LandingPage from './pages/landingPage/LandingPage';
 import Login from './pages/login/Login';
 import Register from './pages/signUp/Register';
@@ -18,23 +11,40 @@ import Home from './pages/homePage/Home';
 
 
 function App() {
+    Amplify.configure({
+        "AWS_PROJECT_REGION": process.env.REACT_APP_AWS_PROJECT_REGION,
+        "aws_cognito_region": process.env.REACT_APP_AWS_COGNITO_REGION,
+        "aws_user_pools_id": process.env.REACT_APP_AWS_USER_POOLS_ID,
+        "aws_user_pools_web_client_id": process.env.REACT_APP_AWS_USER_POOL_WEB_CLIENT_ID,
+        "oauth": {},
+        Auth: {
+            // identityPoolId: process.env.REACT_APP_IDENTITY_POOL_ID,         // We are not using an Identity Pool
+            region: process.env.REACT_APP_AWS_PROJECT_REGION,
+            userPoolId: process.env.REACT_APP_AWS_USER_POOLS_ID,
+            userPoolWebClientId: process.env.REACT_APP_AWS_USER_POOL_WEB_CLIENT_ID,
+        }
+    });
+    // For changing user `Confirmed status` from `Force change password` to `CONFIRMED` in aws cognito
+    // aws cognito-idp admin-set-user-password --username <username> --password <password> --user-pool-id <user-pool-id>  --permanent
+
+
     return (
         <>
-           <Router>
+            <Router>
                 {/* <Navbar/> */}
-                    <Routes>
-                        <Route path='/' element={<LandingPage/>}/>
-                        <Route path='/login' element={<Login/>} />
-                        <Route path='/signup' element={<Register/>} />
-                        <Route path='/home' element={<Home/>} />
-                        {/* <Route path='/contact' element={<About/>} /> */}
+                <Routes>
+                    <Route path='/' element={<LandingPage />} />
+                    <Route path='/login' element={<Login />} />
+                    <Route path='/signup' element={<Register />} />
+                    <Route path='/home' element={<Home />} />
+                    {/* <Route path='/contact' element={<About/>} /> */}
 
-                        {/* {user?(<Route path={`user/${user.name}`} element={<Profile/>} />):<></>} */}
-                        {/* {user?(<Route path={`user/${user.name}/${user._id}`} element={<AccountDetails/>} />):<></>} */}
-                        
-                        {/* <Route path='*' exact={true} element={<Error404/>} /> */}
+                    {/* {user?(<Route path={`user/${user.name}`} element={<Profile/>} />):<></>} */}
+                    {/* {user?(<Route path={`user/${user.name}/${user._id}`} element={<AccountDetails/>} />):<></>} */}
 
-                    </Routes>
+                    {/* <Route path='*' exact={true} element={<Error404/>} /> */}
+
+                </Routes>
             </Router>
             <ToastContainer />
         </>
