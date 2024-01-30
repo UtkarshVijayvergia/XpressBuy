@@ -63,10 +63,12 @@ const Login = () => {
             console.log(user);
             localStorage.setItem("access_token", user.signInUserSession.accessToken.jwtToken);
             console.log(localStorage.getItem("access_token"));
-            window.location.href = "/"
+            // window.location.href = "/"
+            navigate('/home')
         } catch (error) {
             if (error.code === 'UserNotConfirmedException') {
-                window.location.href = "/confirm";
+                // window.location.href = "/confirm";
+                navigate('/confirm')
             }
             setErrors(error.message);
             console.log('error signing in', error);
