@@ -40,17 +40,6 @@ const Login = () => {
             [e.target.name]: e.target.value,
         }))
     }
-
-
-    // const onSubmit = (e) => {
-    //     e.preventDefault();
-    //     // const userData = {
-    //     //     username,
-    //     //     password,
-    //     // }
-    //     // dispatch(login(userData))
-    //     console.log(username, password);
-    // }
     
 
     // aws-amplify aws cognito - sign in
@@ -59,15 +48,25 @@ const Login = () => {
         setErrors('');
         try {
             console.log(email, password);
+            // Sign in with email and password
             const user = await Auth.signIn(email, password);
             console.log(user);
-            localStorage.setItem("access_token", user.signInUserSession.accessToken.jwtToken);
-            console.log(localStorage.getItem("access_token"));
-            // window.location.href = "/"
+
+            // Send the ID token to the server
+            const idToken = user.signInUserSession.idToken.jwtToken;
+            console.log(idToken);
+            const isTokenValid = await verifyIdToken(user.signInUserSession.idToken.jwtToken, user.signInUserSession.accessToken.jwtToken);
+            console.log(isTokenValid);
+
+            // check if server has verified the ID token
+            if(!isTokenValid){
+                setErrors('Invalid ID token');
+                return false;
+            }
+
             navigate('/home')
         } catch (error) {
             if (error.code === 'UserNotConfirmedException') {
-                // window.location.href = "/confirm";
                 navigate('/confirm')
             }
             setErrors(error.message);
@@ -75,6 +74,34 @@ const Login = () => {
         }
         return false;
     }
+
+
+    // verify the ID token
+    const verifyIdToken = async (idToken, access_token) => {
+        try {
+            const response = await fetch('http://localhost:5000/api/v1/VerifyIdToken', {
+                credentials: 'include',
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${idToken}`,
+                    'X-Access-Token': `${access_token}`,
+                },
+            });
+            const data = await response.json();
+            console.log(data);
+            if(data.isValid){
+                return true;
+            }
+            else{
+                return true;
+            }
+        } catch (err) {
+            console.log(err);
+            return false;
+        }
+    }
+
 
 
     return (

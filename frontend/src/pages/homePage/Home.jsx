@@ -28,6 +28,33 @@ const Home = () => {
         }
     }
 
+
+    
+    // Data from backend API
+    const [data, setData] = React.useState(null);
+    const [isData, setIsData] = React.useState(false);
+
+    const getData = async () => {
+        // console.log("accessToken", localStorage.getItem("access_token"));
+        // try{
+        //     const response = await fetch('http://localhost:5000/api/v1/VerifiedJWT', {
+        //         headers: {
+        //             Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+        //             'Content-Type': 'application/json',
+        //         },
+        //         Method: 'GET',
+        //     });
+        //     setData(await response.json());
+        //     setIsData(true);
+        // }
+        // catch(err){
+        //     console.log(err);
+        // }
+        setIsData(true);
+        setData({data: "data"});
+    }
+
+
     // sign out
     const signOut = async () => {
         try {
@@ -38,40 +65,35 @@ const Home = () => {
         }
     }
     
-    
-    // const checkUserAuthenticated = React.useCallback(async () => {
-    //     try {
-    //         await Auth.currentAuthenticatedUser();
-    //         userHasAuthenticated(true);
-    //     } catch (err) {
-    //         console.log(err);
-    //     }
-    // }, []);
-
-    // React.useEffect(() => {
-    //     Auth.currentAuthenticatedUser()
-    //         .then(user => setUser(user))
-    //         .catch(() => setUser(null));
-    // }, []);
 
     React.useEffect(() => {
         checkUser();
+        getData();
     }, []);
 
     return (
         <div>
-            {isAuthenticated ? (
+            {isAuthenticated && isData ? (
                 <div>
                     <h1>Home</h1>
                     <h1>Welcome {user.name}</h1>
                     <h1>Email: {user.email}</h1>
                     <h1>Username: {user.username}</h1>
+                    <h1>Data: {data.data}</h1>
                 </div>
             ) : (
                 <div>
                     <h1>Home</h1>
                     <h1>Welcome Guest</h1>
                 </div>
+            )}
+            {!isData ? (
+                <div>
+                    <h1>Access Denied</h1>
+                </div>
+            ) : (
+                <>
+                </>
             )}
 
             {/* sign out */}
