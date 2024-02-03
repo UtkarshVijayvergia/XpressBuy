@@ -1,10 +1,13 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 // aws-amplify authenication
 import { Auth } from 'aws-amplify';
 
 
 const Home = () => {
+    const navigate = useNavigate()
+
     // aws-amplify aws cognito - get current user
     const [user, setUser] = React.useState(null);
     const [isAuthenticated, setIsAuthenticated] = React.useState(false);
@@ -60,6 +63,8 @@ const Home = () => {
         try {
             await Auth.signOut();
             setIsAuthenticated(false);
+            console.log("signed out");
+            navigate('/');
         } catch (err) {
             console.log(err);
         }
