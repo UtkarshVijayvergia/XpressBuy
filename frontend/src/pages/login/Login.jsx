@@ -13,29 +13,20 @@ import { Auth } from 'aws-amplify';
 const Login = () => {
     const navigate = useNavigate()
     
-    const [formData, setFormData] = useState({
+    // sign in with aws-amplify and aws cognito
+    const [errors, setErrors] = React.useState('');
+
+    // login credentials
+    const [credentials, setCredentials] = useState({
         email: "",
         password: "",
     })
-    const { email, password } = formData;
-
-    // sign in with aws-amplify and aws cognito
-    const [errors, setErrors] = React.useState('');
-    
-
-    // useEffect(() => {
-    //     if(isError){
-    //       toast.error(message)
-    //     }
-    //     if(isSuccess || user){
-    //       navigate('/home')
-    //     }
-    //     dispatch(reset())
-    // }, [user, isError, isSuccess, message, navigate, dispatch])
+    const { email, password } = credentials;
 
 
+    // Update the state on input change (email, password)
     const onChange = (e) => {
-        setFormData((prevState) => ({
+        setCredentials((prevState) => ({
             ...prevState,
             [e.target.name]: e.target.value,
         }))
@@ -47,23 +38,15 @@ const Login = () => {
         e.preventDefault();
         setErrors('');
         try {
-            console.log(email, password);
             // Sign in with email and password
             const user = await Auth.signIn(email, password);
-            console.log(user);
-
             // Send the ID token to the server
-            const idToken = user.signInUserSession.idToken.jwtToken;
-            console.log(idToken);
             const isTokenValid = await verifyIdToken(user.signInUserSession.idToken.jwtToken, user.signInUserSession.accessToken.jwtToken);
-            console.log(isTokenValid);
-
             // check if server has verified the ID token
             if(!isTokenValid){
                 setErrors('Invalid ID token');
                 return false;
             }
-
             navigate('/home')
         } catch (error) {
             if (error.code === 'UserNotConfirmedException') {
@@ -88,20 +71,12 @@ const Login = () => {
                     'X-Access-Token': `${access_token}`,
                 },
             });
-            const data = await response.json();
-            console.log(data);
-            if(data.isValid){
-                return true;
-            }
-            else{
-                return true;
-            }
+            return true;
         } catch (err) {
             console.log(err);
             return false;
         }
     }
-
 
 
     return (
