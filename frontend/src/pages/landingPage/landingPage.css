@@ -1,0 +1,192 @@
+.landing-page-bg {
+    background-image: url('../../assets/images/landingPage/landingPage.png');
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    height: 100vh;
+    width: 100%;
+    position: relative;
+}
+
+.landing-page-heading-position {
+    position: absolute;
+    left: 12%;
+    right: 50%;
+    top: 30%;
+}
+
+.landing-page-heading {
+    color: rgb(43, 43, 43);
+    font-size: 50px;
+    font-weight: 650;
+    text-align: left;
+}
+
+.landing-page-sub-heading {
+    padding-top: 25px;
+    color: rgb(43, 43, 43);
+    font-size: 30px;
+    font-weight: 450;
+    text-align: left;
+}
+
+.landing-page-btns {
+    padding-top: 45px;
+    width: 100%;
+    display: flex;
+}
+
+.landing-page-btn1 {
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #000000;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 0px;
+}
+
+.landing-page-btn2-pos {
+    padding-left: 40px;
+}
+
+.landing-page-btn2 {
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 0px;
+}
+
+.landing-page-brand-name {
+    font-style: italic;
+    font-weight: 350;
+    font-size: 30px;
+    font-family: 'Times New Roman', Times, serif;
+    color: rgb(108, 108, 108);
+}
+
+.brand-carousel-pos {
+    padding-top: 25vh;
+    padding-bottom: 10vh;
+    padding-left: 40vh;
+    padding-right: 40vh;
+}
+
+.brand-carousel-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.brand-carousel {
+    width: 100vw;
+    overflow: hidden;
+}
+
+.carousel {
+    display: grid;
+    grid-template-columns: repeat(14, calc(100% / 6));
+    animation: scroll 20s linear infinite;
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(calc(-100% * 1)); /* Adjust the number of brand names */
+    }
+}
+
+.trial-product-card-pos {
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+    margin-left: 25vh;
+    margin-right: 25vh;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.trial-product-card {
+    background: 
+        linear-gradient(
+            rgba(0, 0, 0, 0.5), /* This is your color overlay, adjust as needed */
+            rgba(0, 0, 0, 0.5) /* This is your color overlay, adjust as needed */
+        ),
+        url('../../assets/images/landingPage/trialProductBg.png');
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-left: 3vh;
+    margin-right: 3vh;
+    width: 50vh;
+    height: 70vh;
+    border: 1px solid #000000;
+}
+
+
+.trial-product-card-details {
+    padding-top: 45vh;
+    position:inherit;
+    padding-left: 30px;
+}
+
+
+.trial-product-card-heading {
+    color: white;
+    font-size: 30px;
+    font-weight: 750;
+    text-align: left;
+}
+
+.trial-product-card-sub-heading {
+    padding-top: 1vh;
+    color: white;
+    font-size: 15px;
+    font-weight: 500;
+    text-align: left;
+}
+
+.trial-product-card-btn {
+    padding-top: 2vh;
+}
+
+.trial-product-card-btn1 {
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 0px;
+}
+
+.featured-products {
+    margin-top: 20vh;
+    padding-top: 10vh;
+    padding-bottom: 5vh;
+    background-color: #cfe0e0;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.featured-products-heading {
+    font-size: 40px;
+    font-weight: 650;
+    color: black;
+    text-align: left;
+}
