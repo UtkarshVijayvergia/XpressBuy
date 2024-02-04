@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node backend/server.js",
-    "server": "nodemon backend/server.js",
+    "server": "nodemon --legacy-watch backend/server.js",
     "client": "npm start --prefix frontend"
   },
   "repository": {

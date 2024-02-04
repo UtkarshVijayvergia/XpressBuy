@@ -1,0 +1,55 @@
+version: "3.8"
+
+services:
+    backend:
+        environment:
+            NODE_ENV: "${NODE_ENV}"
+            PORT: "${PORT}"
+            COGNITO_USER_POOL_REGION: "${COGNITO_USER_POOL_REGION}"
+            COGNITO_USER_POOL_ID: "${COGNITO_USER_POOL_ID}"
+            COGNITO_USER_POOL_CLIENT_ID: "${COGNITO_USER_POOL_CLIENT_ID}"
+        build: ./
+        ports:
+            - "5000:5000"
+        volumes:
+            - ./backend:/backend
+        networks:
+            - internal-network
+
+    frontend:
+        environment:
+            CHOKIDAR_USEPOLLING: "true"
+            WATCHPACK_POLLING: "true"
+            AWS_REGION: "${AWS_REGION}"
+            REACT_APP_AWS_PROJECT_REGION: "${REACT_APP_AWS_PROJECT_REGION}"
+            REACT_APP_AWS_COGNITO_REGION: "${REACT_APP_AWS_COGNITO_REGION}"
+            REACT_APP_AWS_USER_POOLS_ID: "${REACT_APP_AWS_USER_POOLS_ID}"
+            REACT_APP_AWS_USER_POOL_WEB_CLIENT_ID: "${REACT_APP_AWS_USER_POOL_WEB_CLIENT_ID}"
+        build: ./frontend
+        ports:
+            - "3000:3000"
+        volumes:
+            - ./frontend:/frontend
+        networks:
+            - internal-network
+    
+    # 3rd container
+    # xray-daemon:
+    #     image: amazon/aws-xray-daemon
+    #     # image means that we are using an image from docker hub
+    #     environment:
+    #         AWS_ACCESS_KEY_ID: "${AWS_ACCESS_KEY_ID}"
+    #         AWS_SECRET_ACCESS_KEY: "${AWS_SECRET_ACCESS_KEY}"
+    #         AWS_REGION: "${AWS_REGION}"
+    #         # "${}" means that we are using an environment variable from the .env file present in the same directory as the Docker-compose.yml file
+    #     command:
+    #         - "xray -o -b xray-daemon:2000"
+    #     ports:
+    #         - 2000:2000/udp
+    #     networks:
+    #         - internal-network
+
+networks: 
+    internal-network:
+        driver: bridge
+        name: XpressBuy
