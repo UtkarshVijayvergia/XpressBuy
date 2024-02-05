@@ -33,7 +33,6 @@ services:
         networks:
             - internal-network
     
-    # 3rd container
     # xray-daemon:
     #     image: amazon/aws-xray-daemon
     #     # image means that we are using an image from docker hub
@@ -49,7 +48,24 @@ services:
     #     networks:
     #         - internal-network
 
+    postgres-db:
+        image: postgres:13-alpine
+        restart: always
+        environment:
+            - POSTGRES_PASSWORD=password
+        ports:
+            - '5432:5432'
+        volumes: 
+            - db:/var/lib/postgresql/data
+        networks:
+            - internal-network
+
+
 networks: 
     internal-network:
         driver: bridge
         name: XpressBuy
+
+volumes:
+    db:
+        driver: local
