@@ -1,0 +1,19 @@
+#! /bin/bash
+
+# This script is used to seed the database
+
+
+# Add start label
+BLUE='\033[0;34m'
+NO_COLOR='\033[0m'
+LABEL="=== Seeding the database"
+printf "${BLUE}${LABEL}${NO_COLOR}\n"
+
+
+psql $CONNECTION_URL xpressbuy < postgres/sql/seed.sql
+
+
+# Add end label
+GREEN='\033[0;32m'
+END_LABEL="=== Database seeded successfully"
+printf "${GREEN}${END_LABEL}${NO_COLOR}\n"
