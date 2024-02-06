@@ -8,6 +8,7 @@ services:
             COGNITO_USER_POOL_REGION: "${COGNITO_USER_POOL_REGION}"
             COGNITO_USER_POOL_ID: "${COGNITO_USER_POOL_ID}"
             COGNITO_USER_POOL_CLIENT_ID: "${COGNITO_USER_POOL_CLIENT_ID}"
+            POSTGRES_CONNECTION_URL: "${POSTGRES_CONNECTION_URL}"
         build: ./
         ports:
             - "5000:5000"
