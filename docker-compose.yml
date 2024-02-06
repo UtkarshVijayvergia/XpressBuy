@@ -52,12 +52,16 @@ services:
         image: postgres:13-alpine
         restart: always
         environment:
-            - POSTGRES_USER=postgres
-            - POSTGRES_PASSWORD=password
+            - POSTGRES_USER=${POSTGRES_USER}
+            - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+            - POSTGRES_CONNECTION_URL=${POSTGRES_CONNECTION_URL}
         ports:
             - '5432:5432'
         volumes: 
             - db:/var/lib/postgresql/data
+            - ./postgress:/postgres
+            # this command will run the schema.sql file present in the postgress folder
+            # /docker-entrypoint-initdb.d: this is the folder where the schema.sql file should be present
         networks:
             - internal-network
 
