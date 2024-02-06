@@ -53,8 +53,23 @@ const Home = () => {
         // catch(err){
         //     console.log(err);
         // }
-        setIsData(true);
-        setData({data: "data"});
+        try {
+            const response = await fetch('http://localhost:5000/api/v1/testdb', {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                Method: 'GET',
+            });
+            const data = await response.json();
+            console.log(data);
+            setData(data);
+            setIsData(true);
+        }
+        // setIsData(true);
+        // setData({data: "data"});
+        catch (err) {
+            console.log(err);
+        }
     }
 
 
@@ -100,6 +115,29 @@ const Home = () => {
                 <>
                 </>
             )}
+            <br />
+            <div>
+                {
+                    data && data.map((item, index) => {
+                        return (
+                            <div key={index}>
+                                <h5>{item.uuid}</h5>
+                                <h5>{item.display_name}</h5>
+                                <h5>{item.handle}</h5>
+                                <h5>{item.cognito_user_id}</h5>
+                                <h5>{item.created_at}</h5>
+                                <br /><br />
+                            </div>
+                        )
+                    })
+                }
+                {/* <h1>{data.uuid}</h1>
+                <h1>{data.display_name}</h1>
+                <h1>{data.handle}</h1>
+                <h1>{data.cognito_user_id}</h1>
+                <h1>{data.created_at}</h1> */}
+            </div>
+            <br />
 
             {/* sign out */}
             <button onClick={signOut}>Sign Out</button>
