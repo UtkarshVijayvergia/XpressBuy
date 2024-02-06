@@ -8,4 +8,18 @@ POSTGRES_NO_DB_CONNECTION_URL=$(sed 's/\/xpressbuy//g' <<< $POSTGRES_CONNECTION_
     # // : the string to replace with (here it is nothing, so the string (/xpressbuy) is removed.), 
     # g : global flag to replace all occurrences of the string
 
+
+# Add a start message
+BLUE='\033[0;34m'
+NO_COLOR='\033[0m'
+START_LABEL="=== Creating the database"
+printf "${BLUE}${START_LABEL}${NO_COLOR}\n"
+
+
 psql $POSTGRES_NO_DB_CONNECTION_URL -c "CREATE DATABASE xpressbuy"
+
+
+# Add a success message
+GREEN='\033[0;32m'
+END_LABEL="=== Database created successfully"
+printf "${GREEN}${END_LABEL}${NO_COLOR}\n"
