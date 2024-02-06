@@ -1,0 +1,11 @@
+#! /bin/bash
+
+POSTGRES_NO_DB_CONNECTION_URL=$(sed 's/\/xpressbuy//g' <<< $POSTGRES_CONNECTION_URL)
+# 's/\/xpressbuy//g' : 
+    # s/ <string to be replaced> / <string to replace with> / <flags>
+    # s/ : start of the sed command, 
+    # /xpressbuy : the string to be replaced, (here it is \/xpressbuy because / is a special character in sed and needs to be escaped with \, so that it is not treated as a delimiter.)
+    # // : the string to replace with (here it is nothing, so the string (/xpressbuy) is removed.), 
+    # g : global flag to replace all occurrences of the string
+
+psql $POSTGRES_NO_DB_CONNECTION_URL -c "DROP DATABASE IF EXISTS xpressbuy"
