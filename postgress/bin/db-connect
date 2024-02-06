@@ -1,0 +1,13 @@
+#! /bin/bash
+
+# This script is used to connect to the database
+
+
+# Add start label
+BLUE='\033[0;34m'
+NO_COLOR='\033[0m'
+START_LABEL="=== Connecting to the database"
+printf "${BLUE}${START_LABEL}${NO_COLOR}\n"
+
+
+psql $POSTGRES_CONNECTION_URL
