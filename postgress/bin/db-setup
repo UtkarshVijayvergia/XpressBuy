@@ -1,0 +1,29 @@
+#! /bin/bash
+
+# This script is used to setup the database
+
+
+-e 
+# -e : to exit the script if any command fails
+
+
+# Add a start message
+RED='\033[0;31m'
+NO_COLOR='\033[0m'
+LABEL="============ Setting up the database"
+printf "${RED}${LABEL}${NO_COLOR}\n"
+
+
+bin_path=$(dirname $0)
+
+source $bin_path/db-drop
+source $bin_path/db-create
+source $bin_path/db-schema-load
+source $bin_path/db-seed
+
+
+# Add a success message
+ORANGE='\033[0;33m'
+RED='\033[0;31m'
+END_LABEL="============ Database setup successfully"
+printf "${ORANGE}${END_LABEL}${NO_COLOR}\n"
