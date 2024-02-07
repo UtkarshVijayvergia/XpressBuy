@@ -28,7 +28,7 @@ const Navbar = () => {
 
     // useEffect to check if user is authenticated
     useEffect(() => {
-        checkUser();
+        // checkUser();
     }, []);
 
 
@@ -71,11 +71,8 @@ const Navbar = () => {
                                         </li>
                                     </>
                                 ) : <>
-                                    <li className="nav-item">
-                                        <a href="/login">LOGIN</a>
-                                    </li>
-                                    <li className="nav-item">
-                                        <a href="/signup">SIGN UP</a>
+                                    <li className="nav-item nav-last-item">
+                                        <a href="/sign-in">SIGN IN</a>
                                     </li>
                                 </>
                             }

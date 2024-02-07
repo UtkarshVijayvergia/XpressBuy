@@ -1,23 +1,53 @@
 import React from 'react'
 import Navbar from '../../components/navbar/Navbar'
 import { FaTshirt, FaBook, FaLaptop, FaGamepad, FaCreditCard, FaPaypal, FaCcMastercard } from 'react-icons/fa'
+import { FaShirtsinbulk, FaShoppingCart, FaIdBadge, FaUserTie, FaVest } from 'react-icons/fa'
 import './landingPage.css'
 
 const LandingPage = () => {
     const brandNames = [
-        <div className='landing-page-brand-name'><FaTshirt /> ADIBAS</div>,
-        <div className='landing-page-brand-name'><FaBook /> PUCA</div>,
-        <div className='landing-page-brand-name'><FaCcMastercard /> REEBOSS</div>,
-        <div className='landing-page-brand-name'><FaGamepad /> US COLO</div>,
-        <div className='landing-page-brand-name'><FaCreditCard /> PARROW</div>,
-        <div className='landing-page-brand-name'><FaPaypal /> PIKE</div>,
-        <div className='landing-page-brand-name'><FaTshirt /> ADIBAS</div>,
-        <div className='landing-page-brand-name'><FaBook /> PUCA</div>,
-        <div className='landing-page-brand-name'><FaCcMastercard /> REEBOSS</div>,
-        <div className='landing-page-brand-name'><FaGamepad /> US COLO</div>,
-        <div className='landing-page-brand-name'><FaCreditCard /> PARROW</div>,
-        <div className='landing-page-brand-name'><FaPaypal /> PIKE</div>,
+        { icon: <FaUserTie />, text: 'VOUIS LUITTON' },
+        { icon: <FaTshirt />, text: 'ADIBAS' },
+        { icon: <FaCcMastercard />, text: 'REEBOSS' },
+        { icon: <FaIdBadge />, text: 'GALENCIABA' },
+        { icon: <FaCreditCard />, text: 'GUKKI' },
+        { icon: <FaVest />, text: 'PERSACE' },
+        { icon: <FaShoppingCart />, text: 'PIKE' },
+        { icon: <FaUserTie />, text: 'VOUIS LUITTON' },
+        { icon: <FaTshirt />, text: 'ADIBAS' },
+        { icon: <FaCcMastercard />, text: 'REEBOSS' },
+        { icon: <FaIdBadge />, text: 'GALENCIABA' },
+        { icon: <FaCreditCard />, text: 'GUKKI' },
+        { icon: <FaVest />, text: 'PERSACE' },
+        { icon: <FaShoppingCart />, text: 'PIKE' },
     ];
+
+    const gridStyle = {
+        display: 'grid',
+        // gridTemplateColumns: `repeat(7, auto)`,
+        gridTemplateColumns: `repeat(14, calc(auto))`,
+        animation: 'scroll 20s linear infinite',
+        gridGap: '20px',
+        // overflow: 'hidden',
+    };
+
+    const MonthOffers = [
+        "Frosty January",
+        "Chilly February",
+        "Fresh March",
+        "Verdant April",
+        "Sunny May",
+        "Hot June",
+        "Scorching July",
+        "Humid August",
+        "Serene September",
+        "Spooky October",
+        "Chilly November",
+        "Festive December",
+    ];
+
+
+    console.log();
 
     return (
         <div>
@@ -26,7 +56,7 @@ const LandingPage = () => {
                     <Navbar />
                     <div className='landing-page-heading-position'>
                         <div className='landing-page-heading'>
-                            Raining Offers for Frosty January
+                            Raining Offers for {MonthOffers[new Date().getMonth()]}
                         </div>
                         <div className='landing-page-sub-heading'>
                             25% Off On All Products
@@ -43,10 +73,13 @@ const LandingPage = () => {
             <div className='brand-carousel-pos'>
                 <div className='brand-carousel-container'>
                     <div className='brand-carousel'>
-                        <div className="carousel">
+                        <div className="carousel" style={gridStyle}>
+                        {/* style={{paddingLeft: "50px"}} */}
                             {brandNames.map((brand, index) => (
-                                <div key={index} className="brand-name">
-                                    {brand}
+                                <div key={index} className="">
+                                    <div className='landing-page-brand-name-styling' >
+                                        {brand.icon} {brand.text}
+                                    </div>
                                 </div>
                             ))}
                         </div>

@@ -1,7 +1,5 @@
 .navbar {
     background-color: #6b6b6b98;
-    /* background-color: #165d7b; */
-    /* opacity: ; */
     overflow: hidden;
 }
 
@@ -35,8 +33,8 @@
 
 .navbar-logo {
     float: left;
-    padding-left: 55px;
-    padding-right: 55px;
+    padding-left: 50px;
+    padding-right: 50px;
     height: 50px;
 }
 
@@ -49,4 +47,13 @@
 .nav-item-left {
     font-size: 15px;
     font-weight: bold;
+}
+
+.nav-item-right {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.nav-last-item {
+    padding-right: 20px;
 }
