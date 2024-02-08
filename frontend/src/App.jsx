@@ -5,10 +5,11 @@ import { Amplify } from 'aws-amplify';
 
 import 'react-toastify/dist/ReactToastify.css'
 import LandingPage from './pages/landingPage/LandingPage';
-import Login from './pages/login/Login';
-import Register from './pages/signUp/Register';
-import Home from './pages/homePage/Home';
+import Login from './pages/authentication/login/Login';
 import ConfirmEmail from './pages/userConfirmation/ConfirmEmail'
+import SignUp from './pages/authentication/signUp/SignUp';
+import Home from './pages/homePage/Home';
+
 
 function App() {
     Amplify.configure({
@@ -35,7 +36,7 @@ function App() {
                 <Routes>
                     <Route path='/' element={<LandingPage />} />
                     <Route path='/login' element={<Login />} />
-                    <Route path='/signup' element={<Register />} />
+                    <Route path='/signup' element={<SignUp />} />
                     <Route path='/home' element={<Home />} />
                     <Route path='/confirm' element={<ConfirmEmail />} />
                     {/* <Route path='/contact' element={<About/>} /> */}
