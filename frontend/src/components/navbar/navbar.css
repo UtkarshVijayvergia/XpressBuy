@@ -14,26 +14,19 @@
     padding-bottom: 20px;
 }
 
-.nav-item {
+.nav-item-logo {
+    padding-left: 50px;
+}
+
+.navbar-logo-symbol {
     float: left;
-}
-
-.nav-item a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding-right: 20px;
-    padding-left: 20px;
-    text-decoration: none;
-}
-
-.nav-item a:hover {
-    background-color: #111;
+    height: 50px;
+    width: 50px;
 }
 
 .navbar-logo {
     float: left;
-    padding-left: 50px;
+    padding-left: 10px;
     padding-right: 50px;
     height: 50px;
 }
@@ -47,6 +40,21 @@
 .nav-item-left {
     font-size: 15px;
     font-weight: bold;
+}
+
+.nav-item {
+    float: left;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.nav-item-name {
+    display: block;
+    color: white;
+    text-align: center;
+    padding-right: 20px;
+    padding-left: 20px;
+    text-decoration: none;
 }
 
 .nav-item-right {
