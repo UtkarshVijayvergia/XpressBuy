@@ -1,0 +1,69 @@
+#!/usr/bin/env node
+
+const { DynamoDBClient, CreateTableCommand } = require("@aws-sdk/client-dynamodb");
+
+// Check if we are in production mode
+if (process.argv.length === 3) {
+  if ("prod" in process.argv[2]) {
+    attrs = {};
+  }
+}
+
+// Set the endpoint to the local dynamodb
+let attrs = {
+  endpoint: 'http://localhost:8000'
+};
+
+// Create a new client
+const dynamodb = new DynamoDBClient(attrs);
+
+// Create a new table
+const tableName = 'cruddur-messages';
+
+// define the schema for the table
+const tableSchema = {
+    AttributeDefinitions: [
+        {
+            AttributeName: 'pk',
+            AttributeType: 'S'
+        },
+        {
+            AttributeName: 'sk',
+            AttributeType: 'S'
+        }
+    ],
+    KeySchema: [
+        {
+            AttributeName: 'pk',
+            KeyType: 'HASH'
+        },
+        {
+            AttributeName: 'sk',
+            KeyType: 'RANGE'
+        }
+    ],
+    BillingMode: 'PROVISIONED',
+    ProvisionedThroughput: {
+        ReadCapacityUnits: 5,
+        WriteCapacityUnits: 5
+    },
+};
+
+
+// create the table
+const createTable = new CreateTableCommand({
+  TableName: tableName,
+  ...tableSchema
+});
+
+
+async function createDynamoDBTable() {
+  try {
+    const response = await dynamodb.send(createTable);
+    console.log(response);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+createDynamoDBTable();
