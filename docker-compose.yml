@@ -62,9 +62,8 @@ services:
             - '5432:5432'
         volumes: 
             - db:/var/lib/postgresql/data
-            - ./postgress:/postgres
-            # this command will run the schema.sql file present in the postgress folder
-            # /docker-entrypoint-initdb.d: this is the folder where the schema.sql file should be present
+            - ./backend/db/postgres:/postgres
+            # mounting the bash scripts to the container
         networks:
             - internal-network
 
