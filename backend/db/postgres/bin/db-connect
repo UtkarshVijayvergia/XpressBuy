@@ -1,0 +1,27 @@
+#! /bin/bash
+
+# This script is used to connect to the database
+
+
+if [ "$1" = "prod" ]; then
+    # echo "Running in production mode"
+        RED='\033[0;31m'
+        NO_COLOR='\033[0m'
+        LABEL="Running in production mode"
+        printf "${RED}${LABEL}${NO_COLOR}\n"
+
+    CONNECTION_URL=$POSTGRES_PROD_CONNECTION_URL
+else
+    CONNECTION_URL=$POSTGRES_CONNECTION_URL
+fi
+
+
+# Add start label
+BLUE='\033[0;34m'
+NO_COLOR='\033[0m'
+START_LABEL="=== Connecting to the database"
+printf "${BLUE}${START_LABEL}${NO_COLOR}\n"
+
+echo "Connection URL: $CONNECTION_URL"
+
+psql $CONNECTION_URL

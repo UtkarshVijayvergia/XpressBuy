@@ -1,0 +1,33 @@
+#! /bin/bash
+
+# This script is used to load the schema into the database
+
+
+# Set the connection url
+if [ "$1" = "prod" ]; then
+    # echo "Running in production mode"
+        RED='\033[0;31m'
+        NO_COLOR='\033[0m'
+        LABEL="Running in production mode"
+        printf "${RED}${LABEL}${NO_COLOR}\n"
+
+    CONNECTION_URL=$POSTGRES_PROD_CONNECTION_URL
+else
+    CONNECTION_URL=$POSTGRES_CONNECTION_URL
+fi
+
+
+# Add start label
+BLUE='\033[0;34m'
+NO_COLOR='\033[0m'
+LABEL="=== Loading the schema into the database"
+printf "${BLUE}${LABEL}${NO_COLOR}\n"
+
+
+psql $CONNECTION_URL xpressbuy < postgres/sql/schema.sql
+
+
+# Add end label
+GREEN='\033[0;32m'
+END_LABEL="=== Schema loaded successfully"
+printf "${GREEN}${END_LABEL}${NO_COLOR}\n"

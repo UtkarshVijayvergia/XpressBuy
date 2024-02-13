@@ -25,6 +25,8 @@ app.use(express.urlencoded({ extended: false }))
 
 app.use('/api/v1/VerifyIdToken', require('./routes/VerifiedJWT'))
 
+app.use('/api/v1/testdb', require('./test/dbTest'));
+
 // app.use(errorHandler)
 
 

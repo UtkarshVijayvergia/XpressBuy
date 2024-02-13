@@ -1,0 +1,112 @@
+.login-card-container {
+    top: 57%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    width: 130vh;
+}
+
+.login-grid-container {
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.login-grid-item {
+    height: 65vh;
+}
+
+.login-grid-item1 {
+    background-image: url('../../../assets/images/XpressBuy/XpressBuy_Logo_Design_NoBg.png');
+    transform: scaleX(-1);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size:contain;
+    margin-top: 5vh;
+    height: 45vh;
+}
+
+.login-signup-navigate-container {
+    transform: scaleX(-1);
+    height: 55vh;
+    display: flex;
+    justify-content:center;
+    align-items:end;
+    border-left: dashed 1px rgba(0, 0, 0, 0.8);
+}
+
+.login-signup-navigate {
+    color: rgb(0, 183, 255);
+    font-size: 17px;
+    text-decoration: none;
+}
+
+.login-heading {
+    font-size: 30px;
+    font-weight: 750;
+    text-align: center;
+    padding-top: 15vh;
+}
+
+.login-inputs {
+    padding-top: 4vh;
+    padding-left: 12.5vh;
+    padding-right: 12.5vh;
+}
+
+.login-input-fields {
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    width: inherit;
+    font-size: 13px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.8);
+}
+
+.login-input-setter {
+    padding-left: 3vh;
+    border: none;
+    font-size: 15px;
+    padding-top: 2vh;
+    text-decoration: none;
+}
+
+.login-input-setter:focus {
+    outline: none;
+}
+
+.padder4vh {
+    padding-top: 4vh;
+}
+
+.login-errors {
+    margin-top: 2vh;
+    background-color: rgb(255, 0, 0);
+    height: 6vh;
+    color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-btn {
+    padding-top: 2vh;
+    display: flex;
+    justify-content: center;
+}
+
+.login-btn-decor {
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    padding-left: 3vh;
+    padding-right: 3vh;
+    background-color: rgb(0, 38, 255);
+    color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 0px;
+    font-size: 20px;
+}
+
+.login-btn-decor:hover {
+    background-color: rgb(134, 255, 134);
+    color: rgb(255, 255, 255);
+}

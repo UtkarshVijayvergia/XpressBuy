@@ -5,8 +5,15 @@
   "main": "server.js",
   "scripts": {
     "start": "node backend/server.js",
-    "server": "nodemon backend/server.js",
+    "server": "nodemon --legacy-watch backend/server.js",
     "client": "npm start --prefix frontend"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "frontend",
+      "node_modules",
+      "postgress"
+    ]
   },
   "repository": {
     "type": "git",
@@ -34,6 +41,7 @@
     "express-async-handler": "^1.2.0",
     "jsonwebtoken": "^9.0.2",
     "jwks-rsa": "^3.1.0",
-    "nodemon": "^3.0.3"
+    "nodemon": "^3.0.3",
+    "pg": "^8.11.3"
   }
 }
