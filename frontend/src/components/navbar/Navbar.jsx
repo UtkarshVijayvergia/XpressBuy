@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react'
+import { useLocation } from 'react-router-dom';
 import { FaShoppingCart } from 'react-icons/fa'
 import { Auth } from 'aws-amplify'
 import './navbar.css'
@@ -7,6 +8,8 @@ import './navbar.css'
 
 const Navbar = (props) => {
     // const [user, setUser] = useState(null);
+    const location = useLocation();
+    
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
     // function to check if user is authenticated
@@ -28,56 +31,66 @@ const Navbar = (props) => {
 
     // useEffect to check if user is authenticated
     useEffect(() => {
-        // checkUser();
+        checkUser();
     }, []);
-
+    // XpressBuy_Logo_Chars_Black_NoBg
 
     return (
         <div>
-            <nav className="navbar">
+            <nav className={ location.pathname=='/' ? 'navbar' : 'navbar-cat' }>
                 <ul className="navbar-nav">
                     <li className="nav-item-logo">
                         <a href="/">
-                            <img className='navbar-logo-symbol' src={require(`../../assets/images/XpressBuy/XpressBuy_Logo_Design_NoBg_White.png`)} alt='logo' />
+                            {
+                                location.pathname=='/' ?
+                                <img className='navbar-logo-symbol' src={require(`../../assets/images/XpressBuy/XpressBuy_Logo_Design_NoBg_White.png`)} alt='logo' />
+                                :
+                                <img className='navbar-logo-symbol' src={require(`../../assets/images/XpressBuy/XpressBuy_Logo_Design_NoBg_Black.png`)} alt='logo' />
+                            }
                         </a>
                     </li>
                     <li className="nav-item-xpressbuy">
                         <a href="/">
-                            <img className='navbar-logo' src={require(`../../assets/images/XpressBuy/XpressBuy_Logo_Chars_NoBg.png`)} alt='logo' />
+                            {
+                                location.pathname=='/' ?
+                                <img className='navbar-logo' src={require(`../../assets/images/XpressBuy/XpressBuy_Logo_Chars_NoBg.png`)} alt='logo' />
+                                :
+                                <img className='navbar-logo' src={require(`../../assets/images/XpressBuy/XpressBuy_Logo_Chars_Black_NoBg.png`)} alt='logo' />
+                            }
                         </a>
                     </li>
                     <div className='nav-item-direction'>
                         <div className='nav-item-left'>
                             <li className="nav-item">
-                                <a className='nav-item-name' href="/">EVERYTHING</a>
+                                <a className={ location.pathname=='/' ? 'nav-item-name' : 'nav-item-cat-name' } href="/">EVERYTHING</a>
                             </li>
                             <li className="nav-item">
-                                <a className='nav-item-name' href="/">MEN</a>
+                                <a className={ location.pathname=='/' ? 'nav-item-name' : location.pathname=='/men' ? 'nav-item-curr-cat-name' : 'nav-item-cat-name' } href="/men">MEN</a>
                             </li>
                             <li className="nav-item">
-                                <a className='nav-item-name' href="/">WOMEN</a>
+                                <a className={ location.pathname=='/' ? 'nav-item-name' : 'nav-item-cat-name' } href="/">WOMEN</a>
                             </li>
                             <li className="nav-item">
-                                <a className='nav-item-name' href="/">SPECIALS</a>
+                                <a className={ location.pathname=='/' ? 'nav-item-name' : 'nav-item-cat-name' } href="/">SPECIALS</a>
                             </li>
                         </div>
                         <div className='nav-item-right'>
                             <li className="nav-item">
-                                <a className='nav-item-name' href="/">ABOUT</a>
+                                <a className={ location.pathname=='/' ? 'nav-item-name' : 'nav-item-cat-name' } href="/">ABOUT</a>
                             </li>
                             <li className="nav-item">
-                                <a className='nav-item-name' href="/">CONTACT US</a>
+                                <a className={ location.pathname=='/' ? 'nav-item-name' : 'nav-item-cat-name' } href="/">CONTACT US</a>
                             </li>
                             {
                                 isAuthenticated ? (
                                     <>
                                         <li className="nav-item">
-                                            <a className='nav-item-name' href="/"><FaShoppingCart /></a>
+                                            <a className={ location.pathname=='/' ? 'nav-item-name' : 'nav-item-cat-name' } href="/"> $0 <FaShoppingCart /></a>
                                         </li>
                                     </>
                                 ) : <>
                                     <li className="nav-item nav-last-item">
-                                        <a className='nav-item-name' href="/signup">SIGN IN</a>
+                                        <a className={ location.pathname=='/' ? 'nav-item-name' : 'nav-item-cat-name' } href="/signup">SIGN IN</a>
                                     </li>
                                 </>
                             }
