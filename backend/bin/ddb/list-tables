@@ -1,5 +1,7 @@
 #!/usr/bin/bash
 
+# command: ./bin/ddb/list-tables
+
 # set -e will cause the script to exit if any command fails
 set -e 
 

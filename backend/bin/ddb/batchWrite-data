@@ -1,0 +1,157 @@
+#!/usr/bin/env node
+
+// command: ./bin/ddb/seed-data prod
+
+const { BatchWriteItemCommand, DynamoDBClient } = require("@aws-sdk/client-dynamodb");
+
+// Check if we are in production mode
+if (process.argv.length === 3) {
+    if ("prod" in process.argv[2]) {
+        attrs = {};
+    }
+}
+
+// Set the endpoint to the local dynamodb
+let attrs = {
+    endpoint: 'http://localhost:8000'
+};
+// Create a new client
+const client = new DynamoDBClient(attrs);
+
+
+
+// Create a new item
+async function batch_write() {
+    let now = new Date().toISOString();
+    const command = new BatchWriteItemCommand({
+        RequestItems: {
+            // Each key in this object is the name of a table. This example refers to a Coffees table.
+            xpressbuy: [
+                // Each entry in Coffees is an object that defines either a PutRequest or DeleteRequest.
+                {
+                    // Each PutRequest object defines one item to be inserted into the table.
+                    PutRequest: {
+                        // The keys of Item are attribute names. Each attribute value is an object with a data type and value.
+                        // For more information about data types,
+                        // see https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.NamingRulesDataTypes.html#HowItWorks.DataTypes
+                        Item: {
+                            pk: { S: "CUSTOMER#c1" },
+                            sk: { S: "PROFILE#c1" },
+                            username: { S: "c1" },
+                            name: { S: "c1c1" },
+                            email: { S: "email" },
+                            cart: { M: { "product": { S: "p1" }, "colour": { S: "c1" }, "size": { S: "s1" } } },
+                            addresses: { M: { "a1": { S: "address1" }, "a2": { S: "address2" }, "a3": { S: "address3" } } },              
+                            created_at: { S: `${now}` },
+                        },
+                    },
+                },
+                {
+                    PutRequest: {
+                        Item: {
+                            pk: { S: "CUSTOMER#c1" },
+                            sk: { S: `ORDER#${now}` },
+                            username: { S: "c1" },
+                            email: { S: "email" },
+                            items: { L: 
+                                [ 
+                                    { M: 
+                                        { 
+                                            "product": { S: "p1" }, 
+                                            "colour": { S: "c1" }, 
+                                            "size": { S: "s1" }, 
+                                            "price": { N: "120" } 
+                                        },
+                                    },
+                                    { M: 
+                                        { 
+                                            "product": { S: "p2" }, 
+                                            "colour": { S: "c2" }, 
+                                            "size": { S: "s2" }, 
+                                            "price": { N: "150" } 
+                                        } 
+                                    } 
+                                ] 
+                            },
+                            total_price: { N: "270" },
+                            address_delivered: { S: "a1" },
+                            status: { S: "Delivered" },
+                            'GSI-1-sk': { S: `Delivered#${now}` },
+                            created_at: { S: `${now}` },
+                        },
+                    },
+                },
+                {
+                    PutRequest: {
+                        Item: {
+                            pk: { S: "CUSTOMER#c1" },
+                            sk: { S: `ORDER#${new Date(2022, 0, 1).toISOString()}` },
+                            username: { S: "c1" },
+                            email: { S: "email" },
+                            items: { L:
+                                [
+                                    { M: 
+                                        { 
+                                            "product": { S: "p3" }, 
+                                            "colour": { S: "c1" }, 
+                                            "size": { S: "s4" }, 
+                                            "price": { N: "420" } 
+                                        }
+                                    },
+                                    { M: 
+                                        { 
+                                            "product": { S: "p2" }, 
+                                            "colour": { S: "c2" }, 
+                                            "size": { S: "s2" }, 
+                                            "price": { N: "150" } 
+                                        } 
+                                    }
+                                ]
+                            },
+                            total_price: { N: "570" },
+                            address_delivered: { S: "a1" },
+                            status: { S: "Cancalled" },
+                            "GSI-1-sk" : { S: `Cancalled#${new Date(2022, 0, 1).toISOString()}` },
+                            created_at: { S: `${new Date(2022, 0, 1).toISOString()}` },
+                        },
+                    },
+                },
+                {
+                    PutRequest: {
+                        Item: {
+                            pk: { S: "CUSTOMER#c1" },
+                            sk: { S: `ORDER#${new Date(2022, 11, 31).toISOString()}`},
+                            username: { S: "c1" },
+                            email: { S: "email" },
+                            items: { L: 
+                                [ 
+                                    { M: 
+                                        { 
+                                            "product": { S: "p3" }, 
+                                            "colour": { S: "c1" }, 
+                                            "size": { S: "s4" }, 
+                                            "price": { N: "420" } 
+                                        } 
+                                    } 
+                                ] 
+                            },
+                            total_price: { N: "570" },
+                            address_delivered: { S: "a1" },
+                            status: { S: "In Progress" },
+                            'GSI-1-sk': { S: `In Progress#${new Date(2022, 11, 31).toISOString()}` },
+                            created_at: { S: `${new Date(2022, 11, 31).toISOString()}` },
+                        },
+                    },
+                },
+            ],
+        },
+    });
+
+    console.dir(command.input, { depth: null });
+
+    const response = await client.send(command);
+    console.log(response);
+};
+
+
+batch_write();

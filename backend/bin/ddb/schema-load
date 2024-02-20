@@ -4,21 +4,21 @@ const { DynamoDBClient, CreateTableCommand } = require("@aws-sdk/client-dynamodb
 
 // Check if we are in production mode
 if (process.argv.length === 3) {
-  if ("prod" in process.argv[2]) {
-    attrs = {};
-  }
+    if ("prod" in process.argv[2]) {
+        attrs = {};
+    }
 }
 
 // Set the endpoint to the local dynamodb
 let attrs = {
-  endpoint: 'http://localhost:8000'
+    endpoint: 'http://localhost:8000'
 };
 
 // Create a new client
-const dynamodb = new DynamoDBClient(attrs);
+const client = new DynamoDBClient(attrs);
 
 // Create a new table
-const tableName = 'cruddur-messages';
+const tableName = 'xpressbuy';
 
 // define the schema for the table
 const tableSchema = {
@@ -29,6 +29,14 @@ const tableSchema = {
         },
         {
             AttributeName: 'sk',
+            AttributeType: 'S'
+        },
+        {
+            AttributeName: 'GSI-1-sk',
+            AttributeType: 'S'
+        },
+        {
+            AttributeName: 'GSI-2-pk',
             AttributeType: 'S'
         }
     ],
@@ -42,6 +50,48 @@ const tableSchema = {
             KeyType: 'RANGE'
         }
     ],
+    GlobalSecondaryIndexes: [
+        {
+            IndexName: 'GSI-1',
+            KeySchema: [
+                {
+                    AttributeName: 'pk',
+                    KeyType: 'HASH'
+                },
+                {
+                    AttributeName: 'GSI-1-sk',
+                    KeyType: 'RANGE'
+                }
+            ],
+            Projection: {
+                ProjectionType: 'ALL'
+            },
+            ProvisionedThroughput: {
+                ReadCapacityUnits: 5,
+                WriteCapacityUnits: 5
+            }
+        },
+        {
+            IndexName: 'GSI-2',
+            KeySchema: [
+                {
+                    AttributeName: 'GSI-2-pk',
+                    KeyType: 'HASH'
+                },
+                {
+                    AttributeName: 'sk',
+                    KeyType: 'RANGE'
+                }
+            ],
+            Projection: {
+                ProjectionType: 'ALL'
+            },
+            ProvisionedThroughput: {
+                ReadCapacityUnits: 5,
+                WriteCapacityUnits: 5
+            }
+        }
+    ],
     BillingMode: 'PROVISIONED',
     ProvisionedThroughput: {
         ReadCapacityUnits: 5,
@@ -52,18 +102,18 @@ const tableSchema = {
 
 // create the table
 const createTable = new CreateTableCommand({
-  TableName: tableName,
-  ...tableSchema
+    TableName: tableName,
+    ...tableSchema
 });
 
 
 async function createDynamoDBTable() {
-  try {
-    const response = await dynamodb.send(createTable);
-    console.log(response);
-  } catch (error) {
-    console.error(error);
-  }
+    try {
+        const response = await client.send(createTable);
+        console.log(response);
+    } catch (error) {
+        console.error(error);
+    }
 }
 
 createDynamoDBTable();

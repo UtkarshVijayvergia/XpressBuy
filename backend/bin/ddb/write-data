@@ -1,0 +1,45 @@
+#!/usr/bin/env node
+
+// command: ./bin/ddb/seed-data prod
+
+const { PutItemCommand, DynamoDBClient } = require("@aws-sdk/client-dynamodb");
+
+// Check if we are in production mode
+if (process.argv.length === 3) {
+    if ("prod" in process.argv[2]) {
+        attrs = {};
+    }
+}
+
+// Set the endpoint to the local dynamodb
+let attrs = {
+    endpoint: 'http://localhost:8000'
+};
+// Create a new client
+const client = new DynamoDBClient(attrs);
+
+// Create a new item
+async function seed() {
+    const command = new PutItemCommand({
+        TableName: "xpressbuy",
+        // For more information about data types,
+        // see https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.NamingRulesDataTypes.html#HowItWorks.DataTypes and
+        // https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Programming.LowLevelAPI.html#Programming.LowLevelAPI.DataTypeDescriptors
+        Item: {
+            pk: { S: "CUSTOMER#c1" },
+            sk: { S: "PROFILE#c1" },
+            username: { S: "c1" },
+            name: { S: "c1c1" },
+            email: { S: "email" },
+            cart: { M: { "product": { S: "p1" }, "colour": { S: "c1" }, "size": { S: "s1" } } },
+            addresses: { M: { "a1": { S: "address1" }, "a2": { S: "address2" }, "a3": { S: "address3" } } },              
+            created_at: { S: Date.now().toString() },
+        },
+    });
+
+    const response = await client.send(command);
+    console.log(response);
+};
+
+
+seed();
