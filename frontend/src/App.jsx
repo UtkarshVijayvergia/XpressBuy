@@ -9,6 +9,7 @@ import Login from './pages/authentication/login/Login';
 import ConfirmEmail from './pages/userConfirmation/ConfirmEmail'
 import SignUp from './pages/authentication/signUp/SignUp';
 import Home from './pages/homePage/Home';
+import Categories from './pages/products/Categories';
 
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
                     <Route path='/signup' element={<SignUp />} />
                     <Route path='/home' element={<Home />} />
                     <Route path='/confirm' element={<ConfirmEmail />} />
+                    <Route path='/men' element={<Categories />} />
                     {/* <Route path='/contact' element={<About/>} /> */}
 
                     {/* {user?(<Route path={`user/${user.name}`} element={<Profile/>} />):<></>} */}
