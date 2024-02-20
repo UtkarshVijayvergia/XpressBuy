@@ -36,7 +36,7 @@ const ConfirmEmail = () => {
             console.log(email, code);
             const confirmSignUpResponse = await Auth.confirmSignUp(email, code);
             console.log(confirmSignUpResponse);
-            navigate('/home');
+            navigate('/');
             toast.success('Code confirmed successfully!');
         } catch (err) {
             console.log(err);
