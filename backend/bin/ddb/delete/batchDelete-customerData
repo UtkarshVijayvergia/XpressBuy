@@ -46,7 +46,7 @@ async function batch_write() {
                     DeleteRequest: {
                         Key: {
                             pk: { S: "CUSTOMER#c1" },
-                            sk: { S: "ORDER#2024-02-21T07:46:21.594Z" },
+                            sk: { S: "ORDER#2024-02-21T08:11:17.457Z" },
                         },
                     },
                 },

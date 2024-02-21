@@ -31,14 +31,11 @@ async function batch_write() {
                 {
                     // Each PutRequest object defines one item to be inserted into the table.
                     PutRequest: {
-                        // The keys of Item are attribute names. Each attribute value is an object with a data type and value.
-                        // For more information about data types,
-                        // see https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.NamingRulesDataTypes.html#HowItWorks.DataTypes
                         Item: {
-                            pk: { S: "CUSTOMER#c1" },
-                            sk: { S: "PROFILE#c1" },
-                            username: { S: "c1" },
-                            name: { S: "c1c1" },
+                            pk: { S: "CUSTOMER#Alex37" },
+                            sk: { S: "PROFILE#Alex37" },
+                            username: { S: "Alex37" },
+                            name: { S: "Alex Peterson" },
                             email: { S: "email" },
                             cart: { M: { "product": { S: "p1" }, "colour": { S: "c1" }, "size": { S: "s1" } } },
                             addresses: { M: { "a1": { S: "address1" }, "a2": { S: "address2" }, "a3": { S: "address3" } } },              
@@ -49,9 +46,9 @@ async function batch_write() {
                 {
                     PutRequest: {
                         Item: {
-                            pk: { S: "CUSTOMER#c1" },
+                            pk: { S: "CUSTOMER#Alex37" },
                             sk: { S: `ORDER#${now}` },
-                            username: { S: "c1" },
+                            username: { S: "Alex37" },
                             email: { S: "email" },
                             items: { L: 
                                 [ 
@@ -84,9 +81,9 @@ async function batch_write() {
                 {
                     PutRequest: {
                         Item: {
-                            pk: { S: "CUSTOMER#c1" },
+                            pk: { S: "CUSTOMER#Alex37" },
                             sk: { S: `ORDER#${new Date(2022, 0, 1).toISOString()}` },
-                            username: { S: "c1" },
+                            username: { S: "Alex37" },
                             email: { S: "email" },
                             items: { L:
                                 [
@@ -119,9 +116,9 @@ async function batch_write() {
                 {
                     PutRequest: {
                         Item: {
-                            pk: { S: "CUSTOMER#c1" },
+                            pk: { S: "CUSTOMER#Alex37" },
                             sk: { S: `ORDER#${new Date(2022, 11, 31).toISOString()}`},
-                            username: { S: "c1" },
+                            username: { S: "Alex37" },
                             email: { S: "email" },
                             items: { L: 
                                 [ 
@@ -147,7 +144,7 @@ async function batch_write() {
         },
     });
 
-    console.dir(command.input, { depth: null });
+    // console.dir(command.input, { depth: null });
 
     const response = await client.send(command);
     console.log(response);

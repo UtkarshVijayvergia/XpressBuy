@@ -26,8 +26,8 @@ async function delete_data() {
         // see https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.NamingRulesDataTypes.html#HowItWorks.DataTypes and
         // https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Programming.LowLevelAPI.html#Programming.LowLevelAPI.DataTypeDescriptors
         Key: {
-          pk: { S: "CUSTOMER#c1" },
-          sk: { S: "ORDER#2021-12-31T18:30:00.000Z" },
+          pk: { S: "PRODUCT#11bc1a2a-07d9-41d3-845c-5b715646e45b" },
+          sk: { S: "REVIEW#5#2024-02-21T16:27:06.812Z" },
         },
     });
 
