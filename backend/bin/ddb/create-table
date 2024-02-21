@@ -2,17 +2,17 @@
 
 const { DynamoDBClient, CreateTableCommand } = require("@aws-sdk/client-dynamodb");
 
+// Set the endpoint to the local dynamodb
+let attrs = {
+    endpoint: 'http://localhost:8000'
+};
+
 // Check if we are in production mode
 if (process.argv.length === 3) {
     if ("prod" in process.argv[2]) {
         attrs = {};
     }
 }
-
-// Set the endpoint to the local dynamodb
-let attrs = {
-    endpoint: 'http://localhost:8000'
-};
 
 // Create a new client
 const client = new DynamoDBClient(attrs);
@@ -32,11 +32,11 @@ const tableSchema = {
             AttributeType: 'S'
         },
         {
-            AttributeName: 'GSI-1-sk',
+            AttributeName: 'GSI1_sk',
             AttributeType: 'S'
         },
         {
-            AttributeName: 'GSI-2-pk',
+            AttributeName: 'GSI2_pk',
             AttributeType: 'S'
         }
     ],
@@ -59,7 +59,7 @@ const tableSchema = {
                     KeyType: 'HASH'
                 },
                 {
-                    AttributeName: 'GSI-1-sk',
+                    AttributeName: 'GSI1_sk',
                     KeyType: 'RANGE'
                 }
             ],
@@ -75,7 +75,7 @@ const tableSchema = {
             IndexName: 'GSI-2',
             KeySchema: [
                 {
-                    AttributeName: 'GSI-2-pk',
+                    AttributeName: 'GSI2_pk',
                     KeyType: 'HASH'
                 },
                 {

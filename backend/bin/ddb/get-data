@@ -2,7 +2,7 @@
 
 // command: ./bin/ddb/seed-data prod
 
-const { GetItemCommand, DynamoDBClient } = require("@aws-sdk/client-dynamodb");
+const { QueryCommand, DynamoDBClient } = require("@aws-sdk/client-dynamodb");
 
 // Check if we are in production mode
 if (process.argv.length === 3) {
@@ -20,20 +20,32 @@ const client = new DynamoDBClient(attrs);
 
 // Create a new item
 async function get_data() {
-    const command = new GetItemCommand({
+    const query = {
         TableName: "xpressbuy",
-        // For more information about data types,
-        // see https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.NamingRulesDataTypes.html#HowItWorks.DataTypes and
-        // https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Programming.LowLevelAPI.html#Programming.LowLevelAPI.DataTypeDescriptors
-        Key: {
-            pk: { S: "CUSTOMER#c1" },
-            sk: { S: "PROFILE#c1" },
+        IndexName: "GSI-1",
+        // KeyConditionExpression: "#pk = :pk and begins_with(#GSI1_sk, :prefix) and #GSI1_sk between :start_time and :end_time",
+        KeyConditionExpression: "#pk = :pk and #GSI1_sk between :start_time and :end_time",
+        ExpressionAttributeNames: {
+            "#pk": "pk",
+            "#GSI1_sk": "GSI1_sk"
         },
-      });
+        ExpressionAttributeValues: {
+            ":pk": { S: "CUSTOMER#c1" },
+            // ":prefix": { S: "Delivered#" },
+            ":start_time": { S: `Delivered#${new Date(2020, 0, 1).toISOString()}` },
+            ":end_time": { S: `Delivered#${new Date(2026, 0, 1).toISOString()}` }
+        }
+    };
 
-    const response = await client.send(command);
-    console.log(response);
-};
+    try {
+        const command = new QueryCommand(query);
+        const response = await client.send(command);
+        console.log(response);
+        console.log(response.Items[0].GSI1_sk.S);
+    } catch (error) {
+        console.error(error);
+    }
+}
 
 
 get_data();

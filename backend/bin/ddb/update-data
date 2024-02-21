@@ -1,0 +1,50 @@
+#!/usr/bin/env node
+
+// command: ./bin/ddb/seed-data prod
+
+const { UpdateItemCommand  , DynamoDBClient } = require("@aws-sdk/client-dynamodb");
+
+// Check if we are in production mode
+if (process.argv.length === 3) {
+    if ("prod" in process.argv[2]) {
+        attrs = {};
+    }
+}
+
+// Set the endpoint to the local dynamodb
+let attrs = {
+    endpoint: 'http://localhost:8000'
+};
+// Create a new client
+const client = new DynamoDBClient(attrs);
+
+// Create a new item
+async function seed() {
+    let now = new Date().toISOString();
+    const command = new UpdateItemCommand ({
+        TableName: "xpressbuy",
+        Key: {
+            "pk": { S: "CUSTOMER#c1" },
+            "sk": { S: "ORDER#2022-12-30T18:30:00.000Z" }
+        },
+        UpdateExpression: "set #status = :status, #GSI1_sk = :GSI1_sk, #updated_at = :updated_at",
+        ExpressionAttributeNames: {
+            "#status": "status",
+            "#GSI1_sk": "GSI1_sk",
+            "#updated_at": "updated_at"
+        },
+        ExpressionAttributeValues: {
+            ":status": { S: "Delivered" },
+            ":GSI1_sk": { S: `Delivered#${new Date(2022, 0, 1).toISOString()}` },
+            ":updated_at": { S: `${new Date(2022, 0, 1).toISOString()}` }
+        },
+
+        ReturnValues: "UPDATED_NEW"
+    });
+
+    const response = await client.send(command);
+    console.log(response);
+};
+
+
+seed();
