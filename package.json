@@ -34,6 +34,7 @@
   "homepage": "https://github.com/UtkarshVijayvergia/XpressBuy#readme",
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.511.0",
+    "@aws-sdk/util-dynamodb": "^3.518.0",
     "aws-jwt-verify": "^4.0.0",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
