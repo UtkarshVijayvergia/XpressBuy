@@ -1,10 +1,7 @@
 const express = require('express');
 const dotenv = require('dotenv').config();
 // const { errorHandler } = require('./middleware/errorMiddleware')
-// const connectDB = require('./config/db')
-// connectDB();
 const port = process.env.PORT || 5000;
-const path = require('path');
 const app = express()
 
 
@@ -26,6 +23,7 @@ app.use(express.urlencoded({ extended: false }))
 app.use('/api/v1/VerifyIdToken', require('./routes/VerifiedJWT'))
 
 app.use('/api/v1/testdb', require('./test/dbTest'));
+app.use('/api/v1/test_dynamodb', require('./test/dbTest_dynamodb'));
 
 // app.use(errorHandler)
 
