@@ -1,17 +1,31 @@
 import React from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './categories.css'
 import Navbar from '../../components/navbar/Navbar'
 
-const Categories = () => {
 
-    const images = [
-        'https://xpressbuy.s3.ap-south-1.amazonaws.com/temp/green_tshirt.jpeg',
-        'https://xpressbuy.s3.ap-south-1.amazonaws.com/temp/blue-tshirt-modern.jpeg',
-        'https://xpressbuy.s3.ap-south-1.amazonaws.com/temp/red_tshirt_folded.jpeg',
-        'https://xpressbuy.s3.ap-south-1.amazonaws.com/temp/something.jpeg',
-        'https://xpressbuy.s3.ap-south-1.amazonaws.com/temp/sommething_black.jpeg',
-    ]
+const Categories = () => {
+    const [products, setProducts] = useState([]);
+
+    // Get all products
+    const getProducts = async () => {
+        try {
+            const response = await fetch('http://localhost:5000/api/v1/products', {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                method: 'GET',
+            });
+            setProducts(await response.json());
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    useEffect(() => {
+        getProducts();
+    }, []);
 
     return (
         <div>
@@ -22,13 +36,13 @@ const Categories = () => {
                 </div>
                 <div className='right-column'>
                     {
-                        images.map((image, index) => {
+                        products.map((image, index) => {
                             return (
                                 <div key={index} className='product-card'>
-                                    <img src={image} alt='product' />
+                                    <img src={products[index][0].imageURL} alt='product' />
                                     <div className='product-details'>
                                         <div className='product-name'>
-                                            Product Name
+                                            { products[index][0].name }
                                         </div>
                                         <div className='product-price'>
                                             $100
