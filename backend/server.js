@@ -24,6 +24,7 @@ app.use('/api/v1/VerifyIdToken', require('./routes/VerifiedJWT'))
 
 app.use('/api/v1/testdb', require('./test/dbTest'));
 app.use('/api/v1/test_dynamodb', require('./test/dbTest_dynamodb'));
+app.use('/api/v1/test_s3', require('./test/s3Test'));
 
 // app.use(errorHandler)
 
