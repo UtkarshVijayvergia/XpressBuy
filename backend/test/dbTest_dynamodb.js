@@ -4,8 +4,7 @@ const asyncHandler = require('express-async-handler')
 
 // dynamodb 
 const dynamodb = require('../db/dynamodb/db')
-const { QueryCommand } = require("@aws-sdk/client-dynamodb");
-const { unmarshall } = require("@aws-sdk/util-dynamodb");
+const { QueryCommand } = require("@aws-sdk/lib-dynamodb");
 
 
 // get a customer's profile's {sk, username, cart} attributes
@@ -13,10 +12,10 @@ const query = {
     TableName: "xpressbuy",
     KeyConditionExpression: "pk = :pk and begins_with(sk, :sk)",
     ExpressionAttributeValues: {
-        ":pk": { S: "CUSTOMER#Alex37" },
-        ":sk": { S: "PROFILE#" },
+        ":pk": "CUSTOMER#Alex37",
+        ":sk": "ORDER#",
     },
-    ProjectionExpression: "sk, username, cart"
+    // ProjectionExpression: "sk, username, cart"
 };
 
 
@@ -25,9 +24,7 @@ router.get('', asyncHandler(async (req, res) => {
     try {
         const command = new QueryCommand(query);
         const response = await dynamodb.send(command);
-        // Transform the data
-        const transformedItems = response.Items.map(item => unmarshall(item));
-        res.status(200).json(transformedItems);
+        res.status(200).json(response.Items);
     } catch (error) {
         console.error(error);
     }
