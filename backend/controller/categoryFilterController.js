@@ -10,20 +10,22 @@ const { GetObjectCommand } = require("@aws-sdk/client-s3");
 const { getSignedUrl } = require("@aws-sdk/s3-request-presigner");
 
 
-// Get all Products
-const getCategoryProducts = {
-    TableName: "xpressbuy",
-    KeyConditionExpression: "pk = :pk and sk = :sk",
-    ExpressionAttributeValues: {
-        ":pk": "CATEGORY",
-        ":sk": "1#EVERYTHING",
-    },
-};
 
 
+// @desc    Get all products
+// @route   GET /api/v1/category
+// @access  Public
 const getAllProducts = asyncHandler(async (req, res) => {
     try {
-        const getAllProductsQuery = new QueryCommand(getCategoryProducts);
+        const getAllProductsQuery = new QueryCommand({
+            TableName: "xpressbuy",
+            KeyConditionExpression: "pk = :pk and sk = :sk",
+            ExpressionAttributeValues: {
+                ":pk": "CATEGORY",
+                ":sk": "1#EVERYTHING",
+            },
+            ProjectionExpression: "product_ids"
+        });
         const products = await dynamodbClient.send(getAllProductsQuery);
         let product_info = [];
         for (const product of products.Items[0].product_ids) {
@@ -34,10 +36,10 @@ const getAllProducts = asyncHandler(async (req, res) => {
                     ":pk": `PRODUCT#${product}`,
                     ":sk": `PRODUCT#${product}`,
                 },
-                ExpressionAttributeNames: {
-                    "#product_name": "name",
-                },
-                ProjectionExpression: "product_id, reviews, purchases, #product_name, rating"
+                // ExpressionAttributeNames: {
+                //     "#product_name": "name",
+                // },
+                ProjectionExpression: "product_id, product_reviews, product_price, product_sold, product_name, product_rating"
             });
             const response = await dynamodbClient.send(getSingleProductQuery);
             const imageName = `${product}.jpg`;
@@ -57,6 +59,11 @@ const getAllProducts = asyncHandler(async (req, res) => {
 });
 
 
+
+
+// @desc    Get all categories
+// @route   GET /api/v1/category
+// @access  Public
 const getAllCategories = asyncHandler(async (req, res) => {
     try {
         const getAllCategoriesQuery = new QueryCommand({
