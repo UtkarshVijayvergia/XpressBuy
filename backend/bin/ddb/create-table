@@ -109,8 +109,8 @@ const createTable = new CreateTableCommand({
 
 async function createDynamoDBTable() {
     try {
-        const response = await client.send(createTable);
-        console.log(response);
+        await client.send(createTable);
+        console.log("Table Created!");
     } catch (error) {
         console.error(error);
     }
