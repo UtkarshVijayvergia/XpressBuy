@@ -36,9 +36,6 @@ const getAllProducts = asyncHandler(async (req, res) => {
                     ":pk": `PRODUCT#${product}`,
                     ":sk": `PRODUCT#${product}`,
                 },
-                // ExpressionAttributeNames: {
-                //     "#product_name": "name",
-                // },
                 ProjectionExpression: "product_id, product_reviews, product_price, product_sold, product_name, product_rating"
             });
             const response = await dynamodbClient.send(getSingleProductQuery);
