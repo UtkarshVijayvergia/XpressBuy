@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './categories.css'
 import Navbar from '../../components/navbar/Navbar'
+import StarRating from '../../components/star-rating/StarRating'
 
 
 const Categories = () => {
@@ -110,13 +111,37 @@ const Categories = () => {
                         products.map((image, index) => {
                             return (
                                 <div key={index} className='product-card'>
-                                    <img src={products[index][0].imageURL} alt='product' />
+                                    <img className='product-image' src={products[index][0].imageURL} alt='product' />
                                     <div className='product-details'>
                                         <div className='product-name'>
                                             {products[index][0].product_name}
                                         </div>
-                                        <div className='product-price'>
-                                            {products[index][0].product_price}
+                                        <div className='product-review-rating'>
+                                            <div className='product-rating-star'>
+                                                <StarRating rating={products[index][0].product_rating} /> 
+                                            </div>
+                                            <div className='product-rating'>
+                                                ({products[index][0].product_rating})
+                                            </div>
+                                            
+                                                <div className="product-inverse-carrot">
+                                                    <sup>` </sup>
+                                                </div>
+                                                <div className="product-reviews">
+                                                <sup>{products[index][0].product_reviews}</sup>
+                                                </div>
+                                            
+                                        </div>
+                                        <div className="product-sold">
+                                            {products[index][0].product_sold}+ bought this product
+                                        </div>
+                                        <div className="product-price-details">
+                                            <div className="product-price-currency">
+                                                <sup>Rs.</sup>
+                                            </div>
+                                            <div className='product-price'>
+                                                {products[index][0].product_price}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -124,6 +149,9 @@ const Categories = () => {
                         })
                     }
                 </div>
+            </div>
+            <div className='page-end'>
+                {/* <hr /> */}
             </div>
         </div>
     )
