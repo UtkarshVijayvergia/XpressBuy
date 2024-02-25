@@ -1,0 +1,192 @@
+#!/usr/bin/env node
+
+// command: ./bin/ddb/seed-data prod
+const { DynamoDBClient } = require("@aws-sdk/client-dynamodb");
+const { DynamoDBDocumentClient, BatchWriteCommand } = require("@aws-sdk/lib-dynamodb");
+
+// Set the endpoint to the local dynamodb
+let attrs = {
+    endpoint: 'http://localhost:8000'
+};
+
+// Check if we are in production mode
+if (process.argv.length === 3) {
+    if ("prod" in process.argv[2]) {
+        attrs = {};
+    }
+}
+
+// Create a new client
+const client = new DynamoDBClient(attrs);
+const docClient = DynamoDBDocumentClient.from(client);
+
+
+// Create a new item
+async function batch_write() {
+    let now = new Date().toISOString();
+    const command = new BatchWriteCommand({
+        RequestItems: {
+            // Each key in this object is the name of a table. This example refers to a Coffees table.
+            xpressbuy: [
+                {
+                    PutRequest: {
+                        Item: {
+                            "colour":  "#4A6986",
+                            "size":  "L",
+                            "price":  "299",
+                            "product_id":  "11bc1a2a-07d9-41d3-845c-5b715646e45b",
+                            "sk":  "COLOUR#4A6986#SIZE#L",
+                            "pk":  "PRODUCT#11bc1a2a-07d9-41d3-845c-5b715646e45b",
+                            "in_stock":  "5",
+                        },
+                    },
+                },
+                {
+                    PutRequest: {
+                        Item: {
+                            "colour":  "#4A6986",
+                            "size":  "M",
+                            "price":  "279",
+                            "product_id":  "11bc1a2a-07d9-41d3-845c-5b715646e45b",
+                            "sk":  "COLOUR#4A6986#SIZE#M",
+                            "pk":  "PRODUCT#11bc1a2a-07d9-41d3-845c-5b715646e45b",
+                            "in_stock":  "13",
+                        },
+                    },
+                },
+                {
+                    PutRequest: {
+                        Item: {
+                            "colour":  "#F9BD4D",
+                            "size":  "XL",
+                            "price":  "319",
+                            "product_id":  "11bc1a2a-07d9-41d3-845c-5b715646e45b",
+                            "sk":  "COLOUR#F9BD4D#SIZE#XL",
+                            "pk":  "PRODUCT#11bc1a2a-07d9-41d3-845c-5b715646e45b",
+                            "in_stock":  "8",
+                        },
+                    },
+                },
+                {
+                    PutRequest: {
+                        Item: {
+                            pk: "PRODUCT#11bc1a2a-07d9-41d3-845c-5b715646e45b",
+                            sk: "COLOUR#4A6986#SIZE#XL",
+                            product_id: "11bc1a2a-07d9-41d3-845c-5b715646e45b",
+                            colour: "#4A6986",
+                            size: "XL",
+                            in_stock: "8",
+                            price: "319",
+                        },
+                    },
+                },
+                {
+                    PutRequest: {
+                        Item: {
+                            "colour":  "#F9BD4D",
+                            "size":  "XXL",
+                            "price":  "280",
+                            "product_id":  "11bc1a2a-07d9-41d3-845c-5b715646e45b",
+                            "sk":  "COLOUR#F9BD4D#SIZE#XXL",
+                            "pk":  "PRODUCT#11bc1a2a-07d9-41d3-845c-5b715646e45b",
+                            "in_stock":  "18",
+                        },
+                    },
+                },
+                {
+                    PutRequest: {
+                        Item: {
+                            "colour":  "#907F61",
+                            "size":  "M",
+                            "price":  "279",
+                            "product_id":  "11bc1a2a-07d9-41d3-845c-5b715646e45b",
+                            "sk":  "COLOUR#907F61#SIZE#M",
+                            "pk":  "PRODUCT#11bc1a2a-07d9-41d3-845c-5b715646e45b",
+                            "in_stock":  "13",
+                        },
+                    },
+                },
+                {
+                    PutRequest: {
+                        Item: {
+                            "colour":  "#907F61",
+                            "size":  "S",
+                            "price":  "239",
+                            "product_id":  "11bc1a2a-07d9-41d3-845c-5b715646e45b",
+                            "sk":  "COLOUR#907F61#SIZE#S",
+                            "pk":  "PRODUCT#11bc1a2a-07d9-41d3-845c-5b715646e45b",
+                            "in_stock":  "10",
+                        },
+                    },
+                },
+                {
+                    PutRequest: {
+                        Item: {
+                            "colour":  "#907F61",
+                            "size":  "XL",
+                            "price":  "319",
+                            "product_id":  "11bc1a2a-07d9-41d3-845c-5b715646e45b",
+                            "sk":  "COLOUR#907F61#SIZE#XL",
+                            "pk":  "PRODUCT#11bc1a2a-07d9-41d3-845c-5b715646e45b",
+                            "in_stock":  "8",
+                        },
+                    },
+                },
+                {
+                    PutRequest: {
+                        Item: {
+                            "reviews":  "2",
+                            "purchases":  "7",
+                            "product_id":  "11bc1a2a-07d9-41d3-845c-5b715646e45b",
+                            "sk":  "PRODUCT#11bc1a2a-07d9-41d3-845c-5b715646e45b",
+                            "name":  "Men's Heavy Taped Neck Comfort Jersey T-Shirt",
+                            "rating":  "4.5",
+                            "description": [
+                                "5.3 oz./yd² (US) 8.8 oz./L yd (CA), 100% cotton, 20 singles. Safety Green is compliant with ANSI / ISEA 107 high-visibility standards",
+                                "Ash Grey is 99/1 cotton/polyester. Tear away label. Classic width, rib collar. Made with OEKO-TEX certified low-impact dyes. Proud member of the U.S. Cotton Trust Protocol",
+                                "Blackberry, Dark Heather, Graphite Heather, Heather Colors, Lilac, Midnight, Neon Colors, Safety Colors, Sunset, & Tweed are 50/50 cotton/polyester",
+                                "Taped neck and shoulders for comfort and durability. Antique colors & Sport Grey are 90/10 cotton/polyester"
+                            ],
+                            "pk":  "PRODUCT#11bc1a2a-07d9-41d3-845c-5b715646e45b",
+                            "colours": [ "#4A6986", "#F9BD4D", "#907F61"],
+                        },
+                    },
+                },
+                {
+                    PutRequest: {
+                        Item: {
+                            "review":  "The shirt is nice but it isn't what I call heavy cotton because the thickness isn't much different than regular Gildan 100% cotton shirts. The sleeve length is above the biceps. This is fine if you want to show how ripped you are but I'm not and I can use a few more inches in sleeve length.",
+                            "product_id":  "11bc1a2a-07d9-41d3-845c-5b715646e45b",
+                            "sk":  "REVIEW#4#2024-02-21T16:28:47.257Z",
+                            "rating":  "4",
+                            "created_at":  "2024-02-21T16:28:47.257Z",
+                            "pk":  "PRODUCT#11bc1a2a-07d9-41d3-845c-5b715646e45b",
+                            "GSI2_pk":  "sougo13",
+                        },
+                    },
+                },
+                {
+                    PutRequest: {
+                        Item: {
+                            "review":  "What can I say other than I'm a big guy and the size chart is accurate. Good quality shirt, worth every penny.",
+                            "product_id":  "11bc1a2a-07d9-41d3-845c-5b715646e45b",
+                            "sk":  "REVIEW#5#2024-02-21T16:28:47.257Z",
+                            "rating":  "5",
+                            "created_at":  "2024-02-21T16:28:47.257Z",
+                            "pk":  "PRODUCT#11bc1a2a-07d9-41d3-845c-5b715646e45b",
+                            "GSI2_pk":  "Alex37",
+                        }
+                    },
+                },
+            ],
+        },
+    });
+
+    // console.dir(command.input, { depth: null });
+
+    const response = await docClient.send(command);
+    console.log(response);
+};
+
+
+batch_write();

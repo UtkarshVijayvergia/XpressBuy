@@ -1,0 +1,180 @@
+#!/usr/bin/env node
+
+// command: ./bin/ddb/seed-data prod
+
+const { BatchWriteItemCommand, DynamoDBClient } = require("@aws-sdk/client-dynamodb");
+
+// Set the endpoint to the local dynamodb
+let attrs = {
+    endpoint: 'http://localhost:8000'
+};
+
+// Check if we are in production mode
+if (process.argv.length === 3) {
+    if ("prod" in process.argv[2]) {
+        attrs = {};
+    }
+}
+
+// Create a new client
+const client = new DynamoDBClient(attrs);
+
+
+// Create a new item
+async function batch_write() {
+    let now = new Date().toISOString();
+    const command = new BatchWriteItemCommand({
+        RequestItems: {
+            // Each key in this object is the name of a table. This example refers to a Coffees table.
+            xpressbuy: [
+                {
+                    PutRequest: {
+                        Item: {
+                            pk: { S: "PRODUCT#11bc1a2a-07d9-41d3-845c-5b715646e45b" },
+                            sk: { S: "PRODUCT#11bc1a2a-07d9-41d3-845c-5b715646e45b" },
+                            product_id: { S: "11bc1a2a-07d9-41d3-845c-5b715646e45b" },
+                            name: { S: "Men's Heavy Taped Neck Comfort Jersey T-Shirt" },
+                            description: { SS: 
+                                [ 
+                                    "5.3 oz./yd² (US) 8.8 oz./L yd (CA), 100% cotton, 20 singles. Safety Green is compliant with ANSI / ISEA 107 high-visibility standards", 
+                                    "Taped neck and shoulders for comfort and durability. Antique colors & Sport Grey are 90/10 cotton/polyester", 
+                                    "Blackberry, Dark Heather, Graphite Heather, Heather Colors, Lilac, Midnight, Neon Colors, Safety Colors, Sunset, & Tweed are 50/50 cotton/polyester", 
+                                    "Ash Grey is 99/1 cotton/polyester. Tear away label. Classic width, rib collar. Made with OEKO-TEX certified low-impact dyes. Proud member of the U.S. Cotton Trust Protocol" 
+                                ]
+                            },
+                            colours: { SS: [ "#FF0000", "#0000FF", "#00FF00" ] },
+                            rating: { N: "4.5" },
+                            reviews: { N: "2" },
+                            purchases: { N: "7" },
+                        },
+                    },
+                },
+                {
+                    PutRequest: {
+                        Item: {
+                            pk: { S: "PRODUCT#11bc1a2a-07d9-41d3-845c-5b715646e45b" },
+                            sk: { S: "COLOUR#FF0000#SIZE#S" },
+                            product_id: { S: "11bc1a2a-07d9-41d3-845c-5b715646e45b" },
+                            colour: { S: "#FF0000" },
+                            size: { S: "S" },
+                            in_stock: { N: "10" },
+                            price: { N: "239" },
+                        },
+                    },
+                },
+                {
+                    PutRequest: {
+                        Item: {
+                            pk: { S: "PRODUCT#11bc1a2a-07d9-41d3-845c-5b715646e45b" },
+                            sk: { S: "COLOUR#FF0000#SIZE#M" },
+                            product_id: { S: "11bc1a2a-07d9-41d3-845c-5b715646e45b" },
+                            colour: { S: "#FF0000" },
+                            size: { S: "M" },
+                            in_stock: { N: "13" },
+                            price: { N: "279" },
+                        },
+                    },
+                },
+                {
+                    PutRequest: {
+                        Item: {
+                            pk: { S: "PRODUCT#11bc1a2a-07d9-41d3-845c-5b715646e45b" },
+                            sk: { S: "COLOUR#FF0000#SIZE#XL" },
+                            product_id: { S: "11bc1a2a-07d9-41d3-845c-5b715646e45b" },
+                            colour: { S: "#FF0000" },
+                            size: { S: "XL" },
+                            in_stock: { N: "8" },
+                            price: { N: "319" },
+                        },
+                    },
+                },
+                {
+                    PutRequest: {
+                        Item: {
+                            pk: { S: "PRODUCT#11bc1a2a-07d9-41d3-845c-5b715646e45b" },
+                            sk: { S: "COLOUR#0000FF#SIZE#M" },
+                            product_id: { S: "11bc1a2a-07d9-41d3-845c-5b715646e45b" },
+                            colour: { S: "#0000FF" },
+                            size: { S: "M" },
+                            in_stock: { N: "13" },
+                            price: { N: "279" },
+                        },
+                    },
+                },
+                {
+                    PutRequest: {
+                        Item: {
+                            pk: { S: "PRODUCT#11bc1a2a-07d9-41d3-845c-5b715646e45b" },
+                            sk: { S: "COLOUR#0000FF#SIZE#L" },
+                            product_id: { S: "11bc1a2a-07d9-41d3-845c-5b715646e45b" },
+                            colour: { S: "#0000FF" },
+                            size: { S: "L" },
+                            in_stock: { N: "5" },
+                            price: { N: "299" },
+                        },
+                    },
+                },
+                {
+                    PutRequest: {
+                        Item: {
+                            pk: { S: "PRODUCT#11bc1a2a-07d9-41d3-845c-5b715646e45b" },
+                            sk: { S: "COLOUR#00FF00#SIZE#XL" },
+                            product_id: { S: "11bc1a2a-07d9-41d3-845c-5b715646e45b" },
+                            colour: { S: "#00FF00" },
+                            size: { S: "XL" },
+                            in_stock: { N: "8" },
+                            price: { N: "319" },
+                        },
+                    },
+                },
+                {
+                    PutRequest: {
+                        Item: {
+                            pk: { S: "PRODUCT#11bc1a2a-07d9-41d3-845c-5b715646e45b" },
+                            sk: { S: "COLOUR#00FF00#SIZE#XXL" },
+                            product_id: { S: "11bc1a2a-07d9-41d3-845c-5b715646e45b" },
+                            colour: { S: "#00FF00" },
+                            size: { S: "XXL" },
+                            in_stock: { N: "18" },
+                            price: { N: "280" },
+                        },
+                    },
+                },
+                {
+                    PutRequest: {
+                        Item: {
+                            pk: { S: "PRODUCT#11bc1a2a-07d9-41d3-845c-5b715646e45b" },
+                            sk: { S: `REVIEW#5#${now}` },
+                            product_id: { S: "11bc1a2a-07d9-41d3-845c-5b715646e45b" },
+                            GSI2_pk: { S: "Alex37" },
+                            review: { S: "What can I say other than I'm a big guy and the size chart is accurate. Good quality shirt, worth every penny." },
+                            rating: { N: "5" },
+                            created_at: { S: `${now}` },
+                        },
+                    },
+                },
+                {
+                    PutRequest: {
+                        Item: {
+                            pk: { S: "PRODUCT#11bc1a2a-07d9-41d3-845c-5b715646e45b" },
+                            sk: { S: `REVIEW#4#${now}` },
+                            product_id: { S: "11bc1a2a-07d9-41d3-845c-5b715646e45b" },
+                            GSI2_pk: { S: "sougo13" },
+                            review: { S: "The shirt is nice but it isn't what I call heavy cotton because the thickness isn't much different than regular Gildan 100% cotton shirts. The sleeve length is above the biceps. This is fine if you want to show how ripped you are but I'm not and I can use a few more inches in sleeve length." },
+                            rating: { N: "4" },
+                            created_at: { S: `${now}` },
+                        },
+                    },
+                },
+            ],
+        },
+    });
+
+    // console.dir(command.input, { depth: null });
+
+    const response = await client.send(command);
+    console.log(response);
+};
+
+
+batch_write();

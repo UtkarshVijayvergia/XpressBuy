@@ -1,0 +1,120 @@
+#!/usr/bin/env node
+
+// command: ./bin/ddb/seed-data prod
+
+const { BatchWriteItemCommand, DynamoDBClient } = require("@aws-sdk/client-dynamodb");
+
+// Check if we are in production mode
+if (process.argv.length === 3) {
+    if ("prod" in process.argv[2]) {
+        attrs = {};
+    }
+}
+
+// Set the endpoint to the local dynamodb
+let attrs = {
+    endpoint: 'http://localhost:8000'
+};
+// Create a new client
+const client = new DynamoDBClient(attrs);
+
+
+
+// Create a new item
+async function batch_write() {
+    const command = new BatchWriteItemCommand({
+        RequestItems: {
+            xpressbuy: [
+                // Each entry in Coffees is an object that defines either a PutRequest or DeleteRequest.
+                {
+                    DeleteRequest: {
+                        Key: {
+                            pk: { S: "PRODUCT#a1b2c3d4-e5f6-47a8-b9c0-d1e2f3a4b5c6" },
+                            sk: { S: "REVIEW#1#2023-11-12T12:52:21.000Z" },
+                        },
+                    },
+                },
+                {
+                    DeleteRequest: {
+                        Key: {
+                            pk: { S: "PRODUCT#a1b2c3d4-e5f6-47a8-b9c0-d1e2f3a4b5c6" },
+                            sk: { S: "REVIEW#5#2024-02-12T12:52:28.000Z" },
+                        },
+                    },
+                },
+                {
+                    DeleteRequest: {
+                        Key: {
+                            pk: { S: "PRODUCT#a1b2c3d4-e5f6-47a8-b9c0-d1e2f3a4b5c6" },
+                            sk: { S: "REVIEW#5#2024-01-22T12:52:28.000Z" },
+                        },
+                    },
+                },
+                {
+                    DeleteRequest: {
+                        Key: {
+                            pk: { S: "PRODUCT#a1b2c3d4-e5f6-47a8-b9c0-d1e2f3a4b5c6" },
+                            sk: { S: "REVIEW#5#2024-02-14T12:52:28.000Z" },
+                        },
+                    },
+                },
+                {
+                    DeleteRequest: {
+                        Key: {
+                            pk: { S: "PRODUCT#a1b2c3d4-e5f6-47a8-b9c0-d1e2f3a4b5c6" },
+                            sk: { S: "REVIEW#5#2024-02-19T12:52:28.000Z" },
+                        },
+                    },
+                },
+                {
+                    DeleteRequest: {
+                        Key: {
+                            pk: { S: "PRODUCT#a1b2c3d4-e5f6-47a8-b9c0-d1e2f3a4b5c6" },
+                            sk: { S: "REVIEW#1#2023-11-12T12:52:35.000Z" },
+                        },
+                    },
+                },
+                {
+                    DeleteRequest: {
+                        Key: {
+                            pk: { S: "PRODUCT#a1b2c3d4-e5f6-47a8-b9c0-d1e2f3a4b5c6" },
+                            sk: { S: "REVIEW#5#2024-02-12T12:52:35.000Z" },
+                        },
+                    },
+                },
+                {
+                    DeleteRequest: {
+                        Key: {
+                            pk: { S: "PRODUCT#a1b2c3d4-e5f6-47a8-b9c0-d1e2f3a4b5c6" },
+                            sk: { S: "REVIEW#5#2024-01-22T12:52:35.000Z" },
+                        },
+                    },
+                },
+                {
+                    DeleteRequest: {
+                        Key: {
+                            pk: { S: "PRODUCT#a1b2c3d4-e5f6-47a8-b9c0-d1e2f3a4b5c6" },
+                            sk: { S: "REVIEW#5#2024-02-14T12:52:35.000Z" },
+                        },
+                    },
+                },
+                {
+                    DeleteRequest: {
+                        Key: {
+                            pk: { S: "PRODUCT#a1b2c3d4-e5f6-47a8-b9c0-d1e2f3a4b5c6" },
+                            sk: { S: "REVIEW#5#2024-02-19T12:52:35.000Z" },
+                        },
+                    },
+                },
+            ],
+        },
+    });
+
+    // console.dir(command.input, { depth: null });
+
+    const response = await client.send(command);
+    console.log(response);
+};
+
+
+batch_write();

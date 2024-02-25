@@ -1,0 +1,135 @@
+#!/usr/bin/env node
+
+// command: ./bin/ddb/seed-data prod
+
+const { DynamoDBClient } = require("@aws-sdk/client-dynamodb");
+const { DynamoDBDocumentClient, BatchWriteCommand } = require("@aws-sdk/lib-dynamodb");
+
+// Set the endpoint to the local dynamodb
+let attrs = {
+    endpoint: 'http://localhost:8000'
+};
+
+// Check if we are in production mode
+if (process.argv.length === 3) {
+    if ("prod" in process.argv[2]) {
+        attrs = {};
+    }
+}
+
+// Create a new client
+const client = new DynamoDBClient(attrs);
+const docClient = DynamoDBDocumentClient.from(client);
+
+
+
+// Create a new item
+async function batch_write() {
+    let now = new Date().toISOString();
+    const command = new BatchWriteCommand({
+        RequestItems: {
+            xpressbuy: [
+                {
+                    PutRequest: {
+                        Item: {
+                            pk: "CUSTOMER#Alex37",
+                            sk: "PROFILE#Alex37",
+                            username: "Alex37",
+                            name: "Alex Peterson",
+                            email: "Peterson.alex37@example.com",
+                            cart: [{ "product": "p1", "colour": "c1", "size": "s1" }],
+                            addresses: { "a1": "address1", "a2": "address2", "a3": "address3" },              
+                            created_at: `${now}`,
+                        },
+                    },
+                },
+                {
+                    PutRequest: {
+                        Item: {
+                            pk: "CUSTOMER#Alex37",
+                            sk: `ORDER#${now}`,
+                            username: "Alex37",
+                            items: [ 
+                                { 
+                                    "product": "p1", 
+                                    "colour": "c1", 
+                                    "size": "s1", 
+                                    "price": "120",
+                                },
+                                { 
+                                    "product": "p2", 
+                                    "colour": "c2", 
+                                    "size": "s2", 
+                                    "price": "150",
+                                },
+                            ],
+                            total_price: "270",
+                            address_delivered: "a1",
+                            status: "Delivered",
+                            GSI1_sk: `Delivered#${now}`,
+                            created_at: `${now}`,
+                        },
+                    },
+                },
+                {
+                    PutRequest: {
+                        Item: {
+                            pk: "CUSTOMER#Alex37",
+                            sk: `ORDER#${new Date(2022, 0, 1).toISOString()}`,
+                            username: "Alex37",
+                            items: [ 
+                                { 
+                                    "product": "p3", 
+                                    "colour": "c1", 
+                                    "size": "s4", 
+                                    "price": "420",
+                                },
+                                { 
+                                    "product": "p2", 
+                                    "colour": "c2", 
+                                    "size": "s2", 
+                                    "price": "150",
+                                },
+                            ],
+                            total_price: "570",
+                            address_delivered: "a1",
+                            status: "Cancalled",
+                            GSI1_sk : `Cancalled#${new Date(2022, 0, 1).toISOString()}`,
+                            created_at: `${new Date(2022, 0, 1).toISOString()}`,
+                        },
+                    },
+                },
+                {
+                    PutRequest: {
+                        Item: {
+                            pk:"CUSTOMER#Alex37",
+                            sk: `ORDER#${new Date(2022, 11, 31).toISOString()}`,
+                            username: "Alex37",
+                            items: [ 
+                                { 
+                                    "product": "p3",
+                                    "colour": "c1",
+                                    "size": "s4",
+                                    "price": "420",
+                                },
+                            ],
+                            total_price: "570",
+                            address_delivered: "a1",
+                            status: "In Progress",
+                            GSI1_sk: `In Progress#${new Date(2022, 11, 31).toISOString()}`,
+                            created_at: `${new Date(2022, 11, 31).toISOString()}`,
+                        },
+                    },
+                },
+            ],
+        },
+    });
+
+    // console.dir(command.input, { depth: null });
+
+    const response = await docClient.send(command);
+    console.log(response);
+};
+
+
+batch_write();
