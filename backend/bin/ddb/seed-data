@@ -29,7 +29,7 @@ async function batch_write() {
         // Product 1
         let fileData;
         try {
-            fileData = await fs.promises.readFile('bin/data/products/Basic V Neck Tee Loose Fitting Casual Short Sleeve Tops.json', 'utf8');
+            fileData = await fs.promises.readFile('bin/data/products/product1.json', 'utf8');
         } catch (err) {
             console.error(err);
             throw err;
@@ -47,7 +47,7 @@ async function batch_write() {
 
         // Product 2
         try {
-            fileData = await fs.promises.readFile('bin/data/products/Men Comfortable Cotton T-Shirt.json', 'utf8');
+            fileData = await fs.promises.readFile('bin/data/products/product2.json', 'utf8');
         } catch (err) {
             console.error(err);
             throw err;
@@ -65,7 +65,7 @@ async function batch_write() {
 
         // Product 3
         try {
-            fileData = await fs.promises.readFile('bin/data/products/Men Heavy Taped Neck Comfort Jersey T-Shirt.json', 'utf8');
+            fileData = await fs.promises.readFile('bin/data/products/product3.json', 'utf8');
         } catch (err) {
             console.error(err);
             throw err;
@@ -83,7 +83,7 @@ async function batch_write() {
 
         // Product 4
         try {
-            fileData = await fs.promises.readFile('bin/data/products/Women Soft Cotton V-Neck T-Shirt.json', 'utf8');
+            fileData = await fs.promises.readFile('bin/data/products/product4.json', 'utf8');
         } catch (err) {
             console.error(err);
             throw err;
