@@ -85,7 +85,7 @@ const Navbar = (props) => {
                                 isAuthenticated ? (
                                     <>
                                         <li className="nav-item">
-                                            <a className={ location.pathname=='/' ? 'nav-item-name' : 'nav-item-cat-name' } href="/"> $0 <FaShoppingCart /></a>
+                                            <a className={ location.pathname=='/' ? 'nav-item-name' : 'nav-item-cat-name' } href="/"> $0 &nbsp; <FaShoppingCart /></a>
                                         </li>
                                     </>
                                 ) : <>
