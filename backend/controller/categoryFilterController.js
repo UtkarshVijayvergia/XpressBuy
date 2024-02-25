@@ -16,7 +16,7 @@ const getCategoryProducts = {
     KeyConditionExpression: "pk = :pk and sk = :sk",
     ExpressionAttributeValues: {
         ":pk": "CATEGORY",
-        ":sk": "EVERYTHING",
+        ":sk": "1#EVERYTHING",
     },
 };
 
@@ -57,7 +57,26 @@ const getAllProducts = asyncHandler(async (req, res) => {
 });
 
 
+const getAllCategories = asyncHandler(async (req, res) => {
+    try {
+        const getAllCategoriesQuery = new QueryCommand({
+            TableName: "xpressbuy",
+            KeyConditionExpression: "pk = :pk",
+            ExpressionAttributeValues: {
+                ":pk": "CATEGORY",
+            },
+            ProjectionExpression: "sk, product_quantity"
+        });
+        const categories = await dynamodbClient.send(getAllCategoriesQuery);
+        res.status(200).json(categories.Items);
+    } catch (error) {
+        console.error(error);
+    }
+});
+
+
 
 module.exports = {
     getAllProducts,
+    getAllCategories,
 }
