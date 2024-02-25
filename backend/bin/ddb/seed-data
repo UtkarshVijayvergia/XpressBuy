@@ -97,6 +97,24 @@ async function batch_write() {
             await docClient.send(new PutCommand(params));
         }
         console.log('P4 Added successfully');
+
+
+        // Product 5
+        try {
+            fileData = await fs.promises.readFile('bin/data/products/product5.json', 'utf8');
+        } catch (err) {
+            console.error(err);
+            throw err;
+        }
+        items = JSON.parse(fileData);
+        for (const item of items) {
+            const params = {
+              TableName: 'xpressbuy',
+              Item: item
+            };
+            await docClient.send(new PutCommand(params));
+        }
+        console.log('P5 Added successfully');
         
 
         // Category
