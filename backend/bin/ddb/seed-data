@@ -1,0 +1,124 @@
+#!/usr/bin/env node
+
+// command: ./bin/ddb/seed-data prod
+
+const { DynamoDBClient } = require("@aws-sdk/client-dynamodb");
+const { DynamoDBDocumentClient, PutCommand } = require("@aws-sdk/lib-dynamodb");
+const fs = require('fs');
+
+// Set the endpoint to the local dynamodb
+let attrs = {
+    endpoint: 'http://localhost:8000'
+};
+
+// Check if we are in production mode
+if (process.argv.length === 3) {
+    if ("prod" in process.argv[2]) {
+        attrs = {};
+    }
+}
+
+// Create a new client
+const client = new DynamoDBClient(attrs);
+const docClient = DynamoDBDocumentClient.from(client);
+
+
+// Create a new item
+async function batch_write() {
+    try {
+        // Product 1
+        let fileData;
+        try {
+            fileData = await fs.promises.readFile('bin/data/products/Basic V Neck Tee Loose Fitting Casual Short Sleeve Tops.json', 'utf8');
+        } catch (err) {
+            console.error(err);
+            throw err;
+        }
+        let items = JSON.parse(fileData);
+        for (const item of items) {
+            const params = {
+              TableName: 'xpressbuy',
+              Item: item
+            };
+            await docClient.send(new PutCommand(params));
+        }
+        console.log('P1 Added successfully');
+
+
+        // Product 2
+        try {
+            fileData = await fs.promises.readFile('bin/data/products/Men Comfortable Cotton T-Shirt.json', 'utf8');
+        } catch (err) {
+            console.error(err);
+            throw err;
+        }
+        items = JSON.parse(fileData);
+        for (const item of items) {
+            const params = {
+              TableName: 'xpressbuy',
+              Item: item
+            };
+            await docClient.send(new PutCommand(params));
+        }
+        console.log('P2 Added successfully');
+
+
+        // Product 3
+        try {
+            fileData = await fs.promises.readFile('bin/data/products/Men Heavy Taped Neck Comfort Jersey T-Shirt.json', 'utf8');
+        } catch (err) {
+            console.error(err);
+            throw err;
+        }
+        items = JSON.parse(fileData);
+        for (const item of items) {
+            const params = {
+              TableName: 'xpressbuy',
+              Item: item
+            };
+            await docClient.send(new PutCommand(params));
+        }
+        console.log('P3 Added successfully');
+
+
+        // Product 4
+        try {
+            fileData = await fs.promises.readFile('bin/data/products/Women Soft Cotton V-Neck T-Shirt.json', 'utf8');
+        } catch (err) {
+            console.error(err);
+            throw err;
+        }
+        items = JSON.parse(fileData);
+        for (const item of items) {
+            const params = {
+              TableName: 'xpressbuy',
+              Item: item
+            };
+            await docClient.send(new PutCommand(params));
+        }
+        console.log('P4 Added successfully');
+        
+
+        // Category
+        try {
+            fileData = await fs.promises.readFile('bin/data/categories/categories.json', 'utf8');
+        } catch (err) {
+            console.error(err);
+            throw err;
+        }
+        items = JSON.parse(fileData);
+        for (const item of items) {
+            const params = {
+              TableName: 'xpressbuy',
+              Item: item
+            };
+            await docClient.send(new PutCommand(params));
+        }
+        console.log('C Added successfully');
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+
+batch_write();
