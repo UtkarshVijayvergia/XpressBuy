@@ -9,7 +9,7 @@
             "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
             "cddb8301-1a31-46c8-b789-06949e19e3ce"
         ],
-        "product_quantity": 3
+        "product_quantity": 5
     },
     {
         "pk": "CATEGORY",
@@ -19,7 +19,7 @@
             "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
             "cddb8301-1a31-46c8-b789-06949e19e3ce"
         ],
-        "product_quantity": 1
+        "product_quantity": 3
     },
     {
         "pk": "CATEGORY",
@@ -29,7 +29,7 @@
             "0e8ce2f5-8ea9-43d8-b5a7-b00233f9e9b4",
             "cddb8301-1a31-46c8-b789-06949e19e3ce"
         ],
-        "product_quantity": 2
+        "product_quantity": 3
     },
     {
         "pk": "CATEGORY",
@@ -40,7 +40,7 @@
             "0e8ce2f5-8ea9-43d8-b5a7-b00233f9e9b4",
             "4c840873-27b2-45ce-8de0-a4ee7d8aa55d"
         ],
-        "product_quantity": 3
+        "product_quantity": 4
     },
     {
         "pk": "CATEGORY",
@@ -48,6 +48,6 @@
         "product_ids": [
             "cddb8301-1a31-46c8-b789-06949e19e3ce"
         ],
-        "product_quantity": 3
+        "product_quantity": 1
     }
 ]
