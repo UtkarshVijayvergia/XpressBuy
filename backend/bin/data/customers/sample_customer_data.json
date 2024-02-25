@@ -1,0 +1,218 @@
+[
+    {
+        "address_delivered": {
+            "S": "address1"
+        },
+        "total_price": {
+            "N": "570"
+        },
+        "sk": {
+            "S": "ORDER#2021-12-31T18:30:00.000Z"
+        },
+        "created_at": {
+            "S": "2021-12-31T18:30:00.000Z"
+        },
+        "GSI1_sk": {
+            "S": "Cancelled#2021-12-31T18:30:00.000Z"
+        },
+        "pk": {
+            "S": "CUSTOMER#Alex37"
+        },
+        "items": {
+            "L": [
+                {
+                    "M": {
+                        "product": {
+                            "S": "UUID"
+                        },
+                        "colour": {
+                            "S": "red"
+                        },
+                        "size": {
+                            "S": "XL"
+                        },
+                        "price": {
+                            "N": "420"
+                        }
+                    }
+                },
+                {
+                    "M": {
+                        "product": {
+                            "S": "UUID"
+                        },
+                        "colour": {
+                            "S": "blue"
+                        },
+                        "size": {
+                            "S": "M"
+                        },
+                        "price": {
+                            "N": "150"
+                        }
+                    }
+                }
+            ]
+        },
+        "username": {
+            "S": "Alex37"
+        },
+        "status": {
+            "S": "Cancelled"
+        }
+    },
+    {
+        "address_delivered": {
+            "S": "address1"
+        },
+        "total_price": {
+            "N": "570"
+        },
+        "sk": {
+            "S": "ORDER#2022-12-30T18:30:00.000Z"
+        },
+        "created_at": {
+            "S": "2022-12-30T18:30:00.000Z"
+        },
+        "GSI1_sk": {
+            "S": "In Progress#2022-12-30T18:30:00.000Z"
+        },
+        "pk": {
+            "S": "CUSTOMER#Alex37"
+        },
+        "items": {
+            "L": [
+                {
+                    "M": {
+                        "product": {
+                            "S": "UUID"
+                        },
+                        "colour": {
+                            "S": "red"
+                        },
+                        "size": {
+                            "S": "XL"
+                        },
+                        "price": {
+                            "N": "420"
+                        }
+                    }
+                }
+            ]
+        },
+        "username": {
+            "S": "Alex37"
+        },
+        "status": {
+            "S": "In Progress"
+        }
+    },
+    {
+        "address_delivered": {
+            "S": "address1"
+        },
+        "total_price": {
+            "N": "270"
+        },
+        "sk": {
+            "S": "ORDER#2024-02-21T16:42:21.198Z"
+        },
+        "created_at": {
+            "S": "2024-02-21T16:42:21.198Z"
+        },
+        "GSI1_sk": {
+            "S": "Delivered#2024-02-21T16:42:21.198Z"
+        },
+        "pk": {
+            "S": "CUSTOMER#Alex37"
+        },
+        "items": {
+            "L": [
+                {
+                    "M": {
+                        "product": {
+                            "S": "UUID"
+                        },
+                        "colour": {
+                            "S": "red"
+                        },
+                        "size": {
+                            "S": "XXL"
+                        },
+                        "price": {
+                            "N": "120"
+                        }
+                    }
+                },
+                {
+                    "M": {
+                        "product": {
+                            "S": "UUID"
+                        },
+                        "colour": {
+                            "S": "blue"
+                        },
+                        "size": {
+                            "S": "M"
+                        },
+                        "price": {
+                            "N": "150"
+                        }
+                    }
+                }
+            ]
+        },
+        "username": {
+            "S": "Alex37"
+        },
+        "status": {
+            "S": "Delivered"
+        }
+    },
+    {
+        "addresses": {
+            "M": {
+                "Default": {
+                    "S": "address1"
+                },
+                "Home": {
+                    "S": "address2"
+                },
+                "Office": {
+                    "S": "address3"
+                }
+            }
+        },
+        "sk": {
+            "S": "PROFILE#Alex37"
+        },
+        "name": {
+            "S": "Alex Peterson"
+        },
+        "created_at": {
+            "S": "2024-02-21T16:42:21.198Z"
+        },
+        "pk": {
+            "S": "CUSTOMER#Alex37"
+        },
+        "email": {
+            "S": "alex143@gmail.com"
+        },
+        "cart": {
+            "M": {
+                "size": {
+                    "S": "XXL"
+                },
+                "product": {
+                    "S": "UUID"
+                },
+                "colour": {
+                    "S": "red"
+                }
+            }
+        },
+        "username": {
+            "S": "Alex37"
+        }
+    }
+]

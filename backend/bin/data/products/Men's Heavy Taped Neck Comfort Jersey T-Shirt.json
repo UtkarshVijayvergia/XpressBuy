@@ -1,0 +1,106 @@
+[
+    {
+        "colour": "#4A6986",
+        "size": "L",
+        "price": 599,
+        "product_id": "11bc1a2a-07d9-41d3-845c-5b715646e45b",
+        "sk": "COLOUR#4A6986#SIZE#L",
+        "pk": "PRODUCT#11bc1a2a-07d9-41d3-845c-5b715646e45b",
+        "in_stock": 5
+    },
+    {
+        "colour": "#4A6986",
+        "size": "M",
+        "price": 579,
+        "product_id": "11bc1a2a-07d9-41d3-845c-5b715646e45b",
+        "sk": "COLOUR#4A6986#SIZE#M",
+        "pk": "PRODUCT#11bc1a2a-07d9-41d3-845c-5b715646e45b",
+        "in_stock": 13
+    },
+    {
+        "colour": "#F9BD4D",
+        "size": "XL",
+        "price": 519,
+        "product_id": "11bc1a2a-07d9-41d3-845c-5b715646e45b",
+        "sk": "COLOUR#F9BD4D#SIZE#XL",
+        "pk": "PRODUCT#11bc1a2a-07d9-41d3-845c-5b715646e45b",
+        "in_stock": 8
+    },
+    {
+        "colour": "#F9BD4D",
+        "size": "XXL",
+        "price": 580,
+        "product_id": "11bc1a2a-07d9-41d3-845c-5b715646e45b",
+        "sk": "COLOUR#F9BD4D#SIZE#XXL",
+        "pk": "PRODUCT#11bc1a2a-07d9-41d3-845c-5b715646e45b",
+        "in_stock": 18
+    },
+    {
+        "colour": "#907F61",
+        "size": "M",
+        "price": 570,
+        "product_id": "11bc1a2a-07d9-41d3-845c-5b715646e45b",
+        "sk": "COLOUR#907F61#SIZE#M",
+        "pk": "PRODUCT#11bc1a2a-07d9-41d3-845c-5b715646e45b",
+        "in_stock": 13
+    },
+    {
+        "colour": "#907F61",
+        "size": "S",
+        "price": 540,
+        "product_id": "11bc1a2a-07d9-41d3-845c-5b715646e45b",
+        "sk": "COLOUR#907F61#SIZE#S",
+        "pk": "PRODUCT#11bc1a2a-07d9-41d3-845c-5b715646e45b",
+        "in_stock": 10
+    },
+    {
+        "colour": "#907F61",
+        "size": "XL",
+        "price": 530,
+        "product_id": "11bc1a2a-07d9-41d3-845c-5b715646e45b",
+        "sk": "COLOUR#907F61#SIZE#XL",
+        "pk": "PRODUCT#11bc1a2a-07d9-41d3-845c-5b715646e45b",
+        "in_stock": 8
+    },
+    {
+        "reviews": 2,
+        "purchases": 7,
+        "product_id": "11bc1a2a-07d9-41d3-845c-5b715646e45b",
+        "sk": "PRODUCT#11bc1a2a-07d9-41d3-845c-5b715646e45b",
+        "name": "Men's Heavy Taped Neck Comfort Jersey T-Shirt",
+        "rating": 4.5,
+        "description": [
+            "5.3 oz./yd² (US) 8.8 oz./L yd (CA), 100% cotton, 20 singles. Safety Green is compliant with ANSI / ISEA 107 high-visibility standards",
+            "Ash Grey is 99/1 cotton/polyester. Tear away label. Classic width, rib collar. Made with OEKO-TEX certified low-impact dyes. Proud member of the U.S. Cotton Trust Protocol",
+            "Blackberry, Dark Heather, Graphite Heather, Heather Colors, Lilac, Midnight, Neon Colors, Safety Colors, Sunset, & Tweed are 50/50 cotton/polyester",
+            "Taped neck and shoulders for comfort and durability. Antique colors & Sport Grey are 90/10 cotton/polyester"
+        ],
+        "pk": "PRODUCT#11bc1a2a-07d9-41d3-845c-5b715646e45b",
+        "colours": [
+            "#4A6986",
+            "#F9BD4D",
+            "#907F61"
+        ],
+        "product_base_price": {
+            "N": "530"
+        }
+    },
+    {
+        "review": "The shirt is nice but it isn't what I call heavy cotton because the thickness isn't much different than regular Gildan 100% cotton shirts. The sleeve length is above the biceps. This is fine if you want to show how ripped you are but I'm not and I can use a few more inches in sleeve length.",
+        "product_id": "11bc1a2a-07d9-41d3-845c-5b715646e45b",
+        "sk": "REVIEW#4#2024-02-21T16:28:47.257Z",
+        "rating": 4,
+        "created_at": "2024-02-21T16:28:47.257Z",
+        "pk": "PRODUCT#11bc1a2a-07d9-41d3-845c-5b715646e45b",
+        "GSI2_pk": "sougo13"
+    },
+    {
+        "review": "What can I say other than I'm a big guy and the size chart is accurate. Good quality shirt, worth every penny.",
+        "product_id": "11bc1a2a-07d9-41d3-845c-5b715646e45b",
+        "sk": "REVIEW#5#2024-02-21T16:28:47.257Z",
+        "rating": 5,
+        "created_at": "2024-02-21T16:28:47.257Z",
+        "pk": "PRODUCT#11bc1a2a-07d9-41d3-845c-5b715646e45b",
+        "GSI2_pk": "Alex37"
+    }
+]

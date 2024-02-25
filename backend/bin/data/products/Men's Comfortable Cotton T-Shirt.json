@@ -1,0 +1,268 @@
+[
+    {
+        "colour": "#4A6986",
+        "size": "XS",
+        "price": 300,
+        "product_id": "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "sk": "COLOUR#4A6986#SIZE#XS",
+        "pk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "in_stock": 10
+    },
+    {
+        "colour": "#4A6986",
+        "size": "S",
+        "price": 320,
+        "product_id": "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "sk": "COLOUR#4A6986#SIZE#S",
+        "pk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "in_stock": 15
+    },
+    {
+        "colour": "#4A6986",
+        "size": "M",
+        "price": 320,
+        "product_id": "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "sk": "COLOUR#4A6986#SIZE#M",
+        "pk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "in_stock": 15
+    },
+    {
+        "colour": "#4A6986",
+        "size": "L",
+        "price": 320,
+        "product_id": "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "sk": "COLOUR#4A6986#SIZE#L",
+        "pk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "in_stock": 15
+    },
+    {
+        "colour": "#4A6986",
+        "size": "XL",
+        "price": 320,
+        "product_id": "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "sk": "COLOUR#4A6986#SIZE#XL",
+        "pk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "in_stock": 15
+    },
+    {
+        "colour": "#F9BD4D",
+        "size": "M",
+        "price": 350,
+        "product_id": "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "sk": "COLOUR#F9BD4D#SIZE#M",
+        "pk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "in_stock": 12
+    },
+    {
+        "colour": "#F9BD4D",
+        "size": "L",
+        "price": 370,
+        "product_id": "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "sk": "COLOUR#F9BD4D#SIZE#L",
+        "pk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "in_stock": 20
+    },
+    {
+        "colour": "#F9BD4D",
+        "size": "S",
+        "price": 350,
+        "product_id": "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "sk": "COLOUR#F9BD4D#SIZE#S",
+        "pk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "in_stock": 12
+    },
+    {
+        "colour": "#F9BD4D",
+        "size": "XXL",
+        "price": 370,
+        "product_id": "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "sk": "COLOUR#F9BD4D#SIZE#XXL",
+        "pk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "in_stock": 20
+    },
+    {
+        "colour": "#907F61",
+        "size": "XL",
+        "price": 290,
+        "product_id": "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "sk": "COLOUR#907F61#SIZE#XL",
+        "pk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "in_stock": 18
+    },
+    {
+        "colour": "#907F61",
+        "size": "XXL",
+        "price": 310,
+        "product_id": "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "sk": "COLOUR#907F61#SIZE#XXL",
+        "pk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "in_stock": 22
+    },
+    {
+        "colour": "#907F61",
+        "size": "XXXL",
+        "price": 290,
+        "product_id": "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "sk": "COLOUR#907F61#SIZE#XXXL",
+        "pk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "in_stock": 18
+    },
+    {
+        "colour": "#907F61",
+        "size": "L",
+        "price": 310,
+        "product_id": "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "sk": "COLOUR#907F61#SIZE#L",
+        "pk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "in_stock": 22
+    },
+    {
+        "colour": "#907F61",
+        "size": "M",
+        "price": 290,
+        "product_id": "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "sk": "COLOUR#907F61#SIZE#M",
+        "pk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "in_stock": 18
+    },
+    {
+        "colour": "#907F61",
+        "size": "S",
+        "price": 310,
+        "product_id": "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "sk": "COLOUR#907F61#SIZE#S",
+        "pk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "in_stock": 22
+    },
+    {
+        "reviews": 11,
+        "purchases": 10,
+        "product_id": "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "sk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "name": "Men's Comfortable Cotton T-Shirt",
+        "rating": 4.63,
+        "description": [
+            "5.3 oz./yd² (US) 8.8 oz./L yd (CA), 100% cotton, 20 singles. Safety Green is compliant with ANSI / ISEA 107 high-visibility standards",
+            "Ash Grey is 99/1 cotton/polyester. Tear away label. Classic width, rib collar. Made with OEKO-TEX certified low-impact dyes. Proud member of the U.S. Cotton Trust Protocol",
+            "Blackberry, Dark Heather, Graphite Heather, Heather Colors, Lilac, Midnight, Neon Colors, Safety Colors, Sunset, & Tweed are 50/50 cotton/polyester",
+            "Taped neck and shoulders for comfort and durability. Antique colors & Sport Grey are 90/10 cotton/polyester"
+        ],
+        "pk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "colours": [
+            "#4A6986",
+            "#F9BD4D",
+            "#907F61"
+        ],
+        "product_base_price": {
+            "N": "290"
+        }
+    },
+    {
+        "review": "The shirt is comfortable and the cotton feels good on the skin. The size chart is accurate. Good quality shirt, worth every penny.",
+        "product_id": "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "sk": "REVIEW#5#2024-03-21T16:28:47.257Z",
+        "rating": 5,
+        "created_at": "2024-03-21T16:28:47.257Z",
+        "pk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "GSI2_pk": "Alex37"
+    },
+    {
+        "review": "The shirt is nice but it isn't what I call heavy cotton because the thickness isn't much different than regular Gildan 100% cotton shirts. The sleeve length is above the biceps. This is fine if you want to show how ripped you are but I'm not and I can use a few more inches in sleeve length.",
+        "product_id": "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "sk": "REVIEW#4#2024-04-21T16:28:47.257Z",
+        "rating": 4,
+        "created_at": "2024-04-21T16:28:47.257Z",
+        "pk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "GSI2_pk": "sougo13"
+    },
+    {
+        "review": "The fabric is soft and comfortable. The fit is perfect. Highly recommended.",
+        "product_id": "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "sk": "REVIEW#5#2024-05-21T16:28:47.257Z",
+        "rating": 5,
+        "created_at": "2024-05-21T16:28:47.257Z",
+        "pk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "GSI2_pk": "JohnDoe"
+    },
+    {
+        "review": "Great shirt for the price. The material is good quality and it fits as expected.",
+        "product_id": "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "sk": "REVIEW##2024-06-21T16:28:47.257Z",
+        "rating": 4,
+        "created_at": "2024-06-21T16:28:47.257Z",
+        "pk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "GSI2_pk": "JaneDoe"
+    },
+    {
+        "review": "The shirt shrunk a bit after washing, but it still fits well. The color hasn't faded either.",
+        "product_id": "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "sk": "REVIEW#4#2024-07-21T16:28:47.257Z",
+        "rating": 4,
+        "created_at": "2024-07-21T16:28:47.257Z",
+        "pk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "GSI2_pk": "Alice"
+    },
+    {
+        "review": "I love this shirt! It's very comfortable and the color is just as shown in the picture.",
+        "product_id": "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "sk": "REVIEW#5#2024-08-21T16:28:47.257Z",
+        "rating": 5,
+        "created_at": "2024-08-21T16:28:47.257Z",
+        "pk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "GSI2_pk": "Bob"
+    },
+    {
+        "review": "The shirt is a bit tight around the arms. I suggest ordering a size up if you have larger arms.",
+        "product_id": "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "sk": "REVIEW#3#2024-09-21T16:28:47.257Z",
+        "rating": 3,
+        "created_at": "2024-09-21T16:28:47.257Z",
+        "pk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "GSI2_pk": "Charlie"
+    },
+    {
+        "review": "This is my go-to shirt for casual wear. It's simple, comfortable, and looks good.",
+        "product_id": "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "sk": "REVIEW#5#2024-10-21T16:28:47.257Z",
+        "rating": 5,
+        "created_at": "2024-10-21T16:28:47.257Z",
+        "pk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "GSI2_pk": "David"
+    },
+    {
+        "review": "The shirt is a bit thin, but it's great for hot weather. It's breathable and keeps me cool.",
+        "product_id": "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "sk": "REVIEW#4#2024-11-21T16:28:47.257Z",
+        "rating": 4,
+        "created_at": "2024-11-21T16:28:47.257Z",
+        "pk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "GSI2_pk": "Eve"
+    },
+    {
+        "review": "The color of the shirt was a bit different from the picture, but I still like it. It's comfortable and fits well.",
+        "product_id": "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "sk": "REVIEW#4#2024-12-21T16:28:47.257Z",
+        "rating": 4,
+        "created_at": "2024-12-21T16:28:47.257Z",
+        "pk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "GSI2_pk": "Frank"
+    },
+    {
+        "review": "The shirt fits perfectly and the material is soft. It's a great basic tee for everyday wear.",
+        "product_id": "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "sk": "REVIEW#5#2025-01-21T16:28:47.257Z",
+        "rating": 5,
+        "created_at": "2025-01-21T16:28:47.257Z",
+        "pk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "GSI2_pk": "Grace"
+    },
+    {
+        "review": "The shirt is okay, but it's not as soft as I expected. It's still comfortable though.",
+        "product_id": "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "sk": "REVIEW#3#2025-02-21T16:28:47.257Z",
+        "rating": 3,
+        "created_at": "2025-02-21T16:28:47.257Z",
+        "pk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "GSI2_pk": "Harry"
+    }
+]
