@@ -1,142 +1,214 @@
 [
     {
-        "product_colour": "#4A6986",
+        "product_colour": "#AAA69D",
         "product_size": "XS",
         "product_id": "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
-        "sk": "COLOUR#4A6986#SIZE#XS",
+        "sk": "COLOUR#AAA69D#SIZE#XS",
         "pk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
         "product_stock": 10,
         "product_sold": 6
     },
     {
-        "product_colour": "#4A6986",
+        "product_colour": "#AAA69D",
         "product_size": "S",
         "product_id": "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
-        "sk": "COLOUR#4A6986#SIZE#S",
+        "sk": "COLOUR#AAA69D#SIZE#S",
         "pk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
         "product_stock": 15,
         "product_sold": 6
     },
     {
-        "product_colour": "#4A6986",
+        "product_colour": "#AAA69D",
         "product_size": "M",
         "product_id": "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
-        "sk": "COLOUR#4A6986#SIZE#M",
+        "sk": "COLOUR#AAA69D#SIZE#M",
         "pk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
         "product_stock": 15,
         "product_sold": 6
     },
     {
-        "product_colour": "#4A6986",
+        "product_colour": "#AAA69D",
         "product_size": "L",
         "product_id": "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
-        "sk": "COLOUR#4A6986#SIZE#L",
+        "sk": "COLOUR#AAA69D#SIZE#L",
         "pk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
         "product_stock": 15,
         "product_sold": 6
     },
     {
-        "product_colour": "#4A6986",
+        "product_colour": "#AAA69D",
         "product_size": "XL",
         "product_id": "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
-        "sk": "COLOUR#4A6986#SIZE#XL",
+        "sk": "COLOUR#AAA69D#SIZE#XL",
         "pk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
         "product_stock": 15,
         "product_sold": 6
     },
     {
-        "product_colour": "#F9BD4D",
+        "product_colour": "#B03B43",
+        "product_size": "S",
+        "product_id": "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "sk": "COLOUR#B03B43#SIZE#S",
+        "pk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "product_stock": 0,
+        "product_sold": 6
+    },
+    {
+        "product_colour": "#B03B43",
         "product_size": "M",
         "product_id": "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
-        "sk": "COLOUR#F9BD4D#SIZE#M",
+        "sk": "COLOUR#B03B43#SIZE#M",
         "pk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
         "product_stock": 12,
         "product_sold": 6
     },
     {
-        "product_colour": "#F9BD4D",
+        "product_colour": "#B03B43",
         "product_size": "L",
         "product_id": "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
-        "sk": "COLOUR#F9BD4D#SIZE#L",
+        "sk": "COLOUR#B03B43#SIZE#L",
         "pk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
         "product_stock": 20,
         "product_sold": 6
     },
     {
-        "product_colour": "#F9BD4D",
-        "product_size": "S",
+        "product_colour": "#B03B43",
+        "product_size": "XL",
         "product_id": "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
-        "sk": "COLOUR#F9BD4D#SIZE#S",
+        "sk": "COLOUR#B03B43#SIZE#XL",
         "pk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
         "product_stock": 12,
         "product_sold": 6
     },
     {
-        "product_colour": "#F9BD4D",
+        "product_colour": "#B03B43",
         "product_size": "XXL",
         "product_id": "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
-        "sk": "COLOUR#F9BD4D#SIZE#XXL",
+        "sk": "COLOUR#B03B43#SIZE#XXL",
         "pk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
         "product_stock": 20,
         "product_sold": 6
     },
     {
-        "product_colour": "#907F61",
+        "product_colour": "#5F88A6",
         "product_size": "XL",
         "product_id": "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
-        "sk": "COLOUR#907F61#SIZE#XL",
+        "sk": "COLOUR#5F88A6#SIZE#XL",
         "pk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
         "product_stock": 18,
         "product_sold": 6
     },
     {
-        "product_colour": "#907F61",
+        "product_colour": "#5F88A6",
         "product_size": "XXL",
         "product_id": "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
-        "sk": "COLOUR#907F61#SIZE#XXL",
+        "sk": "COLOUR#5F88A6#SIZE#XXL",
         "pk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
         "product_stock": 22,
         "product_sold": 6
     },
     {
-        "product_colour": "#907F61",
+        "product_colour": "#5F88A6",
         "product_size": "XXXL",
         "product_id": "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
-        "sk": "COLOUR#907F61#SIZE#XXXL",
+        "sk": "COLOUR#5F88A6#SIZE#XXXL",
         "pk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
         "product_stock": 18,
         "product_sold": 6
     },
     {
-        "product_colour": "#907F61",
+        "product_colour": "#5F88A6",
         "product_size": "L",
         "product_id": "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
-        "sk": "COLOUR#907F61#SIZE#L",
+        "sk": "COLOUR#5F88A6#SIZE#L",
         "pk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
         "product_stock": 22,
         "product_sold": 6
     },
     {
-        "product_colour": "#907F61",
+        "product_colour": "#5F88A6",
         "product_size": "M",
         "product_id": "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
-        "sk": "COLOUR#907F61#SIZE#M",
+        "sk": "COLOUR#5F88A6#SIZE#M",
         "pk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
         "product_stock": 18,
         "product_sold": 6
     },
     {
-        "product_colour": "#907F61",
+        "product_colour": "#5F88A6",
         "product_size": "S",
         "product_id": "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
-        "sk": "COLOUR#907F61#SIZE#S",
+        "sk": "COLOUR#5F88A6#SIZE#S",
+        "pk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "product_stock": 22,
+        "product_sold": 6
+    },
+    {
+        "product_colour": "#DBDBDB",
+        "product_size": "XL",
+        "product_id": "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "sk": "COLOUR#DBDBDB#SIZE#XL",
+        "pk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "product_stock": 18,
+        "product_sold": 6
+    },
+    {
+        "product_colour": "#DBDBDB",
+        "product_size": "XXL",
+        "product_id": "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "sk": "COLOUR#DBDBDB#SIZE#XXL",
+        "pk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "product_stock": 22,
+        "product_sold": 6
+    },
+    {
+        "product_colour": "#DBDBDB",
+        "product_size": "XXXL",
+        "product_id": "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "sk": "COLOUR#DBDBDB#SIZE#XXXL",
+        "pk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "product_stock": 18,
+        "product_sold": 6
+    },
+    {
+        "product_colour": "#DBDBDB",
+        "product_size": "L",
+        "product_id": "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "sk": "COLOUR#DBDBDB#SIZE#L",
+        "pk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "product_stock": 22,
+        "product_sold": 6
+    },
+    {
+        "product_colour": "#DBDBDB",
+        "product_size": "M",
+        "product_id": "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "sk": "COLOUR#DBDBDB#SIZE#M",
+        "pk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "product_stock": 18,
+        "product_sold": 6
+    },
+    {
+        "product_colour": "#DBDBDB",
+        "product_size": "S",
+        "product_id": "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "sk": "COLOUR#DBDBDB#SIZE#S",
+        "pk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "product_stock": 22,
+        "product_sold": 6
+    },
+    {
+        "product_colour": "#DBDBDB",
+        "product_size": "XS",
+        "product_id": "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "sk": "COLOUR#DBDBDB#SIZE#XS",
         "pk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
         "product_stock": 22,
         "product_sold": 6
     },
     {
         "product_reviews": 11,
-        "product_sold": 90,
+        "product_sold": 96,
         "product_id": "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
         "sk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
         "product_name": "Men's Comfortable Cotton T-Shirt",
@@ -149,9 +221,10 @@
         ],
         "pk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
         "available_colours": [
-            "#4A6986",
-            "#F9BD4D",
-            "#907F61"
+            "#AAA69D",
+            "#B03B43",
+            "#5F88A6",
+            "#DBDBDB"
         ],
         "product_price": 590
     },

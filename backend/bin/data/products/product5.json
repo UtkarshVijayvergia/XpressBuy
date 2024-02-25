@@ -1,0 +1,410 @@
+[
+    {
+        "product_colour": "#E33431",
+        "product_size": "XS",
+        "product_id": "cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "sk": "COLOUR#E33431#SIZE#XS",
+        "pk": "PRODUCT#cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "product_stock": 10,
+        "product_sold": 6
+    },
+    {
+        "product_colour": "#E33431",
+        "product_size": "S",
+        "product_id": "cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "sk": "COLOUR#E33431#SIZE#S",
+        "pk": "PRODUCT#cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "product_stock": 15,
+        "product_sold": 6
+    },
+    {
+        "product_colour": "#E33431",
+        "product_size": "M",
+        "product_id": "cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "sk": "COLOUR#E33431#SIZE#M",
+        "pk": "PRODUCT#cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "product_stock": 15,
+        "product_sold": 6
+    },
+    {
+        "product_colour": "#E33431",
+        "product_size": "L",
+        "product_id": "cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "sk": "COLOUR#E33431#SIZE#L",
+        "pk": "PRODUCT#cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "product_stock": 15,
+        "product_sold": 6
+    },
+    {
+        "product_colour": "#E33431",
+        "product_size": "XL",
+        "product_id": "cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "sk": "COLOUR#E33431#SIZE#XL",
+        "pk": "PRODUCT#cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "product_stock": 15,
+        "product_sold": 6
+    },
+    {
+        "product_colour": "#E33431",
+        "product_size": "XXL",
+        "product_id": "cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "sk": "COLOUR#E33431#SIZE#XXL",
+        "pk": "PRODUCT#cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "product_stock": 0,
+        "product_sold": 6
+    },
+    {
+        "product_colour": "#E33431",
+        "product_size": "XXXL",
+        "product_id": "cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "sk": "COLOUR#E33431#SIZE#XXXL",
+        "pk": "PRODUCT#cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "product_stock": 0,
+        "product_sold": 6
+    },
+    {
+        "product_colour": "#527F68",
+        "product_size": "XS",
+        "product_id": "cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "sk": "COLOUR#527F68#SIZE#XS",
+        "pk": "PRODUCT#cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "product_stock": 0,
+        "product_sold": 6
+    },
+    {
+        "product_colour": "#527F68",
+        "product_size": "S",
+        "product_id": "cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "sk": "COLOUR#527F68#SIZE#S",
+        "pk": "PRODUCT#cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "product_stock": 0,
+        "product_sold": 6
+    },
+    {
+        "product_colour": "#527F68",
+        "product_size": "M",
+        "product_id": "cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "sk": "COLOUR#527F68#SIZE#M",
+        "pk": "PRODUCT#cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "product_stock": 12,
+        "product_sold": 5
+    },
+    {
+        "product_colour": "#527F68",
+        "product_size": "L",
+        "product_id": "cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "sk": "COLOUR#527F68#SIZE#L",
+        "pk": "PRODUCT#cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "product_stock": 5,
+        "product_sold": 7
+    },
+    {
+        "product_colour": "#527F68",
+        "product_size": "XL",
+        "product_id": "cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "sk": "COLOUR#527F68#SIZE#XL",
+        "pk": "PRODUCT#cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "product_stock": 12,
+        "product_sold": 6
+    },
+    {
+        "product_colour": "#527F68",
+        "product_size": "XXL",
+        "product_id": "cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "sk": "COLOUR#527F68#SIZE#XXL",
+        "pk": "PRODUCT#cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "product_stock": 2,
+        "product_sold": 6
+    },
+    {
+        "product_colour": "#527F68",
+        "product_size": "XXXL",
+        "product_id": "cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "sk": "COLOUR#527F68#SIZE#XXXL",
+        "pk": "PRODUCT#cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "product_stock": 0,
+        "product_sold": 6
+    },
+    {
+        "product_colour": "#446E87",
+        "product_size": "XS",
+        "product_id": "cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "sk": "COLOUR#446E87#SIZE#XS",
+        "pk": "PRODUCT#cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "product_stock": 0,
+        "product_sold": 6
+    },
+    {
+        "product_colour": "#446E87",
+        "product_size": "S",
+        "product_id": "cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "sk": "COLOUR#446E87#SIZE#S",
+        "pk": "PRODUCT#cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "product_stock": 2,
+        "product_sold": 6
+    },
+    {
+        "product_colour": "#446E87",
+        "product_size": "M",
+        "product_id": "cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "sk": "COLOUR#446E87#SIZE#M",
+        "pk": "PRODUCT#cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "product_stock": 1,
+        "product_sold": 6
+    },
+    {
+        "product_colour": "#446E87",
+        "product_size": "L",
+        "product_id": "cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "sk": "COLOUR#446E87#SIZE#L",
+        "pk": "PRODUCT#cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "product_stock": 2,
+        "product_sold": 12
+    },
+    {
+        "product_colour": "#446E87",
+        "product_size": "XL",
+        "product_id": "cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "sk": "COLOUR#446E87#SIZE#XL",
+        "pk": "PRODUCT#cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "product_stock": 18,
+        "product_sold": 6
+    },
+    {
+        "product_colour": "#446E87",
+        "product_size": "XXL",
+        "product_id": "cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "sk": "COLOUR#446E87#SIZE#XXL",
+        "pk": "PRODUCT#cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "product_stock": 22,
+        "product_sold": 6
+    },
+    {
+        "product_colour": "#446E87",
+        "product_size": "XXXL",
+        "product_id": "cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "sk": "COLOUR#446E87#SIZE#XXXL",
+        "pk": "PRODUCT#cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "product_stock": 18,
+        "product_sold": 6
+    },
+    {
+        "product_colour": "#EDC74A",
+        "product_size": "XS",
+        "product_id": "cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "sk": "COLOUR#EDC74A#SIZE#XS",
+        "pk": "PRODUCT#cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "product_stock": 2,
+        "product_sold": 6
+    },
+    {
+        "product_colour": "#EDC74A",
+        "product_size": "S",
+        "product_id": "cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "sk": "COLOUR#EDC74A#SIZE#S",
+        "pk": "PRODUCT#cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "product_stock": 2,
+        "product_sold": 6
+    },
+    {
+        "product_colour": "#EDC74A",
+        "product_size": "M",
+        "product_id": "cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "sk": "COLOUR#EDC74A#SIZE#M",
+        "pk": "PRODUCT#cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "product_stock": 8,
+        "product_sold": 8
+    },
+    {
+        "product_colour": "#EDC74A",
+        "product_size": "L",
+        "product_id": "cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "sk": "COLOUR#EDC74A#SIZE#L",
+        "pk": "PRODUCT#cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "product_stock": 22,
+        "product_sold": 6
+    },
+    {
+        "product_colour": "#EDC74A",
+        "product_size": "XL",
+        "product_id": "cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "sk": "COLOUR#EDC74A#SIZE#XL",
+        "pk": "PRODUCT#cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "product_stock": 8,
+        "product_sold": 6
+    },
+    {
+        "product_colour": "#EDC74A",
+        "product_size": "XXL",
+        "product_id": "cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "sk": "COLOUR#EDC74A#SIZE#XXL",
+        "pk": "PRODUCT#cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "product_stock": 22,
+        "product_sold": 3
+    },
+    {
+        "product_colour": "#EDC74A",
+        "product_size": "XXXL",
+        "product_id": "cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "sk": "COLOUR#EDC74A#SIZE#XXXL",
+        "pk": "PRODUCT#cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "product_stock": 18,
+        "product_sold": 1
+    },
+    {
+        "product_reviews": 14,
+        "product_sold": 126,
+        "product_id": "cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "sk": "PRODUCT#cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "product_name": "Loose Fit Midweight Graphic Sweatshirt",
+        "product_rating": 4.57,
+        "product_description": [
+            "Original fit",
+            "Attached three-piece hood with draw-cord closure",
+            "Front hand warmer pockets",
+            "Stretchable, spandex-reinforced rib-knit cuffs and waistband",
+            "Carhartt signature logo printed on left sleeve",
+            "Loose Fit t-shirts are cut larger with a roomier fit in the chest and shoulders"
+        ],
+        "pk": "PRODUCT#cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "available_colours": [
+            "#E33431",
+            "#527F68",
+            "#446E87",
+            "#EDC74A"
+        ],
+        "product_price": 1250
+    },
+    {
+        "product_review_message": "The shirt is comfortable and the cotton feels good on the skin. The size chart is accurate. Good quality shirt, worth every penny.",
+        "product_id": "cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "sk": "REVIEW#5#2023-03-21T16:28:47.257Z",
+        "product_rating": 5,
+        "created_at": "2023-03-21T16:28:47.257Z",
+        "pk": "PRODUCT#cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "GSI2_pk": "Alex37"
+    },
+    {
+        "product_review_message": "The shirt is nice but it isn't what I call heavy cotton because the thickness isn't much different than regular Gildan 100% cotton shirts. The sleeve length is above the biceps. This is fine if you want to show how ripped you are but I'm not and I can use a few more inches in sleeve length.",
+        "product_id": "cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "sk": "REVIEW#4#2023-04-21T16:28:47.257Z",
+        "product_rating": 4,
+        "created_at": "2023-04-21T16:28:47.257Z",
+        "pk": "PRODUCT#cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "GSI2_pk": "sougo13"
+    },
+    {
+        "product_review_message": "The fabric is soft and comfortable. The fit is perfect. Highly recommended.",
+        "product_id": "cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "sk": "REVIEW#5#2023-05-21T16:28:47.257Z",
+        "product_rating": 5,
+        "created_at": "2023-05-21T16:28:47.257Z",
+        "pk": "PRODUCT#cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "GSI2_pk": "JohnDoe"
+    },
+    {
+        "product_review_message": "Great shirt for the price. The material is good quality and it fits as expected.",
+        "product_id": "cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "sk": "REVIEW##2023-06-21T16:28:47.257Z",
+        "product_rating": 4,
+        "created_at": "2023-06-21T16:28:47.257Z",
+        "pk": "PRODUCT#cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "GSI2_pk": "JaneDoe"
+    },
+    {
+        "product_review_message": "The shirt shrunk a bit after washing, but it still fits well. The color hasn't faded either.",
+        "product_id": "cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "sk": "REVIEW#4#2023-07-21T16:28:47.257Z",
+        "product_rating": 4,
+        "created_at": "2023-07-21T16:28:47.257Z",
+        "pk": "PRODUCT#cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "GSI2_pk": "Alice"
+    },
+    {
+        "product_review_message": "I love this shirt! It's very comfortable and the color is just as shown in the picture.",
+        "product_id": "cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "sk": "REVIEW#5#2023-08-21T16:28:47.257Z",
+        "product_rating": 5,
+        "created_at": "2023-08-21T16:28:47.257Z",
+        "pk": "PRODUCT#cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "GSI2_pk": "Bob"
+    },
+    {
+        "product_review_message": "The shirt is a bit tight around the arms. I suggest ordering a size up if you have larger arms.",
+        "product_id": "cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "sk": "REVIEW#3#2023-09-21T16:28:47.257Z",
+        "product_rating": 3,
+        "created_at": "2023-09-21T16:28:47.257Z",
+        "pk": "PRODUCT#cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "GSI2_pk": "Charlie"
+    },
+    {
+        "product_review_message": "This is my go-to shirt for casual wear. It's simple, comfortable, and looks good.",
+        "product_id": "cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "sk": "REVIEW#5#2023-10-21T16:28:47.257Z",
+        "product_rating": 5,
+        "created_at": "2023-10-21T16:28:47.257Z",
+        "pk": "PRODUCT#cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "GSI2_pk": "David"
+    },
+    {
+        "product_review_message": "The shirt is a bit thin, but it's great for hot weather. It's breathable and keeps me cool.",
+        "product_id": "cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "sk": "REVIEW#4#2023-11-21T16:28:47.257Z",
+        "product_rating": 4,
+        "created_at": "2023-11-21T16:28:47.257Z",
+        "pk": "PRODUCT#cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "GSI2_pk": "Eve"
+    },
+    {
+        "product_review_message": "The color of the shirt was a bit different from the picture, but I still like it. It's comfortable and fits well.",
+        "product_id": "cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "sk": "REVIEW#4#2023-12-21T16:28:47.257Z",
+        "product_rating": 4,
+        "created_at": "2023-12-21T16:28:47.257Z",
+        "pk": "PRODUCT#cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "GSI2_pk": "Frank"
+    },
+    {
+        "product_review_message": "The shirt fits perfectly and the material is soft. It's a great basic tee for everyday wear.",
+        "product_id": "cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "sk": "REVIEW#5#2024-01-21T16:28:47.257Z",
+        "product_rating": 5,
+        "created_at": "2024-01-21T16:28:47.257Z",
+        "pk": "PRODUCT#cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "GSI2_pk": "Grace"
+    },
+    {
+        "product_review_message": "The shirt is okay, but it's not as soft as I expected. It's still comfortable though.",
+        "product_id": "cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "sk": "REVIEW#3#2024-02-21T16:28:47.257Z",
+        "product_rating": 3,
+        "created_at": "2024-02-21T16:28:47.257Z",
+        "pk": "PRODUCT#cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "GSI2_pk": "Harry"
+    },
+    {
+        "product_id": "cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "sk": "REVIEW#3#2024-01-21T16:28:47.257Z",
+        "product_rating": 5,
+        "created_at": "2024-01-21T16:28:47.257Z",
+        "pk": "PRODUCT#cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "GSI2_pk": "qwyeu"
+    },
+    {
+        "product_id": "cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "sk": "REVIEW#3#2024-10-21T16:28:47.257Z",
+        "product_rating": 5,
+        "created_at": "2024-10-21T16:28:47.257Z",
+        "pk": "PRODUCT#cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "GSI2_pk": "qwerty"
+    },
+    {
+        "product_id": "cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "sk": "REVIEW#3#2024-11-21T16:28:47.257Z",
+        "product_rating": 3,
+        "created_at": "2024-11-21T16:28:47.257Z",
+        "pk": "PRODUCT#cddb8301-1a31-46c8-b789-06949e19e3ce",
+        "GSI2_pk": "mcalsa"
+    }
+]
