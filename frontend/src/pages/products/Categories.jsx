@@ -64,7 +64,7 @@ const Categories = () => {
                                                 {
                                                     category.sk[0] >= '0' && category.sk[0] <= '9'
                                                         ?
-                                                        category.sk[0] == 1
+                                                        category.sk[0] === '1'
                                                             ?
                                                             <div className='category-name category-name-upper'>
                                                                 EVERYTHING
@@ -73,7 +73,7 @@ const Categories = () => {
                                                                 </div>
                                                             </div>
                                                             :
-                                                            category.sk[0] == 2
+                                                            category.sk[0] === '2'
                                                                 ?
                                                                 <div className='category-name category-name-upper'>
                                                                     MEN
@@ -113,10 +113,10 @@ const Categories = () => {
                                     <img src={products[index][0].imageURL} alt='product' />
                                     <div className='product-details'>
                                         <div className='product-name'>
-                                            {products[index][0].name}
+                                            {products[index][0].product_name}
                                         </div>
                                         <div className='product-price'>
-                                            $100
+                                            {products[index][0].product_price}
                                         </div>
                                     </div>
                                 </div>
