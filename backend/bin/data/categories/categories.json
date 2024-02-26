@@ -1,7 +1,8 @@
 [
     {
         "pk": "CATEGORY",
-        "sk": "1#EVERYTHING",
+        "sk": "018DE5AA-91A7-BD3C-F93C-C1FADA5DC1C4",
+        "category_name": "Everything",
         "product_ids": [
             "11bc1a2a-07d9-41d3-845c-5b715646e45b",
             "2e175904-748a-4ebf-8a34-a98fb42cd2db",
@@ -13,7 +14,8 @@
     },
     {
         "pk": "CATEGORY",
-        "sk": "2#MEN",
+        "sk": "018DE5AC-A4DC-2600-C495-D8E31F87C887",
+        "category_name": "Men",
         "product_ids": [
             "11bc1a2a-07d9-41d3-845c-5b715646e45b",
             "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
@@ -23,7 +25,8 @@
     },
     {
         "pk": "CATEGORY",
-        "sk": "3#WOMEN",
+        "sk": "018DE5AC-BAB0-00C1-0248-2816E5309CCF",
+        "category_name": "Women",
         "product_ids": [
             "2e175904-748a-4ebf-8a34-a98fb42cd2db",
             "0e8ce2f5-8ea9-43d8-b5a7-b00233f9e9b4",
@@ -33,7 +36,8 @@
     },
     {
         "pk": "CATEGORY",
-        "sk": "TSHIRTS",
+        "sk": "018DE5AC-D3AB-D59F-8B24-7B1F24DB0BAC",
+        "category_name": "Tshirts",
         "product_ids": [
             "11bc1a2a-07d9-41d3-845c-5b715646e45b",
             "2e175904-748a-4ebf-8a34-a98fb42cd2db",
@@ -44,7 +48,8 @@
     },
     {
         "pk": "CATEGORY",
-        "sk": "HOODIES",
+        "sk": "018DE5AC-E8DF-302D-429A-4C50B2BD723C",
+        "category_name": "Hoodies",
         "product_ids": [
             "cddb8301-1a31-46c8-b789-06949e19e3ce"
         ],
