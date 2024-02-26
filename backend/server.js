@@ -25,7 +25,8 @@ app.use('/api/v1/VerifyIdToken', require('./routes/VerifiedJWT'))
 
 
 // category routes
-app.use('/api/v1/products', require('./routes/categoryRoute'))
+app.use('/api/v1/products', require('./routes/productRoutes'))
+app.use('/api/v1/category', require('./routes/categoryRoute'))
 
 
 // test routes
