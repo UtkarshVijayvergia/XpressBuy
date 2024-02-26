@@ -62,13 +62,13 @@ const Navbar = (props) => {
                     <div className='nav-item-direction'>
                         <div className='nav-item-left'>
                             <li className="nav-item">
-                                <a className={ location.pathname=='/' ? 'nav-item-name' : 'nav-item-cat-name' } href="/">EVERYTHING</a>
+                                <a className={ location.pathname=='/' ? 'nav-item-name' : location.pathname=='/products/018DE5AA-91A7-BD3C-F93C-C1FADA5DC1C4' ? 'nav-item-curr-cat-name' : 'nav-item-cat-name' } href="/products/018DE5AA-91A7-BD3C-F93C-C1FADA5DC1C4">EVERYTHING</a>
                             </li>
                             <li className="nav-item">
-                                <a className={ location.pathname=='/' ? 'nav-item-name' : location.pathname=='/men' ? 'nav-item-curr-cat-name' : 'nav-item-cat-name' } href="/men">MEN</a>
+                                <a className={ location.pathname=='/' ? 'nav-item-name' : location.pathname=='/products/018DE5AC-A4DC-2600-C495-D8E31F87C887' ? 'nav-item-curr-cat-name' : 'nav-item-cat-name' } href="/products/018DE5AC-A4DC-2600-C495-D8E31F87C887">MEN</a>
                             </li>
                             <li className="nav-item">
-                                <a className={ location.pathname=='/' ? 'nav-item-name' : 'nav-item-cat-name' } href="/">WOMEN</a>
+                                <a className={ location.pathname=='/' ? 'nav-item-name' : location.pathname=='/products/018DE5AC-BAB0-00C1-0248-2816E5309CCF' ? 'nav-item-curr-cat-name' : 'nav-item-cat-name' } href="/products/018DE5AC-BAB0-00C1-0248-2816E5309CCF">WOMEN</a>
                             </li>
                             <li className="nav-item">
                                 <a className={ location.pathname=='/' ? 'nav-item-name' : 'nav-item-cat-name' } href="/">SPECIALS</a>

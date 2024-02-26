@@ -40,7 +40,7 @@ function App() {
                     <Route path='/signup' element={<SignUp />} />
                     <Route path='/home' element={<Home />} />
                     <Route path='/confirm' element={<ConfirmEmail />} />
-                    <Route path='/men' element={<Categories />} />
+                    <Route path='/products/:category_name' element={<Categories />} />
                     {/* <Route path='/contact' element={<About/>} /> */}
 
                     {/* {user?(<Route path={`user/${user.name}`} element={<Profile/>} />):<></>} */}

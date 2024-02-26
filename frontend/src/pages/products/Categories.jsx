@@ -1,19 +1,30 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useParams } from "react-router-dom";
 import './categories.css'
 import Navbar from '../../components/navbar/Navbar'
 import StarRating from '../../components/star-rating/StarRating'
 
 
 const Categories = () => {
+    const { id } = useParams();
     const [category, setCategory] = useState([])
     const [products, setProducts] = useState([]);
+    const [categoryName, setCategoryName] = useState('018DE5AA-91A7-BD3C-F93C-C1FADA5DC1C4');
+
+    // Post category name to get products
+    const navigate = useNavigate();
+    const handleCategory = (categoryName) => {
+        setCategoryName(categoryName);
+        console.log(categoryName);
+        navigate(`/products/${categoryName}`);
+    }
 
     // Get all categories
     const getCategories = async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/v1/products/category', {
+            const response = await fetch(`http://localhost:5000/api/v1/category`, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -28,7 +39,7 @@ const Categories = () => {
     // Get all products
     const getProducts = async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/v1/products', {
+            const response = await fetch(`http://localhost:5000/api/v1/products/${categoryName}`, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -44,7 +55,7 @@ const Categories = () => {
     useEffect(() => {
         getCategories();
         getProducts();
-    }, []);
+    }, [categoryName]);
 
 
     return (
@@ -63,41 +74,22 @@ const Categories = () => {
                                         <div key={index} className='category-list'>
                                             <div className='category-name'>
                                                 {
-                                                    category.sk[0] >= '0' && category.sk[0] <= '9'
-                                                        ?
-                                                        category.sk[0] === '1'
-                                                            ?
-                                                            <div className='category-name category-name-upper'>
-                                                                EVERYTHING
-                                                                <div className="category-quantity">
-                                                                    ({category.product_quantity})
-                                                                </div>
-                                                            </div>
-                                                            :
-                                                            category.sk[0] === '2'
-                                                                ?
-                                                                <div className='category-name category-name-upper'>
-                                                                    MEN
-                                                                    <div className="category-quantity">
-                                                                        ({category.product_quantity})
-                                                                    </div>
-                                                                </div>
-                                                                :
-                                                                <div className=' category-name category-name-lower'>
-                                                                    WOMEN
-                                                                    <div className="category-quantity">
-                                                                        ({category.product_quantity})
-                                                                    </div>
-                                                                </div>
-                                                        :
-                                                        <div className='category-name'>
-                                                            {category.sk}
-                                                            <div className="category-quantity">
-                                                                ({category.product_quantity})
-                                                            </div>
+                                                    ((index === 0) || (index === 2)) 
+                                                    ?
+                                                    <div className='category-name category-name-lower' onClick={() => handleCategory(`${category.sk}`)}>
+                                                        {category.category_name}
+                                                        <div className="category-quantity">
+                                                            ({category.product_quantity})
                                                         </div>
+                                                    </div>
+                                                    :
+                                                    <div className='category-name' onClick={() => handleCategory(`${category.sk}`)}>
+                                                        {category.category_name}
+                                                        <div className="category-quantity">
+                                                            ({category.product_quantity})
+                                                        </div>
+                                                    </div>
                                                 }
-
                                             </div>
                                         </div>
                                     )
