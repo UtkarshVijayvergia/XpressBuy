@@ -10,6 +10,7 @@ import ConfirmEmail from './pages/userConfirmation/ConfirmEmail'
 import SignUp from './pages/authentication/signUp/SignUp';
 import Home from './pages/homePage/Home';
 import Categories from './pages/products/Categories';
+import ErrorPage from './pages/errorPage/ErrorPage';
 
 
 function App() {
@@ -46,7 +47,7 @@ function App() {
                     {/* {user?(<Route path={`user/${user.name}`} element={<Profile/>} />):<></>} */}
                     {/* {user?(<Route path={`user/${user.name}/${user._id}`} element={<AccountDetails/>} />):<></>} */}
 
-                    {/* <Route path='*' exact={true} element={<Error404/>} /> */}
+                    <Route path='*' exact={true} element={<ErrorPage />} />
 
                 </Routes>
             </Router>
