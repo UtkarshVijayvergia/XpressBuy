@@ -80,7 +80,8 @@
             "#707271",
             "#FFFFFF"
         ],
-        "product_price": 760
+        "current_colour": "#DEB894",
+        "product_price": 23.45
     },
     {
         "product_review_message": "This shirt is very soft and comfortable. I like the v-neck style and the fit is perfect. The yellow color is bright and cheerful. I would recommend this shirt to anyone who likes a casual and cozy tee.",

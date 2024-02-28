@@ -226,7 +226,8 @@
             "#5F88A6",
             "#DBDBDB"
         ],
-        "product_price": 590
+        "current_colour": "#AAA69D",
+        "product_price": 21.99
     },
     {
         "product_review_message": "The shirt is comfortable and the cotton feels good on the skin. The size chart is accurate. Good quality shirt, worth every penny.",
