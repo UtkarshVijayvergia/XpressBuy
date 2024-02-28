@@ -37,6 +37,13 @@ app.use('/api/v1/test_s3', require('./test/s3Test'));
 
 // app.use(errorHandler)
 
+app.get('/external/colour/:colour', async (req, res) => {
+    const { colour } = req.params;
+    const response = await fetch(`https://colornames.org/search/json/?hex=${colour}`);
+    const data = await response.json();
+    res.status(200).json(data);
+});
+
 
 app.listen(port, () => {
     console.log(`Server started on port ${port}`);
