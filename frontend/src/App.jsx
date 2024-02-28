@@ -10,6 +10,7 @@ import ConfirmEmail from './pages/userConfirmation/ConfirmEmail'
 import SignUp from './pages/authentication/signUp/SignUp';
 import Home from './pages/homePage/Home';
 import Categories from './pages/products/Categories';
+import Product from './pages/products/Product';
 import ErrorPage from './pages/errorPage/ErrorPage';
 
 
@@ -41,7 +42,8 @@ function App() {
                     <Route path='/signup' element={<SignUp />} />
                     <Route path='/home' element={<Home />} />
                     <Route path='/confirm' element={<ConfirmEmail />} />
-                    <Route path='/products/:category_name' element={<Categories />} />
+                    <Route path='/products/:category_id' element={<Categories />} />
+                    <Route path='/products/:category_id/:product_id' element={<Product />} />
                     {/* <Route path='/contact' element={<About/>} /> */}
 
                     {/* {user?(<Route path={`user/${user.name}`} element={<Profile/>} />):<></>} */}
