@@ -13,6 +13,7 @@ const Categories = () => {
     const [category, setCategory] = useState([])
     const [products, setProducts] = useState([]);
     const [categoryName, setCategoryName] = useState('');
+    // console.log(product_id);
 
     // Post category name to get products
     const navigate = useNavigate();
@@ -20,6 +21,13 @@ const Categories = () => {
         setCategoryName(categoryName);
         navigate(`/products/${categoryName}`);
         getProducts(categoryName);
+    }
+
+    // Navigate to product page
+    const productPageNavigator = (product_id) => {
+        return () => {
+            navigate(`${product_id}`);
+        }
     }
 
     // Get all categories
@@ -105,7 +113,7 @@ const Categories = () => {
                             {
                                 products.map((image, index) => {
                                     return (
-                                        <div key={index} className='product-card'>
+                                        <div key={index} className='product-card' onClick={productPageNavigator(products[index][0].product_id)}>
                                             <img className='product-image' src={products[index][0].imageURL} alt='product' />
                                             <div className='product-details'>
                                                 <div className='product-name'>
@@ -125,7 +133,6 @@ const Categories = () => {
                                                     <div className="product-reviews">
                                                         <sup>{products[index][0].product_reviews}</sup>
                                                     </div>
-
                                                 </div>
                                                 <div className="product-sold">
                                                     {products[index][0].product_sold}+ bought this product
