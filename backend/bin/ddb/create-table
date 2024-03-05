@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+// command: ./backend/bin/ddb/create-table prod
+
 
 const { DynamoDBClient, CreateTableCommand } = require("@aws-sdk/client-dynamodb");
 
