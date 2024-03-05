@@ -11,6 +11,10 @@ const Product = () => {
     const location = useLocation();
     const [productDetails, setProductDetails] = useState([]);
     const [colourName, setColourName] = useState('');
+    const [currentImage, setCurrentImage] = useState('');
+    const [originalImage, setOriginalImage] = useState('');
+    const [currentProductVariation, setCurrentProductVariation] = useState('');
+    const [productStock, setProductStock] = useState();
 
 
     // Get product details
@@ -24,13 +28,32 @@ const Product = () => {
             });
             const data = await response.json();
             setProductDetails(data);
+            setCurrentImage(data[0].base_imageURL);
+            setOriginalImage(data[0].base_imageURL);
             getColourName(data[0].current_colour.slice(1));
         } catch (error) {
             console.error(error);
         }
     }
-
-
+    
+    
+    // Get product variation
+    const getProductVariation = async (product_id, colour, size) => {
+        try {
+            const response = await fetch(`http://localhost:5000/api/v1/products/${product_id}/${colour}/${size}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                method: 'GET',
+            });
+            setCurrentProductVariation(await response.json());
+        } 
+        catch (error) {
+            console.error(error);
+        }
+    }
+    
+    
     // Get colour name
     const getColourName = async (colour) => {
         try {
@@ -47,6 +70,22 @@ const Product = () => {
         }
     }
 
+    
+    // Change Image on click
+    const changeImage = (imageURL, colour) => {
+        setCurrentImage(imageURL);
+        setOriginalImage(currentImage);
+        getColourName(colour.slice(1));
+        setCurrentProductVariation('');
+        document.querySelector('.product-size-list-style').value = '';
+    }
+
+
+    // Size selector
+    const sizeSelector = (size) => {
+        getProductVariation(productDetails[0].product_id, colourName.hexCode, size);
+    }
+    
 
     // useEffect to get product details on page load
     useEffect(() => {
@@ -62,14 +101,14 @@ const Product = () => {
                     <div className="product-image-selector-container">
                         {
                             productDetails && productDetails[0] ?
-                                <img className='product-image-selector' src={productDetails[0].base_imageURL} alt="product" /> :
+                                <img className='product-image-selector' src={currentImage} alt="product" /> :
                                 <img className='product-image-selector' src="https://via.placeholder.com/150" alt="product" />
                         }
                     </div>
                     <div className="product-image-container">
                         {
                             productDetails && productDetails[0] ?
-                                <img className='product-image' src={productDetails[0].base_imageURL} alt="product" /> :
+                                <img className='product-image' src={currentImage} alt="product" /> :
                                 <img className='product-image' src="https://via.placeholder.com/150" alt="product" />
                         }
                     </div>
@@ -95,6 +134,9 @@ const Product = () => {
                                         {productDetails[0].product_reviews} reviews
                                     </div>
                                 </div>
+                                <div className="product-description-details">
+                                    {(Math.floor(productDetails[0].product_sold/10))*10}+ products sold up till now
+                                </div>
                                 <div className="horizontal-line"></div>
                                 <div className="product-pricing-details">
                                     <div className="product-pricing-heading">
@@ -108,8 +150,9 @@ const Product = () => {
                                     <div className="product-colour-heading">
                                         Colour:&nbsp;
                                     </div>
-                                    <div className="product-colour" style={{ color: `${productDetails[0].current_colour}` }}>
-                                        {colourName && colourName.name ? colourName.name : productDetails[0].current_colour}
+                                    <div className="product-colour-display" style={{ backgroundColor: `#${colourName.hexCode}` }}></div>
+                                    <div className="product-colour" style={{ color: `Black` }}>
+                                        {colourName && colourName.name ? colourName.name : `#${colourName.hexCode}`}
                                     </div>
                                 </div>
                                 <div className="product-size-details">
@@ -117,7 +160,7 @@ const Product = () => {
                                         Size:&nbsp;
                                     </div>
                                     <div className="product-size-list">
-                                        <select className='product-size-list-style'>
+                                        <select className='product-size-list-style' onChange={(e) => sizeSelector(e.target.value)}>
                                             <option value="">Select</option>
                                             <option value="XS">X-Small</option>
                                             <option value="S">Small</option>
@@ -127,6 +170,16 @@ const Product = () => {
                                             <option value="XXL">XX-Large</option>
                                             <option value="XXXL">XXX-Large</option>
                                         </select>
+                                        <div className="product-stock-details">
+                                            {
+                                                currentProductVariation && currentProductVariation[0] ? 
+                                                    <div>
+                                                        {currentProductVariation[0].product_stock} items left in stock
+                                                    </div> 
+                                                    : 
+                                                    <></>
+                                            }
+                                        </div>
                                     </div>
                                 </div>
                                 <div className="product-variation-images">
@@ -134,7 +187,12 @@ const Product = () => {
                                         productDetails[0].available_colours.map((val, index) => {
                                             return (
                                                 <div className="product-variation-images-list">
-                                                    <img className='product-variation-single-image' key={index} src={productDetails[0][`${val}_imageURL`]} alt='product' />
+                                                    <img className='product-variation-single-image' key={index} 
+                                                        src={productDetails[0][`${val}_imageURL`]} alt='product' 
+                                                        onMouseOver={() => setCurrentImage(productDetails[0][`${val}_imageURL`])}
+                                                        onMouseOut={() => setCurrentImage(originalImage)}
+                                                        onClick={() => changeImage(productDetails[0][`${val}_imageURL`], val)}
+                                                    />
                                                 </div>
                                             )
                                         })
