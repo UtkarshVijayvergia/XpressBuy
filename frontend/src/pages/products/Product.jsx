@@ -14,7 +14,7 @@ const Product = () => {
     const [currentImage, setCurrentImage] = useState('');
     const [originalImage, setOriginalImage] = useState('');
     const [currentProductVariation, setCurrentProductVariation] = useState('');
-    const [productStock, setProductStock] = useState();
+    const [currentProductSize, setCurrentProductSize] = useState();
 
 
     // Get product details
@@ -38,9 +38,9 @@ const Product = () => {
     
     
     // Get product variation
-    const getProductVariation = async (product_id, colour, size) => {
+    const getProductVariation = async (product_id, colour) => {
         try {
-            const response = await fetch(`http://localhost:5000/api/v1/products/${product_id}/${colour}/${size}`, {
+            const response = await fetch(`http://localhost:5000/api/v1/products/${product_id}/${colour}`, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -76,14 +76,15 @@ const Product = () => {
         setCurrentImage(imageURL);
         setOriginalImage(currentImage);
         getColourName(colour.slice(1));
-        setCurrentProductVariation('');
+        getProductVariation(productDetails[0].product_id, colour.slice(1));
         document.querySelector('.product-size-list-style').value = '';
+        setCurrentProductSize();
     }
 
 
     // Size selector
     const sizeSelector = (size) => {
-        getProductVariation(productDetails[0].product_id, colourName.hexCode, size);
+        setCurrentProductSize(size);
     }
     
 
@@ -162,19 +163,19 @@ const Product = () => {
                                     <div className="product-size-list">
                                         <select className='product-size-list-style' onChange={(e) => sizeSelector(e.target.value)}>
                                             <option value="">Select</option>
-                                            <option value="XS">X-Small</option>
-                                            <option value="S">Small</option>
-                                            <option value="M">Medium</option>
-                                            <option value="L">Large</option>
-                                            <option value="XL">X-Large</option>
-                                            <option value="XXL">XX-Large</option>
-                                            <option value="XXXL">XXX-Large</option>
+                                            <option value="X-Small">X-Small</option>
+                                            <option value="Small">Small</option>
+                                            <option value="Medium">Medium</option>
+                                            <option value="Large">Large</option>
+                                            <option value="X-Large">X-Large</option>
+                                            <option value="XX-Large">XX-Large</option>
+                                            <option value="XXX-Large">XXX-Large</option>
                                         </select>
                                         <div className="product-stock-details">
                                             {
-                                                currentProductVariation && currentProductVariation[0] ? 
+                                                currentProductVariation && currentProductVariation[0] && currentProductSize ? 
                                                     <div>
-                                                        {currentProductVariation[0].product_stock} items left in stock
+                                                        {currentProductVariation[0].size_variation[currentProductSize].product_stock} items left in stock
                                                     </div> 
                                                     : 
                                                     <></>
@@ -202,6 +203,9 @@ const Product = () => {
                             :
                             <></>
                     }
+                </div>
+                <div className="cart-column">
+
                 </div>
             </div>
         </div>
