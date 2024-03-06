@@ -7,7 +7,7 @@ const { getSingleProduct, productVariation } = require('../controller/productDet
 router.get('', getAllProducts)
 router.get('/:category_id', getProductsByCategory)
 router.get('/product/:product_id', getSingleProduct)
-router.get('/:product_id/:colour/:size', productVariation)
+router.get('/:product_id/:colour', productVariation)
 
 
 

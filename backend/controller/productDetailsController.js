@@ -54,21 +54,20 @@ const getSingleProduct = asyncHandler(async (req, res) => {
 
 
 
-// @desc    Get Single Product
-// @route   GET /api/v1/product/products/:product_id/:colour/:size
+// @desc    Get Single Product Variation
+// @route   GET /api/v1/products/:product_id/:colour/
 // @access  Public
 const productVariation = asyncHandler(async (req, res) => {
     try {
-        const { product_id, colour, size } = req.params;
-        const colourCAPS = colour.toUpperCase();
+        const { product_id, colour } = req.params;
         const getSingleProductVariationQuery = new QueryCommand({
             TableName: "xpressbuy",
             KeyConditionExpression: "pk = :pk and sk = :sk",
             ExpressionAttributeValues: {
                 ":pk": `PRODUCT#${product_id}`,
-                ":sk": `COLOUR#${colourCAPS}#SIZE#${size}`,
+                ":sk": `COLOUR#${colour}`,
             },
-            ProjectionExpression: "product_id, product_colour, product_size, product_stock, product_sold "
+            ProjectionExpression: "product_id, product_colour, size_variation"
         });
         const response = await dynamodbClient.send(getSingleProductVariationQuery);
         res.status(200).json(response.Items);
