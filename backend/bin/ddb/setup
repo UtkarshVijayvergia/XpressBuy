@@ -17,9 +17,9 @@ printf "${RED}${LABEL}${NO_COLOR}\n"
 
 bin_path=$(dirname $0)
 
-source $bin_path/drop-table xpressbuy
-node $bin_path/create-table
-node $bin_path/seed-data
+# source $bin_path/drop-table xpressbuy prod
+# node $bin_path/create-table prod
+node $bin_path/seed-data prod
 
 
 # Add a success message

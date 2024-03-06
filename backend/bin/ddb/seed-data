@@ -12,11 +12,16 @@ let attrs = {
 };
 
 // Check if we are in production mode
+console.log("process.argv.length: " + process.argv.length);
 if (process.argv.length === 3) {
-    if ("prod" in process.argv[2]) {
-        attrs = {};
+    if (process.argv[2].includes("prod")) {
+        attrs = {
+            endpoint: 'https://dynamodb.ap-south-1.amazonaws.com'
+        };
     }
 }
+
+console.log("attrs: " + JSON.stringify(attrs));
 
 // Create a new client
 const client = new DynamoDBClient(attrs);

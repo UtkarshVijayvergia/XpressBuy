@@ -11,7 +11,7 @@ let attrs = {
 
 // Check if we are in production mode
 if (process.argv.length === 3) {
-    if ("prod" in process.argv[2]) {
+    if (process.argv[2].includes("prod")) {
         attrs = {};
     }
 }

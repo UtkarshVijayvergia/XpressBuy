@@ -7,7 +7,7 @@ set -e
 
 if [ "$1" = "prod" ]; then
     echo "Running in production mode"
-    ENDPOINT_URL=""
+    ENDPOINT_URL="https://dynamodb.ap-south-1.amazonaws.com"
 else
     ENDPOINT_URL="--endpoint-url=http://localhost:8000"
 fi
