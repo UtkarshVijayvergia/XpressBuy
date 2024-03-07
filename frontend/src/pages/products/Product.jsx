@@ -16,6 +16,12 @@ const Product = () => {
     const [currentProductVariation, setCurrentProductVariation] = useState('');
     const [currentProductSize, setCurrentProductSize] = useState();
     const [buyQuantity, setBuyQuantity] = useState(1);
+    const [buyNowValidation, setBuyNowValidation] = useState('');
+    const [addToCartValidation, setAddToCartValidation] = useState('');
+
+
+    // Predefined sizes for the product
+    const allSizes = ["X-Small", "Small", "Medium", "Large", "X-Large", "XX-Large", "XXX-Large"];
 
 
     // Get product details
@@ -32,6 +38,7 @@ const Product = () => {
             setCurrentImage(data[0].base_imageURL);
             setOriginalImage(data[0].base_imageURL);
             getColourName(data[0].current_colour.slice(1));
+            getProductVariation(data[0].product_id, data[0].current_colour.slice(1));
         } catch (error) {
             console.error(error);
         }
@@ -93,6 +100,57 @@ const Product = () => {
     const handleQuantityChange = (event) => {
         setBuyQuantity(event.target.value);
     };
+
+
+    // Buy Now handler
+    const buyNowHandler = () => {
+        if (currentProductSize) {
+            if (currentProductVariation && currentProductVariation[0] && currentProductSize && currentProductVariation[0].size_variation[currentProductSize].product_stock >= buyQuantity) {
+                setBuyNowValidation('Navigating to checkout page...');
+                setTimeout(() => {
+                    setBuyNowValidation('');
+                }, 1000);
+            }
+            else {
+                setBuyNowValidation('Product out of stock');
+                setTimeout(() => {
+                    setBuyNowValidation('');
+                }, 1000);
+            }
+        }
+        else {
+            setBuyNowValidation('Please select size');
+            setTimeout(() => {
+                setBuyNowValidation('');
+            }, 1000);
+        }
+    }
+
+
+    // Add to Cart handler
+    const addToCartHandler = () => {
+        if (currentProductSize) {
+            if (currentProductVariation && currentProductVariation[0] && currentProductSize && currentProductVariation[0].size_variation[currentProductSize].product_stock >= buyQuantity) {
+                setAddToCartValidation('Product added to cart');
+                setTimeout(() => {
+                    setAddToCartValidation('');
+                }
+                    , 1000);
+            }
+            else {
+                setAddToCartValidation('Product out of stock');
+                setTimeout(() => {
+                    setAddToCartValidation('');
+                }, 1000);
+            }
+        }
+        else {
+            setAddToCartValidation('Please select size');
+            setTimeout(() => {
+                setAddToCartValidation('');
+            }, 1000);
+        }
+    }
 
 
     // useEffect to get product details on page load
@@ -172,13 +230,22 @@ const Product = () => {
                                     <div className="product-size-list">
                                         <select className='product-size-list-style' onChange={(e) => sizeSelector(e.target.value)}>
                                             <option value="">Select</option>
-                                            <option value="X-Small">X-Small</option>
-                                            <option value="Small">Small</option>
-                                            <option value="Medium">Medium</option>
-                                            <option value="Large">Large</option>
-                                            <option value="X-Large">X-Large</option>
-                                            <option value="XX-Large">XX-Large</option>
-                                            <option value="XXX-Large">XXX-Large</option>
+                                            {currentProductVariation && currentProductVariation[0] &&
+                                                allSizes.map(size => (
+                                                    <option
+                                                        value={size}
+                                                        disabled={!currentProductVariation[0].size_variation[size]}
+                                                    >
+                                                        {size}
+                                                    </option>
+                                                ))
+                                            }
+                                            {
+                                                currentProductVariation && currentProductVariation[0] &&
+                                                Object.keys(currentProductVariation[0].size_variation).map(size => (
+                                                    !allSizes.includes(size) && <option value={size}>{size}</option>
+                                                ))
+                                            }
                                         </select>
                                         <div className="product-stock-details">
                                             {
@@ -244,20 +311,44 @@ const Product = () => {
                                     onChange={handleQuantityChange}
                                 />
                             </div>
-                            <div className='add-to-cart'>
-                                <div className="cart-half-circle-left"></div>
-                                <div className="cart-button">
+                            <div className='add-to-cart' onClick={addToCartHandler}>
+                                <div class="half-circle-container">
+                                    <div class="half-circle" style={{ "backgroundColor": `rgb(255, 200, 0)`, "transform": `translateX(20px)` }}></div>
+                                </div>
+                                <div className="cart-button" style={{ "backgroundColor": `rgb(255, 200, 0)` }}>
                                     Add to Cart
                                 </div>
-                                <div className="cart-half-circle-right"></div>
+                                <div class="half-circle-container">
+                                    <div className="half-circle" style={{ "backgroundColor": `rgb(255, 200, 0)`, "transform": `translateX(-20px)` }}></div>
+                                </div>
                             </div>
-                            <div className='buy-now'>
-                                <div className="buy-half-circle-left"></div>
-                                <div className="buy-button">
+                            {
+                                addToCartValidation ?
+                                    <div className="buy-validation">
+                                        {addToCartValidation}
+                                    </div>
+                                    :
+                                    <></>
+                            }
+                            <div className='buy-now' onClick={buyNowHandler}>
+                                <div class="half-circle-container">
+                                    <div class="half-circle" style={{ "backgroundColor": `rgb(255, 128, 0)`, "transform": `translateX(20px)` }}></div>
+                                </div>
+                                <div className="buy-button" style={{ "backgroundColor": `rgb(255, 128, 0)` }}>
                                     Buy Now
                                 </div>
-                                <div className="buy-half-circle-right"></div>
+                                <div class="half-circle-container">
+                                    <div className="half-circle" style={{ "backgroundColor": `rgb(255, 128, 0)`, "transform": `translateX(-20px)` }}></div>
+                                </div>
                             </div>
+                            {
+                                buyNowValidation ?
+                                    <div className="buy-validation">
+                                        {buyNowValidation}
+                                    </div>
+                                    :
+                                    <></>
+                            }
                         </div>
                     </div>
                 </div>
