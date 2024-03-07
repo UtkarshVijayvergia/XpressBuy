@@ -15,6 +15,7 @@ const Product = () => {
     const [originalImage, setOriginalImage] = useState('');
     const [currentProductVariation, setCurrentProductVariation] = useState('');
     const [currentProductSize, setCurrentProductSize] = useState();
+    const [buyQuantity, setBuyQuantity] = useState(1);
 
 
     // Get product details
@@ -35,8 +36,8 @@ const Product = () => {
             console.error(error);
         }
     }
-    
-    
+
+
     // Get product variation
     const getProductVariation = async (product_id, colour) => {
         try {
@@ -47,13 +48,13 @@ const Product = () => {
                 method: 'GET',
             });
             setCurrentProductVariation(await response.json());
-        } 
+        }
         catch (error) {
             console.error(error);
         }
     }
-    
-    
+
+
     // Get colour name
     const getColourName = async (colour) => {
         try {
@@ -70,7 +71,7 @@ const Product = () => {
         }
     }
 
-    
+
     // Change Image on click
     const changeImage = (imageURL, colour) => {
         setCurrentImage(imageURL);
@@ -86,7 +87,13 @@ const Product = () => {
     const sizeSelector = (size) => {
         setCurrentProductSize(size);
     }
-    
+
+
+    // Buy Quantity change handler
+    const handleQuantityChange = (event) => {
+        setBuyQuantity(event.target.value);
+    };
+
 
     // useEffect to get product details on page load
     useEffect(() => {
@@ -99,22 +106,24 @@ const Product = () => {
             <Navbar />
             <div className="product-details-partition">
                 <div className="product-image-coloum">
-                    <div className="product-image-selector-container">
-                        {
-                            productDetails && productDetails[0] ?
-                                <img className='product-image-selector' src={currentImage} alt="product" /> :
-                                <img className='product-image-selector' src="https://via.placeholder.com/150" alt="product" />
-                        }
-                    </div>
-                    <div className="product-image-container">
-                        {
-                            productDetails && productDetails[0] ?
-                                <img className='product-image' src={currentImage} alt="product" /> :
-                                <img className='product-image' src="https://via.placeholder.com/150" alt="product" />
-                        }
+                    <div className="product-image-stick">
+                        <div className="product-image-selector-container">
+                            {
+                                productDetails && productDetails[0] ?
+                                    <img className='product-image-selector' src={currentImage} alt="product" /> :
+                                    <img className='product-image-selector' src="https://via.placeholder.com/150" alt="product" />
+                            }
+                        </div>
+                        <div className="product-image-container">
+                            {
+                                productDetails && productDetails[0] ?
+                                    <img className='product-image' src={currentImage} alt="product" /> :
+                                    <img className='product-image' src="https://via.placeholder.com/150" alt="product" />
+                            }
+                        </div>
                     </div>
                 </div>
-                <div className="product-details-coloum">
+                <div className="product-details-col-container">
                     {
                         productDetails && productDetails[0] ?
                             <div className="product-details-container">
@@ -136,7 +145,7 @@ const Product = () => {
                                     </div>
                                 </div>
                                 <div className="product-description-details">
-                                    {(Math.floor(productDetails[0].product_sold/10))*10}+ products sold up till now
+                                    {(Math.floor(productDetails[0].product_sold / 10)) * 10}+ products sold up till now
                                 </div>
                                 <div className="horizontal-line"></div>
                                 <div className="product-pricing-details">
@@ -173,11 +182,11 @@ const Product = () => {
                                         </select>
                                         <div className="product-stock-details">
                                             {
-                                                currentProductVariation && currentProductVariation[0] && currentProductSize ? 
+                                                currentProductVariation && currentProductVariation[0] && currentProductSize ?
                                                     <div>
                                                         {currentProductVariation[0].size_variation[currentProductSize].product_stock} items left in stock
-                                                    </div> 
-                                                    : 
+                                                    </div>
+                                                    :
                                                     <></>
                                             }
                                         </div>
@@ -188,8 +197,8 @@ const Product = () => {
                                         productDetails[0].available_colours.map((val, index) => {
                                             return (
                                                 <div className="product-variation-images-list">
-                                                    <img className='product-variation-single-image' key={index} 
-                                                        src={productDetails[0][`${val}_imageURL`]} alt='product' 
+                                                    <img className='product-variation-single-image' key={index}
+                                                        src={productDetails[0][`${val}_imageURL`]} alt='product'
                                                         onMouseOver={() => setCurrentImage(productDetails[0][`${val}_imageURL`])}
                                                         onMouseOut={() => setCurrentImage(originalImage)}
                                                         onClick={() => changeImage(productDetails[0][`${val}_imageURL`], val)}
@@ -199,13 +208,58 @@ const Product = () => {
                                         })
                                     }
                                 </div>
+                                <div className="product-description">
+                                    <div className="product-description-heading">
+                                        Product Details:
+                                    </div>
+                                    <div className="product-description-content">
+                                        {
+                                            productDetails[0].product_description.map((val, index) => {
+                                                return (
+                                                    <div className='product-desc' key={index}>
+                                                        &bull; {val}
+                                                    </div>
+                                                )
+                                            })
+                                        }
+                                    </div>
+                                </div>
                             </div>
                             :
                             <></>
                     }
                 </div>
                 <div className="cart-column">
-
+                    <div className="buy-cart-padder">
+                        <div className="buy-details">
+                            <div className="buy-heading">
+                                To Buy, Select <b>Size</b>
+                            </div>
+                            <div className="buy-quantity-input">
+                                <label className='buy-quantity-label-style'>Quantity: </label>
+                                <input
+                                    className='buy-quantity-input-style'
+                                    type="number"
+                                    value={buyQuantity}
+                                    onChange={handleQuantityChange}
+                                />
+                            </div>
+                            <div className='add-to-cart'>
+                                <div className="cart-half-circle-left"></div>
+                                <div className="cart-button">
+                                    Add to Cart
+                                </div>
+                                <div className="cart-half-circle-right"></div>
+                            </div>
+                            <div className='buy-now'>
+                                <div className="buy-half-circle-left"></div>
+                                <div className="buy-button">
+                                    Buy Now
+                                </div>
+                                <div className="buy-half-circle-right"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
