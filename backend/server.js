@@ -24,9 +24,13 @@ app.use(express.urlencoded({ extended: false }))
 app.use('/api/v1/VerifyIdToken', require('./routes/VerifiedJWT'))
 
 
-// category routes
+// category + products routes
 app.use('/api/v1/products', require('./routes/productRoutes'))
 app.use('/api/v1/category', require('./routes/categoryRoute'))
+
+
+// product review routes
+app.use('/api/v1/reviews', require('./routes/productReviewsRoute'))
 
 
 // test routes
