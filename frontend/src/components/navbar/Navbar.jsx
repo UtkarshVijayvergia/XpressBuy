@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { FaShoppingCart } from 'react-icons/fa'
+import { FaShoppingCart, FaUser } from 'react-icons/fa'
 import { Auth } from 'aws-amplify'
 import './navbar.css'
 
@@ -10,7 +10,10 @@ import './navbar.css'
 const Navbar = ({ setCategoryName }) => {
     const location = useLocation();
 
+
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
+
 
     // function to check if user is authenticated
     const checkUser = async () => {
@@ -23,6 +26,18 @@ const Navbar = ({ setCategoryName }) => {
             console.log(err);
         }
     }
+
+
+    // sign out
+    const signOut = async () => {
+        try {
+            await Auth.signOut();
+            setIsAuthenticated(false);
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
 
     // useEffect to check if user is authenticated
     useEffect(() => {
@@ -87,10 +102,24 @@ const Navbar = ({ setCategoryName }) => {
                                         <li className="nav-item">
                                             <Link className={location.pathname == '/' ? 'nav-item-name' : 'nav-item-cat-name'} to="/"> $0 &nbsp; <FaShoppingCart /></Link>
                                         </li>
+                                        <li className='nav-item '>
+                                            <div className="dropdown">
+                                                <FaUser className={location.pathname == '/' ? 'nav-item-name' : 'nav-item-cat-name'} onClick={() => setProfileDropdownOpen(!profileDropdownOpen)} />
+                                                {profileDropdownOpen && (
+                                                    <div className="dropdown-content">
+                                                        <Link className={location.pathname == '/' ? 'nav-item-name drop-options' : 'nav-item-cat-name drop-options'} to="/profile">PROFILE</Link>
+                                                        <Link className={location.pathname == '/' ? 'nav-item-name drop-options' : 'nav-item-cat-name drop-options'} onClick={signOut}>SIGN OUT</Link>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        </li>
                                     </>
                                 ) : <>
+                                    <li className="nav-item">
+                                        <Link className={location.pathname == '/' ? 'nav-item-name' : 'nav-item-cat-name'} to="/login">LOG IN</Link>
+                                    </li>
                                     <li className="nav-item nav-last-item">
-                                        <Link className={location.pathname == '/' ? 'nav-item-name' : 'nav-item-cat-name'} to="/signup">SIGN IN</Link>
+                                        <Link className={location.pathname == '/' ? 'nav-item-name' : 'nav-item-cat-name'} to="/signup">SIGN UP</Link>
                                     </li>
                                 </>
                             }
