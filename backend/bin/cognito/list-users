@@ -1,0 +1,31 @@
+#!/usr/bin/env node
+
+// command: ./backend/bin/cognito/list-users
+
+
+const { CognitoIdentityProviderClient, ListUsersCommand } = require("@aws-sdk/client-cognito-identity-provider");
+const dotenv = require('dotenv');
+dotenv.config();
+
+const client = new CognitoIdentityProviderClient({ 
+    region: process.env.COGNITO_USER_POOL_REGION 
+});
+
+const params = {
+    UserPoolId: process.env.COGNITO_USER_POOL_ID,
+    AttributesToGet: [
+        'preferred_username',
+        'sub'
+    ]
+};
+
+const getUsers = async () => {
+    const response = await client.send(new ListUsersCommand(params));
+
+    for (const user of response.Users) {
+        const attrs = user.Attributes;
+        console.log(attrs);
+    }
+}
+
+getUsers();
