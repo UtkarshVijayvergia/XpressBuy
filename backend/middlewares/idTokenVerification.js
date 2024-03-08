@@ -9,7 +9,6 @@ const verifyIdToken = async (req, res, next) => {
         throw new Error('No Token, Not authorized')
     }
     const idToken = req.headers.authorization.split(' ')[1];
-    console.log("Token:", idToken);
 
     // create a verifier instance using the `verify` method from the `aws-jwt-verify` package
     const verifier = CognitoJwtVerifier.create({
@@ -17,16 +16,13 @@ const verifyIdToken = async (req, res, next) => {
         tokenUse: "id",
         clientId: process.env.COGNITO_USER_POOL_CLIENT_ID,
     });
-    console.log("Verifier:", verifier);
     
     try {
         // verify the JWT signature using the publicKey from the JWKS
         const payload = await verifier.verify(idToken);
-        console.log("payload:", payload);
 
         // Store the payload user information in the request object
         req.user = payload;
-        console.log("req.user:", req.user);
 
         // After verifying the ID token
         res.cookie('id_token', idToken, {
