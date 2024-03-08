@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom'
 import Navbar from '../../components/navbar/Navbar'
 
 import StarRating from '../../components/star-rating/StarRating'
+import Reviews from './productDetailsPage/Reviews'
 import './product.css'
 
 
@@ -352,6 +353,12 @@ const Product = () => {
                         </div>
                     </div>
                 </div>
+            </div>
+            <div className="product-review-partition">
+                <hr />
+            </div>
+            <div className="product-reviews">
+                <Reviews />
             </div>
         </div>
     )
