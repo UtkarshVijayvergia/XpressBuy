@@ -2,18 +2,26 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
-import './categories.css'
+import { useContext } from 'react'
+
 import Navbar from '../../components/navbar/Navbar'
 import StarRating from '../../components/star-rating/StarRating'
 import ErrorPage from '../errorPage/ErrorPage'
+import { LastPageContext } from '../../contexts/LastPageContext';
+import './categories.css'
 
 
 const Categories = () => {
+    
     const location = useLocation();
+    const { setLastPage } = useContext(LastPageContext);
+    setLastPage(location.pathname);
+
+
     const [category, setCategory] = useState([])
     const [products, setProducts] = useState([]);
     const [categoryName, setCategoryName] = useState('');
-    // console.log(product_id);
+
 
     // Post category name to get products
     const navigate = useNavigate();
@@ -23,12 +31,14 @@ const Categories = () => {
         getProducts(categoryName);
     }
 
+
     // Navigate to product page
     const productPageNavigator = (product_id) => {
         return () => {
             navigate(`${product_id}`);
         }
     }
+
 
     // Get all categories
     const getCategories = async () => {
@@ -45,6 +55,7 @@ const Categories = () => {
         }
     }
 
+
     // Get all products
     const getProducts = async (categoryName) => {
         try {
@@ -59,6 +70,7 @@ const Categories = () => {
             console.error(error);
         }
     }
+
 
     // useEffect
     useEffect(() => {

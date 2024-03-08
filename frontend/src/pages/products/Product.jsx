@@ -1,15 +1,23 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import Navbar from '../../components/navbar/Navbar'
+import { useContext } from 'react'
 
+import Navbar from '../../components/navbar/Navbar'
 import StarRating from '../../components/star-rating/StarRating'
 import Reviews from './productDetailsPage/Reviews'
+import { LastPageContext } from '../../contexts/LastPageContext';
 import './product.css'
 
 
 const Product = () => {
+
+    const { setLastPage } = useContext(LastPageContext);
     const location = useLocation();
+    setLastPage(location.pathname);
+
+
+    // useState hooks
     const [productDetails, setProductDetails] = useState([]);
     const [colourName, setColourName] = useState('');
     const [currentImage, setCurrentImage] = useState('');

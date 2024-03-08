@@ -2,9 +2,11 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
+import { useContext } from 'react'
 import { FaUser, FaEnvelope, FaUserLock, FaLock } from 'react-icons/fa'
 
 import Navbar from '../../../components/navbar/Navbar'
+import { LastPageContext } from '../../../contexts/LastPageContext';
 import './login.css'
 
 // AWS Amplify authenication
@@ -12,14 +14,18 @@ import { Auth } from 'aws-amplify';
 
 
 const Login = () => {
+    const { lastPage } = useContext(LastPageContext);
     const navigate = useNavigate()
+    const [errors, setErrors] = React.useState('');
     
+
     // login credentials
     const [credentials, setCredentials] = useState({
         email: "",
         password: "",
     })
     const { email, password } = credentials;
+
 
     // Update the state on input change (email, password)
     const onChange = (e) => {
@@ -31,8 +37,6 @@ const Login = () => {
     
     
     // aws-amplify aws cognito - sign in
-    const [errors, setErrors] = React.useState('');
-
     const onSubmit = async (e) => {
         e.preventDefault();
         setErrors('');
@@ -51,7 +55,8 @@ const Login = () => {
                     setErrors('Invalid ID token');
                     return false;
                 }
-                navigate('/home')
+                // navigate('/home')
+                navigate(lastPage);
             } catch (error) {
                 if (error.code === 'UserNotConfirmedException') {
                     navigate('/confirm')

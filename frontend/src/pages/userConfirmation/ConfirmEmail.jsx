@@ -1,16 +1,18 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { FaUser, FaEnvelope, FaUserLock, FaLock } from 'react-icons/fa'
 import { toast } from 'react-toastify'
+import { LastPageContext } from '../../contexts/LastPageContext';
 
 // AWS Amplify authenication
 import { Auth } from 'aws-amplify';
-import { useParams } from 'react-router-dom';
 
 
 const ConfirmEmail = () => {
+    const { lastPage } = useContext(LastPageContext);
     const navigate = useNavigate()
     
     const [email, setEmail] = useState('');
@@ -35,8 +37,7 @@ const ConfirmEmail = () => {
         try {
             console.log(email, code);
             const confirmSignUpResponse = await Auth.confirmSignUp(email, code);
-            console.log(confirmSignUpResponse);
-            navigate('/');
+            navigate(lastPage);
             toast.success('Code confirmed successfully!');
         } catch (err) {
             console.log(err);

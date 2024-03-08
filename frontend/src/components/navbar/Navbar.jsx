@@ -1,14 +1,19 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { FaShoppingCart, FaUser } from 'react-icons/fa'
 import { Auth } from 'aws-amplify'
+
+import { LastPageContext } from '../../contexts/LastPageContext';
 import './navbar.css'
 
 
 const Navbar = ({ setCategoryName }) => {
     const location = useLocation();
+    const navigate = useNavigate();
+    const { lastPage } = React.useContext(LastPageContext);
 
 
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -33,6 +38,7 @@ const Navbar = ({ setCategoryName }) => {
         try {
             await Auth.signOut();
             setIsAuthenticated(false);
+            navigate(lastPage);
         } catch (err) {
             console.log(err);
         }
