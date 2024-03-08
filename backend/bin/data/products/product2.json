@@ -117,92 +117,107 @@
             "#FFFFFF"
         ],
         "current_colour": "#FFFFFF",
-        "product_price": 15.99
+        "product_price": 15.99,
+        "product_rating_1": 1,
+        "product_rating_2": 0,
+        "product_rating_3": 2,
+        "product_rating_4": 0,
+        "product_rating_5": 7
     },
     {
         "product_review_message": "This shirt is very soft and comfortable. I like the v-neck style and the fit is perfect. The yellow color is bright and cheerful. I would recommend this shirt to anyone who likes a casual and cozy tee.",
         "product_id": "2e175904-748a-4ebf-8a34-a98fb42cd2db",
-        "sk": "REVIEW#5#2024-02-22T12:52:35.000Z",
+        "sk": "REVIEW#5#01HRDMHSY68BPVF2270ZEN4BV2",
         "product_rating": 5,
-        "created_at": "2024-02-22T12:52:35.000Z",
+        "created_at": "2024-03-07T23:39:06.566Z",
         "pk": "PRODUCT#2e175904-748a-4ebf-8a34-a98fb42cd2db",
+        "review_id": "01HRDMHSY68BPVF2270ZEN4BV2",
         "GSI2_pk": "Riya25"
     },
     {
         "product_review_message": "I ordered the purple shirt and it looks nice, but it's a bit too tight for me. I wish they had a size chart on the website. The fabric is also thinner than I expected. It's not a bad shirt, but not my favorite either.",
         "product_id": "2e175904-748a-4ebf-8a34-a98fb42cd2db",
-        "sk": "REVIEW#3#2023-02-22T12:52:35.000Z",
+        "sk": "REVIEW#3#01HRDMJYKCVPG5GMC9SPAVTZ2K",
         "product_rating": 3,
-        "created_at": "2023-02-22T12:52:35.000Z",
+        "created_at": "2024-03-07T23:39:44.108Z",
         "pk": "PRODUCT#2e175904-748a-4ebf-8a34-a98fb42cd2db",
+        "review_id": "01HRDMJYKCVPG5GMC9SPAVTZ2K",
         "GSI2_pk": "frankie72"
     },
     {
         "product_review_message": "I love this shirt! It's so soft and comfortable. I bought the white one and it's perfect for summer. I'm going to buy another one in a different color.",
         "product_id": "2e175904-748a-4ebf-8a34-a98fb42cd2db",
-        "sk": "REVIEW#5#2023-03-22T12:52:35.000Z",
+        "sk": "REVIEW#5#01HRDMMAVZZBP1YQV9SB4Q193Y",
         "product_rating": 5,
-        "created_at": "2023-03-22T12:52:35.000Z",
+        "created_at": "2024-03-07T23:40:29.439Z",
         "pk": "PRODUCT#2e175904-748a-4ebf-8a34-a98fb42cd2db",
+        "review_id": "01HRDMMAVZZBP1YQV9SB4Q193Y",
         "GSI2_pk": "Ivy_31"
     },
     {
         "product_review_message": "It's so pretttyyyyy. The fabric is soft and the fit is perfect. I'm very happy with my purchase.",
         "product_id": "2e175904-748a-4ebf-8a34-a98fb42cd2db",
-        "sk": "REVIEW#5#2023-10-22T12:52:35.000Z",
+        "sk": "REVIEW#5#01HRDMNDFJA3P9DJTDBE5YTMX4",
         "product_rating": 5,
-        "created_at": "2023-10-22T12:52:35.000Z",
+        "created_at": "01HRDMNDFJA3P9DJTDBE5YTMX4",
         "pk": "PRODUCT#2e175904-748a-4ebf-8a34-a98fb42cd2db",
+        "review_id": "01HRDMNDFJA3P9DJTDBE5YTMX4",
         "GSI2_pk": "Lily"
     },
     {
         "product_review_message": "The shirt is okay, but not great. The fabric is thin and wrinkles easily. The yellow color is too bright for my taste. The size is also a bit large for me. I would recommend ordering a size down if you want a snug fit.",
         "product_id": "2e175904-748a-4ebf-8a34-a98fb42cd2db",
-        "sk": "REVIEW#3#2023-11-22T12:52:35.000Z",
+        "sk": "REVIEW#3#01HRDMPD4NKSQ6WH5JGCBMX5FV",
         "product_rating": 3,
-        "created_at": "2023-11-22T12:52:35.000Z",
+        "created_at": "2024-03-07T23:41:37.301Z",
         "pk": "PRODUCT#2e175904-748a-4ebf-8a34-a98fb42cd2db",
+        "review_id": "01HRDMPD4NKSQ6WH5JGCBMX5FV",
         "GSI2_pk": "Snowflake.9787"
     },
     {
         "product_review_message": "This shirt is a disappointment. The purple color is faded and looks nothing like the picture. The fabric is rough and scratchy. The v-neck is too high and makes me feel choked. The size is also too small for me. I would not recommend this shirt to anyone.",
         "product_id": "2e175904-748a-4ebf-8a34-a98fb42cd2db",
-        "sk": "REVIEW#1#2023-11-12T12:52:35.000Z",
+        "sk": "REVIEW#1#01HRDMSCANN21J22F8K56HKSZX",
         "product_rating": 1,
-        "created_at": "2023-11-12T12:52:35.000Z",
+        "created_at": "2024-03-07T23:43:14.773Z",
         "pk": "PRODUCT#2e175904-748a-4ebf-8a34-a98fb42cd2db",
+        "review_id": "01HRDMSCANN21J22F8K56HKSZX",
         "GSI2_pk": "Pooja56"
     },
     {
         "product_id": "2e175904-748a-4ebf-8a34-a98fb42cd2db",
-        "sk": "REVIEW#5#2024-02-12T12:52:35.000Z",
+        "sk": "REVIEW#5#01HRDMT8CB16DR9N68P800GCN1",
         "product_rating": 5,
-        "created_at": "2024-02-12T12:52:35.000Z",
+        "created_at": "2024-03-07T23:43:43.499Z",
         "pk": "PRODUCT#2e175904-748a-4ebf-8a34-a98fb42cd2db",
+        "review_id": "01HRDMT8CB16DR9N68P800GCN1",
         "GSI2_pk": "JasmineTea"
     },
     {
         "product_id": "2e175904-748a-4ebf-8a34-a98fb42cd2db",
-        "sk": "REVIEW#5#2024-01-22T12:52:35.000Z",
+        "sk": "REVIEW#5#01HRDMV0C60T7JRNG4T2VT4XCR",
         "product_rating": 5,
-        "created_at": "2024-01-22T12:52:35.000Z",
+        "created_at": "2024-03-07T23:44:08.070Z",
         "pk": "PRODUCT#2e175904-748a-4ebf-8a34-a98fb42cd2db",
+        "review_id": "01HRDMV0C60T7JRNG4T2VT4XCR",
         "GSI2_pk": "EllaVator"
     },
     {
         "product_id": "2e175904-748a-4ebf-8a34-a98fb42cd2db",
-        "sk": "REVIEW#5#2024-02-14T12:52:35.000Z",
+        "sk": "REVIEW#5#01HRDMVXBNEHVK3NBV2Z4A2RW8",
         "product_rating": 5,
-        "created_at": "2024-02-14T12:52:35.000Z",
+        "created_at": "2024-03-07T23:44:37.749Z",
         "pk": "PRODUCT#2e175904-748a-4ebf-8a34-a98fb42cd2db",
+        "review_id": "01HRDMVXBNEHVK3NBV2Z4A2RW8",
         "GSI2_pk": "XaraXara"
     },
     {
         "product_id": "2e175904-748a-4ebf-8a34-a98fb42cd2db",
-        "sk": "REVIEW#5#2024-02-19T12:52:35.000Z",
+        "sk": "REVIEW#5#01HRDMWQCR8K4JF1V71FW0KBKC",
         "product_rating": 5,
-        "created_at": "2024-02-19T12:52:35.000Z",
+        "created_at": "2024-03-07T23:45:04.408Z",
         "pk": "PRODUCT#2e175904-748a-4ebf-8a34-a98fb42cd2db",
+        "review_id": "01HRDMWQCR8K4JF1V71FW0KBKC",
         "GSI2_pk": "priyaaaa"
     }
 ]

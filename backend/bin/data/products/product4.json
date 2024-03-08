@@ -147,12 +147,12 @@
         }
     },    
     {
-        "product_reviews": 11,
+        "product_reviews": 12,
         "product_sold": 96,
         "product_id": "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
         "sk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
         "product_name": "Men's Comfortable Cotton T-Shirt",
-        "product_rating": 4.63,
+        "product_rating": 4.25,
         "product_description": [
             "5.3 oz./yd² (US) 8.8 oz./L yd (CA), 100% cotton, 20 singles. Safety Green is compliant with ANSI / ISEA 107 high-visibility standards",
             "Ash Grey is 99/1 cotton/polyester. Tear away label. Classic width, rib collar. Made with OEKO-TEX certified low-impact dyes. Proud member of the U.S. Cotton Trust Protocol",
@@ -167,114 +167,131 @@
             "#DBDBDB"
         ],
         "current_colour": "#AAA69D",
-        "product_price": 21.99
+        "product_price": 21.99,
+        "product_rating_1": 0,
+        "product_rating_2": 0,
+        "product_rating_3": 2,
+        "product_rating_4": 5,
+        "product_rating_5": 5
     },
     {
         "product_review_message": "The shirt is comfortable and the cotton feels good on the skin. The size chart is accurate. Good quality shirt, worth every penny.",
         "product_id": "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
-        "sk": "REVIEW#5#2024-03-21T16:28:47.257Z",
+        "sk": "REVIEW#5#01HRDQ2P9J9HQYY7Z8TXBGGTWH",
         "product_rating": 5,
-        "created_at": "2024-03-21T16:28:47.257Z",
+        "created_at": "2024-03-08T00:23:17.042Z",
         "pk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "review_id": "01HRDQ2P9J9HQYY7Z8TXBGGTWH",
         "GSI2_pk": "Alex37"
     },
     {
         "product_review_message": "The shirt is nice but it isn't what I call heavy cotton because the thickness isn't much different than regular Gildan 100% cotton shirts. The sleeve length is above the biceps. This is fine if you want to show how ripped you are but I'm not and I can use a few more inches in sleeve length.",
         "product_id": "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
-        "sk": "REVIEW#4#2024-04-21T16:28:47.257Z",
+        "sk": "REVIEW#4#01HRDQ3JHZ64Y978KVJKGBXCPQ",
         "product_rating": 4,
-        "created_at": "2024-04-21T16:28:47.257Z",
+        "created_at": "2024-03-08T00:23:45.983Z",
         "pk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "review_id": "01HRDQ3JHZ64Y978KVJKGBXCPQ",
         "GSI2_pk": "sougo13"
     },
     {
         "product_review_message": "The fabric is soft and comfortable. The fit is perfect. Highly recommended.",
         "product_id": "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
-        "sk": "REVIEW#5#2024-05-21T16:28:47.257Z",
+        "sk": "REVIEW#5#01HRDQ3X00ZG229BYSB7H9MKAS",
         "product_rating": 5,
-        "created_at": "2024-05-21T16:28:47.257Z",
+        "created_at": "2024-03-08T00:23:56.672Z",
         "pk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "review_id": "01HRDQ3X00ZG229BYSB7H9MKAS",
         "GSI2_pk": "JohnDoe"
     },
     {
         "product_review_message": "Great shirt for the price. The material is good quality and it fits as expected.",
         "product_id": "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
-        "sk": "REVIEW##2024-06-21T16:28:47.257Z",
+        "sk": "REVIEW##01HRDQ4F47470DSDBJYXJMZ132",
         "product_rating": 4,
-        "created_at": "2024-06-21T16:28:47.257Z",
+        "created_at": "2024-03-08T00:24:15.239Z",
         "pk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "review_id": "01HRDQ4F47470DSDBJYXJMZ132",
         "GSI2_pk": "JaneDoe"
     },
     {
         "product_review_message": "The shirt shrunk a bit after washing, but it still fits well. The color hasn't faded either.",
         "product_id": "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
-        "sk": "REVIEW#4#2024-07-21T16:28:47.257Z",
+        "sk": "REVIEW#4#01HRDQ4Z2ZMZTGZAYTS6JT4NH9",
         "product_rating": 4,
-        "created_at": "2024-07-21T16:28:47.257Z",
+        "created_at": "2024-03-08T00:24:31.583Z",
         "pk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "review_id": "01HRDQ4Z2ZMZTGZAYTS6JT4NH9",
         "GSI2_pk": "Alice"
     },
     {
         "product_review_message": "I love this shirt! It's very comfortable and the color is just as shown in the picture.",
         "product_id": "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
-        "sk": "REVIEW#5#2024-08-21T16:28:47.257Z",
+        "sk": "REVIEW#5#01HRDQ5J7WC87ANFR8Y7GGZBW6",
         "product_rating": 5,
-        "created_at": "2024-08-21T16:28:47.257Z",
+        "created_at": "2024-03-08T00:24:51.196Z",
         "pk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "review_id": "01HRDQ5J7WC87ANFR8Y7GGZBW6",
         "GSI2_pk": "Bob"
     },
     {
         "product_review_message": "The shirt is a bit tight around the arms. I suggest ordering a size up if you have larger arms.",
         "product_id": "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
-        "sk": "REVIEW#3#2024-09-21T16:28:47.257Z",
+        "sk": "REVIEW#3#01HRDQ7SG8Z7T8N7Q48YBMTXAY",
         "product_rating": 3,
-        "created_at": "2024-09-21T16:28:47.257Z",
+        "created_at": "2024-03-08T00:26:04.168Z",
         "pk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "review_id": "01HRDQ7SG8Z7T8N7Q48YBMTXAY",
         "GSI2_pk": "Charlie"
     },
     {
         "product_review_message": "This is my go-to shirt for casual wear. It's simple, comfortable, and looks good.",
         "product_id": "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
-        "sk": "REVIEW#5#2024-10-21T16:28:47.257Z",
+        "sk": "REVIEW#5#01HRDQ8BDPYRWP9RJ03N1S9CBM",
         "product_rating": 5,
-        "created_at": "2024-10-21T16:28:47.257Z",
+        "created_at": "2024-03-08T00:26:22.518Z",
         "pk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "review_id": "01HRDQ8BDPYRWP9RJ03N1S9CBM",
         "GSI2_pk": "David"
     },
     {
         "product_review_message": "The shirt is a bit thin, but it's great for hot weather. It's breathable and keeps me cool.",
         "product_id": "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
-        "sk": "REVIEW#4#2024-11-21T16:28:47.257Z",
+        "sk": "REVIEW#4#01HRDQ8T7K3X3HJEZNX421RY1T",
         "product_rating": 4,
-        "created_at": "2024-11-21T16:28:47.257Z",
+        "created_at": "2024-03-08T00:26:37.683Z",
         "pk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "review_id": "01HRDQ8T7K3X3HJEZNX421RY1T",
         "GSI2_pk": "Eve"
     },
     {
         "product_review_message": "The color of the shirt was a bit different from the picture, but I still like it. It's comfortable and fits well.",
         "product_id": "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
-        "sk": "REVIEW#4#2024-12-21T16:28:47.257Z",
+        "sk": "REVIEW#4#01HRDQ9SE967FKBP7FYJT40GY9",
         "product_rating": 4,
-        "created_at": "2024-12-21T16:28:47.257Z",
+        "created_at": "2024-03-08T00:27:09.641Z",
         "pk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "review_id": "01HRDQ9SE967FKBP7FYJT40GY9",
         "GSI2_pk": "Frank"
     },
     {
         "product_review_message": "The shirt fits perfectly and the material is soft. It's a great basic tee for everyday wear.",
         "product_id": "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
-        "sk": "REVIEW#5#2025-01-21T16:28:47.257Z",
+        "sk": "REVIEW#5#01HRDQAA51Y3GVGT78RRQ0HDY5",
         "product_rating": 5,
-        "created_at": "2025-01-21T16:28:47.257Z",
+        "created_at": "2024-03-08T00:27:26.753Z",
         "pk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "review_id": "01HRDQAA51Y3GVGT78RRQ0HDY5",
         "GSI2_pk": "Grace"
     },
     {
         "product_review_message": "The shirt is okay, but it's not as soft as I expected. It's still comfortable though.",
         "product_id": "4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
-        "sk": "REVIEW#3#2025-02-21T16:28:47.257Z",
+        "sk": "REVIEW#3#01HRDQB5TK4JQZ07VE2CR5ETRD",
         "product_rating": 3,
-        "created_at": "2025-02-21T16:28:47.257Z",
+        "created_at": "2024-03-08T00:27:55.091Z",
         "pk": "PRODUCT#4c840873-27b2-45ce-8de0-a4ee7d8aa55d",
+        "review_id": "01HRDQB5TK4JQZ07VE2CR5ETRD",
         "GSI2_pk": "Harry"
     }
 ]

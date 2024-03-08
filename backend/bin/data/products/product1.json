@@ -88,24 +88,31 @@
             "#BF4B4E"
         ],
         "current_colour": "#BF4B4E",
-        "product_price": 14.30
+        "product_price": 14.30,
+        "product_rating_1": 0,
+        "product_rating_2": 0,
+        "product_rating_3": 0,
+        "product_rating_4": 1,
+        "product_rating_5": 1
     },
     {
         "product_review_message": "The shirt is nice but it isn't what I call heavy cotton because the thickness isn't much different than regular Gildan 100% cotton shirts. The sleeve length is above the biceps. This is fine if you want to show how ripped you are but I'm not and I can use a few more inches in sleeve length.",
         "product_id": "11bc1a2a-07d9-41d3-845c-5b715646e45b",
-        "sk": "REVIEW#4#2024-02-21T16:28:47.257Z",
+        "sk": "REVIEW#4#01HRDMGSX5JHR41NMR4B92ZZ4B",
         "product_rating": 4,
-        "created_at": "2024-02-21T16:28:47.257Z",
+        "created_at": "2024-03-07T23:38:33.765Z",
         "pk": "PRODUCT#11bc1a2a-07d9-41d3-845c-5b715646e45b",
+        "review_id": "01HRDMGSX5JHR41NMR4B92ZZ4B",
         "GSI2_pk": "sougo13"
     },
     {
         "product_review_message": "What can I say other than I'm a big guy and the size chart is accurate. Good quality shirt, worth every penny.",
         "product_id": "11bc1a2a-07d9-41d3-845c-5b715646e45b",
-        "sk": "REVIEW#5#2024-02-21T16:28:47.257Z",
+        "sk": "REVIEW#5#01HRDMH8WASFZ86GCN3GAG2Y5K",
         "product_rating": 5,
-        "created_at": "2024-02-21T16:28:47.257Z",
+        "created_at": "2024-03-07T23:38:49.098Z",
         "pk": "PRODUCT#11bc1a2a-07d9-41d3-845c-5b715646e45b",
+        "review_id": "01HRDMH8WASFZ86GCN3GAG2Y5K",
         "GSI2_pk": "Alex37"
     }
 ]
