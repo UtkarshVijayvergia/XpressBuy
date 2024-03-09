@@ -2,21 +2,29 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 // AWS Amplify
 import { Auth } from 'aws-amplify'
+// ULID 
+import { ulid } from 'ulid'
 
 import Navbar from '../../components/navbar/Navbar'
 import StarRating from '../../components/star-rating/StarRating'
 import Reviews from './productDetailsPage/Reviews'
 import { LastPageContext } from '../../contexts/LastPageContext';
+import { TransactionContext } from '../../contexts/TransactionContext'
+import { InstaBuyContext } from '../../contexts/InstaBuyContext'
 import './product.css'
 
 
 const Product = () => {
 
-    const { setLastPage } = useContext(LastPageContext);
     const location = useLocation();
+    const navigate = useNavigate();
+    const { setLastPage } = useContext(LastPageContext);
+    const { setTransactionDetails } = useContext(TransactionContext);
+    const { setInstaBuy } = useContext(InstaBuyContext);
     setLastPage(location.pathname);
 
 
@@ -120,7 +128,6 @@ const Product = () => {
         try {
             await Auth.currentAuthenticatedUser({ bypassCache: false });
             setIsAuthenticated(true);
-            console.log("User is authenticated");
         } catch (err) {
             setIsAuthenticated(false);
             console.log(err);
@@ -134,10 +141,27 @@ const Product = () => {
             if (currentProductVariation && currentProductVariation[0] && currentProductSize && currentProductVariation[0].size_variation[currentProductSize].product_stock >= buyQuantity) {
                 if (isAuthenticated) {
                     setBuyNowValidation('Navigating to checkout page...');
+                    const currOrder_id = ulid();
+                    setTransactionDetails({
+                        order_id: currOrder_id,
+                        isCart: false,
+                        cart_id: '',
+                        shippingAddress: '',
+                        amount: 0,
+                    });
+                    setInstaBuy({
+                        product_id: productDetails[0].product_id,
+                        color_id: productDetails[0].current_colour,
+                        product_image: originalImage,
+                        size_id: currentProductSize,
+                        productQuantity: buyQuantity,
+                        productPrice: productDetails[0].product_price,
+                        totalAmount: productDetails[0].product_price * buyQuantity,
+                    });
                     setTimeout(() => {
                         setBuyNowValidation('');
                     }, 1000);
-                    navigate('/checkout');
+                    navigate(`checkout/${currOrder_id}`);
                 }
                 else {
                     setBuyNowValidation('Please SIGN IN to continue...');
@@ -197,6 +221,7 @@ const Product = () => {
 
     // useEffect to get product details on page load
     useEffect(() => {
+        checkUser();
         getProductDetails(location.pathname.split('/')[3]);
     }, []);
 

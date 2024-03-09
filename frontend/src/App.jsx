@@ -12,14 +12,33 @@ import SignUp from './pages/authentication/signUp/SignUp';
 import Home from './pages/homePage/Home';
 import Categories from './pages/products/Categories';
 import Product from './pages/products/Product';
+import CheckOut from './pages/checkoutPage/CheckOut';
 import ErrorPage from './pages/errorPage/ErrorPage';
 
 import { LastPageContext } from './contexts/LastPageContext';
+import { TransactionContext } from './contexts/TransactionContext';
+import { InstaBuyContext } from './contexts/InstaBuyContext';
 
 
 function App() {
 
     const [lastPage, setLastPage] = useState('/');
+    const [transactionDetails, setTransactionDetails] = useState({
+        order_id: '',
+        isCart: false,
+        cart_id: '',
+        shippingAddress: '',
+        amount: 0,
+    });
+    const [instaBuy, setInstaBuy] = useState({
+        product_id: '',
+        color_id: '',
+        product_image: '',
+        size_id: '',
+        productQuantity: 0,
+        productPrice: 0,
+        totalAmount: 0,
+    });
 
 
     Amplify.configure({
@@ -42,6 +61,8 @@ function App() {
     return (
         <>
             <LastPageContext.Provider value={{ lastPage, setLastPage }}>
+            <TransactionContext.Provider value={{ transactionDetails, setTransactionDetails }}>
+            <InstaBuyContext.Provider value={{ instaBuy, setInstaBuy }}>
                 <Router>
                     <Routes>
                         <Route path='/' element={<LandingPage />} />
@@ -51,6 +72,7 @@ function App() {
                         <Route path='/confirm' element={<ConfirmEmail />} />
                         <Route path='/products/:category_id' element={<Categories />} />
                         <Route path='/products/:category_id/:product_id' element={<Product />} />
+                        <Route path='/products/:category_id/:product_id/checkout/:order_id' element={<CheckOut />} />
                         {/* <Route path='/contact' element={<About/>} /> */}
 
                         {/* {user?(<Route path={`user/${user.name}`} element={<Profile/>} />):<></>} */}
@@ -61,6 +83,8 @@ function App() {
                     </Routes>
                 </Router>
                 <ToastContainer />
+            </InstaBuyContext.Provider>
+            </TransactionContext.Provider>
             </LastPageContext.Provider>
         </>
     );
