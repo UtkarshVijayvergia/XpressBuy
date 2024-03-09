@@ -3,6 +3,9 @@ import { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useContext } from 'react'
 
+// AWS Amplify
+import { Auth } from 'aws-amplify'
+
 import Navbar from '../../components/navbar/Navbar'
 import StarRating from '../../components/star-rating/StarRating'
 import Reviews from './productDetailsPage/Reviews'
@@ -18,6 +21,7 @@ const Product = () => {
 
 
     // useState hooks
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [productDetails, setProductDetails] = useState([]);
     const [colourName, setColourName] = useState('');
     const [currentImage, setCurrentImage] = useState('');
@@ -111,14 +115,36 @@ const Product = () => {
     };
 
 
+    // Check if user is authenticated
+    const checkUser = async () => {
+        try {
+            await Auth.currentAuthenticatedUser({ bypassCache: false });
+            setIsAuthenticated(true);
+            console.log("User is authenticated");
+        } catch (err) {
+            setIsAuthenticated(false);
+            console.log(err);
+        }
+    }
+
+
     // Buy Now handler
     const buyNowHandler = () => {
         if (currentProductSize) {
             if (currentProductVariation && currentProductVariation[0] && currentProductSize && currentProductVariation[0].size_variation[currentProductSize].product_stock >= buyQuantity) {
-                setBuyNowValidation('Navigating to checkout page...');
-                setTimeout(() => {
-                    setBuyNowValidation('');
-                }, 1000);
+                if (isAuthenticated) {
+                    setBuyNowValidation('Navigating to checkout page...');
+                    setTimeout(() => {
+                        setBuyNowValidation('');
+                    }, 1000);
+                    navigate('/checkout');
+                }
+                else {
+                    setBuyNowValidation('Please SIGN IN to continue...');
+                    setTimeout(() => {
+                        setBuyNowValidation('');
+                    }, 1000);
+                }
             }
             else {
                 setBuyNowValidation('Product out of stock');
@@ -140,11 +166,18 @@ const Product = () => {
     const addToCartHandler = () => {
         if (currentProductSize) {
             if (currentProductVariation && currentProductVariation[0] && currentProductSize && currentProductVariation[0].size_variation[currentProductSize].product_stock >= buyQuantity) {
-                setAddToCartValidation('Product added to cart');
-                setTimeout(() => {
-                    setAddToCartValidation('');
+                if (isAuthenticated) {
+                    setBuyNowValidation('Product Added to your Cart');
+                    setTimeout(() => {
+                        setBuyNowValidation('');
+                    }, 1000);
                 }
-                    , 1000);
+                else {
+                    setBuyNowValidation('Please SIGN IN to continue...');
+                    setTimeout(() => {
+                        setBuyNowValidation('');
+                    }, 1000);
+                }
             }
             else {
                 setAddToCartValidation('Product out of stock');
