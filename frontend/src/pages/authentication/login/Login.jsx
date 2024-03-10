@@ -36,6 +36,17 @@ const Login = () => {
     }
     
     
+    // sign out
+    const signOut = async () => {
+        try {
+            await Auth.signOut();
+            navigate(lastPage);
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+
     // aws-amplify aws cognito - sign in
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -53,6 +64,7 @@ const Login = () => {
                 // check if server has verified the ID token
                 if(!isTokenValid){
                     setErrors('Invalid ID token');
+                    signOut();
                     return false;
                 }
                 // navigate('/home')
