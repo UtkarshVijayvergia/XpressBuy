@@ -1,11 +1,10 @@
 const express = require('express')
 const router = express.Router()
 const asyncHandler = require('express-async-handler')
-// const { registerUser, loginUser, getUserDetails, getMe } = require('../controller/userController')
-const { verifyIdToken } = require('../middlewares/idTokenVerification')
-// const { verifyIdToken } = require('../middlewares/idTokenVerification_nonAwsPackages')
+const { loginVerification } = require('../middlewares/authVerification')
 
-router.post('', verifyIdToken, asyncHandler(async (req, res) => {
+
+router.post('', loginVerification, asyncHandler(async (req, res) => {
     res.status(200).json();
 }));
 
