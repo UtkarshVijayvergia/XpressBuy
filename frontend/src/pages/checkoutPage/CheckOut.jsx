@@ -3,12 +3,62 @@ import React from 'react'
 import Navbar from '../../components/navbar/Navbar'
 import { TransactionContext } from '../../contexts/TransactionContext'
 import { InstaBuyContext } from '../../contexts/InstaBuyContext'
+import './checkOut.css'
 
 
 const CheckOut = () => {
 
     const { transactionDetails, setTransactionDetails } = React.useContext(TransactionContext);
-    const { instaBuy } = React.useContext(InstaBuyContext);
+    const { instaBuy, setInstaBuy } = React.useContext(InstaBuyContext);
+
+
+    // Transaction Confirmation Handler
+    const TransactionConfirmationHandler = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await fetch(`http://localhost:5000/api/v1/order/${transactionDetails.order_id}/`, {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    user_id: transactionDetails.user_id,
+                    order_id: transactionDetails.order_id,
+                    items: instaBuy,
+                    total_amount: instaBuy.totalAmount,
+                    shipping_address: transactionDetails.shippingAddress,
+                    created_at: new Date().toISOString()
+                })
+            });
+            const data = await response.json();
+            console.log(data);
+            // if (response.status === 200) {
+            //     setTransactionDetails({
+            //         order_id: '',
+            //         isCart: false,
+            //         cart_id: '',
+            //         shippingAddress: '',
+            //         amount: 0,
+            //     });
+            //     setInstaBuy({
+            //         product_id: '',
+            //         color_id: '',
+            //         product_image: '',
+            //         size_id: '',
+            //         productQuantity: 0,
+            //         productPrice: 0,
+            //         totalAmount: 0,
+            //     });
+            //     alert('Transaction Successful');
+            // }
+
+            // console.log('id token: ', id_token);
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }
 
 
     return (
@@ -39,6 +89,7 @@ const CheckOut = () => {
                         <h3>Product Quantity: {instaBuy.productQuantity}</h3>
                         <h3>Product Price: {instaBuy.productPrice}</h3>
                         <h3>Total Amount: {instaBuy.totalAmount}</h3>
+                        <div className="confirm-purchase-btn" onClick={TransactionConfirmationHandler}>Confirm Purchase</div>
                     </div>
                 :
                 <h3>Transaction Session Expired</h3>
