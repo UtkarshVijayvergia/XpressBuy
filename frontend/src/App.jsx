@@ -72,7 +72,7 @@ function App() {
                         <Route path='/confirm' element={<ConfirmEmail />} />
                         <Route path='/products/:category_id' element={<Categories />} />
                         <Route path='/products/:category_id/:product_id' element={<Product />} />
-                        <Route path='/products/:category_id/:product_id/checkout/:order_id' element={<CheckOut />} />
+                        <Route path='/checkout/:order_id' element={<CheckOut />} />
                         {/* <Route path='/contact' element={<About/>} /> */}
 
                         {/* {user?(<Route path={`user/${user.name}`} element={<Profile/>} />):<></>} */}

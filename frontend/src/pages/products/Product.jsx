@@ -161,7 +161,7 @@ const Product = () => {
                     setTimeout(() => {
                         setBuyNowValidation('');
                     }, 1000);
-                    navigate(`checkout/${currOrder_id}`);
+                    navigate(`/checkout/${currOrder_id}`);
                 }
                 else {
                     setBuyNowValidation('Please SIGN IN to continue...');
