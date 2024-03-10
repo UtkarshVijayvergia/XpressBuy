@@ -29,8 +29,12 @@ app.use('/api/v1/products', require('./routes/productRoutes'))
 app.use('/api/v1/category', require('./routes/categoryRoute'))
 
 
-// product review routes
+// review routes
 app.use('/api/v1/reviews', require('./routes/productReviewsRoute'))
+
+
+// user order routes
+app.use('/api/v1/order', require('./routes/orderRoutes'))
 
 
 // test routes
@@ -41,6 +45,8 @@ app.use('/api/v1/test_s3', require('./test/s3Test'));
 
 // app.use(errorHandler)
 
+
+// external api routes
 app.get('/external/colour/:colour', async (req, res) => {
     const { colour } = req.params;
     const response = await fetch(`https://colornames.org/search/json/?hex=${colour}`);
