@@ -59,8 +59,8 @@ const Login = () => {
             try {
                 // Sign in with email and password
                 const user = await Auth.signIn(email, password);
-                // Send the ID token to the server
-                const isTokenValid = await verifyIdToken(user.signInUserSession.idToken.jwtToken, user.signInUserSession.accessToken.jwtToken);
+                // Send the tokens to the server
+                const isTokenValid = await verifyIdToken(user.signInUserSession.idToken.jwtToken, user.signInUserSession.accessToken.jwtToken, user.signInUserSession.refreshToken.token);
                 // check if server has verified the ID token
                 if(!isTokenValid){
                     setErrors('Invalid ID token');
@@ -81,7 +81,7 @@ const Login = () => {
 
 
     // verify the ID token
-    const verifyIdToken = async (idToken, access_token) => {
+    const verifyIdToken = async (idToken, access_token, refresh_token) => {
         try {
             const response = await fetch('http://localhost:5000/api/v1/VerifyIdToken', {
                 credentials: 'include',
@@ -90,6 +90,7 @@ const Login = () => {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${idToken}`,
                     'X-Access-Token': `${access_token}`,
+                    'X-Refresh-Token': `${refresh_token}`
                 },
             });
             return true;
