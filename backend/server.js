@@ -21,7 +21,7 @@ app.use(express.urlencoded({ extended: false }))
 
 
 // verify token route
-app.use('/api/v1/VerifyIdToken', require('./routes/VerifiedJWT'))
+app.use('/api/v1/VerifyIdToken', require('./routes/loginVerificationRoute'))
 
 
 // category + products routes
