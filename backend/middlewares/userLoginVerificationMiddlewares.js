@@ -1,6 +1,6 @@
 const { CognitoJwtVerifier } = require("aws-jwt-verify");
 
-// Middleware to verify the ID token
+
 const loginVerification = async (req, res, next) => {
     // check for the authorization header or the token
     if (!req.headers.authorization || !req.headers.authorization.startsWith('Bearer')) {
@@ -27,26 +27,33 @@ const loginVerification = async (req, res, next) => {
         // After verifying the ID token
         res.cookie('id_token', idToken, {
             httpOnly: true, // The cookie is only accessible by the web server
-            secure: true, // for now because localhost is on http. If true: The cookie can only be transmitted over https
+            secure: false, // for now because localhost is on http. If true: The cookie can only be transmitted over https
             sameSite: 'Lax' // The cookie can only be sent to the same site as the one that it's already on
         });
         
         const accessToken = req.headers['x-access-token'];
         res.cookie('access_token', accessToken, {
             httpOnly: true, // The cookie is only accessible by the web server
-            secure: true, // for now because localhost is on http. If true: The cookie can only be transmitted over https
+            secure: false, // for now because localhost is on http. If true: The cookie can only be transmitted over https
             sameSite: 'Lax' // The cookie can only be sent to the same site as the one that it's already on
         });
 
+        const refreshToken = req.headers['x-refresh-token'];
+        res.cookie('refresh_token', refreshToken, {
+            httpOnly: true, // The cookie is only accessible by the web server
+            secure: false, // for now because localhost is on http. If true: The cookie can only be transmitted over https
+            sameSite: 'Lax' // The cookie can only be sent to the same site as the one that it's already on
+        });
 
-        // Move to the next middleware or route handler
         next();
-    } catch (err) {
+    } 
+    catch (err) {
         console.log("JWT not valid!", err);
-        res.status(401)
-        throw new Error('Unauthorized')
+        return res.status(401).send('Unauthorized');
     }
 };
+
+
 
 module.exports = {
     loginVerification,
