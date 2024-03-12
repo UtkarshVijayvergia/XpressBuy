@@ -17,6 +17,7 @@ const CheckOut = () => {
         e.preventDefault();
         try {
             const response = await fetch(`http://localhost:5000/api/v1/order/${transactionDetails.order_id}/`, {
+            // const response = await fetch("http://localhost:5000/api/v1/VerifyIdToken/refresh", {
                 method: 'POST',
                 credentials: 'include',
                 headers: {

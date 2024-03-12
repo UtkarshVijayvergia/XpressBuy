@@ -86,6 +86,8 @@ const postNewOrder = asyncHandler(async (req, res) => {
         console.log("--------------------");
         console.log(req.user_id);
         console.log("--------------------");
+        console.log("refreshed token");
+        res.status(200).json();
     } catch (error) {
         console.error(error);
     }
