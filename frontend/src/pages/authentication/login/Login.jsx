@@ -37,6 +37,7 @@ const Login = () => {
     
     
     // sign out
+    // TODO: Add removeCookies function during sign out
     const signOut = async () => {
         try {
             await Auth.signOut();
