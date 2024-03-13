@@ -84,7 +84,7 @@ const Login = () => {
     // verify the ID token
     const verifyIdToken = async (idToken, access_token, refresh_token) => {
         try {
-            const response = await fetch('http://localhost:5000/api/v1/VerifyIdToken', {
+            await fetch('http://localhost:5000/api/v1/tokenVerification/verifyIdToken', {
                 credentials: 'include',
                 method: 'POST',
                 headers: {
