@@ -4,7 +4,7 @@ const asyncHandler = require('express-async-handler')
 const { loginVerification } = require('../middlewares/userLoginVerificationMiddlewares')
 const { verifyAccessTokenMiddleware } = require('../middlewares/tokenVerificationMiddlewares')
 
-// royes for /api/v1/tokenVerification
+// routes for /api/v1/tokenVerification
 router.post('/verifyIdToken', loginVerification, asyncHandler(async (req, res) => {
     res.status(200).json();
 }));
