@@ -59,7 +59,7 @@ const { getSignedUrl } = require("@aws-sdk/s3-request-presigner");
 // @access  Private
 const postNewOrder = asyncHandler(async (req, res) => {
     try {
-        const { order_id, items, total_amount, shipping_address, created_at } = req.body;
+        const { order_id, product_details, total_amount, shipping_address, created_at } = req.body;
         const user_id = req.user_id;
         const putNewOrderQuery = new PutCommand({
             TableName: "xpressbuy",
@@ -68,14 +68,7 @@ const postNewOrder = asyncHandler(async (req, res) => {
                 sk: `ORDER#${order_id}`,
                 user_id: user_id,
                 order_id: order_id,
-                items: {
-                    product_id: items.product_id,
-                    color_id: items.color_id,
-                    size_id: items.size_id,
-                    product_quantity: items.productQuantity,
-                    product_price: items.productPrice,
-                    total_amount: items.totalAmount,
-                },
+                product_details: product_details,
                 total_amount: total_amount,
                 shipping_address: shipping_address,
                 status: "PENDING",
