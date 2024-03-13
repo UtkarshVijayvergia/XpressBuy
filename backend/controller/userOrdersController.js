@@ -55,39 +55,36 @@ const { getSignedUrl } = require("@aws-sdk/s3-request-presigner");
 
 
 // @desc    POST new Order
-// @route   GET /api/v1/user/:user_id/order/:order_id/
+// @route   GET /api/v1/user/order/:order_id
 // @access  Private
 const postNewOrder = asyncHandler(async (req, res) => {
     try {
-        // product_id, color_id, size_id, product_quantity, product_price, total_amount
-        // const { user_id, order_id, items, total_amount, shipping_address, created_at } = req.body;
-        // const putNewOrderQuery = new PutCommand({
-        //     TableName: "xpressbuy",
-        //     Item: {
-        //         pk: `USER#${user_id}`,
-        //         sk: `ORDER#${order_id}`,
-        //         user_id: user_id,
-        //         order_id: order_id,
-        //         items: items,
-        //         total_amount: total_amount,
-        //         shipping_address: shipping_address,
-        //         status: "PENDING",
-        //         created_at: created_at,
-        //         GSI1_SK: `PENDING#${order_id}`
-        //     }
-        // });
-        // const response = await dynamodbClient.send(putNewOrderQuery);
-        // res.status(200).json(response.Items);
-        // console.log(req.body);
-        // console.log("--------------------");
-        // console.log(req.headers);
-        // console.log("--------------------");
-        // console.log(req.cookies);
-        console.log("--------------------");
-        console.log(req.user_id);
-        console.log("--------------------");
-        console.log("refreshed token");
-        res.status(200).json();
+        const { order_id, items, total_amount, shipping_address, created_at } = req.body;
+        const user_id = req.user_id;
+        const putNewOrderQuery = new PutCommand({
+            TableName: "xpressbuy",
+            Item: {
+                pk: `USER#${user_id}`,
+                sk: `ORDER#${order_id}`,
+                user_id: user_id,
+                order_id: order_id,
+                items: {
+                    product_id: items.product_id,
+                    color_id: items.color_id,
+                    size_id: items.size_id,
+                    product_quantity: items.product_quantity,
+                    product_price: items.product_price,
+                    total_amount: items.total_amount
+                },
+                total_amount: total_amount,
+                shipping_address: shipping_address,
+                status: "PENDING",
+                created_at: created_at,
+                GSI1_SK: `PENDING#${order_id}`,
+            }
+        });
+        const response = await dynamodbClient.send(putNewOrderQuery);
+        res.status(200).json(response);
     } catch (error) {
         console.error(error);
     }

@@ -37,7 +37,8 @@ const verifyIdTokenMiddleware = async (req, res, next) => {
         }
         if (error instanceof FetchError) {
             console.log('Latency Error');
-            return res.status(401).send('Latency Error');
+            // return res.status(401).send('Latency Error');
+            return verifyAccessTokenMiddleware(req, res, next);
         }
         console.log(error);
         return res.status(401).send('Unauthorized');
@@ -80,7 +81,8 @@ const verifyAccessTokenMiddleware = async (req, res, next) => {
         }
         if (error instanceof FetchError) {
             console.log('Latency Error');
-            return res.status(401).send('Latency Error');
+            // return res.status(401).send('Latency Error');
+            return verifyAccessTokenMiddleware(req, res, next);
         }
         console.log(error);
         return res.status(401).send('Unauthorized');
