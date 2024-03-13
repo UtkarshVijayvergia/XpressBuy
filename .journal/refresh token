@@ -1,0 +1,27 @@
+refresh token -> used to refresh access and id token
+
+
+
+access and id token from aws cognito gets expored in 1 hour
+refresh token gets expired in 30 days
+
+
+
+workflow:
+1. call verify token middleware
+    - tokens are kept in cookies which gets passed in every API request from frontend
+    - use 'Lax' for sameSite when declaring cookies instead of 'Strict' because client and server are on different domains.
+        - sameSite: 'Strict'  => cookies will pass only when the API request domain is same (client and server domain is same)
+        - sameSite: 'Lax'     => cookies will pass when same domain and also the domain of "top navigation".
+
+2. if expired, call refresh token middleware
+    - refresh both id and access tokens
+    - overwrite the cookies with the new token
+        - the overwrite will only happen after request is finished or res.status() is given.
+        - So, first check if tokens are valid, refresh them, return true, them call another API.
+
+
+
+Dependencies:
+- aws-jwt-verify package is used.
+    - only available for javascript aws cognito token verification
