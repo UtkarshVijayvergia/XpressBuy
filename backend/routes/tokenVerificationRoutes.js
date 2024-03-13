@@ -11,7 +11,6 @@ router.post('/verifyIdToken', loginVerification, asyncHandler(async (req, res) =
 
 
 router.post('/verifyAccessToken', verifyAccessTokenMiddleware, asyncHandler(async (req, res) => {
-    console.log('Access token verified');
     res.status(200).json({isAuthenticated: true});
 }));
 

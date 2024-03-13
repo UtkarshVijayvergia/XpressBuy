@@ -27,12 +27,12 @@ const verifyIdTokenMiddleware = async (req, res, next) => {
         // Store the payload user information in the request object
         req.user_details = payload;
 
-        // Move to the next middleware or route handler
+        console.log('ID token verified');
         next();
     } 
     catch (error) {
         if (error instanceof JwtExpiredError) {
-            console.log('Token expired, refreshing...');
+            console.log('Token expired');
             return refreshTokens(req, res, next);
         }
         if (error instanceof FetchError) {
@@ -71,12 +71,12 @@ const verifyAccessTokenMiddleware = async (req, res, next) => {
         // Store the payload user information in the request object
         req.user_id = payload['sub'];
 
-        // Move to the next middleware or route handler
+        console.log('Access token verified');
         next();
     } 
     catch (error) {
         if (error instanceof JwtExpiredError) {
-            console.log('Token expired, refreshing...');
+            console.log('Token expired');
             return refreshTokens(req, res, next);
         }
         if (error instanceof FetchError) {

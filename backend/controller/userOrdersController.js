@@ -72,9 +72,9 @@ const postNewOrder = asyncHandler(async (req, res) => {
                     product_id: items.product_id,
                     color_id: items.color_id,
                     size_id: items.size_id,
-                    product_quantity: items.product_quantity,
-                    product_price: items.product_price,
-                    total_amount: items.total_amount
+                    product_quantity: items.productQuantity,
+                    product_price: items.productPrice,
+                    total_amount: items.totalAmount,
                 },
                 total_amount: total_amount,
                 shipping_address: shipping_address,
@@ -84,6 +84,7 @@ const postNewOrder = asyncHandler(async (req, res) => {
             }
         });
         const response = await dynamodbClient.send(putNewOrderQuery);
+        console.log("Order Placed Successfully!");
         res.status(200).json(response);
     } catch (error) {
         console.error(error);
