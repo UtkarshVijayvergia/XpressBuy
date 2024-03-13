@@ -125,21 +125,34 @@ const Product = () => {
 
     // Check if user is authenticated
     const checkUser = async () => {
-        try {
-            await Auth.currentAuthenticatedUser({ bypassCache: false });
-            setIsAuthenticated(true);
-        } catch (err) {
-            setIsAuthenticated(false);
-            console.log(err);
+        try{
+            const response = await fetch('http://localhost:5000/api/v1/tokenVerification/verifyAccessToken', {
+                credentials: 'include',
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            const data = await response.json();
+            if(data.isAuthenticated){
+                // setIsAuthenticated(true);
+                return true;
+            }
+            return false;
+        }
+        catch(error){
+            // setIsAuthenticated(false)
+            console.log(error);
+            return false;
         }
     }
 
 
     // Buy Now handler
-    const buyNowHandler = () => {
+    const buyNowHandler = async () => {
         if (currentProductSize) {
             if (currentProductVariation && currentProductVariation[0] && currentProductSize && currentProductVariation[0].size_variation[currentProductSize].product_stock >= buyQuantity) {
-                if (isAuthenticated) {
+                if (await checkUser()) {
                     setBuyNowValidation('Navigating to checkout page...');
                     const currOrder_id = ulid();
                     setTransactionDetails({
@@ -221,7 +234,6 @@ const Product = () => {
 
     // useEffect to get product details on page load
     useEffect(() => {
-        checkUser();
         getProductDetails(location.pathname.split('/')[3]);
     }, []);
 

@@ -12,49 +12,76 @@ const CheckOut = () => {
     const { instaBuy, setInstaBuy } = React.useContext(InstaBuyContext);
 
 
+    // Token Verification
+    // Check if user is authenticated
+    const checkUser = async () => {
+        try{
+            const response = await fetch('http://localhost:5000/api/v1/tokenVerification/verifyAccessToken', {
+                credentials: 'include',
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            const data = await response.json();
+            if(data.isAuthenticated){
+                return true;
+            }
+            return false;
+        }
+        catch(error){
+            console.log(error);
+            return false;
+        }
+    }
+
+
     // Transaction Confirmation Handler
     const TransactionConfirmationHandler = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch(`http://localhost:5000/api/v1/order/${transactionDetails.order_id}/`, {
-            // const response = await fetch("http://localhost:5000/api/v1/VerifyIdToken/refresh", {
-                method: 'POST',
-                credentials: 'include',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    user_id: transactionDetails.user_id,
-                    order_id: transactionDetails.order_id,
-                    items: instaBuy,
-                    total_amount: instaBuy.totalAmount,
-                    shipping_address: transactionDetails.shippingAddress,
-                    created_at: new Date().toISOString()
-                })
-            });
-            const data = await response.json();
-            console.log(data);
-            // if (response.status === 200) {
-            //     setTransactionDetails({
-            //         order_id: '',
-            //         isCart: false,
-            //         cart_id: '',
-            //         shippingAddress: '',
-            //         amount: 0,
-            //     });
-            //     setInstaBuy({
-            //         product_id: '',
-            //         color_id: '',
-            //         product_image: '',
-            //         size_id: '',
-            //         productQuantity: 0,
-            //         productPrice: 0,
-            //         totalAmount: 0,
-            //     });
-            //     alert('Transaction Successful');
-            // }
-
-            // console.log('id token: ', id_token);
+            if(await checkUser()){
+                const response = await fetch(`http://localhost:5000/api/v1/order/${transactionDetails.order_id}/`, {
+                    method: 'POST',
+                    credentials: 'include',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        user_id: transactionDetails.user_id,
+                        order_id: transactionDetails.order_id,
+                        items: instaBuy,
+                        total_amount: instaBuy.totalAmount,
+                        shipping_address: transactionDetails.shippingAddress,
+                        created_at: new Date().toISOString()
+                    })
+                });
+                alert('Transaction Successful');
+                if (response.status === 200) {
+                    setTransactionDetails({
+                        order_id: '',
+                        isCart: false,
+                        cart_id: '',
+                        shippingAddress: '',
+                        amount: 0,
+                    });
+                    setInstaBuy({
+                        product_id: '',
+                        color_id: '',
+                        product_image: '',
+                        size_id: '',
+                        productQuantity: 0,
+                        productPrice: 0,
+                        totalAmount: 0,
+                    });
+                }
+                else {
+                    alert('Transaction Failed! Please try again later.');
+                }
+            }
+            else{
+                alert('Session Expired');
+            }
         }
         catch (error) {
             console.log(error);
