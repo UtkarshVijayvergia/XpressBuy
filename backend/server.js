@@ -55,6 +55,10 @@ app.get('/external/colour/:colour', async (req, res) => {
 });
 
 
+// Test if the server is running
+app.use('/api/v1/health-check', require('./routes/healthCheckRoute'));
+ 
+
 app.listen(port, () => {
     console.log(`Server started on port ${port}`);
 });
