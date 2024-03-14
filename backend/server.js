@@ -43,22 +43,19 @@ app.use('/api/v1/test_dynamodb', require('./test/dbTest_dynamodb'));
 app.use('/api/v1/test_s3', require('./test/s3Test'));
 
 
-// app.use(errorHandler)
-
-
 // external api routes
-app.get('/external/colour/:colour', async (req, res) => {
-    const { colour } = req.params;
-    const response = await fetch(`https://colornames.org/search/json/?hex=${colour}`);
-    const data = await response.json();
-    res.status(200).json(data);
-});
+app.use('/external', require('./routes/externalApiRoutes'));
 
 
 // Test if the server is running
 app.use('/api/v1/health-check', require('./routes/healthCheckRoute'));
- 
 
+
+
+// app.use(errorHandler)
+
+
+// Start the server
 app.listen(port, () => {
     console.log(`Server started on port ${port}`);
 });
