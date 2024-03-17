@@ -49,7 +49,7 @@ const Login = () => {
 
 
     // aws-amplify aws cognito - sign in
-    const onSubmit = async (e) => {
+    const userLogin = async (e) => {
         e.preventDefault();
         setErrors('');
         // field validation
@@ -131,7 +131,7 @@ const Login = () => {
                                         errors ? <div className='login-errors'>{errors}</div> : <div className='padder4vh'></div>
                                     }
                                     <div className="login-btn">
-                                        <button type="submit" className="btn login-btn-decor" onClick={onSubmit} >Submit</button>
+                                        <button type="submit" className="btn login-btn-decor" onClick={userLogin} >Submit</button>
                                     </div>
                                 </form>
                             </div>
