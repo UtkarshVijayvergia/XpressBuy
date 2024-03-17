@@ -5,7 +5,7 @@ import { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { FaUser, FaEnvelope, FaUserLock, FaLock } from 'react-icons/fa'
 import { toast } from 'react-toastify'
-import { LastPageContext } from '../../contexts/LastPageContext';
+import { LastPageContext } from '../../../contexts/LastPageContext';
 
 // AWS Amplify authenication
 import { Auth } from 'aws-amplify';
@@ -36,7 +36,7 @@ const ConfirmEmail = () => {
         setErrors('');
         try {
             console.log(email, code);
-            const confirmSignUpResponse = await Auth.confirmSignUp(email, code);
+            await Auth.confirmSignUp(email, code);
             navigate(lastPage);
             toast.success('Code confirmed successfully!');
         } catch (err) {
@@ -67,6 +67,27 @@ const ConfirmEmail = () => {
             }
         }
     }
+
+
+    // // Add user info to dynamodb table
+    // const addUserToDB = async () => {
+    //     try {
+    //         const response = await fetch('http://localhost:5000/api/v1/user/', {
+    //             method: 'POST',
+    //             credentials: 'include',
+    //             headers: {
+    //                 'Content-Type': 'application/json',
+    //             },
+    //             body: JSON.stringify({
+    //                 email: email,
+    //             }),
+    //         });
+    //         const data = await response.json();
+    //         console.log(data);
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // }
 
 
     return (

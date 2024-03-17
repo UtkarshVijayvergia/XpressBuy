@@ -7,8 +7,8 @@ import { Amplify } from 'aws-amplify';
 import 'react-toastify/dist/ReactToastify.css'
 import LandingPage from './pages/landingPage/LandingPage';
 import Login from './pages/authentication/login/Login';
-import ConfirmEmail from './pages/userConfirmation/ConfirmEmail'
 import SignUp from './pages/authentication/signUp/SignUp';
+import ConfirmEmail from './pages/authentication/userConfirmation/ConfirmEmail'
 import Home from './pages/homePage/Home';
 import Categories from './pages/products/Categories';
 import Product from './pages/products/Product';
