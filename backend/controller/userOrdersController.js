@@ -2,13 +2,17 @@ const asyncHandler = require('express-async-handler')
 
 // dynamodb 
 const dynamodbClient = require('../db/dynamodb/db')
-const { QueryCommand, PutCommand } = require("@aws-sdk/lib-dynamodb");
+const { QueryCommand, PutCommand, GetCommand } = require("@aws-sdk/lib-dynamodb");
 
 // S3
 const s3Client = require('../db/s3/s3Config')
 const { GetObjectCommand } = require("@aws-sdk/client-s3");
 const { getSignedUrl } = require("@aws-sdk/s3-request-presigner");
 
+
+// SES
+const { SESClient, SendEmailCommand } =  require("@aws-sdk/client-ses");
+const sesClient = new SESClient({ region: "ap-south-1" });
 
 
 
@@ -61,6 +65,7 @@ const postNewOrder = asyncHandler(async (req, res) => {
     try {
         const { order_id, product_details, total_amount, shipping_address, created_at } = req.body;
         const user_id = req.user_id;
+        console.log(user_id)
         const putNewOrderQuery = new PutCommand({
             TableName: "xpressbuy",
             Item: {
@@ -78,11 +83,60 @@ const postNewOrder = asyncHandler(async (req, res) => {
         });
         const response = await dynamodbClient.send(putNewOrderQuery);
         console.log("Order Placed Successfully!");
+        // emailOrderConfirmation(user_id);
         res.status(200).json(response);
     } catch (error) {
-        console.error(error);
+        console.error("Error order placing: ", error);
     }
 });
+
+
+
+
+const emailOrderConfirmation = async ( user_id ) => {
+    const getProfileItem = new GetCommand({
+        TableName: "xpressbuy",
+        Key: {
+            "pk": `USER#${user_id}`,
+            "sk": `PROFILE#${user_id}`,
+        },
+        ProjectionExpression: "email_id"
+    });
+
+    try {
+        const profileItem = await dynamodbClient.send(getProfileItem);
+        console.log("profileItem: ", profileItem);
+        // console.log("profileItem.Item: ", profileItem.Item);
+        console.log("profileItem.Item: ", profileItem.Item);
+
+        // Check if the email_id attribute exists in the response
+        if (profileItem.Item && profileItem.Item.email_id) {
+            console.log("Inside Email");
+            const emailParams = new SendEmailCommand({
+                Destination: {
+                    ToAddresses: [profileItem.Item.email_id],
+                },
+                Message: {
+                    Body: {
+                        Text: { Data: "A new order has been placed." },
+                    },
+                    Subject: { Data: "New Order Notification" },
+                },
+                Source: "utkarsh.v1901@gmail.com",
+                // ReplyToAddresses: [
+                //     "utkarsh.v1901@gmail.com"
+                // ],
+            });
+
+            // Send the email
+            console.log("sending email")
+            const emailResponse = await sesClient.send(emailParams);
+            console.log("Email sent", emailResponse);
+        }
+    } catch (error) {
+        console.error("Failed to get the item or send the email", error);
+    }
+}
 
 
 
