@@ -1,0 +1,37 @@
+Usecase: 
+    user will place order and an item will be inserted into the dynamodb table
+    item inserted: 
+        -   pk: USER#user_id
+        -   sk: ORDER#order_id
+    lambda function will get trigerred by analyzing the stream of dynamodb table
+    lambda function will access the user_id from pk and GET an item
+    Item retrieved:
+        -   pk: USER#user_id
+        -   sk: PROFILE#user_id
+        -   email_id: "email ID"
+    lambda will send an email to this email ID
+
+
+Problem: Give least privilege access to lambda function to access dynamodb table and send email using SES
+
+
+options:
+    - only give "dynamodb:GetItem" persmission to lambda function
+    - provide the tabel name
+    - provide the pk and sk of the item so it will be able to access only that item
+
+
+problem: 
+    the pk and sk contains user_id which is dynamic, and pk and sk needs to be fixed in the policy
+    - so this is not possible to provide the pk and sk in the policy
+    - so the only option is to provide the table name and "dynamodb:GetItem" permission to the lambda function and write the condition in code.
+
+    - This is how it is done:
+        "Condition": {
+            "ForAllValues:StringEquals": {
+                "dynamodb:LeadingKeys": ["USER#${aws:username}"],
+                "dynamodb:Attributes": ["email_id", "attribute2", "attribute3"]
+            }
+        }
+
+    - ${aws:username} needs to be provided in advance and so it can not be changed later.
