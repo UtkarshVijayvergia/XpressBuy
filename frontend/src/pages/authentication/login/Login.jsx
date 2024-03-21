@@ -2,9 +2,11 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
+import { useContext } from 'react'
 import { FaUser, FaEnvelope, FaUserLock, FaLock } from 'react-icons/fa'
 
 import Navbar from '../../../components/navbar/Navbar'
+import { LastPageContext } from '../../../contexts/LastPageContext';
 import './login.css'
 
 // AWS Amplify authenication
@@ -12,14 +14,18 @@ import { Auth } from 'aws-amplify';
 
 
 const Login = () => {
+    const { lastPage } = useContext(LastPageContext);
     const navigate = useNavigate()
+    const [errors, setErrors] = React.useState('');
     
+
     // login credentials
     const [credentials, setCredentials] = useState({
         email: "",
         password: "",
     })
     const { email, password } = credentials;
+
 
     // Update the state on input change (email, password)
     const onChange = (e) => {
@@ -30,10 +36,20 @@ const Login = () => {
     }
     
     
-    // aws-amplify aws cognito - sign in
-    const [errors, setErrors] = React.useState('');
+    // sign out
+    // TODO: Add removeCookies function during sign out
+    const signOut = async () => {
+        try {
+            await Auth.signOut();
+            navigate(lastPage);
+        } catch (err) {
+            console.log(err);
+        }
+    }
 
-    const onSubmit = async (e) => {
+
+    // aws-amplify aws cognito - sign in
+    const userLogin = async (e) => {
         e.preventDefault();
         setErrors('');
         // field validation
@@ -44,14 +60,16 @@ const Login = () => {
             try {
                 // Sign in with email and password
                 const user = await Auth.signIn(email, password);
-                // Send the ID token to the server
-                const isTokenValid = await verifyIdToken(user.signInUserSession.idToken.jwtToken, user.signInUserSession.accessToken.jwtToken);
+                // Send the tokens to the server
+                const isTokenValid = await verifyIdToken(user.signInUserSession.idToken.jwtToken, user.signInUserSession.accessToken.jwtToken, user.signInUserSession.refreshToken.token);
                 // check if server has verified the ID token
                 if(!isTokenValid){
                     setErrors('Invalid ID token');
+                    signOut();
                     return false;
                 }
-                navigate('/home')
+                // navigate('/home')
+                navigate(lastPage);
             } catch (error) {
                 if (error.code === 'UserNotConfirmedException') {
                     navigate('/confirm')
@@ -64,15 +82,16 @@ const Login = () => {
 
 
     // verify the ID token
-    const verifyIdToken = async (idToken, access_token) => {
+    const verifyIdToken = async (idToken, access_token, refresh_token) => {
         try {
-            const response = await fetch('http://localhost:5000/api/v1/VerifyIdToken', {
+            await fetch('http://localhost:5000/api/v1/tokenVerification/verifyIdToken', {
                 credentials: 'include',
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${idToken}`,
                     'X-Access-Token': `${access_token}`,
+                    'X-Refresh-Token': `${refresh_token}`
                 },
             });
             return true;
@@ -112,7 +131,7 @@ const Login = () => {
                                         errors ? <div className='login-errors'>{errors}</div> : <div className='padder4vh'></div>
                                     }
                                     <div className="login-btn">
-                                        <button type="submit" className="btn login-btn-decor" onClick={onSubmit} >Submit</button>
+                                        <button type="submit" className="btn login-btn-decor" onClick={userLogin} >Submit</button>
                                     </div>
                                 </form>
                             </div>

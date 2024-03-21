@@ -1,0 +1,213 @@
+[
+    {
+        "product_colour": "#DEB894",
+        "product_id": "0e8ce2f5-8ea9-43d8-b5a7-b00233f9e9b4",
+        "sk": "COLOUR#DEB894",
+        "pk": "PRODUCT#0e8ce2f5-8ea9-43d8-b5a7-b00233f9e9b4",
+        "size_variation": {
+            "Small": {
+                "product_size": "Small",
+                "product_stock": 10,
+                "product_sold": 8
+            },
+            "Large": {
+                "product_size": "Large",
+                "product_stock": 7,
+                "product_sold": 8
+            },
+            "Medium": {
+                "product_size": "Medium",
+                "product_stock": 12,
+                "product_sold": 8
+            },
+            "X-Large": {
+                "product_size": "X-Large",
+                "product_stock": 8,
+                "product_sold": 8
+            }
+        }
+    },
+    {
+        "product_colour": "#707271",
+        "product_id": "0e8ce2f5-8ea9-43d8-b5a7-b00233f9e9b4",
+        "sk": "COLOUR#707271",
+        "pk": "PRODUCT#0e8ce2f5-8ea9-43d8-b5a7-b00233f9e9b4",
+        "size_variation": {
+            "Small": {
+                "product_size": "Small",
+                "product_stock": 10,
+                "product_sold": 8
+            },
+            "Large": {
+                "product_size": "Large",
+                "product_stock": 7,
+                "product_sold": 8
+            },
+            "Medium": {
+                "product_size": "Medium",
+                "product_stock": 12,
+                "product_sold": 8
+            },
+            "X-Large": {
+                "product_size": "X-Large",
+                "product_stock": 9,
+                "product_sold": 8
+            },
+            "XX-Large": {
+                "product_size": "XX-Large",
+                "product_stock": 15,
+                "product_sold": 5
+            }
+        }
+    },    
+    {
+        "product_colour": "#FFFFFF",
+        "product_id": "0e8ce2f5-8ea9-43d8-b5a7-b00233f9e9b4",
+        "sk": "COLOUR#FFFFFF",
+        "pk": "PRODUCT#0e8ce2f5-8ea9-43d8-b5a7-b00233f9e9b4",
+        "size_variation": {
+            "Small":{
+                "product_size": "Small",
+                "product_stock": 10,
+                "product_sold": 8
+            },
+            "Large":{
+                "product_size": "Large",
+                "product_stock": 7,
+                "product_sold": 8
+            },
+            "Medium":{
+                "product_size": "Medium",
+                "product_stock": 13,
+                "product_sold": 8
+            },
+            "X-Large":{
+                "product_size": "X-Large",
+                "product_stock": 8,
+                "product_sold": 8
+            }
+        }
+    },
+    {
+        "product_reviews": 10,
+        "product_sold": 56,
+        "product_id": "0e8ce2f5-8ea9-43d8-b5a7-b00233f9e9b4",
+        "sk": "PRODUCT#0e8ce2f5-8ea9-43d8-b5a7-b00233f9e9b4",
+        "product_name": "Basic V Neck Tee Loose Fitting Casual Short Sleeve Tops",
+        "product_rating": 4.1,
+        "product_description": [
+            "4.5 oz./yd² (US) 7.5 oz./L yd (CA), 100% combed ringspun cotton, 30 singles. Heather Grey is 90/10 cotton/polyester",
+            "Semi-fitted contoured silhouette with side seams. Tear away label. V-neck collar. Made with OEKO-TEX certified low-impact dyes. Proud member of the U.S. Cotton Trust Protocol",
+            "Heather Colors are 35/65 cotton/polyester. Cap sleeves. Double-needle stitched sleeves and bottom hem"
+        ],
+        "pk": "PRODUCT#0e8ce2f5-8ea9-43d8-b5a7-b00233f9e9b4",
+        "available_colours": [
+            "#DEB894",
+            "#707271",
+            "#FFFFFF"
+        ],
+        "current_colour": "#DEB894",
+        "product_price": 23.45,
+        "product_rating_1": 1,
+        "product_rating_2": 0,
+        "product_rating_3": 2,
+        "product_rating_4": 0,
+        "product_rating_5": 7
+    },
+    {
+        "product_review_message": "This shirt is very soft and comfortable. I like the v-neck style and the fit is perfect. The yellow color is bright and cheerful. I would recommend this shirt to anyone who likes a casual and cozy tee.",
+        "product_id": "01HRDN76KE3X56JF47KCGJBXK1",
+        "sk": "REVIEW#5#2024-02-22T12:52:28.000Z",
+        "product_rating": 5,
+        "created_at": "2024-02-22T12:52:28.000Z",
+        "pk": "PRODUCT#2024-03-07T23:50:47.662Z",
+        "review_id": "01HRDN76KE3X56JF47KCGJBXK1",
+        "GSI2_pk": "Riya25"
+    },
+    {
+        "product_review_message": "I ordered the purple shirt and it looks nice, but it's a bit too tight for me. I wish they had a size chart on the website. The fabric is also thinner than I expected. It's not a bad shirt, but not my favorite either.",
+        "product_id": "0e8ce2f5-8ea9-43d8-b5a7-b00233f9e9b4",
+        "sk": "REVIEW#3#01HRDN7SYWQZFZMJTS7W7TXEVX",
+        "product_rating": 3,
+        "created_at": "2024-03-07T23:51:07.484Z",
+        "pk": "PRODUCT#0e8ce2f5-8ea9-43d8-b5a7-b00233f9e9b4",
+        "review_id": "01HRDN7SYWQZFZMJTS7W7TXEVX",
+        "GSI2_pk": "frankie72"
+    },
+    {
+        "product_review_message": "I love this shirt! It's so soft and comfortable. I bought the white one and it's perfect for summer. I'm going to buy another one in a different color.",
+        "product_id": "0e8ce2f5-8ea9-43d8-b5a7-b00233f9e9b4",
+        "sk": "REVIEW#5#01HRDN8GZENVRE7V47TNXQVD8G",
+        "product_rating": 5,
+        "created_at": "2024-03-07T23:51:31.054Z",
+        "pk": "PRODUCT#0e8ce2f5-8ea9-43d8-b5a7-b00233f9e9b4",
+        "review_id": "01HRDN8GZENVRE7V47TNXQVD8G",
+        "GSI2_pk": "Ivy_31"
+    },
+    {
+        "product_review_message": "It's so pretttyyyyy. The fabric is soft and the fit is perfect. I'm very happy with my purchase.",
+        "product_id": "0e8ce2f5-8ea9-43d8-b5a7-b00233f9e9b4",
+        "sk": "REVIEW#5#01HRDN9NKQMWXXPC8K9F93ER96",
+        "product_rating": 5,
+        "created_at": "2024-03-07T23:52:08.567Z",
+        "pk": "PRODUCT#0e8ce2f5-8ea9-43d8-b5a7-b00233f9e9b4",
+        "review_id": "01HRDN9NKQMWXXPC8K9F93ER96",
+        "GSI2_pk": "Lily"
+    },
+    {
+        "product_review_message": "The shirt is okay, but not great. The fabric is thin and wrinkles easily. The yellow color is too bright for my taste. The size is also a bit large for me. I would recommend ordering a size down if you want a snug fit.",
+        "product_id": "0e8ce2f5-8ea9-43d8-b5a7-b00233f9e9b4",
+        "sk": "REVIEW#3#01HRDNAFQE7TA6VA0Q53HCWPAN",
+        "product_rating": 3,
+        "created_at": "2024-03-07T23:52:35.310Z",
+        "pk": "PRODUCT#0e8ce2f5-8ea9-43d8-b5a7-b00233f9e9b4",
+        "review_id": "01HRDNAFQE7TA6VA0Q53HCWPAN",
+        "GSI2_pk": "Snowflake.9787"
+    },
+    {
+        "product_review_message": "This shirt is a disappointment. The purple color is faded and looks nothing like the picture. The fabric is rough and scratchy. The v-neck is too high and makes me feel choked. The size is also too small for me. I would not recommend this shirt to anyone.",
+        "product_id": "0e8ce2f5-8ea9-43d8-b5a7-b00233f9e9b4",
+        "sk": "REVIEW#1#01HRDNB0N0HTEHHT3GSFFK1P75",
+        "product_rating": 1,
+        "created_at": "2024-03-07T23:52:52.640Z",
+        "pk": "PRODUCT#0e8ce2f5-8ea9-43d8-b5a7-b00233f9e9b4",
+        "review_id": "01HRDNB0N0HTEHHT3GSFFK1P75",
+        "GSI2_pk": "Pooja56"
+    },
+    {
+        "product_id": "0e8ce2f5-8ea9-43d8-b5a7-b00233f9e9b4",
+        "sk": "REVIEW#5#01HRDNBMXA4GVQQRKKWHZS60DF",
+        "product_rating": 5,
+        "created_at": "2024-03-07T23:53:13.386Z",
+        "pk": "PRODUCT#0e8ce2f5-8ea9-43d8-b5a7-b00233f9e9b4",
+        "review_id": "01HRDNBMXA4GVQQRKKWHZS60DF",
+        "GSI2_pk": "JasmineTea"
+    },
+    {
+        "product_id": "0e8ce2f5-8ea9-43d8-b5a7-b00233f9e9b4",
+        "sk": "REVIEW#5#01HRDNCEEVH5KDMJ9SDEDHJXBP",
+        "product_rating": 5,
+        "created_at": "2024-03-07T23:53:39.547Z",
+        "pk": "PRODUCT#0e8ce2f5-8ea9-43d8-b5a7-b00233f9e9b4",
+        "review_id": "01HRDNCEEVH5KDMJ9SDEDHJXBP",
+        "GSI2_pk": "EllaVator"
+    },
+    {
+        "product_id": "0e8ce2f5-8ea9-43d8-b5a7-b00233f9e9b4",
+        "sk": "REVIEW#5#01HRDND5W33630WT1Z3MXCW060",
+        "product_rating": 5,
+        "created_at": "2024-03-07T23:54:03.523Z",
+        "pk": "PRODUCT#0e8ce2f5-8ea9-43d8-b5a7-b00233f9e9b4",
+        "review_id": "01HRDND5W33630WT1Z3MXCW060",
+        "GSI2_pk": "XaraXara"
+    },
+    {
+        "product_id": "0e8ce2f5-8ea9-43d8-b5a7-b00233f9e9b4",
+        "sk": "REVIEW#5#01HRDNDQGR3G1GTKNZPQQSRQ2A",
+        "product_rating": 5,
+        "created_at": "2024-03-07T23:54:21.592Z",
+        "pk": "PRODUCT#0e8ce2f5-8ea9-43d8-b5a7-b00233f9e9b4",
+        "review_id": "01HRDNDQGR3G1GTKNZPQQSRQ2A",
+        "GSI2_pk": "priyaaaa"
+    }
+]

@@ -1,10 +1,20 @@
 import React from 'react'
+import { useLocation } from 'react-router-dom'
+import { useContext } from 'react'
+import { FaTshirt, FaCreditCard, FaCcMastercard, FaShoppingCart, FaIdBadge, FaUserTie, FaVest } from 'react-icons/fa'
+
 import Navbar from '../../components/navbar/Navbar'
-import { FaTshirt, FaBook, FaLaptop, FaGamepad, FaCreditCard, FaPaypal, FaCcMastercard } from 'react-icons/fa'
-import { FaShirtsinbulk, FaShoppingCart, FaIdBadge, FaUserTie, FaVest } from 'react-icons/fa'
+import { LastPageContext } from '../../contexts/LastPageContext'
 import './landingPage.css'
 
+
 const LandingPage = () => {
+
+    const location = useLocation();
+    const { setLastPage } = useContext(LastPageContext);
+    setLastPage(location.pathname);
+
+
     const brandNames = [
         { icon: <FaUserTie />, text: 'VOUIS LUITTON' },
         { icon: <FaTshirt />, text: 'ADIBAS' },
@@ -22,14 +32,14 @@ const LandingPage = () => {
         { icon: <FaShoppingCart />, text: 'PIKE' },
     ];
 
+
     const gridStyle = {
         display: 'grid',
-        // gridTemplateColumns: `repeat(7, auto)`,
         gridTemplateColumns: `repeat(14, calc(auto))`,
         animation: 'scroll 20s linear infinite',
         gridGap: '20px',
-        // overflow: 'hidden',
     };
+
 
     const MonthOffers = [
         "Frosty January",
@@ -46,8 +56,6 @@ const LandingPage = () => {
         "Festive December",
     ];
 
-
-    console.log();
 
     return (
         <div>
@@ -74,7 +82,6 @@ const LandingPage = () => {
                 <div className='brand-carousel-container'>
                     <div className='brand-carousel'>
                         <div className="carousel" style={gridStyle}>
-                        {/* style={{paddingLeft: "50px"}} */}
                             {brandNames.map((brand, index) => (
                                 <div key={index} className="">
                                     <div className='landing-page-brand-name-styling' >

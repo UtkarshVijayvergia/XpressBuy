@@ -88,18 +88,18 @@ const Home = () => {
 
     React.useEffect(() => {
         checkUser();
-        getData();
+        // getData();
     }, []);
 
     return (
         <div>
-            {isAuthenticated && isData ? (
+            {isAuthenticated ? (
                 <div>
                     <h1>Home</h1>
                     <h1>Welcome {user.name}</h1>
                     <h1>Email: {user.email}</h1>
                     <h1>Username: {user.username}</h1>
-                    <h1>Data: {data.data}</h1>
+                    {/* <h1>Data: {data.data}</h1> */}
                 </div>
             ) : (
                 <div>

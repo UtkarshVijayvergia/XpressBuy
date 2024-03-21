@@ -1,0 +1,118 @@
+[
+    {
+        "product_colour": "#638392",
+        "product_id": "11bc1a2a-07d9-41d3-845c-5b715646e45b",
+        "sk": "COLOUR#638392",
+        "pk": "PRODUCT#11bc1a2a-07d9-41d3-845c-5b715646e45b",
+        "size_variation": {
+            "Small": {
+                "product_size": "Small",
+                "product_stock": 5,
+                "product_sold": 7
+            },
+            "Medium": {
+                "product_size": "Medium",
+                "product_stock": 13,
+                "product_sold": 15
+            },
+            "Large": {
+                "product_size": "Large",
+                "product_stock": 5,
+                "product_sold": 24
+            }
+        }
+    },
+    {
+        "product_colour": "#222328",
+        "product_id": "11bc1a2a-07d9-41d3-845c-5b715646e45b",
+        "sk": "COLOUR#222328",
+        "pk": "PRODUCT#11bc1a2a-07d9-41d3-845c-5b715646e45b",
+        "size_variation": {
+            "Medium": {
+                "product_size": "Medium",
+                "product_stock": 13,
+                "product_sold": 17
+            },
+            "X-Large": {
+                "product_size": "X-Large",
+                "product_stock": 8,
+                "product_sold": 7
+            },
+            "XX-Large": {
+                "product_size": "XX-Large",
+                "product_stock": 18,
+                "product_sold": 5
+            }
+        }
+    },
+    {
+        "product_colour": "#BF4B4E",
+        "product_id": "11bc1a2a-07d9-41d3-845c-5b715646e45b",
+        "sk": "COLOUR#BF4B4E",
+        "pk": "PRODUCT#11bc1a2a-07d9-41d3-845c-5b715646e45b",
+        "size_variation": {
+            "Small": {
+                "product_size": "Small",
+                "product_stock": 10,
+                "product_sold": 13
+            },
+            "Medium": {
+                "product_size": "Medium",
+                "product_stock": 13,
+                "product_sold": 14
+            },
+            "X-Large": {
+                "product_size": "X-Large",
+                "product_stock": 8,
+                "product_sold": 4
+            }
+        }
+    },
+    {
+        "product_reviews": 2,
+        "product_sold": 49,
+        "product_id": "11bc1a2a-07d9-41d3-845c-5b715646e45b",
+        "sk": "PRODUCT#11bc1a2a-07d9-41d3-845c-5b715646e45b",
+        "product_name": "Men's Heavy Taped Neck Comfort Jersey T-Shirt",
+        "product_rating": 4.5,
+        "product_description": [
+            "5.3 oz./yd² (US) 8.8 oz./L yd (CA), 100% cotton, 20 singles. Safety Green is compliant with ANSI / ISEA 107 high-visibility standards",
+            "Ash Grey is 99/1 cotton/polyester. Tear away label. Classic width, rib collar. Made with OEKO-TEX certified low-impact dyes. Proud member of the U.S. Cotton Trust Protocol",
+            "Blackberry, Dark Heather, Graphite Heather, Heather Colors, Lilac, Midnight, Neon Colors, Safety Colors, Sunset, & Tweed are 50/50 cotton/polyester",
+            "Taped neck and shoulders for comfort and durability. Antique colors & Sport Grey are 90/10 cotton/polyester"
+        ],
+        "pk": "PRODUCT#11bc1a2a-07d9-41d3-845c-5b715646e45b",
+        "available_colours": [
+            "#638392",
+            "#222328",
+            "#BF4B4E"
+        ],
+        "current_colour": "#BF4B4E",
+        "product_price": 14.30,
+        "product_rating_1": 0,
+        "product_rating_2": 0,
+        "product_rating_3": 0,
+        "product_rating_4": 1,
+        "product_rating_5": 1
+    },
+    {
+        "product_review_message": "The shirt is nice but it isn't what I call heavy cotton because the thickness isn't much different than regular Gildan 100% cotton shirts. The sleeve length is above the biceps. This is fine if you want to show how ripped you are but I'm not and I can use a few more inches in sleeve length.",
+        "product_id": "11bc1a2a-07d9-41d3-845c-5b715646e45b",
+        "sk": "REVIEW#4#01HRDMGSX5JHR41NMR4B92ZZ4B",
+        "product_rating": 4,
+        "created_at": "2024-03-07T23:38:33.765Z",
+        "pk": "PRODUCT#11bc1a2a-07d9-41d3-845c-5b715646e45b",
+        "review_id": "01HRDMGSX5JHR41NMR4B92ZZ4B",
+        "GSI2_pk": "sougo13"
+    },
+    {
+        "product_review_message": "What can I say other than I'm a big guy and the size chart is accurate. Good quality shirt, worth every penny.",
+        "product_id": "11bc1a2a-07d9-41d3-845c-5b715646e45b",
+        "sk": "REVIEW#5#01HRDMH8WASFZ86GCN3GAG2Y5K",
+        "product_rating": 5,
+        "created_at": "2024-03-07T23:38:49.098Z",
+        "pk": "PRODUCT#11bc1a2a-07d9-41d3-845c-5b715646e45b",
+        "review_id": "01HRDMH8WASFZ86GCN3GAG2Y5K",
+        "GSI2_pk": "Alex37"
+    }
+]

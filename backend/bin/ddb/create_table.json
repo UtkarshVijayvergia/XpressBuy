@@ -1,0 +1,94 @@
+{
+    "AttributeDefinitions": [
+        {
+            "AttributeName": "pk",
+            "AttributeType": "S"
+        },
+        {
+            "AttributeName": "sk",
+            "AttributeType": "S"
+        },
+        {
+            "AttributeName": "GSI1_sk",
+            "AttributeType": "S"
+        },
+        {
+            "AttributeName": "GSI2_pk",
+            "AttributeType": "S"
+        }
+    ],
+    "TableName": "xpressbuy",
+    "KeySchema": [
+        {
+            "AttributeName": "pk",
+            "KeyType": "HASH"
+        },
+        {
+            "AttributeName": "sk",
+            "KeyType": "RANGE"
+        }
+    ],
+    "TableStatus": "ACTIVE",
+    "CreationDateTime": {},
+    "ProvisionedThroughput": {
+        "LastIncreaseDateTime": {},
+        "LastDecreaseDateTime": {},
+        "NumberOfDecreasesToday": 0,
+        "ReadCapacityUnits": 5,
+        "WriteCapacityUnits": 5
+    },
+    "TableSizeBytes": 3647,
+    "ItemCount": 14,
+    "TableArn": "arn:aws:dynamodb:ddblocal:000000000000:table/xpressbuy",
+    "GlobalSecondaryIndexes": [
+        {
+            "IndexName": "GSI-2",
+            "KeySchema": [
+                {
+                    "AttributeName": "GSI2_pk",
+                    "KeyType": "HASH"
+                },
+                {
+                    "AttributeName": "sk",
+                    "KeyType": "RANGE"
+                }
+            ],
+            "Projection": {
+                "ProjectionType": "ALL"
+            },
+            "IndexStatus": "ACTIVE",
+            "ProvisionedThroughput": {
+                "ReadCapacityUnits": 5,
+                "WriteCapacityUnits": 5
+            },
+            "IndexSizeBytes": 3647,
+            "ItemCount": 2,
+            "IndexArn": "arn:aws:dynamodb:ddblocal:000000000000:table/xpressbuy/index/GSI-2"
+        },
+        {
+            "IndexName": "GSI-1",
+            "KeySchema": [
+                {
+                    "AttributeName": "pk",
+                    "KeyType": "HASH"
+                },
+                {
+                    "AttributeName": "GSI1_sk",
+                    "KeyType": "RANGE"
+                }
+            ],
+            "Projection": {
+                "ProjectionType": "ALL"
+            },
+            "IndexStatus": "ACTIVE",
+            "ProvisionedThroughput": {
+                "ReadCapacityUnits": 5,
+                "WriteCapacityUnits": 5
+            },
+            "IndexSizeBytes": 3647,
+            "ItemCount": 3,
+            "IndexArn": "arn:aws:dynamodb:ddblocal:000000000000:table/xpressbuy/index/GSI-1"
+        }
+    ],
+    "DeletionProtectionEnabled": false
+}

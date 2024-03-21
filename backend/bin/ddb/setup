@@ -1,0 +1,29 @@
+#! /bin/bash
+# Command: ./backend/bin/ddb/setup
+
+# This script is used to setup the database
+
+
+set -e 
+# -e : to exit the script if any command fails
+
+
+# Add a start message
+RED='\033[0;31m'
+NO_COLOR='\033[0m'
+LABEL="============ Setting up the database"
+printf "${RED}${LABEL}${NO_COLOR}\n"
+
+
+bin_path=$(dirname $0)
+
+# source $bin_path/drop-table xpressbuy prod
+# node $bin_path/create-table prod
+node $bin_path/seed-data prod
+
+
+# Add a success message
+ORANGE='\033[0;33m'
+RED='\033[0;31m'
+END_LABEL="============ Database setup successfully"
+printf "${ORANGE}${END_LABEL}${NO_COLOR}\n"

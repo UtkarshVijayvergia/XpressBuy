@@ -1,4 +1,13 @@
 /node_modules
 /package-lock.json
 /.env
+
+
 /help.txt
+
+
+# /backend/bin/data
+# /backend/bin/ddb/crud
+/XpressBuy - Database Design.xlsx
+
+/docker

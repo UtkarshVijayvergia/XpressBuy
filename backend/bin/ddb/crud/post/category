@@ -1,0 +1,55 @@
+#!/usr/bin/env node
+
+// command: ./bin/ddb/seed-data prod
+
+const { DynamoDBClient } = require("@aws-sdk/client-dynamodb");
+const { DynamoDBDocumentClient, BatchWriteCommand } = require("@aws-sdk/lib-dynamodb");
+
+// Set the endpoint to the local dynamodb
+let attrs = {
+    endpoint: 'http://localhost:8000'
+};
+
+// Check if we are in production mode
+if (process.argv.length === 3) {
+    if ("prod" in process.argv[2]) {
+        attrs = {};
+    }
+}
+
+// Create a new client
+const client = new DynamoDBClient(attrs);
+const docClient = DynamoDBDocumentClient.from(client);
+
+
+
+// Create a new item
+async function batch_write() {
+    const command = new BatchWriteCommand({
+        RequestItems: {
+            xpressbuy: [
+                {
+                    PutRequest: {
+                        Item: {
+                            pk: "CATEGORY",
+                            sk: "EVERYTHING",
+                            product_ids: [ 
+                                "0e8ce2f5-8ea9-43d8-b5a7-b00233f9e9b4", 
+                                "2e175904-748a-4ebf-8a34-a98fb42cd2db", 
+                                "11bc1a2a-07d9-41d3-845c-5b715646e45b" 
+                            ],
+                        }
+                    }
+                },
+            ],
+        },
+    });
+
+    // console.dir(command.input, { depth: null });
+
+    const response = await docClient.send(command);
+    console.log(response);
+};
+
+
+batch_write();

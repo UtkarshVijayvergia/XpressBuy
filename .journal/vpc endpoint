@@ -1,0 +1,5 @@
+VPC endpoints allow communication with AWS services from your VPC without requiring access to the public internet. Traffic to the configured service will be routed through the endpoint directly to the service without hitting the public internet.
+
+There are two types of VPC endpoints: interface endpoints and gateway endpoints. Gateway endpoints are simply a route in your subnet's route table that directs traffic directly to the given service. Gateway endpoints are great because they don't cost you anything to run. Unfortunately, gateway endpoints are only supported for Amazon S3 and DynamoDB. If you want other services, you're out of luck.
+
+Interface endpoints support a much broader menu of services, including Amazon CloudWatch, Amazon SNS, Amazon SQS, and Amazon Kinesis. Interface endpoints use AWS PrivateLink to route your network traffic to the given service. Unfortunately, interface endpoints do have an associated cost -- $0.01 per hour per endpoint per AZ (~$7.50 per month) plus a $0.01 fee per GB of data processed. If you have three AZs in your VPC, you're looking at a base cost of $22 per month in addition to the data processing charges.

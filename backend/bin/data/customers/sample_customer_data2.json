@@ -1,0 +1,172 @@
+[
+    {
+        "address_delivered": {
+            "S": "address5"
+        },
+        "total_price": {
+            "N": "300"
+        },
+        "sk": {
+            "S": "ORDER#2024-02-22T10:00:00.000Z"
+        },
+        "created_at": {
+            "S": "2024-02-22T10:00:00.000Z"
+        },
+        "GSI1_sk": {
+            "S": "Shipped#2024-02-22T10:00:00.000Z"
+        },
+        "pk": {
+            "S": "CUSTOMER#JaneDoe67"
+        },
+        "items": {
+            "L": [
+                {
+                    "M": {
+                        "product": {
+                            "S": "770e8400-e29b-41d4-a716-446655440066"
+                        },
+                        "colour": {
+                            "S": "#33FF57"
+                        },
+                        "size": {
+                            "S": "S"
+                        },
+                        "price": {
+                            "N": "150"
+                        }
+                    }
+                },
+                {
+                    "M": {
+                        "product": {
+                            "S": "880e8400-e29b-41d4-a716-446655440088"
+                        },
+                        "colour": {
+                            "S": "#39C7C7"
+                        },
+                        "size": {
+                            "S": "L"
+                        },
+                        "price": {
+                            "N": "150"
+                        }
+                    }
+                }
+            ]
+        },
+        "username": {
+            "S": "JaneDoe67"
+        },
+        "status": {
+            "S": "Shipped"
+        }
+    },
+    {
+        "address_delivered": {
+            "S": "address6"
+        },
+        "total_price": {
+            "N": "450"
+        },
+        "sk": {
+            "S": "ORDER#2024-02-23T15:00:00.000Z"
+        },
+        "created_at": {
+            "S": "2024-02-23T15:00:00.000Z"
+        },
+        "GSI1_sk": {
+            "S": "Delivered#2024-02-23T15:00:00.000Z"
+        },
+        "pk": {
+            "S": "CUSTOMER#JaneDoe67"
+        },
+        "items": {
+            "L": [
+                {
+                    "M": {
+                        "product": {
+                            "S": "990e8400-e29b-41d4-a716-446655440099"
+                        },
+                        "colour": {
+                            "S": "#FFC300"
+                        },
+                        "size": {
+                            "S": "M"
+                        },
+                        "price": {
+                            "N": "300"
+                        }
+                    }
+                },
+                {
+                    "M": {
+                        "product": {
+                            "S": "AA0e8400-e29b-41d4-a716-4466554400AA"
+                        },
+                        "colour": {
+                            "S": "#900C3F"
+                        },
+                        "size": {
+                            "S": "S"
+                        },
+                        "price": {
+                            "N": "150"
+                        }
+                    }
+                }
+            ]
+        },
+        "username": {
+            "S": "JaneDoe67"
+        },
+        "status": {
+            "S": "Delivered"
+        }
+    },
+    {
+        "addresses": {
+            "M": {
+                "Default": {
+                    "S": "address5"
+                },
+                "Home": {
+                    "S": "address6"
+                },
+                "Office": {
+                    "S": "address7"
+                }
+            }
+        },
+        "sk": {
+            "S": "PROFILE#JaneDoe67"
+        },
+        "name": {
+            "S": "Jane Doe"
+        },
+        "created_at": {
+            "S": "2024-02-21T16:42:21.198Z"
+        },
+        "pk": {
+            "S": "CUSTOMER#JaneDoe67"
+        },
+        "email": {
+            "S": "jane67@gmail.com"
+        },
+        "cart": {
+            "M": {
+                "size": {
+                    "S": "M"
+                },
+                "product": {
+                    "S": "BB0e8400-e29b-41d4-a716-4466554400BB"
+                },
+                "colour": {
+                    "S": "#581845"
+                }
+            }
+        },
+        "username": {
+            "S": "JaneDoe67"
+        }
+    }
+]

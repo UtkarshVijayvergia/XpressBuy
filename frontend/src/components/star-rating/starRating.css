@@ -1,0 +1,12 @@
+.half-star-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.half-star-overlay {
+  position: absolute;
+  overflow: hidden;
+  top: 0;
+  bottom: 0;
+  right: -1;
+}

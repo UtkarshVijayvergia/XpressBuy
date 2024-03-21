@@ -1,0 +1,39 @@
+#!/usr/bin/env node
+
+// command: ./bin/ddb/delete-data prod
+
+const { DeleteItemCommand, DynamoDBClient } = require("@aws-sdk/client-dynamodb");
+
+// Check if we are in production mode
+if (process.argv.length === 3) {
+    if ("prod" in process.argv[2]) {
+        attrs = {};
+    }
+}
+
+// Set the endpoint to the local dynamodb
+let attrs = {
+    endpoint: 'http://localhost:8000'
+};
+// Create a new client
+const client = new DynamoDBClient(attrs);
+
+// Create a new item
+async function delete_data() {
+    const command = new DeleteItemCommand({
+        TableName: "xpressbuy",
+        // For more information about data types,
+        // see https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.NamingRulesDataTypes.html#HowItWorks.DataTypes and
+        // https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Programming.LowLevelAPI.html#Programming.LowLevelAPI.DataTypeDescriptors
+        Key: {
+          pk: { S: "PRODUCT#11bc1a2a-07d9-41d3-845c-5b715646e45b" },
+          sk: { S: "REVIEW#5#2024-02-21T16:27:06.812Z" },
+        },
+    });
+
+    const response = await client.send(command);
+    console.log(response);
+};
+
+
+delete_data();
