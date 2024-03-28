@@ -1,5 +1,5 @@
-# Use an official Node.js runtime as the base image
-FROM node:14
+# Using image from AWS ECR
+FROM 891180839529.dkr.ecr.ap-south-1.amazonaws.com/expressbuy-node:latest
 
 # Set the working directory in the container
 WORKDIR /
@@ -17,4 +17,4 @@ COPY . .
 EXPOSE 5000
 
 # Start the server
-CMD [ "npm", "run", "server" ]
+CMD [ "npm", "run", "start" ]
