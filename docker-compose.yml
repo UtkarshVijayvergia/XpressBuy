@@ -19,22 +19,22 @@ services:
             - internal-network
 
 
-    frontend:
-        environment:
-            CHOKIDAR_USEPOLLING: "true"
-            WATCHPACK_POLLING: "true"
-            AWS_REGION: "${AWS_REGION}"
-            REACT_APP_AWS_PROJECT_REGION: "${REACT_APP_AWS_PROJECT_REGION}"
-            REACT_APP_AWS_COGNITO_REGION: "${REACT_APP_AWS_COGNITO_REGION}"
-            REACT_APP_AWS_USER_POOLS_ID: "${REACT_APP_AWS_USER_POOLS_ID}"
-            REACT_APP_AWS_USER_POOL_WEB_CLIENT_ID: "${REACT_APP_AWS_USER_POOL_WEB_CLIENT_ID}"
-        build: ./frontend
-        ports:
-            - "3000:3000"
-        volumes:
-            - ./frontend:/frontend
-        networks:
-            - internal-network
+    # frontend:
+    #     environment:
+    #         CHOKIDAR_USEPOLLING: "true"
+    #         WATCHPACK_POLLING: "true"
+    #         AWS_REGION: "${AWS_REGION}"
+    #         REACT_APP_AWS_PROJECT_REGION: "${REACT_APP_AWS_PROJECT_REGION}"
+    #         REACT_APP_AWS_COGNITO_REGION: "${REACT_APP_AWS_COGNITO_REGION}"
+    #         REACT_APP_AWS_USER_POOLS_ID: "${REACT_APP_AWS_USER_POOLS_ID}"
+    #         REACT_APP_AWS_USER_POOL_WEB_CLIENT_ID: "${REACT_APP_AWS_USER_POOL_WEB_CLIENT_ID}"
+    #     build: ./frontend
+    #     ports:
+    #         - "3000:3000"
+    #     volumes:
+    #         - ./frontend:/frontend
+    #     networks:
+    #         - internal-network
     
 
     # xray-daemon:
@@ -53,38 +53,38 @@ services:
     #         - internal-network
 
 
-    postgres-db:
-        image: postgres:13-alpine
-        restart: always
-        environment:
-            - POSTGRES_USER=${POSTGRES_USER}
-            - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-            - POSTGRES_CONNECTION_URL=${POSTGRES_CONNECTION_URL}
-            - POSTGRES_PROD_CONNECTION_URL=${POSTGRES_PROD_CONNECTION_URL}
-        ports:
-            - '5432:5432'
-        volumes: 
-            - db:/var/lib/postgresql/data
-            - ./backend/db/postgres:/postgres
-            # mounting the bash scripts to the container
-        networks:
-            - internal-network
+    # postgres-db:
+    #     image: postgres:13-alpine
+    #     restart: always
+    #     environment:
+    #         - POSTGRES_USER=${POSTGRES_USER}
+    #         - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    #         - POSTGRES_CONNECTION_URL=${POSTGRES_CONNECTION_URL}
+    #         - POSTGRES_PROD_CONNECTION_URL=${POSTGRES_PROD_CONNECTION_URL}
+    #     ports:
+    #         - '5432:5432'
+    #     volumes: 
+    #         - db:/var/lib/postgresql/data
+    #         - ./backend/db/postgres:/postgres
+    #         # mounting the bash scripts to the container
+    #     networks:
+    #         - internal-network
 
  
-    dynamodb-local:
-        user: root
-        # https://stackoverflow.com/questions/67533058/persist-local-dynamodb-data-in-volumes-lack-permission-unable-to-open-databa
-        # We needed to add user:root to get this working.
-        command: "-jar DynamoDBLocal.jar -sharedDb -dbPath ./data"
-        image: "amazon/dynamodb-local:latest"
-        container_name: dynamodb-local
-        ports:
-        - "8000:8000"
-        volumes:
-        - "./docker/dynamodb:/home/dynamodblocal/data"
-        working_dir: /home/dynamodblocal
-        networks:
-            - internal-network
+    # dynamodb-local:
+    #     user: root
+    #     # https://stackoverflow.com/questions/67533058/persist-local-dynamodb-data-in-volumes-lack-permission-unable-to-open-databa
+    #     # We needed to add user:root to get this working.
+    #     command: "-jar DynamoDBLocal.jar -sharedDb -dbPath ./data"
+    #     image: "amazon/dynamodb-local:latest"
+    #     container_name: dynamodb-local
+    #     ports:
+    #     - "8000:8000"
+    #     volumes:
+    #     - "./docker/dynamodb:/home/dynamodblocal/data"
+    #     working_dir: /home/dynamodblocal
+    #     networks:
+    #         - internal-network
 
 
 
