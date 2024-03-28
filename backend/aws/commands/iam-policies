@@ -1,0 +1,17 @@
+1. fargate-task-execution -> Role ( + giving ECS permission to assume this role ) + Policy
+        A. Create a role for the task execution role having a trust policy
+                aws iam create-role `
+                --role-name XpressBuy-Service-Execution-Role `
+                --assume-role-policy-document file://C:/Users/.../service-assume-role-execution-policy.json
+
+
+        B. Make a new policy and attach it to the role
+                aws iam put-role-policy `
+                --policy-name XpressBuy-Service-Execution-Policy `
+                --role-name XpressBuy-Service-Execution-Role `
+                --policy-document file://C:/Users/.../service-execution-policy.json
+
+
+
+
+// 2. fargate-task-execution -> Task Role ( + giving ECS permission to assume this role ) + Policy

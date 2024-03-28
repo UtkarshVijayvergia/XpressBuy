@@ -1,0 +1,12 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [{
+            "Effect": "Allow",
+            "Action": [
+                "ssm:GetParameters",
+                "ssm:GetParameter"
+            ],
+            "Resource": "arn:aws:ssm:ap-south-1:891180839529:parameter/xpressbuy/backend/*"
+        }
+    ]
+}
