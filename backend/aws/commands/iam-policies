@@ -1,17 +1,33 @@
-1. fargate-task-execution -> Role ( + giving ECS permission to assume this role ) + Policy
+1. fargate-task-execution-role -> Role ( + giving ECS permission to assume this role ) + Policy
         A. Create a role for the task execution role having a trust policy
                 aws iam create-role `
                 --role-name XpressBuy-Service-Execution-Role `
-                --assume-role-policy-document file://C:/Users/.../service-assume-role-execution-policy.json
+                --assume-role-policy-document file://C:/Users/.../ecs-service-assume-role-policy.json
 
 
         B. Make a new policy and attach it to the role
                 aws iam put-role-policy `
-                --policy-name XpressBuy-Service-Execution-Policy `
+                --policy-name XpressBuy-readAccess-systemsManager-parameterStore-policy `
                 --role-name XpressBuy-Service-Execution-Role `
-                --policy-document file://C:/Users/.../service-execution-policy.json
+                --policy-document file://C:/Users/.../readAccess-systemsManager-parameterStore-policy.json
 
 
 
 
-// 2. fargate-task-execution -> Task Role ( + giving ECS permission to assume this role ) + Policy
+2. fargate-task-role -> Role ( + giving ECS permission to assume this role ) + Policy
+        A. Create a role for the task role having a trust policy
+                aws iam create-role `
+                --role-name XpressBuy-task-Role `
+                --assume-role-policy-document file://C:/Users/.../ecs-service-assume-role-policy.json
+
+        B. Make a new policy and attach it to the role
+                aws iam put-role-policy `
+                // --policy-name SSM-access-Policy `
+                --role-name XpressBuy-task-Role `
+                --policy-document file://C:/Users/.../readAccess-systemsManager-parameterStore-policy.json
+
+        C. Attach cloudwatch access policy (pre-defined) to the role
+                aws iam attach-role-policy --policy-arn arn:aws:iam::aws:policy/CloudWatchFullAccess --role-name XpressBuy-task-Role
+
+        D. Attach XRay read access policy (pre-defined) to the role
+                aws iam attach-role-policy --policy-arn arn:aws:iam::aws:policy/AWSXRayDaemonWriteAccess --role-name XpressBuy-task-Role
