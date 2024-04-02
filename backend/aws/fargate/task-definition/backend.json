@@ -1,0 +1,80 @@
+{
+    "family": "xpressbuy-backend",
+    "executionRoleArn": "arn:aws:iam::891180839529:role/XpressBuy-Fargate-Task-Execution-Role",
+    "taskRoleArn": "arn:aws:iam::891180839529:role/XpressBuy-Fargate-Task-Role",
+    "networkMode": "awsvpc",
+    "cpu": "256",
+    "memory": "512",
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "containerDefinitions": [
+        {
+            "name": "backend",
+            "image": "891180839529.dkr.ecr.ap-south-1.amazonaws.com/expressbuy-node",
+            "essential": true,
+            "healthCheck": {
+                "command": [
+                    "CMD-SHELL",
+                    "node /backend/bin/node/health-check"
+                ],
+                "interval": 30,
+                "timeout": 5,
+                "retries": 3,
+                "startPeriod": 60
+            },
+            "portMappings": [
+                {
+                    "name": "backend",
+                    "containerPort": 5000,
+                    "protocol": "tcp",
+                    "appProtocol": "http"
+                }
+            ],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "/xpressbuy/fargate-cluster",
+                    "awslogs-region": "ap-south-1",
+                    "awslogs-stream-prefix": "backend"
+                }
+            },
+            "environment": [
+                {
+                    "name": "FRONTEND_URL",
+                    "value": "*"
+                },
+                {
+                    "name": "BACKEND_URL",
+                    "value": "*"
+                },
+                {
+                    "name": "AWS_DEFAULT_REGION",
+                    "value": "ap-south-1"
+                }
+            ],
+            "secrets": [
+                {
+                    "name": "AWS_ACCESS_KEY_ID",
+                    "valueFrom": "arn:aws:ssm:ap-south-1:891180839529:parameter/xpressbuy/backend/AWS_ACCESS_KEY_ID"
+                },
+                {
+                    "name": "AWS_SECRET_ACCESS_KEY",
+                    "valueFrom": "arn:aws:ssm:ap-south-1:891180839529:parameter/xpressbuy/backend/AWS_SECRET_ACCESS_KEY"
+                },
+                {
+                    "name": "POSTGRES_CONNECTION_URL",
+                    "valueFrom": "arn:aws:ssm:ap-south-1:891180839529:parameter/xpressbuy/backend/POSTGRES_CONNECTION_URL"
+                },
+                {
+                    "name": "AWS_COGNITO_USER_POOL_ID",
+                    "valueFrom": "arn:aws:ssm:ap-south-1:891180839529:parameter/xpressbuy/backend/AWS_COGNITO_USER_POOL_ID"
+                },
+                {
+                    "name": "AWS_COGNITO_USER_POOL_CLIENT_ID",
+                    "valueFrom": "arn:aws:ssm:ap-south-1:891180839529:parameter/xpressbuy/backend/AWS_COGNITO_USER_POOL_CLIENT_ID"
+                }
+            ]
+        }
+    ]
+}

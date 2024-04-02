@@ -13,4 +13,3 @@
 /docker
 
 /backend/aws/systems-manager
-/backend/aws/fargate/task-definition
