@@ -1,0 +1,23 @@
+{
+    "cluster": "xpressbuy",
+    "launchType": "FARGATE",
+    "desiredCount": 1,
+    "enableECSManagedTags": true,
+    "enableExecuteCommand": true,
+    "networkConfiguration": {
+        "awsvpcConfiguration": {
+            "assignPublicIp": "ENABLED",
+            "securityGroups": [
+                "sg-0f1f0258ecc4a5fb8"
+            ],
+            "subnets": [
+                "subnet-02a2bfa7fed8314c1",
+                "subnet-0f0f5891273bc12ed",
+                "subnet-0f52b5c4f16cf46cb"
+            ]
+        }
+    },
+    "propagateTags": "SERVICE",
+    "serviceName": "backend",
+    "taskDefinition": "xpressbuy-backend"
+}
