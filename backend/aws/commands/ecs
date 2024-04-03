@@ -1,4 +1,18 @@
 1. Register Task definition from a json file
-        aws ecs register-task-definition --cli-input-json file://backend/aws/fargate/task-definition/backend.json
+        aws ecs register-task-definition --cli-input-json file://backend/aws/ecs/task-definition-backend.json
 
 
+
+2. Start a service
+        aws ecs create-service --cli-input-json file://backend/aws/ecs/create-service-backend.json
+
+
+
+2. Connect To ECS Service
+        aws ecs execute-command `
+        --region <region-name> `
+        --cluster <cluster-name> `
+        --task "54db6d3928d2454fb876f26435afbfd1" `
+        --container backend `
+        --command "/bin/bash" `
+        --interactive
