@@ -3,8 +3,8 @@
     "Statement": [
         {
             "Action": [
-                "ssmmessages:CreateControlChannel",
-                "ssmmessages:OpenControlChannel"
+                "ssmmessages:CreateDataChannel",
+                "ssmmessages:OpenDataChannel"
             ],
             "Effect": "Allow",
             "Resource": "*"
