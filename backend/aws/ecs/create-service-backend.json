@@ -19,5 +19,21 @@
     },
     "propagateTags": "SERVICE",
     "serviceName": "backend",
-    "taskDefinition": "xpressbuy-backend"
+    "taskDefinition": "xpressbuy-backend",
+    "serviceConnectConfiguration": {
+        "enabled": true,
+        "namespace": "xpressbuy",
+        "services": [
+            {
+                "portName": "backend",
+                "discoveryName": "backend",
+                "clientAliases": [
+                    {
+                        "port": 5000,
+                        "dnsName": "backend"
+                    }
+                ]
+            }
+        ]
+    }
 }
