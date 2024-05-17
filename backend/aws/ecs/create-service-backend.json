@@ -4,6 +4,13 @@
     "desiredCount": 1,
     "enableECSManagedTags": true,
     "enableExecuteCommand": true,
+    "loadBalancers": [
+        {
+            "targetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:891180839529:targetgroup/xpressbuy-backend-tg/dfe453d1e48d6846",
+            "containerName": "backend",
+            "containerPort": 5000
+        }
+    ],
     "networkConfiguration": {
         "awsvpcConfiguration": {
             "assignPublicIp": "ENABLED",
