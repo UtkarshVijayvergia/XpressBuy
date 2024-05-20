@@ -1,0 +1,45 @@
+# This Dockerfile.prod uses a multi-stage build to first build a React application using Node.js, 
+# then serve the built static files using an Nginx server. The process includes copying necessary 
+# files and setting environment variables to configure the application during the build stage. This 
+# approach optimizes the final image size and separates the build and production environments.
+
+
+
+# Stage 1: Build Image ---------------------------------------->
+
+FROM node:16.18 AS build
+# AS build: This is part of Docker's multi-stage build feature. It assigns a name (build) to this stage 
+# of the build process. Multi-stage builds are useful for creating leaner and more efficient Docker images. 
+# By naming this stage, you can refer back to it in later stages of the Dockerfile to copy artifacts 
+# from it, without including all the unnecessary build dependencies and tools in the final image.
+
+ARG REACT_APP_BACKEND_URL
+ARG REACT_APP_AWS_PROJECT_REGION
+ARG REACT_APP_AWS_COGNITO_REGION
+ARG REACT_APP_AWS_USER_POOLS_ID
+ARG REACT_APP_AWS_USER_POOL_WEB_CLIENT_ID
+# ARG: These lines define build-time variables that can be passed during the build process (passed with the command)
+
+ENV REACT_APP_BACKEND_URL=$REACT_APP_BACKEND_URL
+ENV REACT_APP_AWS_PROJECT_REGION=$REACT_APP_AWS_PROJECT_REGION
+ENV REACT_APP_AWS_COGNITO_REGION=$REACT_APP_AWS_COGNITO_REGION
+ENV REACT_APP_AWS_USER_POOLS_ID=$REACT_APP_AWS_USER_POOLS_ID
+ENV REACT_APP_AWS_USER_POOL_WEB_CLIENT_ID=$REACT_APP_AWS_USER_POOL_WEB_CLIENT_ID
+# ENV: These lines set environment variables for the build stage using the values passed as build arguments.
+
+COPY . ./frontend-react-js
+WORKDIR /frontend-react-js
+RUN npm install
+RUN npm run build
+
+
+# Stage 2: Production Image ---------------------------------------->
+FROM nginx:1.23.3-alpine
+# This line sets the base image for the production stage to nginx:1.23.3-alpine
+
+COPY --from=build /frontend-react-js/build /usr/share/nginx/html
+# This line copies the build artifacts (static files) from the build stage to the Nginx default directory for serving HTML files.
+COPY --from=build /frontend-react-js/nginx.conf /etc/nginx/nginx.conf
+# This line copies the custom Nginx configuration file from the build stage to the Nginx configuration directory.
+
+EXPOSE 3000
