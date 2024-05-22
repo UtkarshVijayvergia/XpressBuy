@@ -1,0 +1,46 @@
+{
+    "cluster": "xpressbuy",
+    "launchType": "FARGATE",
+    "desiredCount": 1,
+    "enableECSManagedTags": true,
+    "enableExecuteCommand": true,
+    "loadBalancers": [
+        {
+            "targetGroupArn": "arn:aws:elasticloadbalancing:ap-south-1:891180839529:targetgroup/xpressbuy-frontend-tg/a6cd238e4cb8f3b8",
+            "containerName": "frontend",
+            "containerPort": 3000
+        }
+    ],
+    "networkConfiguration": {
+        "awsvpcConfiguration": {
+            "assignPublicIp": "ENABLED",
+            "securityGroups": [
+                "sg-0f1f0258ecc4a5fb8"
+            ],
+            "subnets": [
+                "subnet-02a2bfa7fed8314c1",
+                "subnet-0f0f5891273bc12ed",
+                "subnet-0f52b5c4f16cf46cb"
+            ]
+        }
+    },
+    "propagateTags": "SERVICE",
+    "serviceName": "frontend",
+    "taskDefinition": "xpressbuy-frontend",
+    "serviceConnectConfiguration": {
+        "enabled": true,
+        "namespace": "xpressbuy",
+        "services": [
+            {
+                "portName": "frontend",
+                "discoveryName": "frontend",
+                "clientAliases": [
+                    {
+                        "port": 3000,
+                        "dnsName": "frontend"
+                    }
+                ]
+            }
+        ]
+    }
+}
