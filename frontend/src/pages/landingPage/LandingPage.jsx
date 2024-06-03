@@ -2,6 +2,7 @@ import React from 'react'
 import { useLocation } from 'react-router-dom'
 import { useContext } from 'react'
 import { FaTshirt, FaCreditCard, FaCcMastercard, FaShoppingCart, FaIdBadge, FaUserTie, FaVest } from 'react-icons/fa'
+import landingPageImage from '../../assets/images/landingPage/landingPage.png';
 
 import Navbar from '../../components/navbar/Navbar'
 import { LastPageContext } from '../../contexts/LastPageContext'
@@ -61,7 +62,8 @@ const LandingPage = () => {
         <div>
             <div className='landing-page-bg'>
                 <div className='landin-page-bg-model'>
-                    <Navbar />
+                    <Navbar className="navbar"/>
+                    <img className='landing-page-image' src={landingPageImage} alt="" />                    {/* <Navbar /> */}
                     <div className='landing-page-heading-position'>
                         <div className='landing-page-heading'>
                             Raining Offers for {MonthOffers[new Date().getMonth()]}

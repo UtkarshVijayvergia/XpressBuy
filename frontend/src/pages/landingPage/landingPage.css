@@ -1,50 +1,71 @@
-.landing-page-bg {
-    background-image: url('../../assets/images/landingPage/landingPage.png');
-    background-size: 100%;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    height: 100vh;
-    width: 100%;
+* {
+    box-sizing: border-box;
+}
+
+.landin-page-bg-model{
     position: relative;
 }
 
-.landing-page-heading-position {
+.landing-page-image {
+    height: auto;
+    width: 100%;
+    object-fit: cover;
+    position: relative;
+    background-attachment: fixed; /* Add this line */
+}
+@media (max-width: 1000px) {
+    .landing-page-image {
+        height: auto;
+        width: 100%;
+        object-fit: contain;
+        background-attachment: scroll; /* Add this line */
+    }
+}
+
+.navbar {
     position: absolute;
-    left: 12.5%;
-    right: 58%;
-    top: 30%;
+    top: 0;
+    width: 100%;
+    z-index: 1000; /* Add this line */
+}
+
+.landing-page-heading-position {
+    padding-left: 25vw;
+    position: absolute;
+    top: 50%; /* Center vertically */
+    left: 25%; /* Adjust as needed for center-left positioning */
+    transform: translate(-50%, -50%); /* Center the element */
 }
 
 .landing-page-heading {
     color: rgb(43, 43, 43);
-    font-size: 50px;
+    font-size: 4vw;
     font-weight: 650;
     text-align: left;
 }
 
 .landing-page-sub-heading {
-    padding-top: 25px;
+    padding-top: 1vh;
     color: rgb(43, 43, 43);
-    font-size: 30px;
+    font-size: 2vw;
     font-weight: 450;
     text-align: left;
 }
 
 .landing-page-btns {
-    padding-top: 45px;
+    padding-top: 4vh;
     width: 100%;
     display: flex;
 }
 
 .landing-page-btn1 {
-    padding-right: 20px;
-    padding-left: 20px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    /* padding-right: 20px;
+    padding-left: 20px; */
+    padding-top: 1vh;
+    padding-bottom: 1vh;
     background-color: #000000;
     color: white;
-    font-size: 20px;
+    font-size: 1vw;
     font-weight: bold;
     text-align: center;
     text-decoration: none;
@@ -52,45 +73,41 @@
 }
 
 .landing-page-btn2-pos {
-    padding-left: 40px;
+    padding-left: 2vw;
 }
 
 .landing-page-btn2 {
-    padding-right: 20px;
-    padding-left: 20px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    /* padding-right: 20px; */
+    /* padding-left: 20px; */
+    padding-top: 1vh;
+    padding-bottom: 1vh;
     background-color: #ffffff;
     color: rgb(0, 0, 0);
-    font-size: 20px;
+    font-size: 1vw;
     font-weight: bold;
     text-align: center;
     text-decoration: none;
     border-radius: 0px;
 }
 
-/* .landing-page-brand-name {
-    font-style: italic;
-    font-weight: 550;
-    font-size: 23px;
-    font-family: 'Times New Roman', Times, serif;
-    color: rgb(99, 99, 99)
-} */
+
+
+
+
+
 
 .landing-page-brand-name-styling {
     font-style: italic;
-    /* font-weight: 450; */
     font-size: 19px;
     font-family: 'Times New Roman', Times, serif;
     text-align: center;
-    /* color: rgb(99, 99, 99) */
 }
 
 .brand-carousel-pos {
     padding-top: 15vh;
     padding-bottom: 10vh;
-    padding-left: 20vh;
-    padding-right: 20vh;
+    /* padding-left: 20vh; */
+    /* padding-right: 20vh; */
 }
 
 .brand-carousel-container {
@@ -108,6 +125,7 @@
     grid-template-columns: repeat(14, calc(100% / 7));
     /* grid-template-columns: repeat(14, 1fr); */
     animation: scroll 10s linear infinite;
+    width: 100%; /* Ensure it doesn’t exceed the viewport */
 }
 
 @keyframes scroll {
@@ -126,10 +144,12 @@
 .trial-product-card-pos {
     padding-top: 5vh;
     padding-bottom: 5vh;
-    margin-left: 25vh;
-    margin-right: 25vh;
+    /* margin-left: 25vh;
+    margin-right: 25vh; */
     display: flex;
     justify-content: space-evenly;
+    width: 70%; /* Adjust to 100% for responsiveness */
+    max-width: 50vh; /* Set a max width to control large screens */
     align-items: center;
 }
 
@@ -144,8 +164,8 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    margin-left: 3vh;
-    margin-right: 3vh;
+    /* margin-left: 3vh;
+    margin-right: 3vh; */
     width: 50vh;
     height: 70vh;
     border: 1px solid #000000;
@@ -155,7 +175,7 @@
 .trial-product-card-details {
     padding-top: 45vh;
     position:inherit;
-    padding-left: 30px;
+    /* padding-left: 30px; */
 }
 
 
