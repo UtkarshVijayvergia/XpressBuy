@@ -39,13 +39,13 @@
 
 .landing-page-heading {
     color: rgb(43, 43, 43);
-    font-size: 4vw;
-    font-weight: 650;
+    font-size: 5vw;
+    font-weight: 550;
     text-align: left;
 }
 
 .landing-page-sub-heading {
-    padding-top: 1vh;
+    padding-top: 1.5vh;
     color: rgb(43, 43, 43);
     font-size: 2vw;
     font-weight: 450;
@@ -53,7 +53,7 @@
 }
 
 .landing-page-btns {
-    padding-top: 4vh;
+    padding-top: 1.5vh;
     width: 100%;
     display: flex;
 }
