@@ -13,7 +13,7 @@
     position: relative;
     background-attachment: fixed; /* Add this line */
 }
-@media (max-width: 1000px) {
+@media (max-width: 700px) {
     .landing-page-image {
         height: auto;
         width: 100%;
@@ -28,18 +28,36 @@
     width: 100%;
     z-index: 1000; /* Add this line */
 }
+@media (max-width: 700px) {
+    .navbar {
+        position:relative;
+        top: 0;
+        width: 100%;
+        z-index: 1000; /* Add this line */
+    }
+}
 
 .landing-page-heading-position {
-    padding-left: 25vw;
+    padding-left: 45vw;
     position: absolute;
     top: 50%; /* Center vertically */
-    left: 25%; /* Adjust as needed for center-left positioning */
+    left: 12.5%; /* Adjust as needed for center-left positioning */
     transform: translate(-50%, -50%); /* Center the element */
+}
+@media (max-width: 530px) {
+    .landing-page-heading-position {
+        top: 60%; /* Center vertically */
+    }
+}
+@media (max-width: 300px) {
+    .landing-page-heading-position {
+        top: 70%; /* Center vertically */
+    }
 }
 
 .landing-page-heading {
     color: rgb(43, 43, 43);
-    font-size: 5vw;
+    font-size: 4.5vw;
     font-weight: 550;
     text-align: left;
 }
@@ -51,25 +69,39 @@
     font-weight: 450;
     text-align: left;
 }
+@media (max-width: 700px) {
+    .landing-page-sub-heading {
+        font-size: 2.5vw;
+    }
+}
 
 .landing-page-btns {
-    padding-top: 1.5vh;
+    padding-top: 6vh;
     width: 100%;
     display: flex;
 }
+@media (max-width: 700px) {
+    .landing-page-btns {
+        padding-top: 2vh;
+    }
+}
 
 .landing-page-btn1 {
-    /* padding-right: 20px;
-    padding-left: 20px; */
     padding-top: 1vh;
     padding-bottom: 1vh;
     background-color: #000000;
     color: white;
-    font-size: 1vw;
+    font-size: 1.25vw;
     font-weight: bold;
     text-align: center;
     text-decoration: none;
     border-radius: 0px;
+}
+@media (max-width: 700px) {
+    .landing-page-btn1 {
+        font-size: 2vw;
+    }
+    
 }
 
 .landing-page-btn2-pos {
@@ -77,17 +109,21 @@
 }
 
 .landing-page-btn2 {
-    /* padding-right: 20px; */
-    /* padding-left: 20px; */
     padding-top: 1vh;
     padding-bottom: 1vh;
     background-color: #ffffff;
     color: rgb(0, 0, 0);
-    font-size: 1vw;
+    font-size: 1.25vw;
     font-weight: bold;
     text-align: center;
     text-decoration: none;
     border-radius: 0px;
+}
+@media (max-width: 700px) {
+    .landing-page-btn2 {
+        font-size: 2vw;
+    }
+    
 }
 
 
@@ -98,16 +134,27 @@
 
 .landing-page-brand-name-styling {
     font-style: italic;
-    font-size: 19px;
+    font-size: 1.25vw;
     font-family: 'Times New Roman', Times, serif;
     text-align: center;
+}
+@media (max-width: 700px) {
+    .landing-page-brand-name-styling {
+        font-size: 3vw;
+    }
 }
 
 .brand-carousel-pos {
     padding-top: 15vh;
     padding-bottom: 10vh;
-    /* padding-left: 20vh; */
-    /* padding-right: 20vh; */
+    padding-left: 10vw;
+    padding-right: 10vw;
+}
+@media (max-width: 700px) {
+    .brand-carousel-pos {
+        padding-top: 5vh;
+        padding-bottom: 5vh;
+    }
 }
 
 .brand-carousel-container {
@@ -116,18 +163,16 @@
 }
 
 .brand-carousel {
-    /* width: 150vw; */
+    width: 100%;
     overflow: hidden;
 }
 
 .carousel {
     display: grid;
-    grid-template-columns: repeat(14, calc(100% / 7));
-    /* grid-template-columns: repeat(14, 1fr); */
+    grid-template-columns: repeat(14, calc(100% / 6.5));
     animation: scroll 10s linear infinite;
-    width: 100%; /* Ensure it doesn’t exceed the viewport */
+    width: 100%;
 }
-
 @keyframes scroll {
     0% {
         transform: translateX(0);
@@ -136,10 +181,28 @@
         transform: translateX(calc(-100% * 1)); /* Adjust the number of brand names */
     }
 }
+@media (max-width: 700px) {
+    .carousel {
+        grid-template-columns: repeat(14, calc(100% / 3.25));
+        animation: scroll 10s linear infinite;
+    }
+    @keyframes scroll {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(calc(-100% * 3)); /* Adjust the number of brand names */
+        }
+    }
+}
 
-/* .brand-name {
-    width: 10vh;
-} */
+
+
+
+
+
+
+
 
 .trial-product-card-pos {
     padding-top: 5vh;
