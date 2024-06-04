@@ -2,6 +2,12 @@
     background-color: #6b6b6b98;
     overflow: hidden;
 }
+@media (max-width: 700px){
+    .navbar {
+        background-color: #ffffff;
+        overflow: hidden;
+    }
+}
 
 .navbar-cat {
     background-color: #ffffff;
@@ -17,24 +23,49 @@
     align-items: center;
     padding-top: 20px;
     padding-bottom: 20px;
+    max-height: 10vh;
+    min-height: 8vh;
+}
+@media (max-width: 700px){
+    .navbar-nav {
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
 }
 
 .nav-item-logo {
-    padding-left: 50px;
+    padding-left: 1vw;
+}
+@media (max-width: 700px){
+    .nav-item-logo {
+        padding-left: 1vw;
+    }
 }
 
 .navbar-logo-symbol {
     float: left;
-    height: 50px;
-    width: 50px;
+    max-height: 6vh;
+}
+@media (max-width: 700px){
+    .navbar-logo-symbol {
+        max-height: 5vh;
+    }
 }
 
 .navbar-logo {
     float: left;
-    padding-left: 10px;
-    padding-right: 50px;
-    height: 50px;
+    padding-left: 1vw;
+    padding-right: 2.5vw;
+    max-height: 5vh;
 }
+@media (max-width: 700px){
+    .navbar-logo {
+        max-height: 4vh;
+    }
+}
+
+
+
 
 .nav-item-direction {
     display: flex;
@@ -49,26 +80,38 @@
 
 .nav-item {
     float: left;
-    padding-top: 10px;
-    padding-bottom: 10px;
 }
 
 .nav-item-name {
     display: block;
     color: white;
     text-align: center;
-    padding-right: 20px;
-    padding-left: 20px;
+    margin-right: 1.5vw;
+    margin-left: 1.5vw;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
     text-decoration: none;
+}
+@media (max-width: 700px){
+    .nav-item-name {
+        color: rgb(0, 0, 0);
+        margin-top: 0.5vh;
+        margin-bottom: 0.5vh;
+    }
 }
 
 .nav-item-cat-name{
     display: block;
     color: rgb(0, 0, 0);
     text-align: center;
-    padding-right: 20px;
-    padding-left: 20px;
+    margin-right: 20px;
+    margin-left: 20px;
     text-decoration: none;
+}
+
+.nav-menu{
+    border: 1px solid #000000;
+    box-sizing: border-box;
 }
 
 .nav-item-curr-cat-name{
@@ -86,7 +129,7 @@
 }
 
 .nav-last-item {
-    padding-right: 30px;
+    padding-right: 2vw;
 }
 
 .dropdown {
