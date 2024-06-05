@@ -7,7 +7,7 @@ const app = express()
 // Configure cors
 const cors = require('cors'); // app.use(cors());
 app.use(cors({
-    origin: 'http://localhost:3000', // replace with your client-side URL
+    origin: ['http://localhost:3000', 'http://192.168.29.108:3000'], // replace with your client-side URL
     credentials: true
 }));
 
