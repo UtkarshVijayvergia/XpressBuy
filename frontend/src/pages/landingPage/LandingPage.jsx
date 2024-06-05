@@ -1,6 +1,7 @@
 import React from 'react'
 import { useLocation } from 'react-router-dom'
 import { useContext } from 'react'
+import { useEffect } from 'react'
 import { FaTshirt, FaCreditCard, FaCcMastercard, FaShoppingCart, FaIdBadge, FaUserTie, FaVest } from 'react-icons/fa'
 
 import Navbar from '../../components/navbar/Navbar'
@@ -14,7 +15,6 @@ const LandingPage = () => {
 
     const location = useLocation();
     const { setLastPage } = useContext(LastPageContext);
-    setLastPage(location.pathname);
 
 
     const brandNames = [
@@ -57,6 +57,12 @@ const LandingPage = () => {
         "Chilly November",
         "Festive December",
     ];
+
+
+    // Set last page visited
+    useEffect(() => {
+        setLastPage(location.pathname);
+    }, []); // Empty array ensures this runs only on mount
 
 
     return (
