@@ -26,14 +26,14 @@
     position: absolute;
     top: 0;
     width: 100%;
-    z-index: 1000; /* Add this line */
+    z-index: 990; /* Add this line */
 }
 @media (max-width: 700px) {
     .navbar {
         position:relative;
         top: 0;
         width: 100%;
-        z-index: 1000; /* Add this line */
+        z-index: 990; /* Add this line */
     }
 }
 
@@ -126,12 +126,6 @@
     
 }
 
-
-
-
-
-
-
 .landing-page-brand-name-styling {
     font-style: italic;
     font-size: 1.25vw;
@@ -205,15 +199,15 @@
 
 
 .trial-product-card-pos {
-    padding-top: 5vh;
-    padding-bottom: 5vh;
-    /* margin-left: 25vh;
-    margin-right: 25vh; */
+    padding-top: 7vh;
     display: flex;
     justify-content: space-evenly;
-    width: 70%; /* Adjust to 100% for responsiveness */
-    max-width: 50vh; /* Set a max width to control large screens */
     align-items: center;
+}
+@media (max-width: 700px) {
+    .trial-product-card-pos {
+        padding-top: 1vh;
+    }
 }
 
 .trial-product-card {

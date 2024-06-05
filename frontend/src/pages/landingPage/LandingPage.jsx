@@ -2,10 +2,11 @@ import React from 'react'
 import { useLocation } from 'react-router-dom'
 import { useContext } from 'react'
 import { FaTshirt, FaCreditCard, FaCcMastercard, FaShoppingCart, FaIdBadge, FaUserTie, FaVest } from 'react-icons/fa'
-import landingPageImage from '../../assets/images/landingPage/landingPage.png';
 
 import Navbar from '../../components/navbar/Navbar'
 import { LastPageContext } from '../../contexts/LastPageContext'
+import landingPageImage from '../../assets/images/landingPage/landingPage.png';
+import DemoImage from '../../assets/images/landingPage/trialProductBg.png';
 import './landingPage.css'
 
 
@@ -97,6 +98,7 @@ const LandingPage = () => {
             </div>
             <div className='trial-product-card-pos'>
                 <div className='card trial-product-card'>
+                    {/* <img src={DemoImage} alt="" /> */}
                     <div className='trial-product-card-details'>
                         <div className='trial-product-card-heading'>
                             Let's Suit Up
