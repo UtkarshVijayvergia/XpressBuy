@@ -12,15 +12,18 @@ import './categories.css'
 
 
 const Categories = () => {
-    
+
     const location = useLocation();
     const { setLastPage } = useContext(LastPageContext);
-    setLastPage(location.pathname);
 
 
     const [category, setCategory] = useState([])
     const [products, setProducts] = useState([]);
     const [categoryName, setCategoryName] = useState('');
+    const [windowSize, setWindowSize] = useState({
+        width: undefined,
+        height: undefined,
+    });
 
 
     // Post category name to get products
@@ -49,6 +52,10 @@ const Categories = () => {
                 },
                 method: 'GET',
             });
+            if (!response.ok) {
+                console.error(`Server responded with status code ${response.status}`);
+                return;
+            }
             setCategory(await response.json());
         } catch (error) {
             console.error(error);
@@ -65,6 +72,10 @@ const Categories = () => {
                 },
                 method: 'GET',
             });
+            if (!response.ok) {
+                console.error(`Server responded with status code ${response.status}`);
+                return;
+            }
             setProducts(await response.json());
         } catch (error) {
             console.error(error);
@@ -79,6 +90,32 @@ const Categories = () => {
     }, [categoryName]);
 
 
+    // useEffect for window size
+    useEffect(() => {
+        function handleResize() {
+            setWindowSize({
+                width: window.innerWidth,
+                height: window.innerHeight,
+            });
+        }
+
+        // Add event listener
+        window.addEventListener('resize', handleResize);
+
+        // Call handler right away so state gets updated with initial window size
+        handleResize();
+
+        // Remove event listener on cleanup
+        return () => window.removeEventListener('resize', handleResize);
+    }, []); // Empty array ensures that effect is only run on mount and unmount
+
+
+    // useEffect for setting last page
+    useEffect(() => {
+        setLastPage(location.pathname);
+    }, []); // Empty array ensures this runs only on mount
+
+
     return (
         <div>
             {products.length > 0 ?
@@ -86,40 +123,45 @@ const Categories = () => {
                     <Navbar setCategoryName={setCategoryName} handleCategory={handleCategory} />
                     <div className='cat-product-container'>
                         <div className='left-column'>
-                            <div className="left-column-placement">
-                                <div className="category-left-column-heading">
-                                    Categories
-                                </div>
-                                <div className='category-list-placement'>
-                                    {
-                                        category.map((category, index) => {
-                                            return (
-                                                <div key={index} className='category-list'>
-                                                    <div className='category-name'>
-                                                        {
-                                                            ((index === 0) || (index === 2))
-                                                                ?
-                                                                <div className='category-name category-name-lower' onClick={() => handleCategory(`${category.sk}`)}>
-                                                                    {category.category_name}
-                                                                    <div className="category-quantity">
-                                                                        ({category.product_quantity})
-                                                                    </div>
-                                                                </div>
-                                                                :
-                                                                <div className='category-name' onClick={() => handleCategory(`${category.sk}`)}>
-                                                                    {category.category_name}
-                                                                    <div className="category-quantity">
-                                                                        ({category.product_quantity})
-                                                                    </div>
-                                                                </div>
-                                                        }
-                                                    </div>
-                                                </div>
-                                            )
-                                        })
-                                    }
-                                </div>
-                            </div>
+                            {
+                                windowSize.width > 1280 ?
+                                    <div className="left-column-placement">
+                                        <div className="category-left-column-heading">
+                                            Categories
+                                        </div>
+                                        <div className='category-list-placement'>
+                                            {
+                                                category.map((category, index) => {
+                                                    return (
+                                                        <div key={index} className='category-list'>
+                                                            <div className='category-name'>
+                                                                {
+                                                                    ((index === 0) || (index === 2))
+                                                                        ?
+                                                                        <div className='category-name category-name-lower' onClick={() => handleCategory(`${category.sk}`)}>
+                                                                            {category.category_name}
+                                                                            <div className="category-quantity">
+                                                                                ({category.product_quantity})
+                                                                            </div>
+                                                                        </div>
+                                                                        :
+                                                                        <div className='category-name' onClick={() => handleCategory(`${category.sk}`)}>
+                                                                            {category.category_name}
+                                                                            <div className="category-quantity">
+                                                                                ({category.product_quantity})
+                                                                            </div>
+                                                                        </div>
+                                                                }
+                                                            </div>
+                                                        </div>
+                                                    )
+                                                })
+                                            }
+                                        </div>
+                                    </div>
+                                    :
+                                    <></>
+                            }
                         </div>
                         <div className='right-column'>
                             {
