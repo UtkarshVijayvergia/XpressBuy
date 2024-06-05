@@ -1,24 +1,20 @@
 .navbar {
     background-color: #6b6b6b98;
-    overflow: hidden;
 }
 @media (max-width: 700px){
     .navbar {
         background-color: #ffffff;
-        overflow: hidden;
     }
 }
 
 .navbar-cat {
     background-color: #ffffff;
-    overflow: hidden;
 }
 
 .navbar-nav {
     list-style-type: none;
     margin: 0;
     padding: 0;
-    overflow: hidden;
     display: flex;
     align-items: center;
     padding-top: 20px;
@@ -70,7 +66,7 @@
 .nav-item-direction {
     display: flex;
     justify-content: space-between;
-    width: 100%; /* Add this to ensure full width */
+    width: 100%;
 }
 
 .nav-item-left {
@@ -100,7 +96,7 @@
     }
 }
 
-.nav-item-cat-name{
+.nav-item-cat-name {
     display: block;
     color: rgb(0, 0, 0);
     text-align: center;
@@ -109,12 +105,12 @@
     text-decoration: none;
 }
 
-.nav-menu{
+.nav-menu {
     border: 1px solid #000000;
-    box-sizing: border-box;
+    /* box-sizing: border-box; */
 }
 
-.nav-item-curr-cat-name{
+.nav-item-curr-cat-name {
     display: block;
     color: rgb(55, 118, 255);
     text-align: center;
@@ -140,11 +136,11 @@
 .dropdown-content {
     display: none;
     position: absolute;
-    right: 0; /* Add this line */
+    right: 0;
     background-color: #f9f9f9;
     min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
 }
 
 .dropdown:hover .dropdown-content {
@@ -152,5 +148,80 @@
 }
 
 .drop-options {
-    color: black!important;
+    color: black !important;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: 0; /* Sidebar starts from the right */
+    width: 85%;
+    height: 100%;
+    background-color: #fff;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5); /* Shadow to the left */
+    z-index: 1000;
+    transform: translateX(100%); /* Start off-screen to the right */
+    opacity: 0; /* Start fully transparent */
+    transition: transform 1.5s ease-in-out, opacity 0.5s ease-in-out; /* Smooth sliding and fading transition */
+    padding-top: 20px;
+    overflow: hidden;
+}
+
+.sidebar.open {
+    transform: translateX(0); /* Slide in from the right */
+    opacity: 1;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px; /* Move close button to the right */
+    font-size: 24px;
+    border: 1px solid #333;
+    background: none;
+    cursor: pointer;
+}
+
+
+.sidebar-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-top: 5vh;
+}
+
+.sidebar-content a {
+    text-decoration: none;
+    color: #333;
+    font-size: 1vh + 1vw;
+    width: 100%;
+    text-align: left;
+}
+
+.sidebar-content a:hover {
+    color: #007BFF;
+}
+
+.nav-sidebar-fauser {
+    font-size: 12.5vw;
+}
+
+.nav-sidebar-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    border-top: 0.1px solid #dbdbdb;
+    border-bottom: 0.1px solid #dbdbdb;
+}
+
+.nav-sidebar-item-name {
+    background-color: rgb(245, 245, 245);
+    padding-top: 4vh;
+    padding-bottom: 4vh;
+    padding-left: 3vw;
+}
+
+.nav-sidebar-partition {
+    min-height: 10vh;
 }

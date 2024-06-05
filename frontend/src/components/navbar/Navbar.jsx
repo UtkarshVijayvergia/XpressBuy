@@ -1,25 +1,22 @@
-import React, { useEffect } from 'react'
-import { useState } from 'react'
+import React, { useEffect } from 'react';
+import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { FaShoppingCart, FaUser, FaBars } from 'react-icons/fa'
-import { Auth } from 'aws-amplify'
+import { FaShoppingCart, FaUser, FaBars } from 'react-icons/fa';
+import { Auth } from 'aws-amplify';
 
 import { LastPageContext } from '../../contexts/LastPageContext';
-import './navbar.css'
-
+import './navbar.css';
 
 const Navbar = ({ setCategoryName }) => {
     const location = useLocation();
     const navigate = useNavigate();
     const { lastPage } = React.useContext(LastPageContext);
 
-
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
-    // const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-    // const [windowHeight, setWindowHeight] = useState(window.innerHeight);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
 
     // function to check if user is authenticated
@@ -32,11 +29,22 @@ const Navbar = ({ setCategoryName }) => {
             setIsAuthenticated(false);
             console.log(err);
         }
+    };
+
+
+    // function to open sidebar
+    const toggleSidebar = () => {
+        setIsSidebarOpen(!isSidebarOpen);
+    };
+
+
+    // Navigate back to home page
+    const backToHome = () => {
+        navigate('/');
     }
 
 
     // sign out
-    // TODO: Add removeCookies function during sign out
     const signOut = async () => {
         try {
             await Auth.signOut();
@@ -45,26 +53,14 @@ const Navbar = ({ setCategoryName }) => {
         } catch (err) {
             console.log(err);
         }
-    }
-
-    // Get screen dimensions
-    // const getScreenDimensions = () => {
-    //     setWindowWidth(window.innerWidth);
-    //     setWindowHeight(window.innerHeight);
-    // }
-    // useEffect(() => {
-    //     window.addEventListener('resize', getScreenDimensions);
-    //     return () => {
-    //         window.removeEventListener('resize', getScreenDimensions);
-    //     }
-    // }, []);
-
+    };
 
 
     // useEffect to check if user is authenticated
     useEffect(() => {
         checkUser();
     }, []);
+
 
     return (
         <div>
@@ -73,13 +69,10 @@ const Navbar = ({ setCategoryName }) => {
                     <li className="nav-item-logo">
                         <Link to="/">
                             {
-                                // window.innerWidth > 700 ?
                                 window.innerWidth > 700 && location.pathname === '/' ?
                                     <img className='navbar-logo-symbol' src={require(`../../assets/images/XpressBuy/XpressBuy_Logo_Design_NoBg_White.png`)} alt='logo' />
                                     :
                                     <img className='navbar-logo-symbol' src={require(`../../assets/images/XpressBuy/XpressBuy_Logo_Design_NoBg_Black.png`)} alt='logo' />
-                                // :
-                                // <img className='navbar-logo-symbol-mobo' src={require(`../../assets/images/XpressBuy/XpressBuy_Logo_Design_NoBg_Black.png`)} alt='logo' />
                             }
                         </Link>
                     </li>
@@ -141,27 +134,7 @@ const Navbar = ({ setCategoryName }) => {
                                         <li className="nav-item">
                                             <Link className={location.pathname === '/' ? 'nav-item-name' : 'nav-item-cat-name'} to="/"> $0 &nbsp; <FaShoppingCart />&nbsp;</Link>
                                         </li>
-                                        <li className='nav-item '>
-                                            {
-                                                window.innerWidth > 700 ?
-                                                    <div className="dropdown">
-                                                        <FaUser className={location.pathname === '/' ? 'nav-item-name' : 'nav-item-cat-name'} onClick={() => setProfileDropdownOpen(!profileDropdownOpen)} />
-                                                        {profileDropdownOpen && (
-                                                            <div className="dropdown-content">
-                                                                <Link className={location.pathname === '/' ? 'nav-item-name drop-options' : 'nav-item-cat-name drop-options'} to="/profile">PROFILE</Link>
-                                                                <Link className={location.pathname === '/' ? 'nav-item-name drop-options' : 'nav-item-cat-name drop-options'} onClick={signOut}>SIGN OUT</Link>
-                                                            </div>
-                                                        )}
-                                                    </div>
-                                                    :
-                                                    <div className="nav-last-item">
-                                                        <div className='nav-menu'>
-                                                            <FaBars className={location.pathname === '/' ? 'nav-item-name' : 'nav-item-cat-name'} />
-                                                        </div>
-                                                    </div>
-                                            }
 
-                                        </li>
                                     </>
                                 ) : <>
                                     <li className="nav-item">
@@ -172,12 +145,78 @@ const Navbar = ({ setCategoryName }) => {
                                     </li>
                                 </>
                             }
+                            <li className='nav-item '>
+                                {
+                                    window.innerWidth > 700 ?
+                                        <div className="dropdown">
+                                            <FaUser className={location.pathname === '/' ? 'nav-item-name' : 'nav-item-cat-name'} onClick={() => setProfileDropdownOpen(!profileDropdownOpen)} />
+                                            {profileDropdownOpen && (
+                                                <div className="dropdown-content">
+                                                    <Link className={location.pathname === '/' ? 'nav-item-name drop-options' : 'nav-item-cat-name drop-options'} to="/profile">PROFILE</Link>
+                                                    <Link className={location.pathname === '/' ? 'nav-item-name drop-options' : 'nav-item-cat-name drop-options'} onClick={signOut}>SIGN OUT</Link>
+                                                </div>
+                                            )}
+                                        </div>
+                                        :
+                                        <div className="nav-last-item">
+                                            <div className='nav-menu' onClick={toggleSidebar}>
+                                                <FaBars className='nav-item-name' />
+                                            </div>
+                                            {isSidebarOpen && (
+                                                <div className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
+                                                    <button className="close-btn" onClick={toggleSidebar}>×</button>
+                                                    <div className="sidebar-content">
+                                                        <hr />
+                                                        {
+                                                            isAuthenticated ?
+                                                                <>
+                                                                    <Link className='nav-item-name' onClick={toggleSidebar} to="/products/018DE5AA-91A7-BD3C-F93C-C1FADA5DC1C4"><FaUser className='nav-sidebar-fauser' /></Link>
+                                                                    <hr />
+                                                                </>
+                                                                :
+                                                                <></>
+                                                        }
+                                                        <div className="nav-sidebar-item">
+                                                            <Link className='nav-sidebar-item-name' onClick={() => { setCategoryName ? setCategoryName('018DE5AA-91A7-BD3C-F93C-C1FADA5DC1C4') : backToHome(); toggleSidebar() }}
+                                                                to="/products/018DE5AA-91A7-BD3C-F93C-C1FADA5DC1C4">EVERYTHING
+                                                            </Link>
+                                                        </div>
+                                                        <div className="nav-sidebar-item">
+                                                            <Link className='nav-sidebar-item-name' onClick={() => { setCategoryName ? setCategoryName('018DE5AC-A4DC-2600-C495-D8E31F87C887') : backToHome(); toggleSidebar() }}
+                                                                to="/products/018DE5AC-A4DC-2600-C495-D8E31F87C887">MEN
+                                                            </Link>
+                                                        </div>
+                                                        <div className="nav-sidebar-item">
+                                                            <Link className='nav-sidebar-item-name' onClick={() => { setCategoryName ? setCategoryName('018DE5AC-BAB0-00C1-0248-2816E5309CCF') : backToHome(); toggleSidebar() }}
+                                                                to="/products/018DE5AC-BAB0-00C1-0248-2816E5309CCF">WOMEN
+                                                            </Link>
+                                                        </div>
+                                                        <div className="nav-sidebar-item">
+                                                            <Link className='nav-sidebar-item-name' onClick={() => { setCategoryName ? backToHome() : backToHome(); toggleSidebar() }}
+                                                                to="/">SPECIALS
+                                                            </Link>
+                                                        </div>
+                                                        {/* <div className='nav-sidebar-partition'>-</div> */}
+                                                        <br /><br />
+                                                        <div className="nav-sidebar-item">
+                                                            <Link className='nav-sidebar-item-name' onClick={toggleSidebar} to="/">ABOUT</Link>
+                                                        </div>
+                                                        <div className="nav-sidebar-item">
+                                                            <Link className='nav-sidebar-item-name' onClick={toggleSidebar} to="/">CONTACT US</Link>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            )}
+                                        </div>
+                                }
+
+                            </li>
                         </div>
                     </div>
                 </ul>
             </nav>
         </div>
-    )
-}
+    );
+};
 
-export default Navbar
+export default Navbar;
