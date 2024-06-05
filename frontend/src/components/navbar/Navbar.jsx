@@ -17,6 +17,10 @@ const Navbar = ({ setCategoryName }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [windowSize, setWindowSize] = useState({
+        width: undefined,
+        height: undefined,
+    });
 
 
     // function to check if user is authenticated
@@ -62,6 +66,26 @@ const Navbar = ({ setCategoryName }) => {
     }, []);
 
 
+    // useEffect for window size
+    useEffect(() => {
+        function handleResize() {
+            setWindowSize({
+                width: window.innerWidth,
+                height: window.innerHeight,
+            });
+        }
+
+        // Add event listener
+        window.addEventListener('resize', handleResize);
+
+        // Call handler right away so state gets updated with initial window size
+        handleResize();
+
+        // Remove event listener on cleanup
+        return () => window.removeEventListener('resize', handleResize);
+    }, []); // Empty array ensures that effect is only run on mount and unmount
+
+
     return (
         <div>
             <nav className={location.pathname === '/' ? 'navbar' : 'navbar-cat'}>
@@ -69,7 +93,7 @@ const Navbar = ({ setCategoryName }) => {
                     <li className="nav-item-logo">
                         <Link to="/">
                             {
-                                window.innerWidth > 700 && location.pathname === '/' ?
+                                windowSize.width > 800 && location.pathname === '/' ?
                                     <img className='navbar-logo-symbol' src={require(`../../assets/images/XpressBuy/XpressBuy_Logo_Design_NoBg_White.png`)} alt='logo' />
                                     :
                                     <img className='navbar-logo-symbol' src={require(`../../assets/images/XpressBuy/XpressBuy_Logo_Design_NoBg_Black.png`)} alt='logo' />
@@ -79,7 +103,7 @@ const Navbar = ({ setCategoryName }) => {
                     <li className="nav-item-xpressbuy">
                         <Link to="/">
                             {
-                                window.innerWidth > 700 && location.pathname === '/' ?
+                                windowSize.width > 800 && location.pathname === '/' ?
                                     <img className='navbar-logo' src={require(`../../assets/images/XpressBuy/XpressBuy_Logo_Chars_NoBg.png`)} alt='logo' />
                                     :
                                     <img className='navbar-logo' src={require(`../../assets/images/XpressBuy/XpressBuy_Logo_Chars_Black_NoBg.png`)} alt='logo' />
@@ -90,7 +114,7 @@ const Navbar = ({ setCategoryName }) => {
                     <div className='nav-item-direction'>
                         <div className='nav-item-left'>
                             {
-                                window.innerWidth > 700
+                                windowSize.width > 800
                                     ? <>
                                         <li className="nav-item">
                                             <Link className={location.pathname === '/' ? 'nav-item-name' : location.pathname === '/products/018DE5AA-91A7-BD3C-F93C-C1FADA5DC1C4' ? 'nav-item-curr-cat-name' : 'nav-item-cat-name'}
@@ -117,7 +141,7 @@ const Navbar = ({ setCategoryName }) => {
                         </div>
                         <div className='nav-item-right'>
                             {
-                                window.innerWidth > 700
+                                windowSize.width > 1100
                                     ? <>
                                         <li className="nav-item">
                                             <Link className={location.pathname === '/' ? 'nav-item-name' : 'nav-item-cat-name'} to="/">ABOUT</Link>
@@ -147,7 +171,7 @@ const Navbar = ({ setCategoryName }) => {
                             }
                             <li className='nav-item '>
                                 {
-                                    window.innerWidth > 700 ?
+                                    windowSize.width > 800 ?
                                         <div className="dropdown">
                                             <FaUser className={location.pathname === '/' ? 'nav-item-name' : 'nav-item-cat-name'} onClick={() => setProfileDropdownOpen(!profileDropdownOpen)} />
                                             {profileDropdownOpen && (
@@ -170,7 +194,7 @@ const Navbar = ({ setCategoryName }) => {
                                                         {
                                                             isAuthenticated ?
                                                                 <>
-                                                                    <Link className='nav-item-name' onClick={toggleSidebar} to="/products/018DE5AA-91A7-BD3C-F93C-C1FADA5DC1C4"><FaUser className='nav-sidebar-fauser' /></Link>
+                                                                    <Link className='nav-item-name' onClick={toggleSidebar} to="/"><FaUser className='nav-sidebar-fauser' /></Link>
                                                                     <hr />
                                                                 </>
                                                                 :
