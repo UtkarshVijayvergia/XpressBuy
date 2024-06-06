@@ -37,6 +37,10 @@ app.use('/api/v1/reviews', require('./routes/productReviewsRoute'))
 app.use('/api/v1/order', require('./routes/orderRoutes'))
 
 
+// Landing Page Image routes
+app.use('/api/v1/image/landingPageImage', require('./routes/landingPageImageRoutes'))
+
+
 // test routes
 app.use('/api/v1/testdb', require('./test/dbTest'));
 app.use('/api/v1/test_dynamodb', require('./test/dbTest_dynamodb'));
