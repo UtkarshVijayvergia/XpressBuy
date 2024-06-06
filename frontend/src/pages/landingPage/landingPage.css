@@ -2,56 +2,59 @@
     box-sizing: border-box;
 }
 
-.landin-page-bg-model{
+.landin-page-bg-model {
     position: relative;
-}
-
-.landing-page-image {
-    height: auto;
-    width: 100%;
-    object-fit: cover;
-    position: relative;
-    background-attachment: fixed; /* Add this line */
-}
-@media (max-width: 700px) {
-    .landing-page-image {
-        height: auto;
-        width: 100%;
-        object-fit: contain;
-        background-attachment: scroll; /* Add this line */
-    }
+    overflow: hidden;
+    height: 100%;
 }
 
 .navbar {
     position: absolute;
     top: 0;
     width: 100%;
-    z-index: 990; /* Add this line */
+    z-index: 990;
 }
-@media (max-width: 700px) {
+@media (max-width: 800px) {
     .navbar {
-        position:relative;
-        top: 0;
-        width: 100%;
-        z-index: 990; /* Add this line */
+        position: relative;
+    }
+}
+
+.landing-page-image {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: 75%;
+    /* Add this to control the visible part of the image */
+    min-height: 60vh;
+}
+@media (max-width: 800px) {
+    .landing-page-image {
+        object-fit: cover;
+        /* background-attachment: scroll; */
     }
 }
 
 .landing-page-heading-position {
     padding-left: 45vw;
     position: absolute;
-    top: 50%; /* Center vertically */
-    left: 12.5%; /* Adjust as needed for center-left positioning */
-    transform: translate(-50%, -50%); /* Center the element */
+    top: 50%;
+    /* Center vertically */
+    left: 12.5%;
+    /* Adjust as needed for center-left positioning */
+    transform: translate(-50%, -50%);
+    /* Center the element */
 }
 @media (max-width: 530px) {
     .landing-page-heading-position {
-        top: 60%; /* Center vertically */
+        /* top: 60%; */
+        /* Center vertically */
     }
 }
 @media (max-width: 300px) {
     .landing-page-heading-position {
-        top: 70%; /* Center vertically */
+        /* top: 70%; */
+        /* Center vertically */
     }
 }
 
@@ -76,13 +79,14 @@
 }
 
 .landing-page-btns {
-    padding-top: 6vh;
+    padding-top: 2vw;
+    margin-top: 2vw;
     width: 100%;
     display: flex;
 }
 @media (max-width: 700px) {
     .landing-page-btns {
-        padding-top: 2vh;
+        /* padding-top: 2vh; */
     }
 }
 
@@ -101,7 +105,6 @@
     .landing-page-btn1 {
         font-size: 2vw;
     }
-    
 }
 
 .landing-page-btn2-pos {
@@ -123,7 +126,6 @@
     .landing-page-btn2 {
         font-size: 2vw;
     }
-    
 }
 
 .landing-page-brand-name-styling {
@@ -171,8 +173,10 @@
     0% {
         transform: translateX(0);
     }
+
     100% {
-        transform: translateX(calc(-100% * 1)); /* Adjust the number of brand names */
+        transform: translateX(calc(-100% * 1));
+        /* Adjust the number of brand names */
     }
 }
 @media (max-width: 700px) {
@@ -184,8 +188,10 @@
         0% {
             transform: translateX(0);
         }
+
         100% {
-            transform: translateX(calc(-100% * 3)); /* Adjust the number of brand names */
+            transform: translateX(calc(-100% * 3));
+            /* Adjust the number of brand names */
         }
     }
 }
@@ -198,72 +204,116 @@
 
 
 
-.trial-product-card-pos {
-    padding-top: 7vh;
+.trial-product-card-container {
     display: flex;
-    justify-content: space-evenly;
-    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 3vw;
+    padding-top: 5vh;
 }
 @media (max-width: 700px) {
-    .trial-product-card-pos {
-        padding-top: 1vh;
+    .trial-product-card-container {
+        flex-direction: column;
+        align-items: center;
     }
 }
 
 .trial-product-card {
-    background: 
-        linear-gradient(
-            rgba(0, 0, 0, 0.5), /* This is your color overlay, adjust as needed */
-            rgba(0, 0, 0, 0.5) /* This is your color overlay, adjust as needed */
-        ),
-        url('../../assets/images/landingPage/trialProductBg.png');
-    background-size: 100%;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    /* margin-left: 3vh;
-    margin-right: 3vh; */
-    width: 50vh;
-    height: 70vh;
+    position: relative;
+    max-width: 450px;
+    width: 100%;
     border: 1px solid #000000;
+    background-color: #ffffff;
+    overflow: hidden;
+}
+@media (max-width: 1450px) {
+    .trial-product-card {
+        max-width: 31vw;
+    }
+}
+@media (max-width: 700px) {
+    .trial-product-card {
+        max-width: 80vw;
+    }
 }
 
+.img-specials {
+    width: 100%;
+    height: 50vh;
+    object-fit: cover;
+    display: block;
+}
+@media (max-width: 700px) {
+    .img-specials {
+        height: 30vh;
+    }
+}
 
 .trial-product-card-details {
-    padding-top: 45vh;
-    position:inherit;
-    /* padding-left: 30px; */
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    background: rgba(0, 0, 0, 0.142);
+    color: #ffffff;
+    padding: 1rem;
+    text-align: left;
 }
 
-
 .trial-product-card-heading {
-    color: white;
-    font-size: 30px;
-    font-weight: 750;
-    text-align: left;
+    font-size: 3vw;
+    font-weight: 700;
 }
 
 .trial-product-card-sub-heading {
-    padding-top: 1vh;
-    color: white;
-    font-size: 15px;
-    font-weight: 500;
-    text-align: left;
+    padding-top: 0.2rem;
+    font-size: 1rem;
 }
 
 .trial-product-card-btn {
-    padding-top: 2vh;
+    padding-top: 1rem;
 }
 
 .trial-product-card-btn1 {
     background-color: #ffffff;
-    color: rgb(0, 0, 0);
-    font-size: 15px;
+    color: #000;
+    font-size: 1rem;
     font-weight: bold;
     text-align: center;
-    text-decoration: none;
-    border-radius: 0px;
+    border: 1px solid #000;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
+
+.trial-product-card-btn1:hover {
+    background-color: #000;
+    color: #fff;
+}
+
+
+.trial-product-card-heading {
+    font-size: 1.2rem;
+}
+
+.trial-product-card-sub-heading {
+    font-size: 0.9rem;
+}
+
+.trial-product-card-btn1 {
+    font-size: 0.9rem;
+}
+
+
+
+
+
+
+
+
+
 
 .featured-products {
     margin-top: 20vh;

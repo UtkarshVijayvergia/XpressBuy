@@ -1,6 +1,7 @@
 import React from 'react'
 import { useLocation } from 'react-router-dom'
 import { useContext } from 'react'
+import { useState } from 'react'
 import { useEffect } from 'react'
 import { FaTshirt, FaCreditCard, FaCcMastercard, FaShoppingCart, FaIdBadge, FaUserTie, FaVest } from 'react-icons/fa'
 
@@ -15,6 +16,8 @@ const LandingPage = () => {
 
     const location = useLocation();
     const { setLastPage } = useContext(LastPageContext);
+
+    const [specialsImages, setSpecialsImages] = useState([]);
 
 
     const brandNames = [
@@ -59,6 +62,32 @@ const LandingPage = () => {
     ];
 
 
+    // Get specials images
+    const getProducts = async (imageCategory) => {
+        try {
+            const response = await fetch(`http://localhost:5000/api/v1/image/landingPageImage/${imageCategory}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                method: 'GET',
+            });
+            if (!response.ok) {
+                console.error(`Server responded with status code ${response.status}`);
+                return;
+            }
+            setSpecialsImages(await response.json());
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+
+    // Get specials images on mount
+    useEffect(() => {
+        getProducts('specials');
+    }, []);
+
+
     // Set last page visited
     useEffect(() => {
         setLastPage(location.pathname);
@@ -69,7 +98,7 @@ const LandingPage = () => {
         <div>
             <div className='landing-page-bg'>
                 <div className='landin-page-bg-model'>
-                    <Navbar className="navbar"/>
+                    <Navbar className="navbar" />
                     <img className='landing-page-image' src={landingPageImage} alt="" />                    {/* <Navbar /> */}
                     <div className='landing-page-heading-position'>
                         <div className='landing-page-heading'>
@@ -102,48 +131,49 @@ const LandingPage = () => {
                     </div>
                 </div>
             </div>
-            <div className='trial-product-card-pos'>
-                <div className='card trial-product-card'>
-                    {/* <img src={DemoImage} alt="" /> */}
-                    <div className='trial-product-card-details'>
-                        <div className='trial-product-card-heading'>
-                            Let's Suit Up
-                        </div>
-                        <div className='trial-product-card-sub-heading'>
-                            Lorem ipsum dolor sit amet consectetur adipisicing.
-                        </div>
-                        <div className='trial-product-card-btn'>
-                            <button className='trial-product-card-btn1'>SEE MORE</button>
-                        </div>
-                    </div>
+            {/* <div className='trial-product-card-pos'>
+                <div className='trial-product-card-pos'>
+                    {
+                        specialsImages && specialsImages.map((image, index) => (
+                            <div className='card trial-product-card' key={index}>
+                                <img className='img-specials' src={image} alt="" />
+                                <div className='trial-product-card-details'>
+                                    <div className='trial-product-card-heading'>
+                                        Let's Suit Up
+                                    </div>
+                                    <div className='trial-product-card-sub-heading'>
+                                        Lorem ipsum dolor sit amet consectetur adipisicing.
+                                    </div>
+                                    <div className='trial-product-card-btn'>
+                                        <button className='trial-product-card-btn1'>SEE MORE</button>
+                                    </div>
+                                </div>
+                            </div>
+                        ))
+                    }
                 </div>
-                <div className='card trial-product-card'>
-                    <div className='trial-product-card-details'>
-                        <div className='trial-product-card-heading'>
-                            Let's Suit Up
+            </div> */}
+            <div className='trial-product-card-container'>
+                {
+                    specialsImages && specialsImages.map((image, index) => (
+                        <div className='card trial-product-card' key={index}>
+                            <img className='img-specials' src={image} alt="" />
+                            <div className='trial-product-card-details'>
+                                <div className='trial-product-card-heading'>
+                                    Let's Suit Up
+                                </div>
+                                <div className='trial-product-card-sub-heading'>
+                                    Lorem ipsum dolor sit amet consectetur adipisicing.
+                                </div>
+                                <div className='trial-product-card-btn'>
+                                    <button className='trial-product-card-btn1'>SEE MORE</button>
+                                </div>
+                            </div>
                         </div>
-                        <div className='trial-product-card-sub-heading'>
-                            Lorem ipsum dolor sit amet consectetur adipisicing.
-                        </div>
-                        <div className='trial-product-card-btn'>
-                            <button className='trial-product-card-btn1'>SEE MORE</button>
-                        </div>
-                    </div>
-                </div>
-                <div className='card trial-product-card'>
-                    <div className='trial-product-card-details'>
-                        <div className='trial-product-card-heading'>
-                            Let's Suit Up
-                        </div>
-                        <div className='trial-product-card-sub-heading'>
-                            Lorem ipsum dolor sit amet consectetur adipisicing.
-                        </div>
-                        <div className='trial-product-card-btn'>
-                            <button className='trial-product-card-btn1'>SEE MORE</button>
-                        </div>
-                    </div>
-                </div>
+                    ))
+                }
             </div>
+
             <div className='featured-products'>
                 <div className='featured-products-heading'>
                     Featured Products
