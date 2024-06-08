@@ -170,7 +170,7 @@ const Categories = () => {
                                         <div key={index} className='product-card' onClick={productPageNavigator(products[index][0].product_id)}>
                                             <img className='product-image' src={products[index][0].imageURL} alt='product' />
                                             <div className='product-details'>
-                                                <div className='product-name'>
+                                                <div className='product-names'>
                                                     {products[index][0].product_name}
                                                 </div>
                                                 <div className='product-review-rating'>
