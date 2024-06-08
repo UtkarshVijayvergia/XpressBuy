@@ -60,9 +60,6 @@
     }
 }
 
-
-
-
 .nav-item-direction {
     display: flex;
     justify-content: space-between;
@@ -93,6 +90,8 @@
         color: rgb(0, 0, 0);
         margin-top: 0.5vh;
         margin-bottom: 0.5vh;
+        margin-right: 1vw;
+        margin-left: 1vw;
     }
 }
 
@@ -100,14 +99,13 @@
     display: block;
     color: rgb(0, 0, 0);
     text-align: center;
-    margin-right: 20px;
-    margin-left: 20px;
+    margin-right: 1.5vw;
+    margin-left: 1.5vw;
     text-decoration: none;
 }
 
 .nav-menu {
     border: 1px solid #000000;
-    /* box-sizing: border-box; */
 }
 
 .nav-item-curr-cat-name {

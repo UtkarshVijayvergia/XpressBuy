@@ -172,15 +172,18 @@ const Navbar = ({ setCategoryName }) => {
                             <li className='nav-item '>
                                 {
                                     windowSize.width > 800 ?
-                                        <div className="dropdown">
-                                            <FaUser className={location.pathname === '/' ? 'nav-item-name' : 'nav-item-cat-name'} onClick={() => setProfileDropdownOpen(!profileDropdownOpen)} />
-                                            {profileDropdownOpen && (
-                                                <div className="dropdown-content">
-                                                    <Link className={location.pathname === '/' ? 'nav-item-name drop-options' : 'nav-item-cat-name drop-options'} to="/profile">PROFILE</Link>
-                                                    <Link className={location.pathname === '/' ? 'nav-item-name drop-options' : 'nav-item-cat-name drop-options'} onClick={signOut}>SIGN OUT</Link>
-                                                </div>
-                                            )}
-                                        </div>
+                                        isAuthenticated ?
+                                            <div className="dropdown">
+                                                <FaUser className={location.pathname === '/' ? 'nav-item-name' : 'nav-item-cat-name'} onClick={() => setProfileDropdownOpen(!profileDropdownOpen)} />
+                                                {profileDropdownOpen && (
+                                                    <div className="dropdown-content">
+                                                        <Link className={location.pathname === '/' ? 'nav-item-name drop-options' : 'nav-item-cat-name drop-options'} to="/profile">PROFILE</Link>
+                                                        <Link className={location.pathname === '/' ? 'nav-item-name drop-options' : 'nav-item-cat-name drop-options'} onClick={signOut}>SIGN OUT</Link>
+                                                    </div>
+                                                )}
+                                            </div>
+                                            :
+                                            <></>
                                         :
                                         <div className="nav-last-item">
                                             <div className='nav-menu' onClick={toggleSidebar}>
