@@ -131,28 +131,6 @@ const LandingPage = () => {
                     </div>
                 </div>
             </div>
-            {/* <div className='trial-product-card-pos'>
-                <div className='trial-product-card-pos'>
-                    {
-                        specialsImages && specialsImages.map((image, index) => (
-                            <div className='card trial-product-card' key={index}>
-                                <img className='img-specials' src={image} alt="" />
-                                <div className='trial-product-card-details'>
-                                    <div className='trial-product-card-heading'>
-                                        Let's Suit Up
-                                    </div>
-                                    <div className='trial-product-card-sub-heading'>
-                                        Lorem ipsum dolor sit amet consectetur adipisicing.
-                                    </div>
-                                    <div className='trial-product-card-btn'>
-                                        <button className='trial-product-card-btn1'>SEE MORE</button>
-                                    </div>
-                                </div>
-                            </div>
-                        ))
-                    }
-                </div>
-            </div> */}
             <div className='trial-product-card-container'>
                 {
                     specialsImages && specialsImages.map((image, index) => (
@@ -163,7 +141,7 @@ const LandingPage = () => {
                                     Let's Suit Up
                                 </div>
                                 <div className='trial-product-card-sub-heading'>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing.
+                                    Lorem ipsum dolor sit amet
                                 </div>
                                 <div className='trial-product-card-btn'>
                                     <button className='trial-product-card-btn1'>SEE MORE</button>
