@@ -5,8 +5,7 @@ import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 // AWS Amplify
-import { Auth } from 'aws-amplify'
-// ULID 
+// import { Auth } from 'aws-amplify'
 import { ulid } from 'ulid'
 
 import Navbar from '../../components/navbar/Navbar'
@@ -25,11 +24,10 @@ const Product = () => {
     const { setLastPage } = useContext(LastPageContext);
     const { setTransactionDetails } = useContext(TransactionContext);
     const { setInstaBuy } = useContext(InstaBuyContext);
-    setLastPage(location.pathname);
 
 
     // useState hooks
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    // const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [productDetails, setProductDetails] = useState([]);
     const [colourName, setColourName] = useState('');
     const [currentImage, setCurrentImage] = useState('');
@@ -39,6 +37,10 @@ const Product = () => {
     const [buyQuantity, setBuyQuantity] = useState(1);
     const [buyNowValidation, setBuyNowValidation] = useState('');
     const [addToCartValidation, setAddToCartValidation] = useState('');
+    const [windowSize, setWindowSize] = useState({
+        width: undefined,
+        height: undefined,
+    });
 
 
     // Predefined sizes for the product
@@ -60,6 +62,7 @@ const Product = () => {
             setOriginalImage(data[0].base_imageURL);
             getColourName(data[0].current_colour.slice(1));
             getProductVariation(data[0].product_id, data[0].current_colour.slice(1));
+            setBuyQuantity(1);
         } catch (error) {
             console.error(error);
         }
@@ -119,6 +122,10 @@ const Product = () => {
 
     // Buy Quantity change handler
     const handleQuantityChange = (event) => {
+        if(event.target.value < 1){
+            setBuyQuantity(1);
+            return;
+        }
         setBuyQuantity(event.target.value);
     };
 
@@ -200,10 +207,10 @@ const Product = () => {
 
 
     // Add to Cart handler
-    const addToCartHandler = () => {
+    const addToCartHandler = async () => {
         if (currentProductSize) {
             if (currentProductVariation && currentProductVariation[0] && currentProductSize && currentProductVariation[0].size_variation[currentProductSize].product_stock >= buyQuantity) {
-                if (isAuthenticated) {
+                if (await checkUser()) {
                     setBuyNowValidation('Product Added to your Cart');
                     setTimeout(() => {
                         setBuyNowValidation('');
@@ -231,11 +238,37 @@ const Product = () => {
         }
     }
 
+    
+    // useEffect for window size
+    useEffect(() => {
+        function handleResize() {
+            setWindowSize({
+                width: window.innerWidth,
+                height: window.innerHeight,
+            });
+        }
+
+        // Add event listener
+        window.addEventListener('resize', handleResize);
+
+        // Call handler right away so state gets updated with initial window size
+        handleResize();
+
+        // Remove event listener on cleanup
+        return () => window.removeEventListener('resize', handleResize);
+    }, []); // Empty array ensures that effect is only run on mount and unmount
+
 
     // useEffect to get product details on page load
     useEffect(() => {
         getProductDetails(location.pathname.split('/')[3]);
     }, []);
+
+
+    // Set last page visited
+    useEffect(() => {
+        setLastPage(location.pathname);
+    }, []); // Empty array ensures this runs only on mount
 
 
     return (
@@ -244,13 +277,18 @@ const Product = () => {
             <div className="product-details-partition">
                 <div className="product-image-coloum">
                     <div className="product-image-stick">
-                        <div className="product-image-selector-container">
-                            {
-                                productDetails && productDetails[0] ?
-                                    <img className='product-image-selector' src={currentImage} alt="product" /> :
-                                    <img className='product-image-selector' src="https://via.placeholder.com/150" alt="product" />
-                            }
-                        </div>
+                        {
+                            windowSize.width > 768 ?
+                                <div className="product-image-selector-container">
+                                    {
+                                        productDetails && productDetails[0] ?
+                                            <img className='product-image-selector' src={currentImage} alt="product" /> :
+                                            <img className='product-image-selector' src="https://via.placeholder.com/150" alt="product" />
+                                    }
+                                </div>
+                                :
+                                <></>
+                        }
                         <div className="product-image-container">
                             {
                                 productDetails && productDetails[0] ?
@@ -309,8 +347,8 @@ const Product = () => {
                                     <div className="product-size-list">
                                         <select className='product-size-list-style' onChange={(e) => sizeSelector(e.target.value)}>
                                             <option value="">Select</option>
-                                            {currentProductVariation && currentProductVariation[0] &&
-                                                allSizes.map(size => (
+                                            {
+                                                currentProductVariation && currentProductVariation[0] && allSizes.map(size => (
                                                     <option
                                                         value={size}
                                                         disabled={!currentProductVariation[0].size_variation[size]}
@@ -342,8 +380,8 @@ const Product = () => {
                                     {
                                         productDetails[0].available_colours.map((val, index) => {
                                             return (
-                                                <div className="product-variation-images-list">
-                                                    <img className='product-variation-single-image' key={index}
+                                                <div className="product-variation-images-list" key={index}>
+                                                    <img className='product-variation-single-image'
                                                         src={productDetails[0][`${val}_imageURL`]} alt='product'
                                                         onMouseOver={() => setCurrentImage(productDetails[0][`${val}_imageURL`])}
                                                         onMouseOut={() => setCurrentImage(originalImage)}
@@ -391,13 +429,13 @@ const Product = () => {
                                 />
                             </div>
                             <div className='add-to-cart' onClick={addToCartHandler}>
-                                <div class="half-circle-container">
-                                    <div class="half-circle" style={{ "backgroundColor": `rgb(255, 200, 0)`, "transform": `translateX(20px)` }}></div>
+                                <div className="half-circle-container">
+                                    <div className="half-circle" style={{ "backgroundColor": `rgb(255, 200, 0)`, "transform": `translateX(20px)` }}></div>
                                 </div>
                                 <div className="cart-button" style={{ "backgroundColor": `rgb(255, 200, 0)` }}>
                                     Add to Cart
                                 </div>
-                                <div class="half-circle-container">
+                                <div className="half-circle-container">
                                     <div className="half-circle" style={{ "backgroundColor": `rgb(255, 200, 0)`, "transform": `translateX(-20px)` }}></div>
                                 </div>
                             </div>
@@ -410,13 +448,13 @@ const Product = () => {
                                     <></>
                             }
                             <div className='buy-now' onClick={buyNowHandler}>
-                                <div class="half-circle-container">
-                                    <div class="half-circle" style={{ "backgroundColor": `rgb(255, 128, 0)`, "transform": `translateX(20px)` }}></div>
+                                <div className="half-circle-container">
+                                    <div className="half-circle" style={{ "backgroundColor": `rgb(255, 128, 0)`, "transform": `translateX(20px)` }}></div>
                                 </div>
                                 <div className="buy-button" style={{ "backgroundColor": `rgb(255, 128, 0)` }}>
                                     Buy Now
                                 </div>
-                                <div class="half-circle-container">
+                                <div className="half-circle-container">
                                     <div className="half-circle" style={{ "backgroundColor": `rgb(255, 128, 0)`, "transform": `translateX(-20px)` }}></div>
                                 </div>
                             </div>
