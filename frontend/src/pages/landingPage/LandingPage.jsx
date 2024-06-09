@@ -143,9 +143,9 @@ const LandingPage = () => {
                                 <div className='trial-product-card-sub-heading'>
                                     Lorem ipsum dolor sit amet
                                 </div>
-                                <div className='trial-product-card-btn'>
+                                {/* <div className='trial-product-card-btn'>
                                     <button className='trial-product-card-btn1'>SEE MORE</button>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     ))
