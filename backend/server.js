@@ -5,11 +5,20 @@ const port = process.env.PORT || 5000;
 const app = express()
 
 // Configure cors
-const cors = require('cors'); // app.use(cors());
+// const cors = require('cors'); // app.use(cors());
+// app.use(cors({
+//     origin: ['http://localhost:3000', 'http://192.168.29.108:3000', 'http://xpressbuy-backend-alb-2126578185.ap-south-1.elb.amazonaws.com:3000'], // replace with your client-side URL
+//     credentials: true
+// }));
+const cors = require('cors');
+
 app.use(cors({
-    origin: ['http://localhost:3000', 'http://192.168.29.108:3000'], // replace with your client-side URL
-    credentials: true
+    origin: ['http://localhost:3000', 'http://192.168.29.108:3000', 'http://xpressbuy-backend-alb-2126578185.ap-south-1.elb.amazonaws.com:3000'],
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'Access-Control-Allow-Origin', 'X-Access-Token', 'X-Refresh-Token']
 }));
+
 
 // configure cookie parser
 const cookieParser = require('cookie-parser');
