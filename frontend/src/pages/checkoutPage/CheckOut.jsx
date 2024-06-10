@@ -24,7 +24,7 @@ const CheckOut = () => {
     // Check if user is authenticated
     const checkUser = async () => {
         try{
-            const response = await fetch('http://localhost:5000/api/v1/tokenVerification/verifyAccessToken', {
+            const response = await fetch('http://xpressbuy-backend-alb-2126578185.ap-south-1.elb.amazonaws.com:5000/api/v1/tokenVerification/verifyAccessToken', {
                 credentials: 'include',
                 method: 'POST',
                 headers: {
@@ -49,7 +49,7 @@ const CheckOut = () => {
         e.preventDefault();
         try {
             if(await checkUser()){
-                const response = await fetch(`http://localhost:5000/api/v1/order/${transactionDetails.order_id}/`, {
+                const response = await fetch(`http://xpressbuy-backend-alb-2126578185.ap-south-1.elb.amazonaws.com:5000/api/v1/order/${transactionDetails.order_id}/`, {
                     method: 'POST',
                     credentials: 'include',
                     headers: {

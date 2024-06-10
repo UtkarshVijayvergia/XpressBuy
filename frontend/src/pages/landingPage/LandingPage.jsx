@@ -65,7 +65,7 @@ const LandingPage = () => {
     // Get specials images
     const getProducts = async (imageCategory) => {
         try {
-            const response = await fetch(`http://localhost:5000/api/v1/image/landingPageImage/${imageCategory}`, {
+            const response = await fetch(`http://xpressbuy-backend-alb-2126578185.ap-south-1.elb.amazonaws.com:5000/api/v1/image/landingPageImage/${imageCategory}`, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
