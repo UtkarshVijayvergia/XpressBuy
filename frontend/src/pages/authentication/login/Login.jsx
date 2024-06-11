@@ -17,7 +17,12 @@ const Login = () => {
     const { lastPage } = useContext(LastPageContext);
     const navigate = useNavigate()
     const [errors, setErrors] = React.useState('');
-    
+
+
+    const [windowSize, setWindowSize] = useState({
+        width: undefined,
+        height: undefined,
+    });
 
     // login credentials
     const [credentials, setCredentials] = useState({
@@ -34,8 +39,8 @@ const Login = () => {
             [e.target.name]: e.target.value,
         }))
     }
-    
-    
+
+
     // sign out
     // TODO: Add removeCookies function during sign out
     const signOut = async () => {
@@ -53,17 +58,17 @@ const Login = () => {
         e.preventDefault();
         setErrors('');
         // field validation
-        if(email === '' || password === ''){
+        if (email === '' || password === '') {
             setErrors('All Fields Are Required')
         }
-        else{
+        else {
             try {
                 // Sign in with email and password
                 const user = await Auth.signIn(email, password);
                 // Send the tokens to the server
                 const isTokenValid = await verifyIdToken(user.signInUserSession.idToken.jwtToken, user.signInUserSession.accessToken.jwtToken, user.signInUserSession.refreshToken.token);
                 // check if server has verified the ID token
-                if(!isTokenValid){
+                if (!isTokenValid) {
                     setErrors('Invalid ID token');
                     signOut();
                     return false;
@@ -102,6 +107,26 @@ const Login = () => {
     }
 
 
+    // useEffect for window size
+    useEffect(() => {
+        function handleResize() {
+            setWindowSize({
+                width: window.innerWidth,
+                height: window.innerHeight,
+            });
+        }
+
+        // Add event listener
+        window.addEventListener('resize', handleResize);
+
+        // Call handler right away so state gets updated with initial window size
+        handleResize();
+
+        // Remove event listener on cleanup
+        return () => window.removeEventListener('resize', handleResize);
+    }, []); // Empty array ensures that effect is only run on mount and unmount
+
+
     return (
         <div>
             <Navbar currentWindow={"signin"} />
@@ -115,17 +140,13 @@ const Login = () => {
                             <div className="login-inputs">
                                 <form>
                                     <div className="login-input-fields">
-                                        <div className=''>
-                                            <FaEnvelope className='' />
-                                            <input className='login-input-setter' type="email" id='email' name='email' value={email} placeholder='Your Email' onChange={onChange} />
-                                        </div>
+                                        <FaEnvelope />
+                                        <input className='login-input-setter' type="email" id='email' name='email' value={email} placeholder='Your Email' onChange={onChange} />
                                     </div>
 
-                                   <div className="login-input-fields">
-                                        <div className=''>
-                                            <FaLock className='' />
-                                            <input className='login-input-setter' type="password" id='password' name='password' value={password} placeholder='Your Password' onChange={onChange} />
-                                        </div>
+                                    <div className="login-input-fields">
+                                        <FaLock />
+                                        <input className='login-input-setter' type="password" id='password' name='password' value={password} placeholder='Your Password' onChange={onChange} />
                                     </div>
                                     {
                                         errors ? <div className='login-errors'>{errors}</div> : <div className='padder4vh'></div>
@@ -134,14 +155,23 @@ const Login = () => {
                                         <button type="submit" className="btn login-btn-decor" onClick={userLogin} >Submit</button>
                                     </div>
                                 </form>
+                                {
+                                    windowSize.width <= 900 ?
+                                        <Link className="login-signup-navigate" to={`/signup`}> <p> Create A New Account? <b>Sign Up</b></p></Link> 
+                                        : 
+                                        null
+                                }
                             </div>
                         </div>
                         <div className="login-grid-item">
-                            <div className="login-grid-item1">
-                                <div className='login-signup-navigate-container'>
-                                    <Link className="login-signup-navigate" to={`/signup`}> <p> Create A New Account? <b>Sign Up</b></p></Link>
-                                </div>
-                            </div>
+                                    <div className="login-grid-item1">
+                                        <div className='login-signup-navigate-container'>
+                                            {
+                                                windowSize.width > 900 ?
+                                                    <Link className="login-signup-navigate" to={`/signup`}> <p> Create A New Account? <b className='sign-up-line-breaker'>Sign Up</b></p></Link> : null
+                                            }
+                                        </div>
+                                    </div>
                         </div>
                     </div>
                 </div>

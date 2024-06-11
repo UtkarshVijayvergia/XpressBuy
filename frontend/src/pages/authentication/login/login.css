@@ -4,12 +4,33 @@
     transform: translate(-50%, -50%);
     position: absolute;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    width: 130vh;
+    width: 90vw;
+    max-width: 60vw;
+}
+@media (max-width: 1350px) {
+    .login-card-container {
+        max-width: 90vw;
+    }
+}
+@media (max-width: 800px) {
+    .login-card-container {
+        top: 50%;
+    }
 }
 
 .login-grid-container {
     display: grid;
     grid-template-columns: 50% 50%;
+}
+@media (max-width: 900px) {
+    .login-grid-container {
+        grid-template-columns: 65% 35%;
+    }
+}
+@media (max-width: 800px) {
+    .login-grid-container {
+        grid-template-columns: 100% 0%;
+    }
 }
 
 .login-grid-item {
@@ -21,7 +42,7 @@
     transform: scaleX(-1);
     background-position: center;
     background-repeat: no-repeat;
-    background-size:contain;
+    background-size: contain;
     margin-top: 5vh;
     height: 45vh;
 }
@@ -30,15 +51,23 @@
     transform: scaleX(-1);
     height: 55vh;
     display: flex;
-    justify-content:center;
-    align-items:end;
+    justify-content: center;
+    align-items: end;
     border-left: dashed 1px rgba(0, 0, 0, 0.8);
+}
+@media (max-width: 800px) {
+    .login-signup-navigate-container {
+        border: none;
+    }
 }
 
 .login-signup-navigate {
     color: rgb(0, 183, 255);
     font-size: 17px;
     text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .login-heading {
@@ -52,18 +81,38 @@
     padding-top: 4vh;
     padding-left: 12.5vh;
     padding-right: 12.5vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+@media (max-width: 486px) {
+    .login-inputs {
+        padding-left: 5vh;
+        padding-right: 5vh;
+    }
+}
+@media (max-width: 360px) {
+    .login-inputs {
+        padding-left: 3vh;
+        padding-right: 3vh;
+    }
+}
+@media (max-width: 320px) {
+    .login-inputs {
+        padding-left: 2vh;
+        padding-right: 2vh;
+    }
 }
 
 .login-input-fields {
     padding-top: 1vh;
     padding-bottom: 1vh;
-    width: inherit;
     font-size: 13px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.8);
 }
 
 .login-input-setter {
-    padding-left: 3vh;
+    padding-left: 1vh;
     border: none;
     font-size: 15px;
     padding-top: 2vh;
