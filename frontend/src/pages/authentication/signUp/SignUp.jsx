@@ -14,6 +14,11 @@ import { Auth } from 'aws-amplify';
 const SignUp = () => {
     const navigate = useNavigate()
 
+    const [windowSize, setWindowSize] = useState({
+        width: undefined,
+        height: undefined,
+    });
+
     // User Credentials
     const [formData, setFormData] = useState({
         name: "",
@@ -23,7 +28,7 @@ const SignUp = () => {
         confirmPassword: "",
     })
     const { name, email, username, password, confirmPassword } = formData;
-    
+
     const onChange = (e) => {
         setFormData((prevState) => ({
             ...prevState,
@@ -39,31 +44,31 @@ const SignUp = () => {
     const onSubmit = async (e) => {
         e.preventDefault();
         setErrors('');
-        if(name === '' || email === '' || username === '' || password === '' || confirmPassword === ''){
+        if (name === '' || email === '' || username === '' || password === '' || confirmPassword === '') {
             setErrors('All Fields Are Required')
         }
-        else if(password.length < 8){
+        else if (password.length < 8) {
             setErrors('Minimum Password length is 8')
         }
-        else if(password.search(/[a-z]/) < 0) {
+        else if (password.search(/[a-z]/) < 0) {
             setErrors('Password must contain lowercase letter')
         }
-        else if(password.search(/[A-Z]/) < 0) {
+        else if (password.search(/[A-Z]/) < 0) {
             setErrors('Password must contain uppercase letter')
         }
-        else if(password.search(/[!#@^*$%&?"]/) < 0) {
+        else if (password.search(/[!#@^*$%&?"]/) < 0) {
             setErrors('Password must contain special character')
         }
-        else if(password.search(/[0-9]/) < 0) {
+        else if (password.search(/[0-9]/) < 0) {
             setErrors('Password must contain number')
         }
-        else if(password.length > 15){
+        else if (password.length > 15) {
             setErrors('Maximum Password length is 15')
         }
-        else if(password !== confirmPassword){
+        else if (password !== confirmPassword) {
             setErrors('Password Do Not Match')
         }
-        else{
+        else {
             try {
                 const signUpResponse = await Auth.signUp({
                     username: email,
@@ -84,17 +89,42 @@ const SignUp = () => {
     }
 
 
+    // useEffect for window size
+    useEffect(() => {
+        function handleResize() {
+            setWindowSize({
+                width: window.innerWidth,
+                height: window.innerHeight,
+            });
+        }
+
+        // Add event listener
+        window.addEventListener('resize', handleResize);
+
+        // Call handler right away so state gets updated with initial window size
+        handleResize();
+
+        // Remove event listener on cleanup
+        return () => window.removeEventListener('resize', handleResize);
+    }, []); // Empty array ensures that effect is only run on mount and unmount
+
+
     return (
         <div>
-            <Navbar currTab={"signin"}/>
+            <Navbar currTab={"signin"} />
             <div className="signup-card-container">
                 <div className="card">
                     <div className="grid-container">
                         <div className="grid-item">
                             <div className="grid-item1">
                                 <div className='signup-login-navigate-container'>
-                                <Link className="signup-login-navigate" to={`/login`}> <p>Already A Registered User? <b>Login</b></p></Link>
-                                </div>
+                                {
+                                    windowSize.width > 900 ?
+                                            <Link className="signup-login-navigate" to={`/login`}> <p>Already A Registered User? <b>Login</b></p></Link>
+                                            :
+                                            null
+                                            }
+                                        </div>
                             </div>
                         </div>
                         <div className="grid-item">
@@ -137,12 +167,18 @@ const SignUp = () => {
                                         </div>
                                     </div>
                                     {
-                                        errors? <div className='signup-errors'>{errors}</div>: <div className='padder2vh'></div>
+                                        errors ? <div className='signup-errors'>{errors}</div> : <div className='padder2vh'></div>
                                     }
                                     <div className="signup-btn">
                                         <button type="submit" className="btn signup-btn-decor" onClick={onSubmit} >Submit</button>
                                     </div>
                                 </form>
+                                {
+                                    windowSize.width <= 900 ?
+                                            <Link className="signup-login-navigate" to={`/login`}> <p>Already A Registered User? <b>Login</b></p></Link>
+                                        :
+                                        null
+                                }
                             </div>
                         </div>
                     </div>
