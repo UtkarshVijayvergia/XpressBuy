@@ -19,38 +19,38 @@ services:
             - internal-network
 
 
-    # frontend:
-    #     environment:
-    #         CHOKIDAR_USEPOLLING: "true"
-    #         WATCHPACK_POLLING: "true"
-    #         AWS_REGION: "${AWS_REGION}"
-    #         REACT_APP_AWS_PROJECT_REGION: "${REACT_APP_AWS_PROJECT_REGION}"
-    #         REACT_APP_AWS_COGNITO_REGION: "${REACT_APP_AWS_COGNITO_REGION}"
-    #         REACT_APP_AWS_USER_POOLS_ID: "${REACT_APP_AWS_USER_POOLS_ID}"
-    #         REACT_APP_AWS_USER_POOL_WEB_CLIENT_ID: "${REACT_APP_AWS_USER_POOL_WEB_CLIENT_ID}"
-    #     build: ./frontend
-    #     ports:
-    #         - "3000:3000"
-    #     volumes:
-    #         - ./frontend:/frontend
-    #     networks:
-    #         - internal-network
+    frontend:
+        environment:
+            CHOKIDAR_USEPOLLING: "true"
+            WATCHPACK_POLLING: "true"
+            AWS_REGION: "${AWS_REGION}"
+            REACT_APP_AWS_PROJECT_REGION: "${REACT_APP_AWS_PROJECT_REGION}"
+            REACT_APP_AWS_COGNITO_REGION: "${REACT_APP_AWS_COGNITO_REGION}"
+            REACT_APP_AWS_USER_POOLS_ID: "${REACT_APP_AWS_USER_POOLS_ID}"
+            REACT_APP_AWS_USER_POOL_WEB_CLIENT_ID: "${REACT_APP_AWS_USER_POOL_WEB_CLIENT_ID}"
+        build: ./frontend
+        ports:
+            - "3000:3000"
+        volumes:
+            - ./frontend:/frontend
+        networks:
+            - internal-network
     
 
-    # xray-daemon:
-    #     image: amazon/aws-xray-daemon
-    #     # image means that we are using an image from docker hub
-    #     environment:
-    #         AWS_ACCESS_KEY_ID: "${AWS_ACCESS_KEY_ID}"
-    #         AWS_SECRET_ACCESS_KEY: "${AWS_SECRET_ACCESS_KEY}"
-    #         AWS_REGION: "${AWS_REGION}"
-    #         # "${}" means that we are using an environment variable from the .env file present in the same directory as the Docker-compose.yml file
-    #     command:
-    #         - "xray -o -b xray-daemon:2000"
-    #     ports:
-    #         - 2000:2000/udp
-    #     networks:
-    #         - internal-network
+    xray-daemon:
+        image: amazon/aws-xray-daemon
+        # image means that we are using an image from docker hub
+        environment:
+            AWS_ACCESS_KEY_ID: "${AWS_ACCESS_KEY_ID}"
+            AWS_SECRET_ACCESS_KEY: "${AWS_SECRET_ACCESS_KEY}"
+            AWS_REGION: "${AWS_REGION}"
+            # "${}" means that we are using an environment variable from the .env file present in the same directory as the Docker-compose.yml file
+        command:
+            - "xray -o -b xray-daemon:2000"
+        ports:
+            - 2000:2000/udp
+        networks:
+            - internal-network
 
 
     # postgres-db:
@@ -71,20 +71,20 @@ services:
     #         - internal-network
 
  
-    # dynamodb-local:
-    #     user: root
-    #     # https://stackoverflow.com/questions/67533058/persist-local-dynamodb-data-in-volumes-lack-permission-unable-to-open-databa
-    #     # We needed to add user:root to get this working.
-    #     command: "-jar DynamoDBLocal.jar -sharedDb -dbPath ./data"
-    #     image: "amazon/dynamodb-local:latest"
-    #     container_name: dynamodb-local
-    #     ports:
-    #     - "8000:8000"
-    #     volumes:
-    #     - "./docker/dynamodb:/home/dynamodblocal/data"
-    #     working_dir: /home/dynamodblocal
-    #     networks:
-    #         - internal-network
+    dynamodb-local:
+        user: root
+        # https://stackoverflow.com/questions/67533058/persist-local-dynamodb-data-in-volumes-lack-permission-unable-to-open-databa
+        # We needed to add user:root to get this working.
+        command: "-jar DynamoDBLocal.jar -sharedDb -dbPath ./data"
+        image: "amazon/dynamodb-local:latest"
+        container_name: dynamodb-local
+        ports:
+        - "8000:8000"
+        volumes:
+        - "./docker/dynamodb:/home/dynamodblocal/data"
+        working_dir: /home/dynamodblocal
+        networks:
+            - internal-network
 
 
 
