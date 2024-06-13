@@ -121,21 +121,46 @@
     outline: none;
 }
 
+.readOnly-input{
+    /* background-color: rgb(171, 171, 171); */
+    color: rgb(171, 171, 171);
+}
+
 .padder2vh {
     padding-top: 3vh;
 }
 
 .signup-errors {
-    margin-top: 1vh;
+    margin-top: 2vh;
+    padding-left: 5px;
+    padding-right: 5px;
     background-color: rgb(255, 0, 0);
-    height: 4vh;
+    height: 50px;
     color: rgb(255, 255, 255);
     display: flex;
     justify-content: center;
+    align-items: center;
+}
+
+.signup-success{
+    margin-top: 2vh;
+    padding-left: 5px;
+    padding-right: 5px;
+    background-color: rgb(0, 128, 0);
+    height: 50px;
+    color: rgb(4, 0, 252);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.otp-verification-btns{
+    display: flex;
+    justify-content: space-between;
 }
 
 .signup-btn {
-    padding-top: 1vh;
+    /* padding-top: 1vh; */
     display: flex;
     justify-content: center;
 }
@@ -152,7 +177,24 @@
     font-size: 20px;
 }
 
+.resend-otp-btn-decor {
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    padding-left: 3vh;
+    padding-right: 3vh;
+    background-color: rgb(0, 38, 255);
+    color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 0px;
+    font-size: 15px;
+}
+
 .signup-btn-decor:hover {
-    background-color: rgb(134, 255, 134);
+    background-color: rgb(0, 128, 0);
+    color: rgb(255, 255, 255);
+}
+
+.resend-otp-btn-decor:hover {
+    background-color: rgb(0, 195, 255);
     color: rgb(255, 255, 255);
 }

@@ -2,10 +2,13 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
+import { useContext } from 'react'
+import { toast } from 'react-toastify'
 import { FaUser, FaEnvelope, FaUserLock, FaLock } from 'react-icons/fa'
 
 import Navbar from '../../../components/navbar/Navbar'
 import './signUp.css'
+import { LastPageContext } from '../../../contexts/LastPageContext';
 
 // AWS Amplify authenication
 import { Auth } from 'aws-amplify';
@@ -13,13 +16,14 @@ import { Auth } from 'aws-amplify';
 
 const SignUp = () => {
     const navigate = useNavigate()
+    const { lastPage } = useContext(LastPageContext);
 
-    const [windowSize, setWindowSize] = useState({
-        width: undefined,
-        height: undefined,
-    });
 
-    // User Credentials
+    // UseState Hooks - aws Amplify aws cognito
+    const [user, setUser] = useState(null);
+    const [errors, setErrors] = useState('');
+    const [success, setSuccess] = useState('');
+    // UseState Hooks - SignUp
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -27,8 +31,22 @@ const SignUp = () => {
         password: "",
         confirmPassword: "",
     })
+    // UseState Hooks - OTP Verification
+    const [OTPverificationStep, setOTPverificationStep] = useState(false)
+    const [code, setCode] = useState('');
+    const [codeSent, setCodeSent] = useState(false);
+    // UseState Hooks - Window Size
+    const [windowSize, setWindowSize] = useState({
+        width: undefined,
+        height: undefined,
+    });
+    
+
+    // User Credentials
     const { name, email, username, password, confirmPassword } = formData;
 
+
+    // Update the state on sign up input change (name, email, username, password, confirmPassword)
     const onChange = (e) => {
         setFormData((prevState) => ({
             ...prevState,
@@ -37,10 +55,13 @@ const SignUp = () => {
     }
 
 
-    // sign up with aws-amplify and aws cognito
-    const [errors, setErrors] = React.useState('');
-    const [user, setUser] = React.useState(null);
+    // OTP Code Input Change Handler
+    const code_onchange = (e) => {
+        setCode(e.target.value);
+    }
 
+
+    // sign up with aws-amplify and aws cognito and proceed to OTP Verification
     const onSubmit = async (e) => {
         e.preventDefault();
         setErrors('');
@@ -81,12 +102,124 @@ const SignUp = () => {
                 });
                 console.log(signUpResponse);
                 setUser(signUpResponse.user);
-                navigate(`/confirm?email=${email}`);
+                setOTPverificationStep(true);
+                // navigate(`/confirm?email=${email}`);
             } catch (err) {
                 console.log(err);
+                setErrors(err.message);
             }
         }
     }
+
+
+    // verify the ID token
+    const verifyIdToken = async (idToken, access_token, refresh_token) => {
+        try {
+            await fetch('http://xpressbuy-backend-alb-2126578185.ap-south-1.elb.amazonaws.com:5000/api/v1/tokenVerification/verifyIdToken', {
+                credentials: 'include',
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${idToken}`,
+                    'X-Access-Token': `${access_token}`,
+                    'X-Refresh-Token': `${refresh_token}`
+                },
+            });
+            return true;
+        } catch (err) {
+            console.log(err);
+            return false;
+        }
+    }
+
+
+    // aws-amplify aws cognito - log in
+    const userLogin = async (e) => {
+        e.preventDefault();
+        setErrors('');
+        // field validation
+        if (formData.email === '' || formData.password === '') {
+            navigate('/login');
+        }
+        else {
+            try {
+                const user = await Auth.signIn(email, password);
+                // Send the tokens to the server
+                const isTokenValid = await verifyIdToken(user.signInUserSession.idToken.jwtToken, user.signInUserSession.accessToken.jwtToken, user.signInUserSession.refreshToken.token);
+                // check if server has verified the ID token
+                if (!isTokenValid) {
+                    setErrors('Invalid ID token');
+                    navigate('/login');
+                    return false;
+                }
+                navigate(lastPage);
+            } catch (error) {
+                if (error.code === 'UserNotConfirmedException') {
+                    navigate('/confirm');
+                }
+                else{
+                    navigate('/login');
+                }
+            }
+        }
+    }
+
+
+    // Resend Activation Code
+    const resendCode = async (e) => {
+        e.preventDefault();
+        setErrors('');
+        try {
+            console.log(formData.email);
+            const resendOtpResponse = await Auth.resendSignUp(formData.email);
+            console.log(resendOtpResponse);
+            setCodeSent(true);
+            // toast.success('Code resent successfully!');
+            setSuccess('Code resent successfully!');
+        } catch (err) {
+            console.log(err);
+            setErrors(err.message);
+            if (err.message === 'Username cannot be empty') {
+                setErrors("You need to provide an email in order to send Resend Activiation Code")
+            }
+            else if (err.message === "Username/client id combination not found.") {
+                setErrors("Email is invalid or cannot be found.")
+            }
+        }
+    }
+
+
+    // aws-amplify aws cognito - confirm sign up
+    const otpConfirmation = async (e) => {
+        e.preventDefault();
+        setErrors('');
+        try {
+            console.log(formData.email, code);
+            const otpVerificationResponse = await Auth.confirmSignUp(formData.email, code);
+            console.log(otpVerificationResponse);
+            if(otpVerificationResponse !== 'SUCCESS'){
+                setErrors('Invalid OTP');
+                return;
+            }
+            toast.success('Code confirmed successfully!');
+            await userLogin(e);
+        } catch (err) {
+            console.log(err);
+            setErrors(err.message);
+            console.log(errors);
+        }
+    }
+
+
+    // useEffect for success message
+    useEffect(() => {
+        if (success) {
+            const timer = setTimeout(() => {
+                setSuccess(null);
+            }, 3000);
+            return () => clearTimeout(timer); // This will clear the timer when the component unmounts
+        }
+    }, [success]);
 
 
     // useEffect for window size
@@ -97,13 +230,10 @@ const SignUp = () => {
                 height: window.innerHeight,
             });
         }
-
         // Add event listener
         window.addEventListener('resize', handleResize);
-
         // Call handler right away so state gets updated with initial window size
         handleResize();
-
         // Remove event listener on cleanup
         return () => window.removeEventListener('resize', handleResize);
     }, []); // Empty array ensures that effect is only run on mount and unmount
@@ -118,68 +248,108 @@ const SignUp = () => {
                         <div className="grid-item">
                             <div className="grid-item1">
                                 <div className='signup-login-navigate-container'>
-                                {
-                                    windowSize.width > 900 ?
+                                    {
+                                        windowSize.width > 900 ?
                                             <Link className="signup-login-navigate" to={`/login`}> <p>Already A Registered User? <b>Login</b></p></Link>
                                             :
                                             null
-                                            }
-                                        </div>
+                                    }
+                                </div>
                             </div>
                         </div>
                         <div className="grid-item">
-                            <div className="heading">
-                                SIGN UP
-                            </div>
-                            <div className="signup-inputs">
-                                <form>
-                                    <div className="signup-input-fields">
-                                        <div className=''>
-                                            <FaUser className='' />
-                                            <input className='signup-input-setter' type="text" id='name' name='name' value={name} placeholder='Your Name' onChange={onChange} />
+                            {
+                                OTPverificationStep ?
+                                    <div>
+                                        <div className="heading">
+                                            OTP Verification
+                                        </div>
+                                        <div className="signup-inputs">
+                                            <form>
+                                                <div className="signup-input-fields">
+                                                    <div className=''>
+                                                        <FaEnvelope className='' />
+                                                        <input className='signup-input-setter readOnly-input' type="text" id='email' name='email' value={formData.email} readOnly={true}/>
+                                                    </div>
+                                                </div>
+                                                <div className="signup-input-fields">
+                                                    <div className=''>
+                                                        <FaUserLock className='' />
+                                                        <input className='signup-input-setter' type="text" id='code' name='code' value={code} placeholder=' Enter OTP' onChange={code_onchange}/>
+                                                    </div>
+                                                </div>
+                                                {
+                                                    errors ? <div className='signup-errors'>{errors}</div> : <div className='padder2vh'></div>
+                                                }
+                                                {
+                                                    // if success then show success for only 3 seconds then remove it
+                                                    success ? <div className='signup-success'>{success}</div> : <div className='padder2vh'></div>
+                                                    
+                                                }
+                                                <div className="otp-verification-btns">
+                                                    <div className="signup-btn">
+                                                        <button type="submit" className="btn resend-otp-btn-decor" onClick={resendCode}>Resend Code</button>
+                                                    </div>
+                                                    <div className="signup-btn">
+                                                        <button type="submit" className="btn signup-btn-decor" onClick={otpConfirmation}>Confirm</button>
+                                                    </div>
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
-
-                                    <div className="signup-input-fields">
-                                        <div className=''>
-                                            <FaEnvelope className='' />
-                                            <input className='signup-input-setter' type="email" id='email' name='email' value={email} placeholder='Your Email' onChange={onChange} />
+                                    :
+                                    <div>
+                                        <div className="heading">
+                                            SIGN UP
+                                        </div>
+                                        <div className="signup-inputs">
+                                            <form>
+                                                <div className="signup-input-fields">
+                                                    <div className=''>
+                                                        <FaUser className='' />
+                                                        <input className='signup-input-setter' type="text" id='name' name='name' value={name} placeholder='Your Name' onChange={onChange} />
+                                                    </div>
+                                                </div>
+                                                <div className="signup-input-fields">
+                                                    <div className=''>
+                                                        <FaEnvelope className='' />
+                                                        <input className='signup-input-setter' type="email" id='email' name='email' value={email} placeholder='Your Email' onChange={onChange} />
+                                                    </div>
+                                                </div>
+                                                <div className="signup-input-fields">
+                                                    <div className=''>
+                                                        <FaUser className='' />
+                                                        <input className='signup-input-setter' type="text" id='username' name='username' value={username} placeholder='Your Username' onChange={onChange} />
+                                                    </div>
+                                                </div>
+                                                <div className="signup-input-fields">
+                                                    <div className=''>
+                                                        <FaLock className='' />
+                                                        <input className='signup-input-setter' type="password" id='password' name='password' value={password} placeholder='Your Password' onChange={onChange} />
+                                                    </div>
+                                                </div>
+                                                <div className="signup-input-fields">
+                                                    <div className=''>
+                                                        <FaUserLock className='' />
+                                                        <input className='signup-input-setter' type="password" id='confirmPassword' name='confirmPassword' value={confirmPassword} placeholder='Confirm Password' onChange={onChange} />
+                                                    </div>
+                                                </div>
+                                                {
+                                                    errors ? <div className='signup-errors'>{errors}</div> : <div className='padder2vh'></div>
+                                                }
+                                                <div className="signup-btn">
+                                                    <button type="submit" className="btn signup-btn-decor" onClick={onSubmit} >Submit</button>
+                                                </div>
+                                            </form>
+                                            {
+                                                windowSize.width <= 900 ?
+                                                    <Link className="signup-login-navigate" to={`/login`}> <p>Already A Registered User? <b>Login</b></p></Link>
+                                                    :
+                                                    null
+                                            }
                                         </div>
                                     </div>
-
-                                    <div className="signup-input-fields">
-                                        <div className=''>
-                                            <FaUser className='' />
-                                            <input className='signup-input-setter' type="text" id='username' name='username' value={username} placeholder='Your Username' onChange={onChange} />
-                                        </div>
-                                    </div>
-
-                                    <div className="signup-input-fields">
-                                        <div className=''>
-                                            <FaLock className='' />
-                                            <input className='signup-input-setter' type="password" id='password' name='password' value={password} placeholder='Your Password' onChange={onChange} />
-                                        </div>
-                                    </div>
-                                    <div className="signup-input-fields">
-                                        <div className=''>
-                                            <FaUserLock className='' />
-                                            <input className='signup-input-setter' type="password" id='confirmPassword' name='confirmPassword' value={confirmPassword} placeholder='Confirm Password' onChange={onChange} />
-                                        </div>
-                                    </div>
-                                    {
-                                        errors ? <div className='signup-errors'>{errors}</div> : <div className='padder2vh'></div>
-                                    }
-                                    <div className="signup-btn">
-                                        <button type="submit" className="btn signup-btn-decor" onClick={onSubmit} >Submit</button>
-                                    </div>
-                                </form>
-                                {
-                                    windowSize.width <= 900 ?
-                                            <Link className="signup-login-navigate" to={`/login`}> <p>Already A Registered User? <b>Login</b></p></Link>
-                                        :
-                                        null
-                                }
-                            </div>
+                            }
                         </div>
                     </div>
                 </div>
