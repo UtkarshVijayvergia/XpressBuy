@@ -1,11 +1,14 @@
 #!/usr/bin/env node
 
-// command: ./backend/bin/cognito/list-users
+// command: ./bin/cognito/list-users
 
 
 const { CognitoIdentityProviderClient, ListUsersCommand } = require("@aws-sdk/client-cognito-identity-provider");
 const dotenv = require('dotenv');
 dotenv.config();
+
+console.log(process.env.COGNITO_USER_POOL_ID);
+console.log(process.env.COGNITO_USER_POOL_REGION);
 
 const client = new CognitoIdentityProviderClient({ 
     region: process.env.COGNITO_USER_POOL_REGION 

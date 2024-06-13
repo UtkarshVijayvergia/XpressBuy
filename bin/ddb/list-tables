@@ -1,5 +1,5 @@
 #!/usr/bin/bash
-# command: ./backend/bin/ddb/list-tables
+# command: ./bin/ddb/list-tables
 
 
 # set -e will cause the script to exit if any command fails

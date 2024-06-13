@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// command: ./backend/bin/ddb/seed-data prod
+// command: ./bin/ddb/seed-data prod
 
 
 const { DynamoDBClient } = require("@aws-sdk/client-dynamodb");
@@ -34,7 +34,7 @@ async function batch_write() {
         // Product 1
         let fileData;
         try {
-            fileData = await fs.promises.readFile('backend/bin/data/products/product1.json', 'utf8');
+            fileData = await fs.promises.readFile('/bin/data/products/product1.json', 'utf8');
         } catch (err) {
             console.error(err);
             throw err;
@@ -52,7 +52,7 @@ async function batch_write() {
 
         // Product 2
         try {
-            fileData = await fs.promises.readFile('backend/bin/data/products/product2.json', 'utf8');
+            fileData = await fs.promises.readFile('/bin/data/products/product2.json', 'utf8');
         } catch (err) {
             console.error(err);
             throw err;
@@ -70,7 +70,7 @@ async function batch_write() {
 
         // Product 3
         try {
-            fileData = await fs.promises.readFile('backend/bin/data/products/product3.json', 'utf8');
+            fileData = await fs.promises.readFile('/bin/data/products/product3.json', 'utf8');
         } catch (err) {
             console.error(err);
             throw err;
@@ -88,7 +88,7 @@ async function batch_write() {
 
         // Product 4
         try {
-            fileData = await fs.promises.readFile('backend/bin/data/products/product4.json', 'utf8');
+            fileData = await fs.promises.readFile('/bin/data/products/product4.json', 'utf8');
         } catch (err) {
             console.error(err);
             throw err;
@@ -106,7 +106,7 @@ async function batch_write() {
 
         // Product 5
         try {
-            fileData = await fs.promises.readFile('backend/bin/data/products/product5.json', 'utf8');
+            fileData = await fs.promises.readFile('/bin/data/products/product5.json', 'utf8');
         } catch (err) {
             console.error(err);
             throw err;
@@ -124,7 +124,7 @@ async function batch_write() {
 
         // Category
         try {
-            fileData = await fs.promises.readFile('backend/bin/data/categories/categories.json', 'utf8');
+            fileData = await fs.promises.readFile('/bin/data/categories/categories.json', 'utf8');
         } catch (err) {
             console.error(err);
             throw err;

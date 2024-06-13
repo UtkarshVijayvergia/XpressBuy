@@ -1,5 +1,5 @@
 #!/usr/bin/bash
-# Command: ./backend/bin/ddb/drop-table <table-name> prod
+# Command: ./bin/ddb/drop-table <table-name> prod
 
 # set -e will cause the script to exit if any command fails
 set -e 

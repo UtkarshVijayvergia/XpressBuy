@@ -1,5 +1,5 @@
 #! /bin/bash
-# Command: ./backend/bin/ddb/setup
+# Command: ./bin/ddb/setup
 
 # This script is used to setup the database
 
