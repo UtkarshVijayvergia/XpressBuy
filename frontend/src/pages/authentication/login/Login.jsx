@@ -12,6 +12,8 @@ import './login.css'
 // AWS Amplify authenication
 import { Auth } from 'aws-amplify';
 
+// TODO: Add forgot password functionality
+// TODO: Add Token Verification from login page
 
 const Login = () => {
     const { lastPage } = useContext(LastPageContext);
@@ -38,6 +40,31 @@ const Login = () => {
             ...prevState,
             [e.target.name]: e.target.value,
         }))
+    }
+
+
+    // Check if user is authenticated
+    const checkUser = async () => {
+        try{
+            const response = await fetch('http://xpressbuy-backend-alb-2126578185.ap-south-1.elb.amazonaws.com:5000/api/v1/tokenVerification/verifyAccessToken', {
+                credentials: 'include',
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            const data = await response.json();
+            if(data.isAuthenticated){
+                // setIsAuthenticated(true);
+                return true;
+            }
+            return false;
+        }
+        catch(error){
+            // setIsAuthenticated(false)
+            console.log(error);
+            return false;
+        }
     }
 
 
@@ -105,6 +132,18 @@ const Login = () => {
             return false;
         }
     }
+
+
+    // useEffect for navigating to last page if user is authenticated
+    // TODO: The page is not navigating to the last page instead it is navigating to the home page
+    useEffect(() => {
+        const checkUserAuthentication = async () => {
+            if (await checkUser()) {
+                navigate(lastPage);
+            }
+        }
+        checkUserAuthentication();
+    }, []); // Empty array ensures this runs only on mount
 
 
     // useEffect for window size
