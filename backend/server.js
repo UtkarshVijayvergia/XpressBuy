@@ -33,6 +33,10 @@ app.use(express.urlencoded({ extended: false }))
 app.use('/api/v1/tokenVerification', require('./routes/tokenVerificationRoutes'))
 
 
+// user Info routes
+app.use('/api/v1/user', require('./routes/userRoutes'))
+
+
 // category + products routes
 app.use('/api/v1/products', require('./routes/productRoutes'))
 app.use('/api/v1/category', require('./routes/categoryRoute'))
