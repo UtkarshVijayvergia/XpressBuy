@@ -2,8 +2,8 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useContext } from 'react'
-import { Link } from 'react-router-dom'
-import { FaUser, FaEnvelope, FaUserLock, FaLock } from 'react-icons/fa'
+// import { Link } from 'react-router-dom'
+import { FaUser, FaEnvelope } from 'react-icons/fa'
 import { toast } from 'react-toastify'
 import { LastPageContext } from '../../../contexts/LastPageContext';
 
@@ -37,6 +37,7 @@ const ConfirmEmail = () => {
         try {
             console.log(email, code);
             await Auth.confirmSignUp(email, code);
+            // await addUserToDB();
             navigate(lastPage);
             toast.success('Code confirmed successfully!');
         } catch (err) {
@@ -69,10 +70,10 @@ const ConfirmEmail = () => {
     }
 
 
-    // // Add user info to dynamodb table
+    // TODO: Add user to dynamodb table
     // const addUserToDB = async () => {
     //     try {
-    //         const response = await fetch('http://localhost:5000/api/v1/user/', {
+    //         const response = await fetch('http://xpressbuy-backend-alb-2126578185.ap-south-1.elb.amazonaws.com:5000/api/v1/user/', {
     //             method: 'POST',
     //             credentials: 'include',
     //             headers: {
@@ -82,8 +83,6 @@ const ConfirmEmail = () => {
     //                 email: email,
     //             }),
     //         });
-    //         const data = await response.json();
-    //         console.log(data);
     //     } catch (error) {
     //         console.log(error);
     //     }
