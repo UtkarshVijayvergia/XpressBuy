@@ -1,0 +1,12 @@
+#! /bin/bash
+# Command: ./bin/backend/create-service
+
+# This script is used to deploy the backend
+
+
+set -e 
+# -e : to exit the script if any command fails
+
+
+# Create Service
+aws ecs create-service --cli-input-json file://backend/aws/ecs/create-service-backend.json

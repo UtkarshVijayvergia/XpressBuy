@@ -1,0 +1,12 @@
+#! /bin/bash
+# Command: ./bin/backend/build-image
+
+# This script is used to build the backend image
+
+
+set -e 
+# -e : to exit the script if any command fails
+
+
+# Build the backend docker image
+docker build -t expressbuy-node .

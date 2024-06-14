@@ -1,0 +1,16 @@
+#! /bin/bash
+# Command: ./bin/backend/setup
+
+# This script is used to build image, tag image, push image and deploy the backend 
+
+
+set -e 
+# -e : to exit the script if any command fails
+
+# Get the directory of the script
+bin_path=$(dirname $0)
+
+
+source $bin_path/build-image && \
+source $bin_path/push-image && \
+source $bin_path/create-service

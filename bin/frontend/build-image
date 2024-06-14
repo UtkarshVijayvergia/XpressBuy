@@ -1,0 +1,24 @@
+#! /bin/bash
+# Command: ./bin/frontend/build-image
+
+# This script is used to build the frontend image
+
+
+set -e 
+# -e : to exit the script if any command fails
+
+
+# Load environment variables from .env file
+# export $(cat .env | xargs)
+
+
+# Build the frontend docker image
+docker build \
+--build-arg REACT_APP_BACKEND_URL="http://xpressbuy-backend-alb-2126578185.ap-south-1.elb.amazonaws.com" \
+--build-arg REACT_APP_AWS_PROJECT_REGION="$REACT_APP_AWS_PROJECT_REGION" \
+--build-arg REACT_APP_AWS_COGNITO_REGION="$REACT_APP_AWS_COGNITO_REGION" \
+--build-arg REACT_APP_AWS_USER_POOLS_ID="ap-south-1_HW3hy0o0g" \
+--build-arg REACT_APP_AWS_USER_POOL_WEB_CLIENT_ID="1dqopo99t55uo8e4ij0ckc3fhq" \
+-t xpressbuy-frontend \
+-f ./frontend/Dockerfile.prod \
+./frontend

@@ -1,0 +1,12 @@
+#! /bin/bash
+# Command: ./bin/fronted/delete-service
+
+# This script is used to delete the frontend service
+
+
+set -e 
+# -e : to exit the script if any command fails
+
+
+# Delete the existing frontend service
+aws ecs delete-service --cluster xpressbuy --service frontend --force

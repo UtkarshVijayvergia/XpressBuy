@@ -1,0 +1,34 @@
+#! /bin/bash
+# Command: ./bin/frontend/push-image
+
+# This script is used to push the frontend image to ECR
+
+
+set -e 
+# -e : to exit the script if any command fails
+
+
+NO_COLOR='\033[0m'
+GREEN='\033[0;32m'
+BLUE='\033[0;34m'
+printf "\n${GREEN}================ Pushing Frontend Image to ECR =================${NO_COLOR}\n\n"
+
+# Command: 1 -> login to ECR
+aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 891180839529.dkr.ecr.ap-south-1.amazonaws.com && \
+
+LABEL="======== Logged-In to ECR"
+printf "${BLUE}${LABEL}${NO_COLOR}\n\n"
+
+
+# Command: 2 -> Tag the Image
+docker tag xpressbuy-frontend:latest 891180839529.dkr.ecr.ap-south-1.amazonaws.com/xpressbuy-frontend:latest && \
+
+LABEL="======== Image Tagged Latest"
+printf "\n${BLUE}${LABEL}${NO_COLOR}\n\n"
+
+
+# Command: 3 -> Push the image to ECR
+docker push 891180839529.dkr.ecr.ap-south-1.amazonaws.com/xpressbuy-frontend:latest
+
+LABEL="=============== Frontend Image Pushed to ECR ================="
+printf "\n\n${GREEN}${LABEL}${NO_COLOR}\n\n"
