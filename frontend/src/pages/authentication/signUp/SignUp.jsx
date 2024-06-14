@@ -202,6 +202,7 @@ const SignUp = () => {
                 return;
             }
             toast.success('Code confirmed successfully!');
+            await addUserToDB();
             await userLogin(e);
         } catch (err) {
             console.log(err);
@@ -209,6 +210,66 @@ const SignUp = () => {
             console.log(errors);
         }
     }
+
+
+    // Add user info to dynamodb table
+    const addUserToDB = async () => {
+        try {
+            const response = await fetch('http://xpressbuy-backend-alb-2126578185.ap-south-1.elb.amazonaws.com:5000/api/v1/user/', {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name: name,
+                    email_id: email,
+                    user_name: username,
+                    address: "",
+                    created_at: new Date().toISOString()
+                }),
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
+    // Check if user is authenticated
+    const checkUser = async () => {
+        try{
+            const response = await fetch('http://xpressbuy-backend-alb-2126578185.ap-south-1.elb.amazonaws.com:5000/api/v1/tokenVerification/verifyAccessToken', {
+                credentials: 'include',
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            const data = await response.json();
+            if(data.isAuthenticated){
+                // setIsAuthenticated(true);
+                return true;
+            }
+            return false;
+        }
+        catch(error){
+            // setIsAuthenticated(false)
+            console.log(error);
+            return false;
+        }
+    }
+
+
+    // useEffect for navigating to last page if user is authenticated
+    // TODO: The page is not navigating to the last page instead it is navigating to the home page
+    useEffect(() => {
+        const checkUserAuthentication = async () => {
+            if (await checkUser()) {
+                navigate(lastPage);
+            }
+        }
+        checkUserAuthentication();
+    }, []); // Empty array ensures this runs only on mount
 
 
     // useEffect for success message
