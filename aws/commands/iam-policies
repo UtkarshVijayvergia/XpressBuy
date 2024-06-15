@@ -2,20 +2,20 @@
         A. Create a role for the task execution role having a trust policy
                 aws iam create-role `
                 --role-name XpressBuy-Fargate-Task-Execution-Role `
-                --assume-role-policy-document file://backend/aws/iam-policies/ecs-service-assume-role-policy.json
+                --assume-role-policy-document file://aws/iam-policies/ecs-service-assume-role-policy.json
 
 
         B. Make a new policy and attach it to the role
                 aws iam put-role-policy `
                 --policy-name XpressBuy-readAccess-systemsManager-parameterStore-policy `
                 --role-name XpressBuy-Fargate-Task-Execution-Role `
-                --policy-document file://backend/aws/iam-policies/readAccess-systemsManager-parameterStore-policy.json
+                --policy-document file://aws/iam-policies/readAccess-systemsManager-parameterStore-policy.json
         
         C. Make a new policy and attach it to the role (Some permissions are required for the task to run)
                 aws iam put-role-policy `
                 --policy-name ecs-task-execution-policy `
                 --role-name XpressBuy-Fargate-Task-Execution-Role `
-                --policy-document file://backend/aws/iam-policies/ecs-task-execution-policy.json
+                --policy-document file://aws/iam-policies/ecs-task-execution-policy.json
 
 
 
@@ -24,7 +24,7 @@
         A. Create a role for the task role having a trust policy
                 aws iam create-role `
                 --role-name XpressBuy-Fargate-Task-Role `
-                --assume-role-policy-document file://backend/aws/iam-policies/ecs-service-assume-role-policy.json
+                --assume-role-policy-document file://aws/iam-policies/ecs-service-assume-role-policy.json
 
         B. Make a new policy and attach it to the role
                 aws iam put-role-policy `
