@@ -9,4 +9,4 @@ set -e
 
 
 # Create Service
-aws ecs create-service --cli-input-json file://backend/aws/ecs/create-service-backend.json
+aws ecs create-service --cli-input-json file://aws/ecs/create-service-backend.json
