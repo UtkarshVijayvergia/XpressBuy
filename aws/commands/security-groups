@@ -1,4 +1,4 @@
-1. Find what the Default VPC ID is:
+<!-- 1. Find what the Default VPC ID is: -->
         aws ec2 describe-vpcs `
         --filters "Name=isDefault, Values=true" `
         --query "Vpcs[0].VpcId" `
@@ -6,7 +6,7 @@
 
 
 
-2. Create a security group using the default VPC
+<!-- 2. Create a security group using the default VPC -->
         aws ec2 create-security-group `
         --group-name "xpressbuy-srv-sg" `
         --description "Security group for XpressBuy services on ECS" `
@@ -15,7 +15,7 @@
 
 
 
-3. If you want to get the security group ID having name as xpressbuy-srv-sg (here value)    --> use this grp id in the next command
+<!-- 3. If you want to get the security group ID having name as xpressbuy-srv-sg (here value)    <-> use this grp id in the next command -->
         aws ec2 describe-security-groups `
         --filters Name=group-name,Values=xpressbuy-srv-sg `
         --query 'SecurityGroups[*].GroupId' `
@@ -23,7 +23,7 @@
 
 
 
-4. Add Inbound Rules to the security group
+<!-- 4. Add Inbound Rules to the security group -->
         aws ec2 authorize-security-group-ingress `
         --group-id $XPRESSBUY_SERVICE_SG `
         --protocol tcp `

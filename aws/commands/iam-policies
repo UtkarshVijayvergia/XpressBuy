@@ -30,22 +30,22 @@
                 aws iam put-role-policy `
                 --policy-name createOpen-ssm-controlChannel-policy `
                 --role-name XpressBuy-Fargate-Task-Role `
-                --policy-document file://backend/aws/iam-policies/createOpen-ssm-controlChannel-policy.json
+                --policy-document file://aws/iam-policies/createOpen-ssm-controlChannel-policy.json
 
         C. Make a new policy and attach it to the role
                 aws iam put-role-policy `
                 --policy-name createOpen-ssm-dataChannel-policy `
                 --role-name XpressBuy-Fargate-Task-Role `
-                --policy-document file://backend/aws/iam-policies/createOpen-ssm-dataChannel-policy.json
+                --policy-document file://aws/iam-policies/createOpen-ssm-dataChannel-policy.json
 
         D. Make a new policy and attach it to the role
                 aws iam put-role-policy `
                 --policy-name writeAccess-cloudwatch-policy `
                 --role-name XpressBuy-Fargate-Task-Role `
-                --policy-document file://backend/aws/iam-policies/writeAccess-cloudwatch-policy.json
+                --policy-document file://aws/iam-policies/writeAccess-cloudwatch-policy.json
 
         E. Make a new policy and attach it to the role
                 aws iam put-role-policy `
                 --policy-name writeAccess-xray-policy `
                 --role-name XpressBuy-Fargate-Task-Role `
-                --policy-document file://backend/aws/iam-policies/writeAccess-xray-policy.json
+                --policy-document file://aws/iam-policies/writeAccess-xray-policy.json
