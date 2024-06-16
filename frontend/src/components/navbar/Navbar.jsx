@@ -25,15 +25,27 @@ const Navbar = ({ setCategoryName }) => {
 
     // function to check if user is authenticated
     const checkUser = async () => {
-        try {
-            await Auth.currentAuthenticatedUser({ bypassCache: false });
-            setIsAuthenticated(true);
-            console.log("User is authenticated");
-        } catch (err) {
-            setIsAuthenticated(false);
-            console.log(err);
+        try{
+            const response = await fetch('http://xpressbuy-backend-alb-2126578185.ap-south-1.elb.amazonaws.com:5000/api/v1/tokenVerification/verifyAccessToken', {
+                credentials: 'include',
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            const data = await response.json();
+            if(data.isAuthenticated){
+                setIsAuthenticated(true);
+                return true;
+            }
+            return false;
         }
-    };
+        catch(error){
+            setIsAuthenticated(false)
+            console.log(error);
+            return false;
+        }
+    }
 
 
     // function to open sidebar
