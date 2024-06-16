@@ -13,6 +13,7 @@ const { QueryCommand, PutCommand, GetCommand } = require("@aws-sdk/lib-dynamodb"
 // TODO: Add Cart Attribute to the Table
 const newUserRegistration = asyncHandler(async (req, res) => {
     try {
+        console.log("User Registration Request Received");
         const { name, email_id, user_name, address, created_at } = req.body;
         const user_id = req.user_id;
         const putNewUserQuery = new PutCommand({
