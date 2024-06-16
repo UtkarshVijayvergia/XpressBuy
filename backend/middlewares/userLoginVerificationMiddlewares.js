@@ -22,7 +22,8 @@ const loginVerification = async (req, res, next) => {
         const payload = await verifier.verify(idToken);
 
         // Store the payload user information in the request object
-        req.user = payload;
+        req.user_id = payload['sub'];
+        // req.user = payload;
 
         // After verifying the ID token
         res.cookie('id_token', idToken, {
