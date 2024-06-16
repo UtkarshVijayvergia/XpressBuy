@@ -115,7 +115,7 @@ const SignUp = () => {
     // verify the ID token
     const verifyIdToken = async (idToken, access_token, refresh_token) => {
         try {
-            await fetch('http://xpressbuy-backend-alb-2126578185.ap-south-1.elb.amazonaws.com:5000/api/v1/tokenVerification/verifyIdToken', {
+            await fetch('http://xpressbuy-backend-alb-2126578185.ap-south-1.elb.amazonaws.com:5000/api/v1/tokenVerification/verifyIdToken/new-user', {
                 credentials: 'include',
                 method: 'POST',
                 headers: {
@@ -124,6 +124,13 @@ const SignUp = () => {
                     'X-Access-Token': `${access_token}`,
                     'X-Refresh-Token': `${refresh_token}`
                 },
+                body: JSON.stringify({
+                    name: name,
+                    email_id: email,
+                    user_name: username,
+                    address: "",
+                    created_at: new Date().toISOString()
+                }),
             });
             return true;
         } catch (err) {
@@ -149,6 +156,7 @@ const SignUp = () => {
                 // check if server has verified the ID token
                 if (!isTokenValid) {
                     setErrors('Invalid ID token');
+                    signOut();
                     navigate('/login');
                     return false;
                 }
@@ -202,35 +210,12 @@ const SignUp = () => {
                 return;
             }
             toast.success('Code confirmed successfully!');
-            await addUserToDB();
+            // await addUserToDB();
             await userLogin(e);
         } catch (err) {
             console.log(err);
             setErrors(err.message);
             console.log(errors);
-        }
-    }
-
-
-    // Add user info to dynamodb table
-    const addUserToDB = async () => {
-        try {
-            const response = await fetch('http://xpressbuy-backend-alb-2126578185.ap-south-1.elb.amazonaws.com:5000/api/v1/user/', {
-                method: 'POST',
-                credentials: 'include',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    name: name,
-                    email_id: email,
-                    user_name: username,
-                    address: "",
-                    created_at: new Date().toISOString()
-                }),
-            });
-        } catch (error) {
-            console.log(error);
         }
     }
 
@@ -256,6 +241,18 @@ const SignUp = () => {
             // setIsAuthenticated(false)
             console.log(error);
             return false;
+        }
+    }
+
+
+    // sign out
+    // TODO: Add removeCookies function during sign out
+    const signOut = async () => {
+        try {
+            await Auth.signOut();
+            navigate(lastPage);
+        } catch (err) {
+            console.log(err);
         }
     }
 
