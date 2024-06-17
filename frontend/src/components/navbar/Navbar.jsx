@@ -63,13 +63,26 @@ const Navbar = ({ setCategoryName }) => {
     // sign out
     const signOut = async () => {
         try {
-            await Auth.signOut();
-            setIsAuthenticated(false);
-            navigate(lastPage);
-        } catch (err) {
-            console.log(err);
+            const response = await fetch('http://xpressbuy-backend-alb-2126578185.ap-south-1.elb.amazonaws.com:5000/api/v1/tokenVerification/signout', {
+                credentials: 'include',
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            if(response.status === 200){
+                try {
+                    await Auth.signOut();
+                    console.log('Successfully signed out');
+                    navigate(lastPage);
+                } catch (error) {
+                    console.log('Cognito error signing out: ', error);
+                }
+            }
+        } catch (error) {
+            console.log('Cookies error: ', error);
         }
-    };
+    }
 
 
     // useEffect to check if user is authenticated
