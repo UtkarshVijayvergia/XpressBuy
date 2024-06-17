@@ -34,7 +34,7 @@ app.use('/api/v1/tokenVerification', require('./routes/tokenVerificationRoutes')
 
 
 // user Info routes
-app.use('/api/v1/user', require('./routes/userRoutes'))
+// app.use('/api/v1/user', require('./routes/userRoutes'))
 
 
 // category + products routes
