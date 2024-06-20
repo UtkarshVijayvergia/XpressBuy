@@ -202,7 +202,7 @@ const Navbar = ({ setCategoryName }) => {
                                                 <FaUser className={location.pathname === '/' ? 'nav-item-name' : 'nav-item-cat-name'} onClick={() => setProfileDropdownOpen(!profileDropdownOpen)} />
                                                 {profileDropdownOpen && (
                                                     <div className="dropdown-content">
-                                                        <Link className={location.pathname === '/' ? 'nav-item-name drop-options' : 'nav-item-cat-name drop-options'} to="/profile">PROFILE</Link>
+                                                        <Link className={location.pathname === '/' ? 'nav-item-name drop-options' : 'nav-item-cat-name drop-options'} to="/user/profile">PROFILE</Link>
                                                         <Link className={location.pathname === '/' ? 'nav-item-name drop-options' : 'nav-item-cat-name drop-options'} onClick={signOut}>SIGN OUT</Link>
                                                     </div>
                                                 )}
