@@ -50,6 +50,10 @@ app.use('/api/v1/reviews', require('./routes/productReviewsRoute'))
 app.use('/api/v1/order', require('./routes/orderRoutes'))
 
 
+// user profile routes
+app.use('/api/v1/user/profile', require('./routes/profileRoutes'))
+
+
 // Landing Page Image routes
 app.use('/api/v1/image/landingPageImage', require('./routes/landingPageImageRoutes'))
 
