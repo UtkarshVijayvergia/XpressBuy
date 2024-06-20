@@ -13,6 +13,7 @@ import Home from './pages/homePage/Home';
 import Categories from './pages/products/Categories';
 import Product from './pages/products/Product';
 import CheckOut from './pages/checkoutPage/CheckOut';
+import UserProfile from './pages/profile/UserProfile';
 import ErrorPage from './pages/errorPage/ErrorPage';
 
 import { LastPageContext } from './contexts/LastPageContext';
@@ -70,6 +71,7 @@ function App() {
                         <Route path='/signup' element={<SignUp />} />
                         <Route path='/home' element={<Home />} />
                         <Route path='/confirm' element={<ConfirmEmail />} />
+                        <Route path='/user/profile' element={<UserProfile />} />
                         <Route path='/products/:category_id' element={<Categories />} />
                         <Route path='/products/:category_id/:product_id' element={<Product />} />
                         <Route path='/checkout/:order_id' element={<CheckOut />} />
