@@ -11,15 +11,6 @@ The application is currently deployed using AWS Fargate, which is not included i
 <br/>
 
 
-## Domain and Security
-Currently, the application is accessible via a Load Balancer IP address instead of a domain name, as acquiring a domain costs $14 initially plus $10 annually. I plan to implement a domain as soon as I receive additional AWS Coupon Credits.
-
-The application uses HTTP rather than HTTPS because setting up SSL certificates requires a domain. Once a domain is established, SSL will be configured to enhance security.
-
-
-<br/>
-
-
 ## Features
 - **Cloud-Based Architecture:** Hosted on AWS. Uses React, NodeJS and AWS JavaScript SDK.
 - **Scalable Infrastructure:** Utilizes AWS Load Balancer, ECS Cluster, and Fargate.
@@ -30,8 +21,18 @@ The application uses HTTP rather than HTTPS because setting up SSL certificates 
 
 <br/>
 
+
+## Domain and Security
+Currently, the application is accessible via a Load Balancer IP address instead of a domain name, as acquiring a domain costs $14 initially plus $10 annually. I plan to implement a domain as soon as I receive additional AWS Coupon Credits.
+
+The application uses HTTP rather than HTTPS because setting up SSL certificates requires a domain. Once a domain is established, SSL will be configured to enhance security.
+
+
+<br/>
+
+
 ## Architecture Overview
-Here is a refined and natural version of your statement: The frontend and backend of the application are both deployed using AWS Fargate, with an Application Load Balancer (ALB) managing incoming traffic. 
+The frontend and backend of the application are both deployed using AWS Fargate, with an Application Load Balancer (ALB) managing incoming traffic. 
 
 The ALB directs traffic received on the default HTTP port (80) to multiple listeners, which then route it to port 3000 where the frontend is hosted. This setup utilizes the Load Balancer's IP address for handling traffic.
 
