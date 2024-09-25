@@ -1,5 +1,5 @@
 
-# Project Title
+# XpressBuy
 
 XpressBuy is a cloud-based E-commerce application designed to provide a seamless shopping experience. This project leverages various AWS services to ensure scalability, security, and efficiency, making it a robust solution for online retail.
 
