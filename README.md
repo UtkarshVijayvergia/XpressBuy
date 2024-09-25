@@ -12,11 +12,11 @@ The application is currently deployed using AWS Fargate, which is not included i
 
 
 ## Features
-- **Cloud-Based Architecture:** Hosted on AWS. Uses React, NodeJS and AWS JavaScript SDK.
-- **Scalable Infrastructure:** Utilizes AWS Load Balancer, ECS Cluster, and Fargate.
-- **Secure Authentication:** Implements OAuth2.0 authentication using AWS Cognito.
-- **Data Storage:** Employs DynamoDB and S3 for efficient data management and storage.
-- **Automated Email Notifications:** Uses AWS Lambda and AWS SES to automate order-confirmation emails.
+- ***<ins>Cloud-Based Architecture</ins>:*** Hosted on AWS. Uses React, NodeJS and AWS JavaScript SDK.
+- ***<ins>Scalable Infrastructure</ins>:*** Utilizes AWS Load Balancer, ECS Cluster, and Fargate.
+- ***<ins>Secure Authentication</ins>:*** Implements OAuth2.0 authentication using AWS Cognito.
+- ***<ins>Data Storage</ins>:*** Employs DynamoDB and S3 for efficient data management and storage.
+- ***<ins>Automated Email Notifications</ins>:*** Uses AWS Lambda and AWS SES to automate order-confirmation emails.
 
 
 <br/>
