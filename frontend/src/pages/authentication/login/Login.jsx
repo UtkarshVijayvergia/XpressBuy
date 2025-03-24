@@ -45,7 +45,7 @@ const Login = () => {
     // Check if user is authenticated
     const checkUser = async () => {
         try{
-            const response = await fetch('http://xpressbuy-backend-alb-2126578185.ap-south-1.elb.amazonaws.com:5000/api/v1/tokenVerification/verifyAccessToken', {
+            const response = await fetch('http://xpressbuy-backend-alb-262308006.us-east-1.elb.amazonaws.com:5000/api/v1/tokenVerification/verifyAccessToken', {
                 credentials: 'include',
                 method: 'POST',
                 headers: {
@@ -70,7 +70,7 @@ const Login = () => {
     // sign out
     const signOut = async () => {
         try {
-            const response = await fetch('http://xpressbuy-backend-alb-2126578185.ap-south-1.elb.amazonaws.com:5000/api/v1/tokenVerification/signout', {
+            const response = await fetch('http://xpressbuy-backend-alb-262308006.us-east-1.elb.amazonaws.com:5000/api/v1/tokenVerification/signout', {
                 credentials: 'include',
                 method: 'POST',
                 headers: {
@@ -128,7 +128,7 @@ const Login = () => {
     // verify the ID token
     const verifyIdToken = async (idToken, access_token, refresh_token) => {
         try {
-            await fetch('http://xpressbuy-backend-alb-2126578185.ap-south-1.elb.amazonaws.com:5000/api/v1/tokenVerification/verifyIdToken', {
+            await fetch('http://xpressbuy-backend-alb-262308006.us-east-1.elb.amazonaws.com:5000/api/v1/tokenVerification/verifyIdToken', {
                 credentials: 'include',
                 method: 'POST',
                 headers: {

@@ -14,21 +14,22 @@ BLUE='\033[0;34m'
 printf "\n${GREEN}================ Pushing Backend Image to ECR =================${NO_COLOR}\n\n"
 
 # Command: 1 -> login to ECR
-aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 891180839529.dkr.ecr.ap-south-1.amazonaws.com && \
+aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 140023403659.dkr.ecr.us-east-1.amazonaws.com && \
+
 
 LABEL="======== Logged-In to ECR"
 printf "${BLUE}${LABEL}${NO_COLOR}\n\n"
 
 
 # Command: 2 -> Tag the Image
-docker tag expressbuy-node:latest 891180839529.dkr.ecr.ap-south-1.amazonaws.com/expressbuy-node:latest && \
+docker tag backend-xpressbuy:latest 140023403659.dkr.ecr.us-east-1.amazonaws.com/backend-xpressbuy:latest && \
 
 LABEL="======== Image Tagged Latest"
 printf "\n${BLUE}${LABEL}${NO_COLOR}\n\n"
 
 
 # Command: 3 -> Push the image to ECR
-docker push 891180839529.dkr.ecr.ap-south-1.amazonaws.com/expressbuy-node:latest
+docker push 140023403659.dkr.ecr.us-east-1.amazonaws.com/backend-xpressbuy:latest
 
 LABEL="=============== Backend Image Pushed to ECR ================="
 printf "\n\n${GREEN}${LABEL}${NO_COLOR}\n\n"

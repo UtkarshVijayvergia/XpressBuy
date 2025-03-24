@@ -14,11 +14,11 @@ set -e
 
 # Build the frontend docker image
 docker build \
---build-arg REACT_APP_BACKEND_URL="http://xpressbuy-backend-alb-2126578185.ap-south-1.elb.amazonaws.com" \
+--build-arg REACT_APP_BACKEND_URL="http://xpressbuy-backend-alb-262308006.us-east-1.elb.amazonaws.com" \
 --build-arg REACT_APP_AWS_PROJECT_REGION="$REACT_APP_AWS_PROJECT_REGION" \
 --build-arg REACT_APP_AWS_COGNITO_REGION="$REACT_APP_AWS_COGNITO_REGION" \
---build-arg REACT_APP_AWS_USER_POOLS_ID="ap-south-1_HW3hy0o0g" \
---build-arg REACT_APP_AWS_USER_POOL_WEB_CLIENT_ID="1dqopo99t55uo8e4ij0ckc3fhq" \
--t xpressbuy-frontend \
+--build-arg REACT_APP_AWS_USER_POOLS_ID="us-east-1_QeC5UeKmH" \
+--build-arg REACT_APP_AWS_USER_POOL_WEB_CLIENT_ID="33mobrtgt4afr6qobfn4dvg6m" \
+-t frontend-xpressbuy \
 -f ./frontend/Dockerfile.prod \
 ./frontend

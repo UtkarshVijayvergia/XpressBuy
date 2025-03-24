@@ -1,5 +1,5 @@
 #! /bin/bash
-# Command: ./bin/fronted/create-service
+# Command: ./bin/frontend/create-service
 
 # This script is used to deploy the frontend
 

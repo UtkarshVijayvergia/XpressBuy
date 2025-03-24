@@ -1,7 +1,7 @@
 {
-    "family": "frontend-xpressbuy",
-    "executionRoleArn": "arn:aws:iam::140023403659:role/XpressBuy-Fargate-Task-Execution-Role",
-    "taskRoleArn": "arn:aws:iam::140023403659:role/XpressBuy-Fargate-Task-Role",
+    "family": "xpressbuy-frontend",
+    "executionRoleArn": "arn:aws:iam::891180839529:role/XpressBuy-Fargate-Task-Execution-Role",
+    "taskRoleArn": "arn:aws:iam::891180839529:role/XpressBuy-Fargate-Task-Role",
     "networkMode": "awsvpc",
     "cpu": "256",
     "memory": "512",
@@ -11,7 +11,7 @@
     "containerDefinitions": [
         {
             "name": "frontend",
-            "image": "140023403659.dkr.ecr.us-east-1.amazonaws.com/frontend-xpressbuy:latest",
+            "image": "891180839529.dkr.ecr.ap-south-1.amazonaws.com/xpressbuy-frontend:latest",
             "essential": true,
             "healthCheck": {
                 "command": [
@@ -34,7 +34,7 @@
                 "logDriver": "awslogs",
                 "options": {
                     "awslogs-group": "/xpressbuy/fargate-cluster",
-                    "awslogs-region": "us-east-1",
+                    "awslogs-region": "ap-south-1",
                     "awslogs-stream-prefix": "frontend"
                 }
             }

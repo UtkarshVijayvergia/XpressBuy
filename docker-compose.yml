@@ -8,8 +8,8 @@ services:
             COGNITO_USER_POOL_REGION: "${COGNITO_USER_POOL_REGION}"
             COGNITO_USER_POOL_ID: "${COGNITO_USER_POOL_ID}"
             COGNITO_USER_POOL_CLIENT_ID: "${COGNITO_USER_POOL_CLIENT_ID}"
-            POSTGRES_CONNECTION_URL: "${POSTGRES_CONNECTION_URL}"
-            POSTGRES_PROD_CONNECTION_URL: "${POSTGRES_PROD_CONNECTION_URL}"
+            # POSTGRES_CONNECTION_URL: "${POSTGRES_CONNECTION_URL}"
+            # POSTGRES_PROD_CONNECTION_URL: "${POSTGRES_PROD_CONNECTION_URL}"
         build: ./
         ports:
             - "5000:5000"
@@ -37,20 +37,20 @@ services:
             - internal-network
     
 
-    xray-daemon:
-        image: amazon/aws-xray-daemon
-        # image means that we are using an image from docker hub
-        environment:
-            AWS_ACCESS_KEY_ID: "${AWS_ACCESS_KEY_ID}"
-            AWS_SECRET_ACCESS_KEY: "${AWS_SECRET_ACCESS_KEY}"
-            AWS_REGION: "${AWS_REGION}"
-            # "${}" means that we are using an environment variable from the .env file present in the same directory as the Docker-compose.yml file
-        command:
-            - "xray -o -b xray-daemon:2000"
-        ports:
-            - 2000:2000/udp
-        networks:
-            - internal-network
+    # xray-daemon:
+    #     image: amazon/aws-xray-daemon
+    #     # image means that we are using an image from docker hub
+    #     environment:
+    #         AWS_ACCESS_KEY_ID: "${AWS_ACCESS_KEY_ID}"
+    #         AWS_SECRET_ACCESS_KEY: "${AWS_SECRET_ACCESS_KEY}"
+    #         AWS_REGION: "${AWS_REGION}"
+    #         # "${}" means that we are using an environment variable from the .env file present in the same directory as the Docker-compose.yml file
+    #     command:
+    #         - "xray -o -b xray-daemon:2000"
+    #     ports:
+    #         - 2000:2000/udp
+    #     networks:
+    #         - internal-network
 
 
     # postgres-db:
@@ -71,20 +71,20 @@ services:
     #         - internal-network
 
  
-    dynamodb-local:
-        user: root
-        # https://stackoverflow.com/questions/67533058/persist-local-dynamodb-data-in-volumes-lack-permission-unable-to-open-databa
-        # We needed to add user:root to get this working.
-        command: "-jar DynamoDBLocal.jar -sharedDb -dbPath ./data"
-        image: "amazon/dynamodb-local:latest"
-        container_name: dynamodb-local
-        ports:
-        - "8000:8000"
-        volumes:
-        - "./docker/dynamodb:/home/dynamodblocal/data"
-        working_dir: /home/dynamodblocal
-        networks:
-            - internal-network
+    # dynamodb-local:
+    #     user: root
+    #     # https://stackoverflow.com/questions/67533058/persist-local-dynamodb-data-in-volumes-lack-permission-unable-to-open-databa
+    #     # We needed to add user:root to get this working.
+    #     command: "-jar DynamoDBLocal.jar -sharedDb -dbPath ./data"
+    #     image: "amazon/dynamodb-local:latest"
+    #     container_name: dynamodb-local
+    #     ports:
+    #     - "8000:8000"
+    #     volumes:
+    #     - "./docker/dynamodb:/home/dynamodblocal/data"
+    #     working_dir: /home/dynamodblocal
+    #     networks:
+    #         - internal-network
 
 
 

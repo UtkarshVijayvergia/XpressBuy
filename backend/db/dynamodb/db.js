@@ -3,7 +3,7 @@ const { DynamoDBDocumentClient } = require("@aws-sdk/lib-dynamodb");
 
 // Set the endpoint to the local dynamodb
 let attrs = {
-    endpoint: 'https://dynamodb.ap-south-1.amazonaws.com'
+    endpoint: 'https://dynamodb.us-east-1.amazonaws.com'
 };
 // Create a new client
 const client = new DynamoDBClient(attrs);

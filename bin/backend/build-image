@@ -9,4 +9,4 @@ set -e
 
 
 # Build the backend docker image
-docker build -t expressbuy-node .
+docker build -t backend-xpressbuy .

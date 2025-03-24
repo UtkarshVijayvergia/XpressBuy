@@ -1,13 +1,12 @@
 #!/usr/bin/bash
 # command: ./bin/ddb/list-tables
 
-
 # set -e will cause the script to exit if any command fails
 set -e 
 
 if [ "$1" = "prod" ]; then
     echo "Running in production mode"
-    ENDPOINT_URL="https://dynamodb.ap-south-1.amazonaws.com"
+    ENDPOINT_URL="--endpoint-url=https://dynamodb.us-east-1.amazonaws.com"
 else
     ENDPOINT_URL="--endpoint-url=http://localhost:8000"
 fi

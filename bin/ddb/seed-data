@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 // command: ./bin/ddb/seed-data prod
 
-
 const { DynamoDBClient } = require("@aws-sdk/client-dynamodb");
 const { DynamoDBDocumentClient, PutCommand } = require("@aws-sdk/lib-dynamodb");
 const fs = require('fs');
+const path = require('path');
 
 // Set the endpoint to the local dynamodb
 let attrs = {
@@ -16,7 +16,7 @@ console.log("process.argv.length: " + process.argv.length);
 if (process.argv.length === 3) {
     if (process.argv[2].includes("prod")) {
         attrs = {
-            endpoint: 'https://dynamodb.ap-south-1.amazonaws.com'
+            endpoint: 'https://dynamodb.us-east-1.amazonaws.com'
         };
     }
 }
@@ -27,14 +27,40 @@ console.log("attrs: " + JSON.stringify(attrs));
 const client = new DynamoDBClient(attrs);
 const docClient = DynamoDBDocumentClient.from(client);
 
-
 // Create a new item
 async function batch_write() {
     try {
-        // Product 1
+        const productFiles = [
+            'product1.json',
+            'product2.json',
+            'product3.json',
+            'product4.json',
+            'product5.json'
+        ];
+
+        for (const file of productFiles) {
+            let fileData;
+            try {
+                fileData = await fs.promises.readFile(path.join(__dirname, '../data/products', file), 'utf8');
+            } catch (err) {
+                console.error(err);
+                throw err;
+            }
+            let items = JSON.parse(fileData);
+            for (const item of items) {
+                const params = {
+                    TableName: 'xpressbuy',
+                    Item: item
+                };
+                await docClient.send(new PutCommand(params));
+            }
+            console.log(`${file} Added successfully`);
+        }
+
+        // Category
         let fileData;
         try {
-            fileData = await fs.promises.readFile('/bin/data/products/product1.json', 'utf8');
+            fileData = await fs.promises.readFile(path.join(__dirname, '../data/categories/categories.json'), 'utf8');
         } catch (err) {
             console.error(err);
             throw err;
@@ -42,106 +68,15 @@ async function batch_write() {
         let items = JSON.parse(fileData);
         for (const item of items) {
             const params = {
-              TableName: 'xpressbuy',
-              Item: item
+                TableName: 'xpressbuy',
+                Item: item
             };
             await docClient.send(new PutCommand(params));
         }
-        console.log('P1 Added successfully');
-
-
-        // Product 2
-        try {
-            fileData = await fs.promises.readFile('/bin/data/products/product2.json', 'utf8');
-        } catch (err) {
-            console.error(err);
-            throw err;
-        }
-        items = JSON.parse(fileData);
-        for (const item of items) {
-            const params = {
-              TableName: 'xpressbuy',
-              Item: item
-            };
-            await docClient.send(new PutCommand(params));
-        }
-        console.log('P2 Added successfully');
-
-
-        // Product 3
-        try {
-            fileData = await fs.promises.readFile('/bin/data/products/product3.json', 'utf8');
-        } catch (err) {
-            console.error(err);
-            throw err;
-        }
-        items = JSON.parse(fileData);
-        for (const item of items) {
-            const params = {
-              TableName: 'xpressbuy',
-              Item: item
-            };
-            await docClient.send(new PutCommand(params));
-        }
-        console.log('P3 Added successfully');
-
-
-        // Product 4
-        try {
-            fileData = await fs.promises.readFile('/bin/data/products/product4.json', 'utf8');
-        } catch (err) {
-            console.error(err);
-            throw err;
-        }
-        items = JSON.parse(fileData);
-        for (const item of items) {
-            const params = {
-              TableName: 'xpressbuy',
-              Item: item
-            };
-            await docClient.send(new PutCommand(params));
-        }
-        console.log('P4 Added successfully');
-
-
-        // Product 5
-        try {
-            fileData = await fs.promises.readFile('/bin/data/products/product5.json', 'utf8');
-        } catch (err) {
-            console.error(err);
-            throw err;
-        }
-        items = JSON.parse(fileData);
-        for (const item of items) {
-            const params = {
-              TableName: 'xpressbuy',
-              Item: item
-            };
-            await docClient.send(new PutCommand(params));
-        }
-        console.log('P5 Added successfully');
-        
-
-        // Category
-        try {
-            fileData = await fs.promises.readFile('/bin/data/categories/categories.json', 'utf8');
-        } catch (err) {
-            console.error(err);
-            throw err;
-        }
-        items = JSON.parse(fileData);
-        for (const item of items) {
-            const params = {
-              TableName: 'xpressbuy',
-              Item: item
-            };
-            await docClient.send(new PutCommand(params));
-        }
-        console.log('C Added successfully');
+        console.log('Categories Added successfully');
     } catch (error) {
         console.error(error);
     }
 };
-
 
 batch_write();

@@ -16,3 +16,13 @@
         --container backend `
         --command "/bin/bash" `
         --interactive
+
+
+
+aws ecs execute-command `
+--region us-east-1 `
+--cluster xpressbuy `
+--task "d2565003980b485fbfd2f0872c49acef" `
+--container backend `
+--command "/bin/bash" `
+--interactive
