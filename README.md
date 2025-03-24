@@ -22,6 +22,15 @@ The application is currently deployed using AWS Fargate, which is not included i
 <br/>
 
 
+## Project Images
+<img width="1265" alt="xpressbuy-landingPage" src="https://github.com/user-attachments/assets/a1d55e44-517c-414a-b680-847c16e26a19">
+<img width="1270" alt="xpressbuy-productsPage" src="https://github.com/user-attachments/assets/bef093a8-95f5-42cb-84c4-9cecf2027949">
+<img width="1262" alt="xpressbuy-productPage" src="https://github.com/user-attachments/assets/8e3578cb-a972-425e-b4ba-9892897f792e">
+
+
+<br/>
+
+
 ## Domain and Security
 Currently, the application is accessible via a Load Balancer IP address instead of a domain name, as acquiring a domain costs $14 initially plus $10 annually. I plan to implement a domain as soon as I receive additional AWS Coupon Credits.
 
@@ -79,6 +88,3 @@ This setup could have been handled via the backend, but I wanted to incorporate 
 
 
 <br/>
-
-
-## Project Images
