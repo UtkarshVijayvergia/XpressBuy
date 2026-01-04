@@ -36,9 +36,10 @@ export class XpressbuyDeploymentStack extends cdk.Stack {
         const namespace = new servicediscovery.HttpNamespace(this, 'xpressbuy', {
             name: 'xpressbuy',
         });
+        namespace.applyRemovalPolicy(cdk.RemovalPolicy.DESTROY);
 
 
-        // 3. VPC & Cluster
+        // 3. Get Default VPC
         const defaultVpc = ec2.Vpc.fromLookup(this, 'DefaultVPC', {
             isDefault: true, // Ensures the default VPC is used
         });
@@ -55,6 +56,8 @@ export class XpressbuyDeploymentStack extends cdk.Stack {
         // Allow traffic from the ALB to the backend and frontend
         securityGroup_albSecurityGroup.addIngressRule(ec2.Peer.anyIpv4(), ec2.Port.tcp(5000), 'Allow Backend traffic');
         securityGroup_albSecurityGroup.addIngressRule(ec2.Peer.anyIpv4(), ec2.Port.tcp(3000), 'Allow Frontend traffic');
+        // Apply removal policy
+        securityGroup_albSecurityGroup.applyRemovalPolicy(cdk.RemovalPolicy.DESTROY);
 
 
         // 5. Security Group for ECS services
@@ -66,6 +69,8 @@ export class XpressbuyDeploymentStack extends cdk.Stack {
         // Add an inbound rule to allow HTTP (port 80) traffic from anywhere
         securityGroup_XpressBuyServiceSG.addIngressRule(securityGroup_albSecurityGroup, ec2.Port.tcp(5000), 'Allow traffic from ALB');
         securityGroup_XpressBuyServiceSG.addIngressRule(securityGroup_albSecurityGroup, ec2.Port.tcp(3000), 'Allow traffic from ALB');
+        // Apply removal policy
+        securityGroup_XpressBuyServiceSG.applyRemovalPolicy(cdk.RemovalPolicy.DESTROY);
 
 
         // 5. Fargate task execution role
@@ -74,7 +79,6 @@ export class XpressbuyDeploymentStack extends cdk.Stack {
             assumedBy: new iam.ServicePrincipal('ecs-tasks.amazonaws.com'),
             // attach the custom policy to the role
         });
-
 
         // Make a custom policy for the ECS task execution role
         const customPolicy_ecsTaskExecutionPolicy = new iam.Policy(this, 'xpressbuyECSTaskExecutionPolicy', {
@@ -96,8 +100,7 @@ export class XpressbuyDeploymentStack extends cdk.Stack {
             ]
         });
 
-
-        // Make a custom policy for the ECS task execution role
+        // Make another custom policy for the ECS task execution role
         const customPolicy_systemsManagerParameterPolicy = new iam.Policy(this, 'XpressBuyReadAccessSystemsManagerParameterStorePolicy', {
             policyName: 'XpressBuy-readAccess-systemsManager-parameterStore-policy',
             statements: [
@@ -112,10 +115,12 @@ export class XpressbuyDeploymentStack extends cdk.Stack {
             ]
         });
 
-
         // Attach the custom policy to the ECS task execution role
         role_taskExecutionRole.attachInlinePolicy(customPolicy_ecsTaskExecutionPolicy);
         role_taskExecutionRole.attachInlinePolicy(customPolicy_systemsManagerParameterPolicy);
+
+        // Apply removal policy
+        role_taskExecutionRole.applyRemovalPolicy(cdk.RemovalPolicy.DESTROY);
 
 
         // 6. ECS task role
@@ -123,7 +128,6 @@ export class XpressbuyDeploymentStack extends cdk.Stack {
             roleName: 'XpressBuy-Fargate-Task-Role',
             assumedBy: new iam.ServicePrincipal('ecs-tasks.amazonaws.com'),
         });
-
 
         // Make a custom policy for the ECS task role
         const customPolicy_ecsTaskPolicy = new iam.Policy(this, 'xpressbuyECSTaskPolicy', {
@@ -147,9 +151,11 @@ export class XpressbuyDeploymentStack extends cdk.Stack {
             ]
         });
 
-
         // Attach the custom policy to the ECS task role
         role_taskRole.attachInlinePolicy(customPolicy_ecsTaskPolicy);
+
+        // Apply removal policy
+        role_taskRole.applyRemovalPolicy(cdk.RemovalPolicy.DESTROY);
 
 
         // 6. SSM Parameters
@@ -157,63 +163,50 @@ export class XpressbuyDeploymentStack extends cdk.Stack {
         const paramAccessKeyID = new ssm.StringParameter(this, 'AWS_ACCESS_KEY_ID', {
             parameterName: '/xpressbuy/backend/AWS_ACCESS_KEY_ID',
             stringValue: process.env.AWS_ACCESS_KEY_ID || '',
-            description: 'AWS Access Key ID'
+            description: 'AWS Access Key ID',
+
         });
         const paramSecretAccessKeyID = new ssm.StringParameter(this, 'AWS_SECRET_ACCESS_KEY', {
             parameterName: '/xpressbuy/backend/AWS_SECRET_ACCESS_KEY',
             stringValue: process.env.AWS_SECRET_ACCESS_KEY || '',
-            description: 'AWS Secret Access Key'
+            description: 'AWS Secret Access Key',
         });
         const paramCognitoUserPoolId = new ssm.StringParameter(this, 'AWS_COGNITO_USER_POOL_ID', {
             parameterName: '/xpressbuy/backend/AWS_COGNITO_USER_POOL_ID',
             stringValue: props.userPoolId,
-            description: 'AWS Cognito User Pool ID'
+            description: 'AWS Cognito User Pool ID',
         });
         const paramCognitoUserPoolClientId = new ssm.StringParameter(this, 'AWS_COGNITO_USER_POOL_CLIENT_ID', {
             parameterName: '/xpressbuy/backend/AWS_COGNITO_USER_POOL_CLIENT_ID',
             stringValue: props.userPoolClientId,
-            description: 'AWS Cognito User Pool Client ID'
+            description: 'AWS Cognito User Pool Client ID',
+        });
+        // Apply removal policy
+        paramAccessKeyID.applyRemovalPolicy(cdk.RemovalPolicy.DESTROY);
+        paramSecretAccessKeyID.applyRemovalPolicy(cdk.RemovalPolicy.DESTROY);
+        paramCognitoUserPoolId.applyRemovalPolicy(cdk.RemovalPolicy.DESTROY);
+        paramCognitoUserPoolClientId.applyRemovalPolicy(cdk.RemovalPolicy.DESTROY);
+
+
+        // =============================================================================================
+        //  CREATE TASK DEFINITIONS & SERVICES
+        // =============================================================================================
+
+
+        // 1. Create ECS Cluster
+        const cluster = new ecs.Cluster(this, 'xpressbuyCluster', {
+            clusterName: 'xpressbuy',
+            vpc: defaultVpc,
         });
 
-
-        // =============================================================================================
-        //  AUTOMATED TASK DEFINITIONS & SERVICES
-        // =============================================================================================
-
-
-        // // 4. Create ECS Cluster
-        // const cluster = new ecs.Cluster(this, 'xpressbuyCluster', {
-        //     clusterName: 'xpressbuy',
-        //     vpc: defaultVpc,
-        // });
-
-
-        // // 5. Create a private ECR repository
-        // const repository_backend = new ecr.Repository(this, 'BackendXpressbuyRepository', {
-        //     repositoryName: 'backend-xpressbuy',
-        //     imageTagMutability: ecr.TagMutability.MUTABLE,
-        //     // When you delete a repository, the data in the repository is deleted.
-        //     removalPolicy: cdk.RemovalPolicy.DESTROY,
-        //     emptyOnDelete: true,
-        // });
-
-
-        // // 6. Create a private ECR repository for frontend
-        // const repository_frontend = new ecr.Repository(this, 'FrontendXpressbuyRepository', {
-        //     repositoryName: 'frontend-xpressbuy',
-        //     imageTagMutability: ecr.TagMutability.MUTABLE,
-        //     // When you delete a repository, the data in the repository is deleted.
-        //     removalPolicy: cdk.RemovalPolicy.DESTROY,
-        //     emptyOnDelete: true,
-        // });
 
         // --- BACKEND ----------------------------------------------------------------------------------------------
 
         // 1. Create Dynamic Task Definition
         const backendTaskDef = new ecs.FargateTaskDefinition(this, 'BackendTaskDef', {
             family: 'xpressbuy-backend',
-            memoryLimitMiB: 512,
             cpu: 256,
+            memoryLimitMiB: 512,
             executionRole: role_taskExecutionRole,
             taskRole: role_taskRole,
         });
@@ -221,24 +214,36 @@ export class XpressbuyDeploymentStack extends cdk.Stack {
         // 2. Add Container (Automates Docker Build & Push)
         const backendContainer = backendTaskDef.addContainer('BackendContainer', {
             containerName: 'backend',
-            // This assumes your folder structure is: root -> backend
-            image: ecs.ContainerImage.fromAsset(path.join(__dirname, '../../backend')),
+            // CDK will look for a file named "Dockerfile" in the root directory (../../)
+            image: ecs.ContainerImage.fromAsset(path.join(__dirname, '../../'), {
+                file: 'Dockerfile',
+                exclude: ['frontend', 'cloudformation', '.journal', 'aws']
+            }),
+            essential: true,
             logging: ecs.LogDrivers.awsLogs({
                 streamPrefix: 'backend',
                 logGroup: logGroup
             }),
-            portMappings: [{ containerPort: 5000 }],
             healthCheck: {
-                command: ["CMD-SHELL", "node /backend/bin/node/health-check"],
+                command: [
+                    "CMD-SHELL",
+                    "node /bin/node/health-check"
+                ],
                 interval: cdk.Duration.seconds(30),
                 timeout: cdk.Duration.seconds(5),
                 retries: 3,
                 startPeriod: cdk.Duration.seconds(60),
             },
+            portMappings: [{
+                name: 'backend',
+                containerPort: 5000,
+                protocol: ecs.Protocol.TCP,
+                appProtocol: ecs.AppProtocol.http
+            }],
             environment: {
                 "FRONTEND_URL": "*",
                 "BACKEND_URL": "*",
-                "AWS_DEFAULT_REGION": this.region // Dynamic Region!
+                "AWS_DEFAULT_REGION": this.region
             },
             secrets: {
                 AWS_ACCESS_KEY_ID: ecs.Secret.fromSsmParameter(paramAccessKeyID),
@@ -249,19 +254,32 @@ export class XpressbuyDeploymentStack extends cdk.Stack {
         });
 
 
-        // // 3. Create Service
-        // const backendService = new ecs.FargateService(this, 'BackendService', {
-        //     cluster: cluster,
-        //     taskDefinition: backendTaskDef,
-        //     serviceName: 'xpressbuy-backend',
-        //     securityGroups: [securityGroup_XpressBuyServiceSG],
-        //     assignPublicIp: true,
-        //     desiredCount: 1,
-        //     cloudMapOptions: {
-        //          name: 'backend',
-        //          cloudMapNamespace: namespace
-        //     }
-        // });
+        // 3. Create Service
+        const backendService = new ecs.FargateService(this, 'BackendService', {
+            cluster: cluster,
+            desiredCount: 0, 
+            enableECSManagedTags: true,
+            enableExecuteCommand: true,
+            propagateTags: ecs.PropagatedTagSource.SERVICE,
+            serviceName: 'xpressbuy-backend',
+            taskDefinition: backendTaskDef,
+            
+            // Updated Service Connect Config
+            serviceConnectConfiguration: {
+                services: [
+                    {
+                        portMappingName: 'backend',
+                        discoveryName: 'backend',
+                    },
+                ],
+            },
+            
+            securityGroups: [securityGroup_XpressBuyServiceSG],
+            assignPublicIp: true,
+            vpcSubnets: defaultVpc.selectSubnets({
+                subnetType: ec2.SubnetType.PUBLIC
+            }),
+        });
 
 
         // 4. Create Backend Target Group
@@ -271,7 +289,7 @@ export class XpressbuyDeploymentStack extends cdk.Stack {
             port: 5000,
             protocol: elbv2.ApplicationProtocol.HTTP,
             targetType: elbv2.TargetType.IP,
-            // targets: [backendService], // <--- Connects Service to TG automatically
+            targets: [backendService], // <--- Connects Service to TG automatically
             healthCheck: {
                 path: '/api/v1/health-check',
                 interval: cdk.Duration.seconds(30),
@@ -283,8 +301,8 @@ export class XpressbuyDeploymentStack extends cdk.Stack {
 
         const frontendTaskDef = new ecs.FargateTaskDefinition(this, 'FrontendTaskDef', {
             family: 'xpressbuy-frontend',
-            memoryLimitMiB: 512,
             cpu: 256,
+            memoryLimitMiB: 512,
             executionRole: role_taskExecutionRole,
             taskRole: role_taskRole,
         });
@@ -299,18 +317,18 @@ export class XpressbuyDeploymentStack extends cdk.Stack {
             portMappings: [{ containerPort: 3000 }],
         });
 
-        // const frontendService = new ecs.FargateService(this, 'FrontendService', {
-        //     cluster: cluster,
-        //     taskDefinition: frontendTaskDef,
-        //     serviceName: 'xpressbuy-frontend',
-        //     securityGroups: [securityGroup_XpressBuyServiceSG],
-        //     assignPublicIp: true,
-        //     desiredCount: 1,
-        //     cloudMapOptions: {
-        //         name: 'frontend',
-        //         cloudMapNamespace: namespace
-        //     }
-        // });
+        const frontendService = new ecs.FargateService(this, 'FrontendService', {
+            cluster: cluster,
+            taskDefinition: frontendTaskDef,
+            serviceName: 'xpressbuy-frontend',
+            securityGroups: [securityGroup_XpressBuyServiceSG],
+            assignPublicIp: true,
+            desiredCount: 1,
+            cloudMapOptions: {
+                name: 'frontend',
+                cloudMapNamespace: namespace
+            }
+        });
 
         // 5. Create Frontend Target Group
         const frontendTargetGroup = new elbv2.ApplicationTargetGroup(this, 'XpressbuyFrontendTG', {
@@ -319,7 +337,7 @@ export class XpressbuyDeploymentStack extends cdk.Stack {
             port: 3000,
             protocol: elbv2.ApplicationProtocol.HTTP,
             targetType: elbv2.TargetType.IP,
-            // targets: [frontendService],
+            targets: [frontendService],
             healthCheck: {
                 path: '/',
                 interval: cdk.Duration.seconds(30),
