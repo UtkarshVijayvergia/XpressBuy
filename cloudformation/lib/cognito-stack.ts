@@ -1,14 +1,18 @@
 import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import * as cognito from 'aws-cdk-lib/aws-cognito';
-// import { aws_cognito as cognito } from 'aws-cdk-lib';
-
 
 export class CognitoStack extends cdk.Stack {
+    // cognito user pool
+    public readonly userPool: cognito.UserPool;
+    // cognito user pool client
+    public readonly userPoolClient: cognito.UserPoolClient;
+
     constructor(scope: Construct, id: string, props?: cdk.StackProps) {
         super(scope, id, props);
 
-        const userPool = new cognito.UserPool(this, 'XpressbuyUserPool', {
+        // cognito user pool
+        this.userPool = new cognito.UserPool(this, 'XpressbuyUserPool', {
             userPoolName: 'xpressbuy',
             selfSignUpEnabled: true,
             // cognito user pool sign in options: email
@@ -60,12 +64,14 @@ export class CognitoStack extends cdk.Stack {
             keepOriginal: {
                 email: true,
             },
+
+            // When you delete a user pool, the data in the user pool is deleted.
+            removalPolicy: cdk.RemovalPolicy.DESTROY,
         });
 
-        
-        // Create a user pool client
-        const userPoolClient = new cognito.UserPoolClient(this, 'XpressbuyUserPoolClient', {
-            userPool,
+        // cognito user pool client
+        this.userPoolClient = new cognito.UserPoolClient(this, 'XpressbuyUserPoolClient', {
+            userPool: this.userPool, // Update reference to this.userPool
             userPoolClientName: 'XpressBuy-AuthClient',
             generateSecret: false,
             // authFlows: Specifies the authentication flows that are enabled for the client.
@@ -87,10 +93,13 @@ export class CognitoStack extends cdk.Stack {
 
         // Output the user pool id and client id
         new cdk.CfnOutput(this, 'UserPoolId', {
-            value: userPool.userPoolId,
+            value: this.userPool.userPoolId,
         });
         new cdk.CfnOutput(this, 'UserPoolClientId', {
-            value: userPoolClient.userPoolClientId,
+            value: this.userPoolClient.userPoolClientId,
+        });
+        new cdk.CfnOutput(this, 'UserPoolRegion', {
+            value: this.region,
         });
     }
 }

@@ -13,17 +13,24 @@ import { aws_ssm as ssm } from 'aws-cdk-lib';
 import * as dotenv from 'dotenv';
 dotenv.config();
 
+// Define an interface for the properties we need
+interface XpressbuyDeploymentStackProps extends cdk.StackProps {
+    userPoolId: string;
+    userPoolClientId: string;
+}
 
 export class XpressbuyDeploymentStack extends cdk.Stack {
-    constructor(scope: Construct, id: string, props?: cdk.StackProps) {
+    constructor(scope: Construct, id: string, props: XpressbuyDeploymentStackProps) {
         super(scope, id, props);
-    
+
         // The code that defines your stack goes here
 
         // Make a cloudwatch log group
         const logGroup = new logs.LogGroup(this, '/xpressbuy/fargate-cluster', {
             logGroupName: '/xpressbuy/fargate-cluster',
             retention: logs.RetentionDays.ONE_DAY,
+            // When you delete a log group, the data in the log group is deleted.
+            removalPolicy: cdk.RemovalPolicy.DESTROY,
         });
 
 
@@ -38,7 +45,7 @@ export class XpressbuyDeploymentStack extends cdk.Stack {
             isDefault: true, // Ensures the default VPC is used
         });
 
-        
+
         // Create an ECS cluster
         const cluster = new ecs.Cluster(this, 'xpressbuyCluster', {
             clusterName: 'xpressbuy',
@@ -50,6 +57,9 @@ export class XpressbuyDeploymentStack extends cdk.Stack {
         const repository_backend = new ecr.Repository(this, 'BackendXpressbuyRepository', {
             repositoryName: 'backend-xpressbuy',
             imageTagMutability: ecr.TagMutability.MUTABLE,
+            // When you delete a repository, the data in the repository is deleted.
+            removalPolicy: cdk.RemovalPolicy.DESTROY,
+            emptyOnDelete: true,
         });
 
 
@@ -57,6 +67,9 @@ export class XpressbuyDeploymentStack extends cdk.Stack {
         const repository_frontend = new ecr.Repository(this, 'FrontendXpressbuyRepository', {
             repositoryName: 'frontend-xpressbuy',
             imageTagMutability: ecr.TagMutability.MUTABLE,
+            // When you delete a repository, the data in the repository is deleted.
+            removalPolicy: cdk.RemovalPolicy.DESTROY,
+            emptyOnDelete: true,
         });
 
 
@@ -68,6 +81,9 @@ export class XpressbuyDeploymentStack extends cdk.Stack {
         });
         securityGroup_albSecurityGroup.addIngressRule(ec2.Peer.anyIpv4(), ec2.Port.tcp(80), 'Allow HTTP traffic');
         securityGroup_albSecurityGroup.addIngressRule(ec2.Peer.anyIpv4(), ec2.Port.tcp(443), 'Allow HTTPS traffic');
+        // Allow traffic from the ALB to the backend and frontend
+        securityGroup_albSecurityGroup.addIngressRule(ec2.Peer.anyIpv4(), ec2.Port.tcp(5000), 'Allow Backend traffic');
+        securityGroup_albSecurityGroup.addIngressRule(ec2.Peer.anyIpv4(), ec2.Port.tcp(3000), 'Allow Frontend traffic');
 
 
         // Create a new security group for services
@@ -89,7 +105,7 @@ export class XpressbuyDeploymentStack extends cdk.Stack {
             protocol: elbv2.ApplicationProtocol.HTTP,
             targetType: elbv2.TargetType.IP,
             healthCheck: {
-                path: 'http://xpressbuy-backend-alb-262308006.us-east-1.elb.amazonaws.com:5000/api/v1/health-check',
+                path: '/api/v1/health-check',
                 interval: cdk.Duration.seconds(30),
                 healthyThresholdCount: 3,
             },
@@ -136,8 +152,8 @@ export class XpressbuyDeploymentStack extends cdk.Stack {
         frontendListener.addTargetGroups('FrontendTargetGroup', {
             targetGroups: [frontendTargetGroup],
         });
-        
-        
+
+
 
         // Create fargate task execution role
         const role_taskExecutionRole = new iam.Role(this, 'XpressbuyTaskExecutionRole', {
@@ -145,7 +161,7 @@ export class XpressbuyDeploymentStack extends cdk.Stack {
             assumedBy: new iam.ServicePrincipal('ecs-tasks.amazonaws.com'),
             // attach the custom policy to the role
         });
-        
+
 
         // Make a custom policy for the ECS task execution role
         const customPolicy_ecsTaskExecutionPolicy = new iam.Policy(this, 'xpressbuyECSTaskExecutionPolicy', {
@@ -167,7 +183,7 @@ export class XpressbuyDeploymentStack extends cdk.Stack {
             ]
         });
 
-        
+
         // Make a custom policy for the ECS task execution role
         const customPolicy_systemsManagerParameterPolicy = new iam.Policy(this, 'XpressBuyReadAccessSystemsManagerParameterStorePolicy', {
             policyName: 'XpressBuy-readAccess-systemsManager-parameterStore-policy',
@@ -178,7 +194,7 @@ export class XpressbuyDeploymentStack extends cdk.Stack {
                         "ssm:GetParameters",
                         "ssm:GetParameter"
                     ],
-                    resources: ['arn:aws:ssm:us-east-1:140023403659:parameter/xpressbuy/backend/*']
+                    resources: [`arn:aws:ssm:${this.region}:${this.account}:parameter/xpressbuy/backend/*`]
                 })
             ]
         });
@@ -227,36 +243,32 @@ export class XpressbuyDeploymentStack extends cdk.Stack {
         new ssm.StringParameter(this, 'AWS_ACCESS_KEY_ID', {
             parameterName: '/xpressbuy/backend/AWS_ACCESS_KEY_ID',
             stringValue: process.env.AWS_ACCESS_KEY_ID || '',
-            description: 'Description of another parameter'
+            description: 'AWS Access Key ID'
         });
         new ssm.StringParameter(this, 'AWS_SECRET_ACCESS_KEY', {
             parameterName: '/xpressbuy/backend/AWS_SECRET_ACCESS_KEY',
             stringValue: process.env.AWS_SECRET_ACCESS_KEY || '',
-            description: 'Description of the parameter'
+            description: 'AWS Secret Access Key'
         });
         new ssm.StringParameter(this, 'AWS_COGNITO_USER_POOL_ID', {
             parameterName: '/xpressbuy/backend/AWS_COGNITO_USER_POOL_ID',
-            stringValue: process.env.COGNITO_USER_POOL_ID || '',
-            description: 'Description of the parameter'
+            stringValue: props.userPoolId,
+            description: 'AWS Cognito User Pool ID'
         });
+
         new ssm.StringParameter(this, 'AWS_COGNITO_USER_POOL_CLIENT_ID', {
             parameterName: '/xpressbuy/backend/AWS_COGNITO_USER_POOL_CLIENT_ID',
-            stringValue: process.env.COGNITO_USER_POOL_CLIENT_ID || '',
-            description: 'Description of the parameter'
+            stringValue: props.userPoolClientId,
+            description: 'AWS Cognito User Pool Client ID'
         });
-        new ssm.StringParameter(this, 'POSTGRES_CONNECTION_URL', {
-            parameterName: '/xpressbuy/backend/POSTGRES_CONNECTION_URL',
-            stringValue: process.env.COGNITO_USER_POOL_CLIENT_ID || '',
-            description: 'Description of the parameter'
-        });
-        
+
 
         // Things left (for both backend and frontend):
-            // Docker image build
-            // Push images in ECR
-            // Create ECS task definitions
-            // Register ECS task definitions
-            // Create ECS services
+        // Docker image build
+        // Push images in ECR
+        // Create ECS task definitions
+        // Register ECS task definitions
+        // Create ECS services
 
     }
 }

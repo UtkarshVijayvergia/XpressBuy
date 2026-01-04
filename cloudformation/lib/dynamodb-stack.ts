@@ -25,19 +25,24 @@ export class DynamodbStack extends cdk.Stack {
                     seedCapacity: 2, 
                 }),
             }),
+
             // All user data stored in a DynamoDB table is fully encrypted at rest. When creating an instance 
             // of the TableV2 construct, you can select the following table encryption options:
             // AWS owned keys - Default encryption type. The keys are owned by DynamoDB (no additional charge).
             encryption: dynamodb.TableEncryptionV2.dynamoOwnedKey(),
-            // Global secondary indexes
-            globalSecondaryIndexes: [
+
+            // Local secondary indexes
+            localSecondaryIndexes: [
                 {
                     indexName: 'GSI-1',
-                    partitionKey: { name: 'pk', type: dynamodb.AttributeType.STRING },
                     sortKey: { name: 'GSI1_sk', type: dynamodb.AttributeType.STRING },
                     // projectionType: The non-key attributes that are projected into the secondary index.
                     projectionType: dynamodb.ProjectionType.ALL,
                 },
+            ],
+
+            // Global secondary indexes
+            globalSecondaryIndexes: [
                 {
                     indexName: 'GSI-2',
                     partitionKey: { name: 'GSI2_pk', type: dynamodb.AttributeType.STRING },
@@ -46,6 +51,7 @@ export class DynamodbStack extends cdk.Stack {
                     projectionType: dynamodb.ProjectionType.ALL,
                 },
             ],
+
             dynamoStream: dynamodb.StreamViewType.NEW_AND_OLD_IMAGES,
             // Warm throughput can not be decreased below the capacity that is currently in use.
             // TODO: Uncomment the following code to enable warm throughput
@@ -53,6 +59,9 @@ export class DynamodbStack extends cdk.Stack {
             //     readUnitsPerSecond: 5,
             //     writeUnitsPerSecond: 5,
             // },
+
+            // When you delete a table, the data in the table is deleted. 
+            removalPolicy: cdk.RemovalPolicy.DESTROY,
         });
 
         

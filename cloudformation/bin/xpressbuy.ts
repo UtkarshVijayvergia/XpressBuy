@@ -8,6 +8,8 @@ import { XpressbuyIamStack } from '../lib/xpressbuy-iam-stack';
 import { XpressbuyDeploymentStack } from '../lib/xpressbuy-deployment-stack';
 
 const app = new cdk.App();
+
+
 new XpressbuyStack(app, 'XpressbuyStack', {
   /* If you don't specify 'env', this stack will be environment-agnostic.
    * Account/Region-dependent features and context lookups will not work,
@@ -25,7 +27,8 @@ new XpressbuyStack(app, 'XpressbuyStack', {
 });
 
 
-new CognitoStack(app, 'CognitoStack', {
+// Capture the CognitoStack in a variable
+const cognitoStack = new CognitoStack(app, 'CognitoStack', {
   env: { account: process.env.CDK_DEFAULT_ACCOUNT, region: process.env.CDK_DEFAULT_REGION },
 });
 
@@ -34,14 +37,18 @@ new DynamodbStack(app, 'DynamodbStack', {
   env: { account: process.env.CDK_DEFAULT_ACCOUNT, region: process.env.CDK_DEFAULT_REGION },
 });
 
-new S3Stack(app, 'S3Stack', {
+const s3Stack = new S3Stack(app, 'S3Stack', {
   env: { account: process.env.CDK_DEFAULT_ACCOUNT, region: process.env.CDK_DEFAULT_REGION },
 });
 
 new XpressbuyIamStack(app, 'XpressbuyIamStack', {
   env: { account: process.env.CDK_DEFAULT_ACCOUNT, region: process.env.CDK_DEFAULT_REGION },
+  bucketName: s3Stack.bucket.bucketName,
 });
 
 new XpressbuyDeploymentStack(app, 'XpressbuyDeploymentStack', {
   env: { account: process.env.CDK_DEFAULT_ACCOUNT, region: process.env.CDK_DEFAULT_REGION },
+  // Passing the ID and Client ID as props
+  userPoolId: cognitoStack.userPool.userPoolId,
+  userPoolClientId: cognitoStack.userPoolClient.userPoolClientId
 });

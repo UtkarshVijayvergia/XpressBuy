@@ -2,8 +2,14 @@ import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import { aws_iam as iam } from 'aws-cdk-lib';
 
+
+interface XpressbuyIamStackProps extends cdk.StackProps {
+    bucketName: string;
+}
+
+
 export class XpressbuyIamStack extends cdk.Stack {
-    constructor(scope: Construct, id: string, props?: cdk.StackProps) {
+    constructor(scope: Construct, id: string, props: XpressbuyIamStackProps) {
         super(scope, id, props);
 
         const S3ReadOnlyGroup = new iam.Group(this, 'S3ReadOnlyGroup', {
@@ -20,13 +26,13 @@ export class XpressbuyIamStack extends cdk.Stack {
             ]
         });
 
-        // Get the user "Utkarsh" from the IAM
-        const utkarshUser = iam.User.fromUserName(this, 'UtkarshUser', 'Utkarsh');
+        // Get the user "utkarsh" from the IAM
+        const utkarshUser = iam.User.fromUserName(this, 'UtkarshUser', 'utkarsh');
 
-        // Add user "Utkarsh" to the S3ReadOnlyGroup. The user already exists in the IAM.
+        // Add user "utkarsh" to the S3ReadOnlyGroup. The user already exists in the IAM.
         S3ReadOnlyGroup.addUser(utkarshUser);
 
-        // Add user "Utkarsh" to the XRayGroup. The user already exists in the IAM.
+        // Add user "utkarsh" to the XRayGroup. The user already exists in the IAM.
         XRayGroup.addUser(utkarshUser);
 
 
@@ -41,7 +47,7 @@ export class XpressbuyIamStack extends cdk.Stack {
                         "s3:GetObject",
                         "s3:DeleteObject"
                     ],
-                    resources: ['arn:aws:s3:::xpressbuy-bucket/*']
+                    resources: [`arn:aws:s3:::${props.bucketName}/*`]
                 })
             ]
         });
