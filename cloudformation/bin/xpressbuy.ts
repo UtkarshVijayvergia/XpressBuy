@@ -6,6 +6,7 @@ import { DynamodbStack } from '../lib/dynamodb-stack';
 import { S3Stack } from '../lib/s3-stack';
 import { XpressbuyIamStack } from '../lib/xpressbuy-iam-stack';
 import { XpressbuyDeploymentStack } from '../lib/xpressbuy-deployment-stack';
+import { DataSeedingStack } from '../lib/data-seeding-stack';
 
 const app = new cdk.App();
 
@@ -33,7 +34,8 @@ const cognitoStack = new CognitoStack(app, 'CognitoStack', {
 });
 
 
-new DynamodbStack(app, 'DynamodbStack', {
+// Capture DynamodbStack to pass table to deployment
+const dynamodbStack = new DynamodbStack(app, 'DynamodbStack', {
   env: { account: process.env.CDK_DEFAULT_ACCOUNT, region: process.env.CDK_DEFAULT_REGION },
 });
 
@@ -48,7 +50,17 @@ new XpressbuyIamStack(app, 'XpressbuyIamStack', {
 
 new XpressbuyDeploymentStack(app, 'XpressbuyDeploymentStack', {
   env: { account: process.env.CDK_DEFAULT_ACCOUNT, region: process.env.CDK_DEFAULT_REGION },
-  // Passing the ID and Client ID as props
+  // Passing Cognito props
   userPoolId: cognitoStack.userPool.userPoolId,
-  userPoolClientId: cognitoStack.userPoolClient.userPoolClientId
+  userPoolClientId: cognitoStack.userPoolClient.userPoolClientId,
+  // Pass S3 bucket and DynamoDB table for IAM permissions
+  s3Bucket: s3Stack.bucket,
+  dynamoTable: dynamodbStack.table,
+});
+
+// Data Seeding Stack - Seeds S3 images and DynamoDB data automatically
+new DataSeedingStack(app, 'DataSeedingStack', {
+  env: { account: process.env.CDK_DEFAULT_ACCOUNT, region: process.env.CDK_DEFAULT_REGION },
+  s3Bucket: s3Stack.bucket,
+  dynamoTable: dynamodbStack.table,
 });

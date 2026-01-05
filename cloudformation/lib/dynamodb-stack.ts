@@ -1,12 +1,15 @@
 import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
-import { aws_dynamodb as dynamodb} from 'aws-cdk-lib';
+import { aws_dynamodb as dynamodb } from 'aws-cdk-lib';
 
 export class DynamodbStack extends cdk.Stack {
+    // Make the table available to other stacks
+    public readonly table: dynamodb.TableV2;
+
     constructor(scope: Construct, id: string, props?: cdk.StackProps) {
         super(scope, id, props);
 
-        const table = new dynamodb.TableV2(this, 'xpressbuy', {
+        this.table = new dynamodb.TableV2(this, 'xpressbuy', {
             tableName: 'xpressbuy',
             partitionKey: { name: 'pk', type: dynamodb.AttributeType.STRING },
             sortKey: { name: 'sk', type: dynamodb.AttributeType.STRING },
@@ -18,11 +21,11 @@ export class DynamodbStack extends cdk.Stack {
             billing: dynamodb.Billing.provisioned({
                 readCapacity: dynamodb.Capacity.fixed(5),
                 // writeCapacity can only be configured with autoscaled capacity. 
-                writeCapacity: dynamodb.Capacity.autoscaled({ 
+                writeCapacity: dynamodb.Capacity.autoscaled({
                     maxCapacity: 5,
                     minCapacity: 1,
                     // seedCapacity specifies the starting point (initial capacity) when the table is first created;
-                    seedCapacity: 2, 
+                    seedCapacity: 2,
                 }),
             }),
 
@@ -64,14 +67,14 @@ export class DynamodbStack extends cdk.Stack {
             removalPolicy: cdk.RemovalPolicy.DESTROY,
         });
 
-        
+
 
         // Output the table name and arn
         new cdk.CfnOutput(this, 'TableName', {
-            value: table.tableName,
+            value: this.table.tableName,
         });
         new cdk.CfnOutput(this, 'TableArn', {
-            value: table.tableArn,
+            value: this.table.tableArn,
         });
     }
 }
