@@ -1,5 +1,5 @@
 # Using image from AWS ECR
-FROM 140023403659.dkr.ecr.us-east-1.amazonaws.com/backend-xpressbuy:14
+FROM node:18-alpine
 
 # Set the working directory in the container
 WORKDIR /
