@@ -13,7 +13,9 @@ const app = express()
 const cors = require('cors');
 
 app.use(cors({
-    origin: ['http://localhost:3000', 'http://192.168.29.108:3000', 'http://xpressbuy-backend-alb-262308006.us-east-1.elb.amazonaws.com:3000'],
+    origin: process.env.FRONTEND_URL === '*' 
+        ? true  // Allow all origins
+        : ['http://localhost:3000', 'http://192.168.29.108:3000', process.env.FRONTEND_URL],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization', 'Access-Control-Allow-Origin', 'X-Access-Token', 'X-Refresh-Token']
