@@ -74,6 +74,13 @@ const getProductsByCategory = asyncHandler(async (req, res) => {
             ProjectionExpression: "product_ids"
         });
         const products = await dynamodbClient.send(getAllProductsQuery);
+
+        // Check if category exists
+        if (!products.Items || products.Items.length === 0 || !products.Items[0].product_ids) {
+            console.log(`Category not found: ${category_id}`);
+            return res.status(404).json({ error: `Category not found: ${category_id}` });
+        }
+
         let product_info = [];
         for (const product of products.Items[0].product_ids) {
             const getSingleProductQuery = new QueryCommand({
@@ -86,19 +93,23 @@ const getProductsByCategory = asyncHandler(async (req, res) => {
                 ProjectionExpression: "product_id, product_reviews, product_price, product_sold, product_name, product_rating"
             });
             const response = await dynamodbClient.send(getSingleProductQuery);
-            const imageName = `${product}.jpg`;
-            const params = {
-                Bucket: process.env.AWS_BUCKET_NAME,
-                Key: imageName
-            };
-            const command = new GetObjectCommand(params);
-            const imageURL = await getSignedUrl(s3Client, command, { expiresIn: 3600 });
-            response.Items[0].imageURL = imageURL;
-            product_info.push(response.Items);
+
+            if (response.Items && response.Items.length > 0) {
+                const imageName = `${product}.jpg`;
+                const params = {
+                    Bucket: process.env.AWS_BUCKET_NAME,
+                    Key: imageName
+                };
+                const command = new GetObjectCommand(params);
+                const imageURL = await getSignedUrl(s3Client, command, { expiresIn: 3600 });
+                response.Items[0].imageURL = imageURL;
+                product_info.push(response.Items);
+            }
         }
         res.status(200).json(product_info);
     } catch (error) {
-        console.error(error);
+        console.error('Error in getProductsByCategory:', error);
+        res.status(500).json({ error: 'Internal server error', details: error.message });
     }
 });
 

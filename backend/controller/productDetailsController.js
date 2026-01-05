@@ -28,6 +28,13 @@ const getSingleProduct = asyncHandler(async (req, res) => {
             ProjectionExpression: "product_id, product_reviews, product_price, product_sold, product_name, product_rating, product_description, current_colour, available_colours"
         });
         const response = await dynamodbClient.send(getSingleProductQuery);
+
+        // Check if product exists
+        if (!response.Items || response.Items.length === 0) {
+            console.log(`Product not found: ${product_id}`);
+            return res.status(404).json({ error: `Product not found: ${product_id}` });
+        }
+
         const imageName = `${product_id}.jpg`;
         const getImageParams = {
             Bucket: process.env.AWS_BUCKET_NAME,
@@ -36,7 +43,7 @@ const getSingleProduct = asyncHandler(async (req, res) => {
         const getImageCommand = new GetObjectCommand(getImageParams);
         const imageURL = await getSignedUrl(s3Client, getImageCommand, { expiresIn: 3600 });
         response.Items[0].base_imageURL = imageURL;
-        for(const color of response.Items[0].available_colours) {
+        for (const color of response.Items[0].available_colours) {
             const itemImageName = `${product_id}${color}.jpg`;
             const getItemImageParams = {
                 Bucket: process.env.AWS_BUCKET_NAME,
@@ -48,7 +55,8 @@ const getSingleProduct = asyncHandler(async (req, res) => {
         }
         res.status(200).json(response.Items);
     } catch (error) {
-        console.error(error);
+        console.error('Error in getSingleProduct:', error);
+        res.status(500).json({ error: 'Internal server error', details: error.message });
     }
 });
 
@@ -60,6 +68,8 @@ const getSingleProduct = asyncHandler(async (req, res) => {
 const productVariation = asyncHandler(async (req, res) => {
     try {
         const { product_id, colour } = req.params;
+        console.log(`Getting product variation for: ${product_id}, colour: ${colour}`);
+
         const getSingleProductVariationQuery = new QueryCommand({
             TableName: "xpressbuy",
             KeyConditionExpression: "pk = :pk and sk = :sk",
@@ -70,9 +80,17 @@ const productVariation = asyncHandler(async (req, res) => {
             ProjectionExpression: "product_id, product_colour, size_variation"
         });
         const response = await dynamodbClient.send(getSingleProductVariationQuery);
+
+        // Check if variation exists
+        if (!response.Items || response.Items.length === 0) {
+            console.log(`Product variation not found: ${product_id}, colour: ${colour}`);
+            return res.status(404).json({ error: `Product variation not found for colour: ${colour}` });
+        }
+
         res.status(200).json(response.Items);
     } catch (error) {
-        console.error(error);
+        console.error('Error in productVariation:', error);
+        res.status(500).json({ error: 'Internal server error', details: error.message });
     }
 });
 
