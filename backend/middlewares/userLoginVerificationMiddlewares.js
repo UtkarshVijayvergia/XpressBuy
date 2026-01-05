@@ -12,11 +12,11 @@ const loginVerification = async (req, res, next) => {
 
     // create a verifier instance using the `verify` method from the `aws-jwt-verify` package
     const verifier = CognitoJwtVerifier.create({
-        userPoolId: process.env.COGNITO_USER_POOL_ID,
+        userPoolId: process.env.AWS_COGNITO_USER_POOL_ID,
         tokenUse: "id",
-        clientId: process.env.COGNITO_USER_POOL_CLIENT_ID,
+        clientId: process.env.AWS_COGNITO_USER_POOL_CLIENT_ID,
     });
-    
+
     try {
         // verify the JWT signature using the publicKey from the JWKS
         const payload = await verifier.verify(idToken);
@@ -31,7 +31,7 @@ const loginVerification = async (req, res, next) => {
             secure: false, // for now because localhost is on http. If true: The cookie can only be transmitted over https
             sameSite: 'Lax' // The cookie can only be sent to the same site as the one that it's already on
         });
-        
+
         const accessToken = req.headers['x-access-token'];
         res.cookie('access_token', accessToken, {
             httpOnly: true, // The cookie is only accessible by the web server
@@ -47,7 +47,7 @@ const loginVerification = async (req, res, next) => {
         });
 
         next();
-    } 
+    }
     catch (err) {
         console.log("JWT not valid!", err);
         return res.status(401).send('Unauthorized');

@@ -15,11 +15,11 @@ const verifyIdTokenMiddleware = async (req, res, next) => {
 
     // create a verifier instance using the `verify` method from the `aws-jwt-verify` package
     const verifier = CognitoJwtVerifier.create({
-        userPoolId: process.env.COGNITO_USER_POOL_ID,
+        userPoolId: process.env.AWS_COGNITO_USER_POOL_ID,
         tokenUse: "id",
-        clientId: process.env.COGNITO_USER_POOL_CLIENT_ID,
+        clientId: process.env.AWS_COGNITO_USER_POOL_CLIENT_ID,
     });
-    
+
     try {
         // verify the JWT signature using the publicKey from the JWKS
         const payload = await verifier.verify(idToken);
@@ -29,7 +29,7 @@ const verifyIdTokenMiddleware = async (req, res, next) => {
 
         console.log('ID token verified');
         next();
-    } 
+    }
     catch (error) {
         if (error instanceof JwtExpiredError) {
             console.log('Token expired');
@@ -59,11 +59,11 @@ const verifyAccessTokenMiddleware = async (req, res, next) => {
 
     // create a verifier instance using the `verify` method from the `aws-jwt-verify` package
     const verifier = CognitoJwtVerifier.create({
-        userPoolId: process.env.COGNITO_USER_POOL_ID,
+        userPoolId: process.env.AWS_COGNITO_USER_POOL_ID,
         tokenUse: "access",
-        clientId: process.env.COGNITO_USER_POOL_CLIENT_ID,
+        clientId: process.env.AWS_COGNITO_USER_POOL_CLIENT_ID,
     });
-    
+
     try {
         // verify the JWT signature using the publicKey from the JWKS
         const payload = await verifier.verify(accessToken);
@@ -73,7 +73,7 @@ const verifyAccessTokenMiddleware = async (req, res, next) => {
 
         console.log('Access token verified');
         next();
-    } 
+    }
     catch (error) {
         if (error instanceof JwtExpiredError) {
             console.log('Token expired');
@@ -101,12 +101,12 @@ const refreshTokens = async (req, res, next) => {
 
     const refreshToken = req.cookies.refresh_token;
 
-    const cognitoIdentity = new CognitoIdentityProviderClient({ 
-        region: process.env.COGNITO_USER_POOL_REGION
+    const cognitoIdentity = new CognitoIdentityProviderClient({
+        region: process.env.AWS_DEFAULT_REGION
     });
     const command = new InitiateAuthCommand({
         AuthFlow: "REFRESH_TOKEN_AUTH",
-        ClientId: process.env.COGNITO_USER_POOL_CLIENT_ID,
+        ClientId: process.env.AWS_COGNITO_USER_POOL_CLIENT_ID,
         AuthParameters: {
             "REFRESH_TOKEN": refreshToken
         }
@@ -127,10 +127,10 @@ const refreshTokens = async (req, res, next) => {
         });
         console.log("tokens refreshed");
         next();
-    } 
+    }
     catch (error) {
         if (error.name === 'NotAuthorizedException') {
-          res.status(401).json({ message: 'Refresh token has expired or is invalid. Please re-authenticate.' });
+            res.status(401).json({ message: 'Refresh token has expired or is invalid. Please re-authenticate.' });
         }
         if (error instanceof FetchError) {
             console.log('Latency Error');

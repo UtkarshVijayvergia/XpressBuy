@@ -4,7 +4,7 @@ const jwksClient = require('jwks-rsa');
 
 // Setup a JWKS client to fetch public keys from Cognito
 const jwksClientInstance = jwksClient({
-    jwksUri: `https://cognito-idp.${process.env.COGNITO_USER_POOL_REGION}.amazonaws.com/${process.env.COGNITO_USER_POOL_ID}/.well-known/jwks.json`,
+    jwksUri: `https://cognito-idp.${process.env.AWS_DEFAULT_REGION}.amazonaws.com/${process.env.AWS_COGNITO_USER_POOL_ID}/.well-known/jwks.json`,
 });
 
 
@@ -15,21 +15,21 @@ const verifyIdToken = (req, res, next) => {
         return res.status(401).json({ error: 'Unauthorized' });
     }
     const token = req.headers.authorization.split(' ')[1];
-    
+
     // verify the JWT signature using the publicKey from the JWKS
     jwt.verify(token, getKey, { algorithms: ['RS256'] }, (err, decoded) => {
         if(err){
             return res.status(401).json({ error: 'Unauthorized' });
         }
-        
+
         // Additional checks - iss (issuer: Cognito), aud (audience: app client id), exp (expiry time)
-        if(!decoded ||
-            !decoded.iss || decoded.iss !== `https://cognito-idp.${process.env.COGNITO_USER_POOL_REGION}.amazonaws.com/${process.env.COGNITO_USER_POOL_ID}` ||
-            !decoded.aud || decoded.aud !== `${process.env.COGNITO_USER_POOL_CLIENT_ID}` ||
-            !decoded.exp || Date.now() >= decoded.exp * 1000){
+        if (!decoded ||
+            !decoded.iss || decoded.iss !== `https://cognito-idp.${process.env.AWS_DEFAULT_REGION}.amazonaws.com/${process.env.AWS_COGNITO_USER_POOL_ID}` ||
+            !decoded.aud || decoded.aud !== `${process.env.AWS_COGNITO_USER_POOL_CLIENT_ID}` ||
+            !decoded.exp || Date.now() >= decoded.exp * 1000) {
             return res.status(401).json({ error: 'Unauthorized' });
         }
-        
+
         // Store the decoded user information in the request object
         req.user = decoded;
 
