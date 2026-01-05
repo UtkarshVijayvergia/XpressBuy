@@ -45,7 +45,7 @@ const Login = () => {
     // Check if user is authenticated
     const checkUser = async () => {
         try{
-            const response = await fetch('http://xpressbuy-backend-alb-262308006.us-east-1.elb.amazonaws.com:5000/api/v1/tokenVerification/verifyAccessToken', {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/v1/tokenVerification/verifyAccessToken`, {
                 credentials: 'include',
                 method: 'POST',
                 headers: {
@@ -70,7 +70,7 @@ const Login = () => {
     // sign out
     const signOut = async () => {
         try {
-            const response = await fetch('http://xpressbuy-backend-alb-262308006.us-east-1.elb.amazonaws.com:5000/api/v1/tokenVerification/signout', {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/v1/tokenVerification/signout`, {
                 credentials: 'include',
                 method: 'POST',
                 headers: {
@@ -128,7 +128,7 @@ const Login = () => {
     // verify the ID token
     const verifyIdToken = async (idToken, access_token, refresh_token) => {
         try {
-            await fetch('http://xpressbuy-backend-alb-262308006.us-east-1.elb.amazonaws.com:5000/api/v1/tokenVerification/verifyIdToken', {
+            await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/v1/tokenVerification/verifyIdToken`, {
                 credentials: 'include',
                 method: 'POST',
                 headers: {
@@ -208,21 +208,21 @@ const Login = () => {
                                 </form>
                                 {
                                     windowSize.width <= 900 ?
-                                        <Link className="login-signup-navigate" to={`/signup`}> <p> Create A New Account? <b>Sign Up</b></p></Link> 
-                                        : 
+                                        <Link className="login-signup-navigate" to={`/signup`}> <p> Create A New Account? <b>Sign Up</b></p></Link>
+                                        :
                                         null
                                 }
                             </div>
                         </div>
                         <div className="login-grid-item">
-                                    <div className="login-grid-item1">
-                                        <div className='login-signup-navigate-container'>
-                                            {
-                                                windowSize.width > 900 ?
-                                                    <Link className="login-signup-navigate" to={`/signup`}> <p> Create A New Account? <b className='sign-up-line-breaker'>Sign Up</b></p></Link> : null
-                                            }
-                                        </div>
-                                    </div>
+                            <div className="login-grid-item1">
+                                <div className='login-signup-navigate-container'>
+                                    {
+                                        windowSize.width > 900 ?
+                                            <Link className="login-signup-navigate" to={`/signup`}> <p> Create A New Account? <b className='sign-up-line-breaker'>Sign Up</b></p></Link> : null
+                                    }
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

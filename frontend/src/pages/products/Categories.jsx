@@ -46,7 +46,7 @@ const Categories = () => {
     // Get all categories
     const getCategories = async () => {
         try {
-            const response = await fetch(`http://xpressbuy-backend-alb-262308006.us-east-1.elb.amazonaws.com:5000/api/v1/category`, {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/v1/category`, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -66,7 +66,7 @@ const Categories = () => {
     // Get all products
     const getProducts = async (categoryName) => {
         try {
-            const response = await fetch(`http://xpressbuy-backend-alb-262308006.us-east-1.elb.amazonaws.com:5000/api/v1/products/${categoryName}`, {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/v1/products/${categoryName}`, {
                 headers: {
                     'Content-Type': 'application/json',
                 },

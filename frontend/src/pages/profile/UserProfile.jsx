@@ -21,7 +21,7 @@ const UserProfile = () => {
     // Get User Profile Info
     const getUserProfileInfo = async () => {
         try {
-            const response = await fetch('http://xpressbuy-backend-alb-262308006.us-east-1.elb.amazonaws.com:5000/api/v1/user/profile', {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/v1/user/profile`, {
                 credentials: 'include',
                 method: 'GET',
                 headers: {

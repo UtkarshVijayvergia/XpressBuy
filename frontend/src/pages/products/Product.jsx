@@ -50,7 +50,7 @@ const Product = () => {
     // Get product details
     const getProductDetails = async (product_id) => {
         try {
-            const response = await fetch(`http://xpressbuy-backend-alb-262308006.us-east-1.elb.amazonaws.com:5000/api/v1/products/product/${product_id}`, {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/v1/products/product/${product_id}`, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -72,7 +72,7 @@ const Product = () => {
     // Get product variation
     const getProductVariation = async (product_id, colour) => {
         try {
-            const response = await fetch(`http://xpressbuy-backend-alb-262308006.us-east-1.elb.amazonaws.com:5000/api/v1/products/${product_id}/${colour}`, {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/v1/products/${product_id}/${colour}`, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -89,7 +89,7 @@ const Product = () => {
     // Get colour name
     const getColourName = async (colour) => {
         try {
-            const response = await fetch(`http://xpressbuy-backend-alb-262308006.us-east-1.elb.amazonaws.com:5000/external/colour/${colour}`, {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/external/colour/${colour}`, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -132,8 +132,8 @@ const Product = () => {
 
     // Check if user is authenticated
     const checkUser = async () => {
-        try{
-            const response = await fetch('http://xpressbuy-backend-alb-262308006.us-east-1.elb.amazonaws.com:5000/api/v1/tokenVerification/verifyAccessToken', {
+        try {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/v1/tokenVerification/verifyAccessToken`, {
                 credentials: 'include',
                 method: 'POST',
                 headers: {
@@ -238,7 +238,7 @@ const Product = () => {
         }
     }
 
-    
+
     // useEffect for window size
     useEffect(() => {
         function handleResize() {

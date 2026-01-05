@@ -40,7 +40,7 @@ const SignUp = () => {
         width: undefined,
         height: undefined,
     });
-    
+
 
     // User Credentials
     const { name, email, username, password, confirmPassword } = formData;
@@ -115,7 +115,7 @@ const SignUp = () => {
     // verify the ID token
     const verifyIdToken = async (idToken, access_token, refresh_token) => {
         try {
-            await fetch('http://xpressbuy-backend-alb-262308006.us-east-1.elb.amazonaws.com:5000/api/v1/tokenVerification/verifyIdToken/new-user', {
+            await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/v1/tokenVerification/verifyIdToken/new-user`, {
                 credentials: 'include',
                 method: 'POST',
                 headers: {
@@ -223,7 +223,7 @@ const SignUp = () => {
     // Check if user is authenticated
     const checkUser = async () => {
         try{
-            const response = await fetch('http://xpressbuy-backend-alb-262308006.us-east-1.elb.amazonaws.com:5000/api/v1/tokenVerification/verifyAccessToken', {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/v1/tokenVerification/verifyAccessToken`, {
                 credentials: 'include',
                 method: 'POST',
                 headers: {
@@ -248,7 +248,7 @@ const SignUp = () => {
     // sign out
     const signOut = async () => {
         try {
-            const response = await fetch('http://xpressbuy-backend-alb-262308006.us-east-1.elb.amazonaws.com:5000/api/v1/tokenVerification/signout', {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/v1/tokenVerification/signout`, {
                 credentials: 'include',
                 method: 'POST',
                 headers: {
@@ -355,7 +355,7 @@ const SignUp = () => {
                                                 {
                                                     // if success then show success for only 3 seconds then remove it
                                                     success ? <div className='signup-success'>{success}</div> : <div className='padder2vh'></div>
-                                                    
+
                                                 }
                                                 <div className="otp-verification-btns">
                                                     <div className="signup-btn">

@@ -24,7 +24,7 @@ const CheckOut = () => {
     // Check if user is authenticated
     const checkUser = async () => {
         try{
-            const response = await fetch('http://xpressbuy-backend-alb-262308006.us-east-1.elb.amazonaws.com:5000/api/v1/tokenVerification/verifyAccessToken', {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/v1/tokenVerification/verifyAccessToken`, {
                 credentials: 'include',
                 method: 'POST',
                 headers: {
@@ -49,7 +49,7 @@ const CheckOut = () => {
         e.preventDefault();
         try {
             if(await checkUser()){
-                const response = await fetch(`http://xpressbuy-backend-alb-262308006.us-east-1.elb.amazonaws.com:5000/api/v1/order/${transactionDetails.order_id}/`, {
+                const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/v1/order/${transactionDetails.order_id}/`, {
                     method: 'POST',
                     credentials: 'include',
                     headers: {
@@ -166,8 +166,8 @@ const CheckOut = () => {
                             <h3>Total Amount: {instaBuy.totalAmount}</h3>
                             <div className="confirm-purchase-btn" onClick={TransactionConfirmationHandler}>Confirm Purchase</div>
                         </div>
-                    :
-                <h3>Transaction Session Expired</h3>
+                        :
+                        <h3>Transaction Session Expired</h3>
             }
         </div>
     )

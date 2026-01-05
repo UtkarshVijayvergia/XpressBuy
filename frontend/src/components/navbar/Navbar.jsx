@@ -26,7 +26,7 @@ const Navbar = ({ setCategoryName }) => {
     // function to check if user is authenticated
     const checkUser = async () => {
         try{
-            const response = await fetch('http://xpressbuy-backend-alb-262308006.us-east-1.elb.amazonaws.com:5000/api/v1/tokenVerification/verifyAccessToken', {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/v1/tokenVerification/verifyAccessToken`, {
                 credentials: 'include',
                 method: 'POST',
                 headers: {
@@ -63,7 +63,7 @@ const Navbar = ({ setCategoryName }) => {
     // sign out
     const signOut = async () => {
         try {
-            const response = await fetch('http://xpressbuy-backend-alb-262308006.us-east-1.elb.amazonaws.com:5000/api/v1/tokenVerification/signout', {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/v1/tokenVerification/signout`, {
                 credentials: 'include',
                 method: 'POST',
                 headers: {
