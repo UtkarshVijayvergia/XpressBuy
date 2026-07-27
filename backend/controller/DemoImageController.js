@@ -23,6 +23,11 @@ const getSpecialsImages = asyncHandler(async (req, res) => {
         };
         const listObjectsCommand = new ListObjectsV2Command(listParams);
         const response = await s3Client.send(listObjectsCommand);
+        
+        if (!response.Contents || response.Contents.length === 0) {
+            return res.status(200).json([]);
+        }
+
         response.Contents.shift(); // remove the folder name from the list
         const imageUrls = await Promise.all(
             response.Contents.map(async (file) => {
@@ -39,6 +44,7 @@ const getSpecialsImages = asyncHandler(async (req, res) => {
         res.status(200).json(imageUrls);
     } catch (error) {
         console.error(error);
+        res.status(500).json({ message: 'Internal Server Error', error: error.message });
     }
 });
 
