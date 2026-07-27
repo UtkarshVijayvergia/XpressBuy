@@ -10,6 +10,7 @@ import { aws_iam as iam } from 'aws-cdk-lib';
 import { aws_ssm as ssm } from 'aws-cdk-lib';
 import { aws_s3 as s3 } from 'aws-cdk-lib';
 import { aws_dynamodb as dynamodb } from 'aws-cdk-lib';
+import { aws_certificatemanager as acm } from 'aws-cdk-lib';
 import * as path from 'path'; // Import path to find local folders
 
 import * as dotenv from 'dotenv';
@@ -359,7 +360,7 @@ export class XpressbuyDeploymentStack extends cdk.Stack {
                 }
             }),
             environment: {
-                "REACT_APP_BACKEND_URL": `http://${loadBalancer.loadBalancerDnsName}:5000`,
+                "REACT_APP_BACKEND_URL": `https://xpressbuy.utkarshv.com`,
                 "REACT_APP_AWS_USER_POOLS_ID": props.userPoolId,
                 "REACT_APP_AWS_USER_POOL_WEB_CLIENT_ID": props.userPoolClientId
             },
@@ -430,6 +431,28 @@ export class XpressbuyDeploymentStack extends cdk.Stack {
 
         // --- LOAD BALANCER LISTENER RULES ---------------------------------------------------------------------------------------
 
+        // 1. Add HTTPS Listener (443)
+        const certificate = acm.Certificate.fromCertificateArn(
+            this,
+            'SSLCertificate',
+            process.env.ACM_CERTIFICATE_ARN || ''
+        );
+
+        const httpsListener = loadBalancer.addListener('HttpsListener', {
+            port: 443,
+            protocol: elbv2.ApplicationProtocol.HTTPS,
+            certificates: [certificate],
+            defaultTargetGroups: [frontendTargetGroup],
+        });
+
+        // Add Rule for /api/* and /external/* on HTTPS
+        httpsListener.addTargetGroups('BackendAPIPathRouting', {
+            targetGroups: [backendTargetGroup],
+            conditions: [
+                elbv2.ListenerCondition.pathPatterns(['/api/*', '/external/*']),
+            ],
+            priority: 1,
+        });
 
 
         // 2. Add Backend Listener
