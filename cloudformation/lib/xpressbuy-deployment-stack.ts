@@ -451,7 +451,21 @@ export class XpressbuyDeploymentStack extends cdk.Stack {
             conditions: [
                 elbv2.ListenerCondition.pathPatterns(['/api/*', '/external/*']),
             ],
-            priority: 1,
+            priority: 10,
+        });
+
+        // Add 301 Redirect for www subdomain to apex domain
+        httpsListener.addAction('WWWRedirect', {
+            priority: 5,
+            conditions: [
+                elbv2.ListenerCondition.hostHeaders(['www.xpressbuy.utkarshv.com']),
+            ],
+            action: elbv2.ListenerAction.redirect({
+                host: 'xpressbuy.utkarshv.com',
+                protocol: 'HTTPS',
+                port: '443',
+                permanent: true,
+            }),
         });
 
 
